@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100" aria-labelledby="logoTitle">
+  <title id="logoTitle">TechPath UG Logo</title>
+  <defs>
+    <linearGradient id="ugandaGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FCDC04;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D90000;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Shield Icon -->
+  <path d="M50 10 L80 25 V50 C80 70 50 90 50 90 C50 90 20 70 20 50 V25 Z" 
+        fill="none" stroke="url(#ugandaGradient)" stroke-width="4" />
+  <path d="M50 25 L50 75 M30 40 L70 40" stroke="#FCDC04" stroke-width="2" opacity="0.8" />
+  
+  <!-- Text -->
+  <text x="100" y="65" font-family="'Segoe UI', sans-serif" font-weight="bold" font-size="40" fill="#FFFFFF">
+    TechPath <tspan fill="#D90000">UG</tspan>
+  </text>
+  
+  <!-- Circuit accents -->
+  <circle cx="50" cy="50" r="5" fill="#D90000" />
+  <rect x="95" y="75" width="280" height="4" fill="url(#ugandaGradient)" rx="2" />
+</svg>
