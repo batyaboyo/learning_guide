@@ -2,6 +2,7 @@ const app = {
     // State
     currentTab: 'dashboard',
     searchQuery: '',
+    projectFilters: { plan: 'all', difficulty: 'all', status: 'all' },
 
     // Init
     init() {
@@ -58,6 +59,38 @@ const app = {
                 }
             }
         });
+    },
+
+    // --- Project Logic ---
+    updateProjectFilter(type, value) {
+        this.projectFilters[type] = value;
+        this.render();
+    },
+
+    openProjectModal(id) {
+        const project = careerData.projects.find(p => p.id == id);
+        if (!project) return;
+        const state = Storage.getProjectState(id);
+
+        const modalHtml = Views.projectModal(project, state);
+        document.body.insertAdjacentHTML('beforeend', modalHtml);
+    },
+
+    saveProjectDetails(id) {
+        const status = document.getElementById('p-status').value;
+        const time = document.getElementById('p-time').value;
+        const income = document.getElementById('p-income').value;
+        const notes = document.getElementById('p-notes').value;
+        const link = document.getElementById('p-link').value;
+        const github = document.getElementById('p-github').value;
+
+        Storage.saveProjectState(id, {
+            status, timeSpent: time, incomeEarned: income, notes, demoLink: link, githubLink: github,
+            lastUpdated: new Date().toISOString()
+        });
+
+        document.getElementById('project-modal').remove();
+        this.render(); // Refresh to show updated status
     },
 
     openResourceModal(planId, resourceName) {
@@ -126,7 +159,11 @@ const app = {
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         this.dom.currentDate.textContent = now.toLocaleDateString('en-US', options);
 
-        // Countdown (Dec 31, 2026)
+        // Countdown (Dec 31, 2026) -> Assuming 2025 roadmap but user mentioned 2026 date in history, prompt says 2025. 
+        // Current Local Year is 2026. User request says "Career Roadmap 2025". 
+        // I'll stick to 2026-12-31 as "End of 2026" or "End of Roadmap" if it's a 2025 roadmap...
+        // Wait, "From CS Student to Professional in 2025". It's 2026 now. 
+        // I will update the countdown to 2026-12-31 for now as per previous code.
         const endYear = new Date('2026-12-31');
         const diff = endYear - now;
         const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
@@ -141,6 +178,7 @@ const app = {
             case 'planA': html = Views.plan('A'); break;
             case 'planB': html = Views.plan('B'); break;
             case 'planC': html = Views.plan('C'); break;
+            case 'projects': html = Views.projects(); break;
             case 'uganda': html = Views.uganda(); break;
             case 'income': html = Views.income(); break;
             case 'search': html = Views.search(this.searchQuery); break;
@@ -191,7 +229,7 @@ const app = {
     },
 
     refreshProgressUI(planId) {
-        // Simple re-render for now, can be optimized to just update the bar
+        // Simple re-render for now
         if (this.currentTab === 'dashboard' || this.currentTab.startsWith('plan')) {
             this.render();
         }
@@ -227,7 +265,6 @@ const app = {
 // View Templates
 const Views = {
     dashboard() {
-        // Calculate Global Stats
         const plans = ['A', 'B', 'C'];
         let totalTotal = 0;
         let totalDone = 0;
@@ -257,6 +294,12 @@ const Views = {
 
         const globalPct = totalTotal === 0 ? 0 : Math.round((totalDone / totalTotal) * 100);
 
+        // Project Stats
+        const allProjects = careerData.projects;
+        const pStates = Storage.getAllProjectStates();
+        const pCompleted = allProjects.filter(p => (pStates[p.id]?.status || 'not-started') === 'completed' || (pStates[p.id]?.status || 'not-started') === 'deployed').length;
+        const pInProgress = allProjects.filter(p => (pStates[p.id]?.status || 'not-started') === 'in-progress').length;
+
         return `
             <div class="search-box">
                 <input type="text" id="global-search" class="search-input" placeholder="🔍 Search resources (e.g., 'Python', 'Security')..." value="${app.searchQuery || ''}">
@@ -269,10 +312,158 @@ const Views = {
                 <div class="progress-container" style="height: 12px; background: rgba(255,255,255,0.2);">
                     <div class="progress-bar" style="width: ${globalPct}%; background: #fff;"></div>
                 </div>
-                <p style="color: #cbd5e1;">You have completed ${totalDone} out of ${totalTotal} milestones across all plans.</p>
+                <div style="display:flex; justify-content:space-between; margin-top:1rem; border-top:1px solid rgba(255,255,255,0.1); padding-top:1rem;">
+                    <div>${totalDone}/${totalTotal} Resources</div>
+                    <div>${pCompleted} Projects Done</div>
+                    <div>${pInProgress} Active</div>
+                </div>
             </div>
             <div class="grid">
                 ${planCards}
+            </div>
+        `;
+    },
+
+    projects() {
+        const { plan, difficulty, status } = app.projectFilters;
+        let pList = careerData.projects;
+        const pStates = Storage.getAllProjectStates();
+
+        // Filtering
+        if (plan !== 'all') pList = pList.filter(p => p.plan === plan);
+        if (difficulty !== 'all') pList = pList.filter(p => p.difficulty.toLowerCase().includes(difficulty.toLowerCase()));
+        if (status !== 'all') pList = pList.filter(p => {
+            const s = pStates[p.id]?.status || 'not-started';
+            return s === status;
+        });
+
+        // Mapping to HTML
+        const cards = pList.map(p => {
+            const state = pStates[p.id] || {};
+            const st = state.status || 'not-started';
+            const stDisplay = st.replace('-', ' ');
+            const stClass = `status-${st}`;
+
+            return `
+                <div class="card">
+                    <div class="project-card-header">
+                        <span class="badge" style="background: ${careerData.plans[p.plan].color}">${careerData.plans[p.plan].icon} Plan ${p.plan}</span>
+                        <span class="status-badge ${stClass}">${stDisplay}</span>
+                    </div>
+                    <h3>${p.name}</h3>
+                    <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:1rem;">${p.desc}</p>
+                    
+                    <div style="display:flex; gap:0.5rem; margin-bottom:1rem;">
+                        <span class="difficulty-badge">${p.difficulty}</span>
+                        <span class="difficulty-badge">⏱️ ${p.time}</span>
+                    </div>
+
+                    <button class="btn-primary" style="width:100%" onclick="app.openProjectModal(${p.id})">Details & Track</button>
+                </div>
+            `;
+        }).join('');
+
+        return `
+            <h1>🚀 Project Tracker</h1>
+            <div class="project-filters">
+                <select class="filter-select" onchange="app.updateProjectFilter('plan', this.value)">
+                    <option value="all" ${plan === 'all' ? 'selected' : ''}>All Plans</option>
+                    <option value="A" ${plan === 'A' ? 'selected' : ''}>Plan A: Cybersecurity</option>
+                    <option value="B" ${plan === 'B' ? 'selected' : ''}>Plan B: Django</option>
+                    <option value="C" ${plan === 'C' ? 'selected' : ''}>Plan C: IT Support</option>
+                </select>
+                <select class="filter-select" onchange="app.updateProjectFilter('difficulty', this.value)">
+                    <option value="all" ${difficulty === 'all' ? 'selected' : ''}>All Difficulties</option>
+                    <option value="Beginner" ${difficulty === 'Beginner' ? 'selected' : ''}>Beginner</option>
+                    <option value="Intermediate" ${difficulty === 'Intermediate' ? 'selected' : ''}>Intermediate</option>
+                    <option value="Advanced" ${difficulty === 'Advanced' ? 'selected' : ''}>Advanced</option>
+                </select>
+                <select class="filter-select" onchange="app.updateProjectFilter('status', this.value)">
+                    <option value="all" ${status === 'all' ? 'selected' : ''}>All Statuses</option>
+                    <option value="not-started" ${status === 'not-started' ? 'selected' : ''}>Not Started</option>
+                    <option value="in-progress" ${status === 'in-progress' ? 'selected' : ''}>In Progress</option>
+                    <option value="completed" ${status === 'completed' ? 'selected' : ''}>Completed</option>
+                </select>
+            </div>
+            
+            <p>Showing ${pList.length} projects</p>
+            <div class="grid">
+                ${cards.length ? cards : '<p>No projects match your filters.</p>'}
+            </div>
+        `;
+    },
+
+    projectModal(p, state) {
+        return `
+            <div class="modal-overlay" id="project-modal">
+                <div class="modal-content modal-large">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <h2>${p.name}</h2>
+                        <span class="modal-close" onclick="document.getElementById('project-modal').remove()">&times;</span>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <p class="subtitle">${p.desc}</p>
+                        
+                        <div class="modal-grid">
+                            <div>
+                                <!-- Details -->
+                                <div class="mb-2">
+                                    <h4>Steps / Implementation Hints</h4>
+                                    <ul style="padding-left:1.5rem;">
+                                        ${p.steps.map(s => `<li>${s}</li>`).join('')}
+                                    </ul>
+                                </div>
+
+                                <div class="mb-2">
+                                    <h4>Skills & Tools</h4>
+                                    <div>
+                                        ${p.skills.map(s => `<span class="tag">${s}</span>`).join('')}
+                                        ${p.tools.map(t => `<span class="tag" style="border-color:var(--accent-primary)">${t}</span>`).join('')}
+                                    </div>
+                                </div>
+
+                                <div class="mb-2">
+                                    <h4>Notes / Learnings</h4>
+                                    <textarea id="p-notes" class="note-input" rows="5" placeholder="Document your journey here...">${state.notes || ''}</textarea>
+                                </div>
+                            </div>
+
+                            <div style="background:var(--bg-primary); padding:1rem; border-radius:0.5rem; height:fit-content;">
+                                <!-- Tracking Form -->
+                                <h4 class="mt-2">Tracking</h4>
+                                
+                                <label>Status</label>
+                                <select id="p-status" class="filter-select" style="width:100%; margin-bottom:1rem;">
+                                    <option value="not-started" ${(state.status || 'not-started') === 'not-started' ? 'selected' : ''}>Not Started</option>
+                                    <option value="planning" ${(state.status || '') === 'planning' ? 'selected' : ''}>Planning</option>
+                                    <option value="in-progress" ${(state.status || '') === 'in-progress' ? 'selected' : ''}>In Progress</option>
+                                    <option value="completed" ${(state.status || '') === 'completed' ? 'selected' : ''}>Completed</option>
+                                    <option value="deployed" ${(state.status || '') === 'deployed' ? 'selected' : ''}>Deployed</option>
+                                </select>
+
+                                <label>Time Spent</label>
+                                <input type="text" id="p-time" class="form-input" value="${state.timeSpent || ''}" placeholder="e.g. 5 hours">
+
+                                <label>Income Earned (UGX)</label>
+                                <input type="text" id="p-income" class="form-input" value="${state.incomeEarned || ''}" placeholder="e.g. 500000">
+
+                                <label>Portfolio / Demo Link</label>
+                                <input type="text" id="p-link" class="form-input" value="${state.demoLink || ''}" placeholder="https://...">
+
+                                <label>GitHub Repo</label>
+                                <input type="text" id="p-github" class="form-input" value="${state.githubLink || ''}" placeholder="https://github.com/...">
+
+                                <button class="btn-primary" style="width:100%; margin-top:1rem;" onclick="app.saveProjectDetails(${p.id})">Save Progress</button>
+                                
+                                <div style="margin-top:2rem; font-size:0.8rem; color:var(--text-secondary);">
+                                    <p><strong>Income Potential:</strong> ${p.income}</p>
+                                    <p><strong>Portfolio Val:</strong> ${p.portfolio}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         `;
     },
@@ -282,27 +473,50 @@ const Views = {
         const lowerQ = query.toLowerCase();
         let results = [];
 
+        // Resources
         ['A', 'B', 'C'].forEach(id => {
             const plan = careerData.plans[id];
             plan.phases.forEach(phase => {
                 phase.resources.forEach(r => {
                     if (r.name.toLowerCase().includes(lowerQ) || r.type.toLowerCase().includes(lowerQ) || r.platform.toLowerCase().includes(lowerQ)) {
-                        results.push({ ...r, planId: id, planTitle: plan.title });
+                        results.push({ ...r, planId: id, planTitle: plan.title, category: 'Resource' });
                     }
                 });
             });
         });
 
-        const list = results.map(r => `
-            <div class="card mb-2">
-                 <div style="display:flex; justify-content:space-between;">
-                    <strong>${r.name}</strong>
-                    <span class="badge" style="background:${careerData.plans[r.planId].color}">${r.planTitle}</span>
-                 </div>
-                 <p><a href="${r.url}" target="_blank" class="resource-link">Open Resource</a></p>
-                 <button class="btn-icon" onclick="app.switchTab('plan${r.planId}')">Go to Plan</button>
-            </div>
-        `).join('');
+        // Projects
+        careerData.projects.forEach(p => {
+            if (p.name.toLowerCase().includes(lowerQ) || p.desc.toLowerCase().includes(lowerQ) || p.skills.some(s => s.toLowerCase().includes(lowerQ))) {
+                results.push({ ...p, category: 'Project' });
+            }
+        });
+
+        const list = results.map(r => {
+            if (r.category === 'Resource') {
+                return `
+                    <div class="card mb-2">
+                         <div style="display:flex; justify-content:space-between;">
+                            <strong>${r.name}</strong>
+                            <span class="badge" style="background:${careerData.plans[r.planId].color}">${r.category}</span>
+                         </div>
+                         <p><a href="${r.url}" target="_blank" class="resource-link">Open Resource</a></p>
+                         <button class="btn-icon" onclick="app.switchTab('plan${r.planId}')">Go to Plan</button>
+                    </div>
+                `;
+            } else {
+                return `
+                    <div class="card mb-2">
+                         <div style="display:flex; justify-content:space-between;">
+                            <strong>${r.name}</strong>
+                            <span class="badge" style="background:${careerData.plans[r.plan].color}">${r.category}</span>
+                         </div>
+                         <p>${r.desc}</p>
+                         <button class="btn-icon" onclick="app.switchTab('projects'); setTimeout(() => app.openProjectModal(${r.id}), 100);">View Project</button>
+                    </div>
+                `;
+            }
+        }).join('');
 
         return `
             <div class="search-box">

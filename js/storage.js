@@ -4,7 +4,8 @@ const Storage = {
         PROGRESS: 'techpath_progress',
         INCOME: 'techpath_income',
         SETTINGS: 'techpath_settings',
-        HABITS: 'techpath_habits'
+        HABITS: 'techpath_habits',
+        PROJECTS: 'techpath_projects'
     },
 
     // Initialize/Load Data
@@ -73,6 +74,22 @@ const Storage = {
             this.save(this.KEYS.INCOME, income);
         }
         return income;
+    },
+
+    // Project Tracking
+    saveProjectState(projectId, data) {
+        const all = this.load(this.KEYS.PROJECTS, {});
+        all[projectId] = { ...(all[projectId] || {}), ...data };
+        this.save(this.KEYS.PROJECTS, all);
+    },
+
+    getProjectState(projectId) {
+        const all = this.load(this.KEYS.PROJECTS, {});
+        return all[projectId] || {};
+    },
+
+    getAllProjectStates() {
+        return this.load(this.KEYS.PROJECTS, {});
     },
 
     // Export/Import
