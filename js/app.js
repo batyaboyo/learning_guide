@@ -12,8 +12,10 @@ const app = {
         this.updateHeaderStats();
 
         // Remove loader
-        document.getElementById('app-loader').style.display = 'none';
-        document.getElementById('app').style.display = 'block';
+        const loader = document.getElementById('app-loader');
+        const appContainer = document.getElementById('app');
+        if (loader) loader.style.display = 'none';
+        if (appContainer) appContainer.style.display = 'block';
     },
 
     cacheDOM() {
@@ -37,18 +39,22 @@ const app = {
         });
 
         // Theme Toggle
-        this.dom.themeToggle.addEventListener('click', () => {
-            const html = document.documentElement;
-            const current = html.getAttribute('data-theme');
-            const next = current === 'dark' ? 'light' : 'dark';
-            html.setAttribute('data-theme', next);
-            this.dom.themeToggle.textContent = next === 'dark' ? '☀️' : '🌙';
-        });
+        if (this.dom.themeToggle) {
+            this.dom.themeToggle.addEventListener('click', () => {
+                const html = document.documentElement;
+                const current = html.getAttribute('data-theme');
+                const next = current === 'dark' ? 'light' : 'dark';
+                html.setAttribute('data-theme', next);
+                this.dom.themeToggle.textContent = next === 'dark' ? '☀️' : '🌙';
+            });
+        }
 
         // Mobile Menu Toggle
         if (this.dom.mobileToggle) {
             this.dom.mobileToggle.addEventListener('click', () => {
-                this.dom.sidebar.classList.toggle('active');
+                if (this.dom.sidebar) {
+                    this.dom.sidebar.classList.toggle('active');
+                }
             });
         }
 
@@ -89,14 +95,14 @@ const app = {
         const income = document.getElementById('p-income').value;
         const notes = document.getElementById('p-notes').value;
         const link = document.getElementById('p-link').value;
-        const github = document.getElementById('p-github').value;
 
         Storage.saveProjectState(id, {
-            status, timeSpent: time, incomeEarned: income, notes, demoLink: link, githubLink: github,
+            status, timeSpent: time, incomeEarned: income, notes, demoLink: link,
             lastUpdated: new Date().toISOString()
         });
 
-        document.getElementById('project-modal').remove();
+        const modal = document.getElementById('project-modal');
+        if (modal) modal.remove();
         this.render(); // Refresh to show updated status
     },
 
@@ -105,28 +111,28 @@ const app = {
 
         const modalHtml = `
             <div class="modal-overlay" id="resource-modal">
-                <div class="modal-content">
+                <div class="modal-content glass">
                     <span class="modal-close" onclick="document.getElementById('resource-modal').remove()">&times;</span>
                     <h3>${resourceName}</h3>
                     
                     <div class="mb-2">
                         <label>Difficulty / Rating:</label>
                         <div class="star-rating">
-                            \${[1, 2, 3, 4, 5].map(i => \`
-                                <span class="star \${i <= meta.rating ? 'active' : ''}" onclick="app.setRating(\${i})">★</span>
-                            \`).join('')}
+                            ${[1, 2, 3, 4, 5].map(i => `
+                                <span class="star ${i <= meta.rating ? 'active' : ''}" onclick="app.setRating(${i})">★</span>
+                            `).join('')}
                         </div>
                     </div>
 
                     <div class="mb-2">
                         <label>My Notes:</label>
-                        <textarea id="modal-note" class="note-input" rows="4" placeholder="What did you learn?">\${meta.note}</textarea>
+                        <textarea id="modal-note" class="note-input glass" rows="4" placeholder="What did you learn?">${meta.note}</textarea>
                     </div>
 
-                    <button class="btn-primary" onclick="app.saveResourceMeta('\${planId}', '\${resourceName}')">Save Notes</button>
+                    <button class="btn-primary" onclick="app.saveResourceMeta('${planId}', '${resourceName}')">Save Notes</button>
                 </div>
             </div>
-        \`;
+        `;
         document.body.insertAdjacentHTML('beforeend', modalHtml);
         this.trapFocus(document.getElementById('resource-modal'));
         this.tempRating = meta.rating;
@@ -155,7 +161,6 @@ const app = {
         const modal = document.getElementById(id);
         if (modal) {
             modal.remove();
-            // Restore focus to last active element if tracked, or main content
             if (this.lastActiveElement) {
                 this.lastActiveElement.focus();
             }
@@ -177,14 +182,14 @@ const app = {
                 return;
             }
 
-            if (e.shiftKey) { // if shift key pressed for shift + tab
+            if (e.shiftKey) {
                 if (document.activeElement === firstFocusableElement) {
-                    lastFocusableElement.focus(); // add focus for the last focusable element
+                    lastFocusableElement.focus();
                     e.preventDefault();
                 }
-            } else { // if tab key is pressed
-                if (document.activeElement === lastFocusableElement) { // if focused has reached to last focusable element then focus first focusable element after pressing tab
-                    firstFocusableElement.focus(); // add focus for the first focusable element
+            } else {
+                if (document.activeElement === lastFocusableElement) {
+                    firstFocusableElement.focus();
                     e.preventDefault();
                 }
             }
@@ -198,7 +203,7 @@ const app = {
         // Update Sidebar UI
         const items = document.querySelectorAll('.sidebar .nav-item');
         items.forEach(t => t.classList.remove('active'));
-        const activeItem = document.querySelector(\`.sidebar [data-tab="\${tabId}"]\`);
+        const activeItem = document.querySelector(`.sidebar [data-tab="${tabId}"]`);
         if (activeItem) activeItem.classList.add('active');
 
         // Render View
@@ -206,15 +211,13 @@ const app = {
         window.scrollTo(0, 0); // Reset scroll on tab change
 
         // Close sidebar on mobile after selection
-        if (window.innerWidth <= 768) {
+        if (window.innerWidth <= 768 && this.dom.sidebar) {
             this.dom.sidebar.classList.remove('active');
         }
     },
 
     updateHeaderStats() {
-        // Date Logic (Hidden in new UI but kept for storage/calc)
         const now = new Date();
-
         const endYear = new Date('2026-12-31T23:59:59');
         const diff = endYear - now;
         const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
@@ -236,7 +239,7 @@ const app = {
             case 'search': html = Views.search(this.searchQuery); break;
             default: html = '<h1>404 - Not Found</h1>';
         }
-        this.dom.main.innerHTML = html;
+        if (this.dom.main) this.dom.main.innerHTML = html;
         this.postRender();
 
         // Refocus search if needed
@@ -244,7 +247,6 @@ const app = {
             const input = document.getElementById('global-search');
             if (input) {
                 input.focus();
-                // move cursor to end
                 const len = input.value.length;
                 input.setSelectionRange(len, len);
             }
@@ -252,7 +254,6 @@ const app = {
     },
 
     postRender() {
-        // Re-attach listeners for dynamic content
         const checkboxes = document.querySelectorAll('.resource-check');
         checkboxes.forEach(cb => {
             cb.addEventListener('change', (e) => {
@@ -263,7 +264,6 @@ const app = {
             });
         });
 
-        // Income Form Listeners
         const incomeForm = document.getElementById('income-add-form');
         if (incomeForm) {
             incomeForm.addEventListener('submit', (e) => {
@@ -275,26 +275,25 @@ const app = {
                     date: document.getElementById('inc-date').value
                 };
                 Storage.addIncomeEntry(entry);
-                this.render(); // Re-render to show new list
+                this.render();
             });
         }
     },
 
     refreshProgressUI(planId) {
-        // Simple re-render for now
         if (this.currentTab === 'dashboard' || this.currentTab.startsWith('plan')) {
             this.render();
         }
     },
 
-    // Export/Import (Exposed to Global)
+    // Export/Import
     exportData() {
         const data = Storage.exportData();
         const blob = new Blob([data], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'techpath_backup.json';
+        a.download = 'pathweaver_backup.json';
         a.click();
     },
 
@@ -317,55 +316,50 @@ const app = {
 // View Templates
 const Views = {
     dashboard() {
-        const plans = ['A', 'B', 'C'];
-        let totalTotal = 0;
         const stats = Storage.getGlobalStats();
-        return \`
-            <div class="hero-section glass mb-2" style="padding: 3rem; text-align: center; background: radial-gradient(circle at center, rgba(34, 211, 238, 0.1), transparent);">
-                <h1 style="font-size: 3rem; margin-bottom: 1rem; font-weight: 900;">Weave Your <span style="color: var(--accent-cyan);">Technical Destiny</span></h1>
-                <p style="font-size: 1.2rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 2rem;">
-                    Pathweaver is your high-performance career architect, designed to guide you from foundational learning to professional mastery in the 2026 tech landscape.
-                </p>
-                <div style="display: flex; justify-content: center; gap: 1rem;">
-                    <button onclick="app.switchTab('planA')" class="btn-primary" style="padding: 1rem 2rem; border-radius: 30px;">Start Your Journey</button>
-                    <button onclick="app.switchTab('projects')" class="btn-secondary glass" style="padding: 1rem 2rem; border-radius: 30px;">Explore Projects</button>
+        return `
+            <div class="hero-section glass mb-2 dashboard-hero">
+                <h1>Weave Your <span class="accent-text">Technical Destiny</span></h1>
+                <p>Pathweaver is your high-performance career architect, designed to guide you to mastery.</p>
+                <div class="hero-actions">
+                    <button onclick="app.switchTab('planA')" class="btn-primary">Start Journey</button>
+                    <button onclick="app.switchTab('projects')" class="btn-secondary glass">Explore Projects</button>
                 </div>
             </div>
 
             <div class="stats-grid">
-                <div class="stat-card glass p-2" style="text-align: center;">
-                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🎯</div>
-                    <h3>\${stats.totalResources}</h3>
-                    <p style="color: var(--text-muted);">Resources Tracked</p>
+                <div class="stat-card glass p-2">
+                    <div class="stat-icon">🎯</div>
+                    <h3>${stats.totalResources}</h3>
+                    <p class="text-muted">Resources Tracked</p>
                 </div>
-                <div class="stat-card glass p-2" style="text-align: center;">
-                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">✅</div>
-                    <h3>\${stats.completedResources}</h3>
-                    <p style="color: var(--text-muted);">Modules Completed</p>
+                <div class="stat-card glass p-2">
+                    <div class="stat-icon">✅</div>
+                    <h3>${stats.completedResources}</h3>
+                    <p class="text-muted">Modules Completed</p>
                 </div>
-                <div class="stat-card glass p-2" style="text-align: center;">
-                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🚀</div>
-                    <h3>\${stats.activeProjects}</h3>
-                    <p style="color: var(--text-muted);">Live Projects</p>
+                <div class="stat-card glass p-2">
+                    <div class="stat-icon">🚀</div>
+                    <h3>${stats.activeProjects}</h3>
+                    <p class="text-muted">Live Projects</p>
                 </div>
-                <div class="stat-card glass p-2" style="text-align: center;">
-                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">💰</div>
-                    <h3>\${stats.totalIncome.toLocaleString()}</h3>
-                    <p style="color: var(--text-muted);">UGX Earned</p>
+                <div class="stat-card glass p-2">
+                    <div class="stat-icon">💰</div>
+                    <h3>${stats.totalIncome.toLocaleString()}</h3>
+                    <p class="text-muted">UGX Earned</p>
                 </div>
             </div>
 
-            <div class="dashboard-grid mt-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+            <div class="dashboard-grid mt-2">
                 <div class="glass p-2">
                     <h3>Current Focus</h3>
-                    <p class="text-secondary">Pick up where you left off in your career path.</p>
-                    <div class="mt-1" style="display: grid; gap: 1rem;">
-                        <div class="focus-item glass p-1" style="display: flex; align-items: center; gap: 1rem; cursor: pointer; border: 1px solid rgba(255,255,255,0.05);" onclick="app.switchTab('planA')">
-                            <span style="font-size: 2rem;">🛡️</span>
-                            <div style="flex-grow: 1;">
+                    <div class="mt-1">
+                        <div class="focus-item glass p-1" onclick="app.switchTab('planA')">
+                            <span class="focus-icon">🛡️</span>
+                            <div class="focus-details">
                                 <strong>Cybersecurity Architecture</strong>
-                                <div class="progress-container" style="height: 6px; margin-top: 5px;">
-                                    <div class="progress-bar" style="width: 15%; background: var(--accent-cyan);"></div>
+                                <div class="progress-container compact">
+                                    <div class="progress-bar" style="width: 15%;"></div>
                                 </div>
                             </div>
                         </div>
@@ -373,14 +367,14 @@ const Views = {
                 </div>
                 <div class="glass p-2">
                     <h3>Quick Navigator</h3>
-                    <div class="mt-1" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                        <button class="badge glass" onclick="app.switchTab('uganda')" style="cursor: pointer; padding: 0.5rem 1rem;">🇺🇬 local_hub</button>
-                        <button class="badge glass" onclick="app.switchTab('projects')" style="cursor: pointer; padding: 0.5rem 1rem;">🚀 active_projects</button>
-                        <button class="badge glass" onclick="app.switchTab('income')" style="cursor: pointer; padding: 0.5rem 1rem;">💰 earnings_tracker</button>
+                    <div class="navigator-pills mt-1">
+                        <button class="badge glass pill" onclick="app.switchTab('uganda')">🇺🇬 local_hub</button>
+                        <button class="badge glass pill" onclick="app.switchTab('projects')">🚀 projects</button>
+                        <button class="badge glass pill" onclick="app.switchTab('income')">💰 earnings</button>
                     </div>
                 </div>
             </div>
-        \`;
+        `;
     },
 
     projects() {
@@ -388,7 +382,6 @@ const Views = {
         let pList = careerData.projects;
         const pStates = Storage.getAllProjectStates();
 
-        // Filtering
         if (plan !== 'all') pList = pList.filter(p => p.plan === plan);
         if (difficulty !== 'all') pList = pList.filter(p => p.difficulty.toLowerCase().includes(difficulty.toLowerCase()));
         if (status !== 'all') pList = pList.filter(p => {
@@ -400,129 +393,85 @@ const Views = {
             const state = pStates[p.id] || {};
             const st = state.status || 'not-started';
             const stDisplay = st.replace('-', ' ');
-            const stClass = \`status-\${st}\`;
+            const stClass = `status-${st}`;
 
-            return \`
-                <div class="card glass p-2" style="border: 1px solid var(--glass-border);">
-                    <div class="project-card-header mb-1" style="display:flex; justify-content:space-between; align-items:center;">
-                        <span class="badge glass" style="background: \${careerData.plans[p.plan].color}">\${careerData.plans[p.plan].icon} Plan \${p.plan}</span>
-                        <span class="status-badge \${stClass}">\${stDisplay}</span>
+            return `
+                <div class="card glass p-2">
+                    <div class="project-card-header mb-1">
+                        <span class="badge glass plan-badge" style="background: ${careerData.plans[p.plan].color}">${careerData.plans[p.plan].icon} Plan ${p.plan}</span>
+                        <span class="status-badge ${stClass}">${stDisplay}</span>
                     </div>
-                    <h3 style="margin-bottom: 0.5rem;">\${p.name}</h3>
-                    <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:1rem;">\${p.desc}</p>
-                    
-                    <div style="display:flex; gap:0.5rem; margin-bottom:1rem;">
-                        <span class="badge glass" style="font-size: 0.7rem;">📊 \${p.difficulty}</span>
-                        <span class="badge glass" style="font-size: 0.7rem;">⏱️ \${p.time}</span>
-                    </div>
-
-                    <button class="btn-primary" style="width:100%; border-radius: 8px;" onclick="app.openProjectModal(\${p.id})">Details & Track</button>
+                    <h3>${p.name}</h3>
+                    <p class="project-desc">${p.desc}</p>
+                    <button class="btn-primary full-width" onclick="app.openProjectModal(${p.id})">Details</button>
                 </div>
-            \`;
+            `;
         }).join('');
 
-        return \`
-            <div class="hero-section glass mb-2" style="padding: 2rem;">
-                <h1 style="margin-bottom: 0.5rem;">🚀 Project Forge</h1>
-                <p style="color: var(--text-muted);">Building real-world experience, one commit at a time.</p>
-                
-                <div class="project-filters mt-1" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        return `
+            <div class="hero-section glass mb-2">
+                <h1>🚀 Project Forge</h1>
+                <div class="project-filters mt-1">
                     <select class="filter-select glass" onchange="app.updateProjectFilter('plan', this.value)">
-                        <option value="all" \${plan === 'all' ? 'selected' : ''}>All Specializations</option>
-                        <option value="A" \${plan === 'A' ? 'selected' : ''}>Cybersecurity</option>
-                        <option value="B" \${plan === 'B' ? 'selected' : ''}>Django Development</option>
-                        <option value="C" \${plan === 'C' ? 'selected' : ''}>IT Support</option>
-                    </select>
-                    <select class="filter-select glass" onchange="app.updateProjectFilter('difficulty', this.value)">
-                        <option value="all" \${difficulty === 'all' ? 'selected' : ''}>All Levels</option>
-                        <option value="Beginner" \${difficulty === 'Beginner' ? 'selected' : ''}>Beginner</option>
-                        <option value="Intermediate" \${difficulty === 'Intermediate' ? 'selected' : ''}>Intermediate</option>
-                        <option value="Advanced" \${difficulty === 'Advanced' ? 'selected' : ''}>Advanced</option>
-                    </select>
-                    <select class="filter-select glass" onchange="app.updateProjectFilter('status', this.value)">
-                        <option value="all" \${status === 'all' ? 'selected' : ''}>All Statuses</option>
-                        <option value="not-started" \${status === 'not-started' ? 'selected' : ''}>Not Started</option>
-                        <option value="in-progress" \${status === 'in-progress' ? 'selected' : ''}>In Progress</option>
-                        <option value="completed" \${status === 'completed' ? 'selected' : ''}>Completed</option>
-                        <option value="deployed" \${status === 'deployed' ? 'selected' : ''}>Deployed</option>
+                        <option value="all" ${plan === 'all' ? 'selected' : ''}>All Specializations</option>
+                        <option value="A" ${plan === 'A' ? 'selected' : ''}>Cybersecurity</option>
+                        <option value="B" ${plan === 'B' ? 'selected' : ''}>Django Development</option>
+                        <option value="C" ${plan === 'C' ? 'selected' : ''}>IT Support</option>
                     </select>
                 </div>
             </div>
-            
-            <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
-                \${cards.length ? cards : '<p>No projects match your current workflow filters.</p>'}
+            <div class="grid">
+                ${cards.length ? cards : '<p class="text-center p-3 text-muted">No projects match your current filters.</p>'}
             </div>
-        \`;
+        `;
     },
 
     projectModal(p, state) {
-        return \`
-            <div class="modal-overlay glass" id="project-modal" style="backdrop-filter: blur(20px);">
-                <div class="modal-content glass p-3" style="max-width: 900px; border: 1px solid var(--glass-border); background: var(--void-panel);">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 2rem;">
-                        <h2 style="font-size: 2rem; background: linear-gradient(to right, var(--accent-cyan), var(--accent-violet)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">\${p.name}</h2>
-                        <span class="modal-close" onclick="document.getElementById('project-modal').remove()" style="font-size: 2rem; cursor: pointer; color: var(--text-muted);">&times;</span>
+        return `
+            <div class="modal-overlay glass" id="project-modal">
+                <div class="modal-content glass modal-large">
+                    <div class="modal-header">
+                        <h2>${p.name}</h2>
+                        <span class="modal-close" onclick="document.getElementById('project-modal').remove()">&times;</span>
                     </div>
-                    
                     <div class="modal-body">
-                        <p style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2rem;">\${p.desc}</p>
-                        
-                        <div class="modal-grid" style="display: grid; grid-template-columns: 3fr 2fr; gap: 3rem;">
-                            <div>
-                                <div class="mb-2">
-                                    <h4 style="color: var(--accent-cyan); margin-bottom: 1rem;">Architectural Steps</h4>
-                                    <ul style="padding-left:1.5rem; color: var(--text-main); line-height: 1.8;">
-                                        \${p.steps.map(s => \`<li>\${s}</li>\`).join('')}
-                                    </ul>
-                                </div>
-
-                                <div class="mb-2">
-                                    <h4 style="color: var(--accent-cyan); margin-bottom: 1rem;">Stack & Arsenal</h4>
-                                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                                        \${p.skills.map(s => \`<span class="badge glass" style="font-size: 0.8rem; border-color: var(--glass-border)">\${s}</span>\`).join('')}
-                                        \${p.tools.map(t => \`<span class="badge glass" style="font-size: 0.8rem; border-color: var(--accent-violet); color: var(--accent-violet)">\${t}</span>\`).join('')}
-                                    </div>
-                                </div>
-
-                                <div class="mb-2">
-                                    <h4 style="color: var(--accent-cyan); margin-bottom: 1rem;">Developer Chronicles</h4>
-                                    <textarea id="p-notes" class="glass" style="width: 100%; min-height: 120px; padding: 1rem; border-radius: 12px; font-size: 0.9rem;" placeholder="Log your technical hurdles and triumphs...">\${state.notes || ''}</textarea>
-                                </div>
+                        <div class="modal-grid">
+                            <div class="modal-main">
+                                <h4 class="accent-color">Architectural Steps</h4>
+                                <ul class="steps-list">
+                                    ${p.steps.map(s => `<li>${s}</li>`).join('')}
+                                </ul>
+                                <h4 class="accent-color mt-2">Developer Chronicles</h4>
+                                <textarea id="p-notes" class="glass note-input" placeholder="Notes...">${state.notes || ''}</textarea>
                             </div>
-
-                            <div class="glass p-2" style="background: rgba(255,255,255,0.02); height: fit-content;">
-                                <h4 style="margin-bottom: 1.5rem; text-align: center; letter-spacing: 1px;">FORGE PROGRESS</h4>
-                                
-                                <label style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 0.5rem;">STATUS</label>
-                                <select id="p-status" class="glass" style="width:100%; margin-bottom:1.5rem; padding: 0.6rem;">
-                                    <option value="not-started" \${(state.status || 'not-started') === 'not-started' ? 'selected' : ''}>Not Started</option>
-                                    <option value="planning" \${(state.status || '') === 'planning' ? 'selected' : ''}>Planning</option>
-                                    <option value="in-progress" \${(state.status || '') === 'in-progress' ? 'selected' : ''}>In Progress</option>
-                                    <option value="completed" \${(state.status || '') === 'completed' ? 'selected' : ''}>Completed</option>
-                                    <option value="deployed" \${(state.status || '') === 'deployed' ? 'selected' : ''}>Deployed</option>
-                                </select>
-
-                                <label style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 0.5rem;">TIME INVESTED</label>
-                                <input type="text" id="p-time" class="glass" style="width: 100%; margin-bottom: 1.5rem; padding: 0.6rem;" value="\${state.timeSpent || ''}" placeholder="e.g. 12 hours">
-
-                                <label style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 0.5rem;">VALUATION (UGX)</label>
-                                <input type="text" id="p-income" class="glass" style="width: 100%; margin-bottom: 1.5rem; padding: 0.6rem;" value="\${state.incomeEarned || ''}" placeholder="e.g. 250,000">
-
-                                <label style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 0.5rem;">DEPLOYMENT LINK</label>
-                                <input type="text" id="p-link" class="glass" style="width: 100%; margin-bottom: 1.5rem; padding: 0.6rem;" value="\${state.demoLink || ''}" placeholder="https://...">
-
-                                <button class="btn-primary" style="width:100%; margin-top:1rem; border-radius: 30px;" onclick="app.saveProjectDetails(\${p.id})">Synch Progress</button>
-                                
-                                <div style="margin-top:2rem; font-size:0.8rem; color:var(--text-muted); border-top: 1px solid var(--glass-border); padding-top: 1.5rem;">
-                                    <p><strong>Yield Potential:</strong> \${p.income}</p>
-                                    <p><strong>Social Capital:</strong> \${p.portfolio}</p>
+                            <div class="modal-sidebar glass p-2">
+                                <div class="input-group">
+                                    <label>STATUS</label>
+                                    <select id="p-status" class="glass full-width">
+                                        <option value="not-started" ${(state.status || 'not-started') === 'not-started' ? 'selected' : ''}>Not Started</option>
+                                        <option value="in-progress" ${(state.status || '') === 'in-progress' ? 'selected' : ''}>In Progress</option>
+                                        <option value="completed" ${(state.status || '') === 'completed' ? 'selected' : ''}>Completed</option>
+                                    </select>
                                 </div>
+                                <div class="input-group mt-1">
+                                    <label>TIME INVESTED</label>
+                                    <input type="text" id="p-time" class="glass full-width" value="${state.timeSpent || ''}">
+                                </div>
+                                <div class="input-group mt-1">
+                                    <label>INCOME (UGX)</label>
+                                    <input type="text" id="p-income" class="glass full-width" value="${state.incomeEarned || ''}">
+                                </div>
+                                <div class="input-group mt-1">
+                                    <label>DEPLOYMENT LINK</label>
+                                    <input type="text" id="p-link" class="glass full-width" value="${state.demoLink || ''}">
+                                </div>
+                                <button class="btn-primary full-width mt-1" onclick="app.saveProjectDetails(${p.id})">Save Progress</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        \`;
+        `;
     },
 
     search(query) {
@@ -530,206 +479,151 @@ const Views = {
         const lowerQ = query.toLowerCase();
         let results = [];
 
-        // Resources
         ['A', 'B', 'C'].forEach(id => {
-            const plan = careerData.plans[id];
-            plan.phases.forEach(phase => {
+            careerData.plans[id].phases.forEach(phase => {
                 phase.resources.forEach(r => {
-                    if (r.name.toLowerCase().includes(lowerQ) || r.type.toLowerCase().includes(lowerQ) || r.platform.toLowerCase().includes(lowerQ)) {
-                        results.push({ ...r, planId: id, planTitle: plan.title, category: 'Resource' });
+                    if (r.name.toLowerCase().includes(lowerQ)) {
+                        results.push({ ...r, planId: id, category: 'Resource' });
                     }
                 });
             });
         });
 
-        // Projects
         careerData.projects.forEach(p => {
-            if (p.name.toLowerCase().includes(lowerQ) || p.desc.toLowerCase().includes(lowerQ) || p.skills.some(s => s.toLowerCase().includes(lowerQ))) {
+            if (p.name.toLowerCase().includes(lowerQ)) {
                 results.push({ ...p, category: 'Project' });
             }
         });
 
-        const list = results.map(r => {
-            if (r.category === 'Resource') {
-                return \`
-                    <div class="card glass mb-2 p-1" style="display:flex; justify-content:space-between; align-items:center;">
-                         <div>
-                            <strong style="color: var(--accent-cyan);">\${r.name}</strong>
-                            <div style="font-size: 0.8rem; color: var(--text-muted);">\${r.planTitle} • \${r.type}</div>
-                         </div>
-                         <button class="badge glass" style="cursor: pointer; background: rgba(34, 211, 238, 0.1);" onclick="app.switchTab('plan\${r.planId}')">Observe Plan</button>
-                    </div>
-                \`;
-            } else {
-                return \`
-                    <div class="card glass mb-2 p-1" style="display:flex; justify-content:space-between; align-items:center;">
-                         <div>
-                            <strong style="color: var(--accent-violet);">\${r.name}</strong>
-                            <div style="font-size: 0.8rem; color: var(--text-muted);">Career Forge Project</div>
-                         </div>
-                         <button class="badge glass" style="cursor: pointer; background: rgba(139, 92, 246, 0.1);" onclick="app.switchTab('projects'); setTimeout(() => app.openProjectModal(\${r.id}), 100);">View Blueprint</button>
-                    </div>
-                \`;
-            }
-        }).join('');
+        const list = results.map(r => `
+            <div class="card glass mb-2 p-1 search-result-card">
+                <div class="result-info">
+                    <strong>${r.name}</strong>
+                    <small class="text-muted">${r.category}</small>
+                </div>
+                <button class="badge glass" onclick="app.switchTab('${r.category === 'Resource' ? 'plan' + r.planId : 'projects'}')">View</button>
+            </div>
+        `).join('');
 
-        return \`
-            <div class="hero-section glass mb-2" style="padding: 2rem;">
-                <h2 style="margin-bottom: 0.5rem;">🔍 Search Results: "\${query}"</h2>
-                <p style="color: var(--text-muted);">Detected \${results.length} relevant technical nodes.</p>
+        return `
+            <div class="hero-section glass mb-2">
+                <h2>🔍 Search: "${query}"</h2>
+                <p class="text-muted">Detected ${results.length} relevant nodes.</p>
             </div>
-            <div style="max-width: 800px; margin: 0 auto;">
-                \${results.length ? list : '<p style="text-align: center; color: var(--text-muted); padding: 3rem;">No technical records found matching that query.</p>'}
+            <div class="search-results-list">
+                ${results.length ? list : '<p class="text-center p-3 text-muted">No technical records found.</p>'}
             </div>
-        \`;
+        `;
     },
 
     plan(planLetter) {
         const plan = careerData.plans[planLetter];
-
         const phasesHtml = plan.phases.map(phase => {
             const resourceList = phase.resources.map(r => {
                 const isChecked = Storage.isResourceCompleted(planLetter, r.name) ? 'checked' : '';
-                const meta = Storage.getResourceMeta(planLetter, r.name);
-                const hasNote = meta && (meta.note || meta.rating > 0);
-
-                return \`
+                return `
                     <div class="resource-item">
-                        <input type="checkbox" class="resource-check" data-plan="\${planLetter}" data-resource="\${r.name}" \${isChecked}>
-                        <div style="flex-grow:1;">
-                            <a href="\${r.url}" target="_blank" class="resource-link">\${r.name}</a>
-                            \${hasNote ? \`<span title="\${meta.note} - Rating: \${meta.rating}/5">📝</span>\` : ''}
-                            <br>
-                            <small style="color:var(--text-secondary)">\${r.type} • \${r.platform}</small>
-                        </div>
-                        <button class="btn-icon" onclick="app.openResourceModal('\${planLetter}', '\${r.name.replace(/'/g, "\\\\'")}')">✏️</button>
+                        <input type="checkbox" class="resource-check" data-plan="${planLetter}" data-resource="${r.name}" ${isChecked}>
+                        <a href="${r.url}" target="_blank" class="resource-link">${r.name}</a>
+                        <button class="btn-icon" onclick="app.openResourceModal('${planLetter}', '${r.name.replace(/'/g, "\\'")}')">✏️</button>
                     </div>
-                \`;
+                `;
             }).join('');
 
-            // NEW: Phase Specific Tools
-            const phaseToolsHtml = phase.tools ? \`
-                <div class="phase-tools mt-2">
-                    <h4 style="font-size:0.9rem; margin-bottom:0.5rem;">🛠️ Essential Tools for this Phase:</h4>
-                    <div class="tools-grid-compact">
-                        \${phase.tools.map(t => \`
-                            <div class="tool-card-compact">
-                                <a href="\${t.url}" target="_blank" title="\${t.desc}"><strong>\${t.name}</strong></a>
-                            </div>
-                        \`).join('')}
-                    </div>
+            const toolsHtml = phase.tools ? `
+                <div class="tools-grid-compact mt-1">
+                    ${phase.tools.map(t => `<div class="tool-card-compact"><a href="${t.url}" target="_blank">${t.name}</a></div>`).join('')}
                 </div>
-            \` : '';
+            ` : '';
 
-            // Phase Progress
-            const total = phase.resources.length;
-            const done = phase.resources.filter(r => Storage.isResourceCompleted(planLetter, r.name)).length;
-            const pct = total === 0 ? 0 : Math.round((done / total) * 100);
-
-            return \`
-                <div class="card glass mb-2 p-2" style="border: 1px solid var(--glass-border);">
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <h3 style="margin: 0;">\${phase.title}</h3>
-                        <span class="badge glass" style="background: rgba(255,255,255,0.05);">\${phase.duration}</span>
-                    </div>
-                    <div class="progress-container mt-1">
-                        <div class="progress-bar" style="width: \${pct}%; background: \${plan.color}"></div>
-                    </div>
-                    <p class="text-right" style="font-size:0.8rem; margin: 0.5rem 0;">\${done}/\${total} Completed</p>
-                    <div class="resource-list mt-1">
-                        \${resourceList}
-                    </div>
-                    \${phaseToolsHtml}
+            return `
+                <div class="card glass mb-2 p-2 plan-phase-card">
+                    <h3>${phase.title}</h3>
+                    <div class="resource-list mt-1">${resourceList}</div>
+                    ${toolsHtml}
                 </div>
-            \`;
+            `;
         }).join('');
 
-        return \`
-            <div class="hero-section glass mb-2" style="padding: 2rem; border-left: 6px solid \${plan.color};">
-                <h1 style="color: var(--text-main); margin-bottom: 0.5rem;">\${plan.icon} \${plan.title}</h1>
-                <p style="color: var(--text-muted);">\${plan.subtitle}</p>
+        return `
+            <div class="hero-section glass mb-2 plan-hero" style="border-left: 6px solid ${plan.color};">
+                <h1>${plan.icon} ${plan.title}</h1>
+                <p class="text-muted">${plan.subtitle || ''}</p>
             </div>
-            \${phasesHtml}
-        \`;
+            ${phasesHtml}
+        `;
     },
 
     uganda() {
-        return \`
-            <div class="hero-section glass mb-2" style="padding: 2rem;">
-                <h1 style="margin-bottom: 0.5rem;">🇺🇬 Uganda Tech Hub</h1>
-                <p style="color: var(--text-muted);">Empowering local talent with professional roadmaps.</p>
+        return `
+            <div class="hero-section glass mb-2">
+                <h1>🇺🇬 Uganda Tech Hub</h1>
+                <p class="text-muted">Empowering local talent with professional roadmaps.</p>
             </div>
-
-            <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
+            <div class="responsive-grid">
                 <div class="glass p-2">
-                    <h3 style="color: var(--accent-cyan); margin-bottom: 1.5rem;">🚀 Local Job Boards</h3>
-                    <div class="resource-list">
-                        <a href="https://www.brightermonday.co.ug/jobs/it-software" target="_blank" class="resource-link glass" style="display: block; margin-bottom: 0.8rem; padding: 0.8rem;">BrighterMonday IT</a>
-                        <a href="https://www.kazijobs.com/" target="_blank" class="resource-link glass" style="display: block; margin-bottom: 0.8rem; padding: 0.8rem;">Kazi Jobs</a>
-                        <a href="https://ug.linkedin.com/jobs/it-jobs" target="_blank" class="resource-link glass" style="display: block; margin-bottom: 0.8rem; padding: 0.8rem;">LinkedIn Uganda</a>
+                    <h3 class="accent-color">Job Boards</h3>
+                    <div class="hub-list mt-1">
+                        <a href="https://www.brightermonday.co.ug" target="_blank" class="hub-link glass">BrighterMonday IT</a>
+                        <a href="https://www. kazijobs.com" target="_blank" class="hub-link glass">Kazi Jobs</a>
                     </div>
                 </div>
                 <div class="glass p-2">
-                    <h3 style="color: var(--accent-violet); margin-bottom: 1.5rem;">🤝 Tech Communities</h3>
-                    <div class="resource-list">
-                        <a href="#" class="resource-link glass" style="display: block; margin-bottom: 0.8rem; padding: 0.8rem; opacity: 0.5;">Innovation Village (Kampala)</a>
-                        <a href="#" class="resource-link glass" style="display: block; margin-bottom: 0.8rem; padding: 0.8rem; opacity: 0.5;">Outbox Hub</a>
-                        <a href="#" class="resource-link glass" style="display: block; margin-bottom: 0.8rem; padding: 0.8rem; opacity: 0.5;">GDG Kampala</a>
+                    <h3 class="violet-color">Communities</h3>
+                    <div class="hub-list mt-1">
+                        <div class="hub-link glass disabled">Outbox Hub (Kampala)</div>
+                        <div class="hub-link glass disabled">Innovation Village</div>
                     </div>
                 </div>
             </div>
-        \`;
+        `;
     },
 
     income() {
         const entries = Storage.getIncomeEntries();
         const total = entries.reduce((acc, curr) => acc + curr.amount, 0);
 
-        return \`
-            <div class="hero-section glass mb-2" style="padding: 2rem;">
-                <h1 style="margin-bottom: 0.5rem;">💰 Wealth Weaver</h1>
-                <p style="color: var(--text-muted);">Tracking your professional valuation in UGX.</p>
-                <div class="mt-1">
-                    <h2 style="color: var(--accent-cyan); font-size: 2.5rem;">\${total.toLocaleString()} UGX</h2>
-                    <p style="font-size: 0.8rem; color: var(--text-muted);">Total Portfolio Earnings</p>
+        return `
+            <div class="hero-section glass mb-2">
+                <h1>💰 Wealth Weaver</h1>
+                <div class="income-stats">
+                    <h2 class="accent-color total-income">${total.toLocaleString()} UGX</h2>
+                    <p class="text-muted">Total Portfolio Earnings</p>
                 </div>
             </div>
-
-            <div class="grid" style="display: grid; grid-template-columns: 1fr 2fr; gap: 2rem;">
+            <div class="responsive-grid">
                 <div class="glass p-2">
                     <h3>Log Transaction</h3>
-                    <form id="income-add-form" class="mt-1" style="display: grid; gap: 1rem;">
-                        <input type="text" id="inc-project" placeholder="Source (e.g., Freelance Web)" class="glass" style="width: 100%;" required>
-                        <input type="text" id="inc-client" placeholder="Client Name" class="glass" style="width: 100%;" required>
-                        <input type="number" id="inc-amount" placeholder="Amount (UGX)" class="glass" style="width: 100%;" required>
-                        <input type="date" id="inc-date" class="glass" style="width: 100%;" required>
-                        <button type="submit" class="btn-primary" style="width: 100%;">Add to Vault</button>
+                    <form id="income-add-form" class="mt-1">
+                        <input type="text" id="inc-project" placeholder="Source" class="glass full-width" required>
+                        <input type="text" id="inc-client" placeholder="Client" class="glass full-width" required>
+                        <input type="number" id="inc-amount" placeholder="Amount" class="glass full-width" required>
+                        <input type="date" id="inc-date" class="glass full-width" required>
+                        <button type="submit" class="btn-primary full-width mt-1">Add to Vault</button>
                     </form>
                 </div>
-                
                 <div class="glass p-2">
                     <h3>Transaction Log</h3>
-                    <div class="resource-list mt-1">
-                        \${entries.length ? entries.map((e, idx) => \`
-                            <div class="glass p-1 mb-1" style="display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(255,255,255,0.05);">
-                                <div>
-                                    <strong style="color: var(--text-main);">\${e.project}</strong>
-                                    <div style="font-size: 0.8rem; color: var(--text-muted);">\${e.client} • \${e.date}</div>
+                    <div class="income-log mt-1">
+                        ${entries.length ? entries.map((e, idx) => `
+                            <div class="glass p-1 mb-1 log-entry">
+                                <div class="entry-info">
+                                    <strong>${e.project}</strong>
+                                    <small>${e.client}</small>
                                 </div>
-                                <div style="display: flex; align-items: center; gap: 1rem;">
-                                    <span style="color: var(--accent-emerald); font-weight: bold;">+\${parseFloat(e.amount).toLocaleString()}</span>
-                                    <button class="btn-icon" onclick="Storage.deleteIncomeEntry(\${idx}); app.render();" style="color:var(--danger); border: none; background: transparent;">🗑️</button>
+                                <div class="entry-math">
+                                    <span class="earned-text">+${e.amount.toLocaleString()}</span>
+                                    <button class="btn-icon delete-btn" onclick="Storage.deleteIncomeEntry(${idx}); app.render();">🗑️</button>
                                 </div>
                             </div>
-                        \`).join('') : '<p style="text-align: center; color: var(--text-muted); padding: 2rem;">The vault is currently empty.</p>'}
+                        `).join('') : '<p class="text-center text-muted p-2">The vault is currently empty.</p>'}
                     </div>
                 </div>
             </div>
-        \`;
+        `;
     }
 };
 
-// Initialize App
 document.addEventListener('DOMContentLoaded', () => {
     app.init();
 });

@@ -4,15 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechPath UG - Career Roadmap 2026</title>
+    <title>Pathweaver | Career Roadmap 2026</title>
     <meta name="description"
-        content="Track your journey from CS Student to Professional in 2026. Explore cybersecurity, development, and IT career paths in Uganda.">
+        content="Weave your technical destiny. Pathweaver is your high-performance career architect for the 2026 tech landscape.">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://techpathug.com/">
-    <meta property="og:title" content="TechPath UG - Career Roadmap 2026">
-    <meta property="og:description" content="Professional growth tracker for tech talent in Uganda.">
+    <meta property="og:title" content="Pathweaver | Technical Destiny 2026">
+    <meta property="og:description" content="High-performance career architecture for the modern tech era.">
     <meta property="og:image" content="assets/og-image.jpg">
 
     <!-- Twitter -->
@@ -49,20 +49,20 @@
 
     <div id="app" style="display: none;">
         <header>
-            <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
-                <div class="brand">
+            <div class="container header-content">
+                <div class="brand" onclick="app.switchTab('dashboard')" style="cursor: pointer;">
                     <button id="mobile-menu-toggle" class="btn-icon glass mobile-only"
-                        style="margin-right: 1rem;">☰</button>
-                    <span style="font-size: 1.8rem;">✨</span> Pathweaver
+                        onclick="event.stopPropagation()">☰</button>
+                    <span>✨</span> Pathweaver
                 </div>
-                <div class="search-container" style="flex-grow: 1; max-width: 400px; margin: 0 2rem;">
+                <div class="search-container">
                     <input type="text" id="global-search" placeholder="Search resources, tools, or projects..."
                         class="glass">
                 </div>
-                <div class="header-actions" style="display: flex; gap: 1rem; align-items: center;">
+                <div class="header-actions">
                     <button id="theme-toggle" class="btn-icon glass">☀️</button>
                     <button onclick="app.exportData()" class="btn-icon glass" title="Export Data">💾</button>
-                    <label class="btn-icon glass" style="cursor:pointer;" title="Import Data">
+                    <label class="btn-icon glass" title="Import Data">
                         📥 <input type="file" onchange="app.importData(this)" style="display:none;">
                     </label>
                 </div>
@@ -95,10 +95,9 @@
                     <span class="nav-icon">🇺🇬</span> Local Hub
                 </div>
 
-                <div style="margin-top: auto; padding-top: 2rem;">
-                    <div id="days-left-container" class="glass" style="padding: 1rem; text-align: center;">
-                        <div id="days-left" style="font-size: 1.5rem; font-weight: bold; color: var(--accent-cyan);">329
-                        </div>
+                <div class="sidebar-footer">
+                    <div id="days-left-container" class="glass">
+                        <div id="days-left">329</div>
                         <small>Days Remaining in 2026</small>
                     </div>
                 </div>
@@ -110,11 +109,14 @@
         </div>
         <!-- Footer -->
         <footer>
-            <p>&copy; 2026 TechPath UG. Built for Success.</p>
-            <div class="data-controls">
-                <button onclick="app.exportData()">Export Data</button>
-                <input type="file" id="import-file" hidden onchange="app.importData(this)">
-                <button onclick="document.getElementById('import-file').click()">Import Data</button>
+            <div class="footer-content container">
+                <p>&copy; 2026 Pathweaver. Weaving Success.</p>
+                <div class="data-controls">
+                    <button onclick="app.exportData()" class="btn-secondary glass">Export Data</button>
+                    <input type="file" id="import-file" hidden onchange="app.importData(this)">
+                    <button onclick="document.getElementById('import-file').click()" class="btn-secondary glass">Import
+                        Data</button>
+                </div>
             </div>
         </footer>
     </div>

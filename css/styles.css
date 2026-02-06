@@ -85,6 +85,13 @@ header {
     padding: 1rem 0;
 }
 
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
 .brand {
     display: flex;
     align-items: center;
@@ -96,6 +103,18 @@ header {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: -0.5px;
+    flex-shrink: 0;
+    user-select: none;
+    transition: var(--transition);
+}
+
+.brand:hover {
+    filter: brightness(1.2);
+    transform: scale(1.02);
+}
+
+.brand span {
+    font-size: 1.8rem;
 }
 
 .mobile-only {
@@ -135,6 +154,23 @@ nav {
 .logo {
     height: 60px;
     width: auto;
+}
+
+.search-container {
+    flex-grow: 1;
+    max-width: 400px;
+    margin: 0 2rem;
+}
+
+.search-container input {
+    width: 100%;
+}
+
+.header-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-shrink: 0;
 }
 
 .header-stats {
@@ -210,6 +246,22 @@ nav {
     backdrop-filter: blur(20px);
     z-index: 1100;
     transition: transform 0.3s ease;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    padding-top: 2rem;
+}
+
+#days-left-container {
+    padding: 1rem;
+    text-align: center;
+}
+
+#days-left {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--accent-cyan);
 }
 
 @media (max-width: 1024px) {
@@ -330,7 +382,21 @@ input.glass:focus {
     border-radius: 20px;
 }
 
-/* Cards & Grid */
+/* Dashboards & Layout Grids */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.dashboard-grid,
+.responsive-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -410,29 +476,205 @@ input[type="checkbox"] {
     font-weight: 600;
 }
 
-/* Header/Subtitle */
-h1 {
-    margin: 0;
-    font-size: 1.5rem;
+/* Utility Classes */
+.full-width {
+    width: 100%;
 }
 
-.subtitle {
-    margin: 0;
-    color: var(--text-secondary);
+.text-center {
+    text-align: center;
+}
+
+.text-muted {
+    color: var(--text-muted);
     font-size: 0.9rem;
 }
 
-/* Utilities */
-.text-center {
-    text-align: center;
+.accent-color {
+    color: var(--accent-cyan);
+}
+
+.violet-color {
+    color: var(--accent-violet);
+}
+
+.accent-text {
+    color: var(--accent-cyan);
+}
+
+.text-right {
+    text-align: right;
+}
+
+.mt-1 {
+    margin-top: 0.5rem;
 }
 
 .mt-2 {
     margin-top: 1rem;
 }
 
+.mb-1 {
+    margin-bottom: 0.5rem;
+}
+
 .mb-2 {
     margin-bottom: 1rem;
+}
+
+.p-1 {
+    padding: 0.5rem;
+}
+
+.p-2 {
+    padding: 1rem;
+}
+
+.p-3 {
+    padding: 2rem;
+}
+
+/* Dashboard Specifics */
+.dashboard-hero {
+    padding: 4rem 2rem;
+    text-align: center;
+    background: radial-gradient(circle at center, rgba(34, 211, 238, 0.1), transparent);
+}
+
+.dashboard-hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    font-weight: 900;
+}
+
+.hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.stat-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.focus-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.focus-icon {
+    font-size: 2rem;
+}
+
+.focus-details {
+    flex-grow: 1;
+}
+
+.progress-container.compact {
+    height: 6px;
+    margin-top: 5px;
+}
+
+.navigator-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.badge.pill {
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+}
+
+/* Projects Specifics */
+.project-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.plan-badge {
+    border-color: var(--glass-border);
+}
+
+/* Modals Refinement */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.steps-list {
+    padding-left: 1.5rem;
+    color: var(--text-main);
+    line-height: 1.8;
+}
+
+.input-group label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 0.3rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Income Specifics */
+.total-income {
+    font-size: 2.5rem;
+    margin: 0.5rem 0;
+}
+
+.log-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.entry-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.entry-info small {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.entry-math {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.earned-text {
+    color: var(--accent-emerald);
+    font-weight: bold;
+}
+
+.hub-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.hub-link {
+    display: block;
+    padding: 0.8rem;
+    text-decoration: none;
+    color: var(--text-main);
+}
+
+.hub-link.disabled {
+    opacity: 0.5;
+    cursor: default;
 }
 
 /* Theme Toggle */
@@ -577,6 +819,27 @@ input.form-input {
         display: flex;
     }
 
+    .header-content {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .brand {
+        order: 1;
+    }
+
+    .header-actions {
+        order: 2;
+    }
+
+    .search-container {
+        order: 3;
+        width: 100%;
+        max-width: none;
+        margin: 0.5rem 0;
+    }
+
     .container {
         flex-direction: column;
         padding: 0 1rem;
@@ -585,19 +848,6 @@ input.form-input {
 
     .app-shell {
         flex-direction: column;
-    }
-
-    header .container {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-
-    .search-container {
-        order: 3;
-        width: 100%;
-        max-width: none !important;
-        margin: 1rem 0 0 0 !important;
     }
 
     .sidebar {
@@ -621,17 +871,23 @@ input.form-input {
 
     .stats-grid,
     .grid,
-    .dashboard-grid {
+    .dashboard-grid,
+    .responsive-grid {
         grid-template-columns: 1fr !important;
-        gap: 1rem;
+        gap: 1rem !important;
     }
 
     .hero-section {
         padding: 2rem 1rem !important;
+        text-align: center;
     }
 
     .hero-section h1 {
         font-size: 2rem !important;
+    }
+
+    .hero-section p {
+        font-size: 1rem !important;
     }
 
     .modal-content {
@@ -645,10 +901,17 @@ input.form-input {
         gap: 2rem !important;
     }
 
-    /* Income Form Fix */
     #income-add-form {
         grid-template-columns: 1fr !important;
     }
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
 /* --- Project Tracking Interface --- */

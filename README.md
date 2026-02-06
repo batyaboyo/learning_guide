@@ -1,4 +1,4 @@
-# TechPath UG Career Tracker 🇺🇬
+# Pathweaver Career Architect ✨
 
 A professional, offline-capable career development tracking website.
 
