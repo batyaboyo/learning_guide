@@ -14,11 +14,15 @@ const careerData = {
                     resources: [
                         { name: 'TryHackMe SOC Level 1', url: 'https://tryhackme.com/path/outline/soclevel1', type: 'Lab', platform: 'TryHackMe' },
                         { name: 'Google Cybersecurity Certificate (Audit)', url: 'https://www.coursera.org/professional-certificates/google-cybersecurity', type: 'Course', platform: 'Coursera' },
-                        { name: 'Splunk Fundamentals (Free Tier)', url: 'https://www.splunk.com/en_us/training/free-courses/splunk-fundamentals-1.html', type: 'Course', platform: 'Splunk' },
+                        { name: 'Rangeforce: Immersive Solo Labs', url: 'https://www.rangeforce.com/solo-labs', type: 'Lab', platform: 'Rangeforce' },
+                        { name: 'Splunk Fundamentals (Free)', url: 'https://www.splunk.com/en_us/training/free-courses/splunk-fundamentals-1.html', type: 'Course', platform: 'Splunk' },
                         { name: 'Microsoft SC-900 Training', url: 'https://learn.microsoft.com/en-us/credentials/certifications/security-compliance-and-identity-fundamentals/', type: 'Course', platform: 'Microsoft' },
                         { name: 'Professor Messer Security+ SY0-701', url: 'https://www.youtube.com/playlist?list=PLG49S3nxzAnkL2ulTSqvMrbCdISPNK9Pr', type: 'Video', platform: 'YouTube' },
                         { name: 'Cisco Introduction to Cybersecurity', url: 'https://www.skillsforall.com/course/introduction-to-cybersecurity', type: 'Course', platform: 'Cisco' },
-                        { name: 'Wazuh SIEM Documentation & Labs', url: 'https://documentation.wazuh.com/current/getting-started/index.html', type: 'Lab', platform: 'Wazuh' }
+                        { name: 'Wazuh SIEM Lab Tutorial', url: 'https://www.youtube.com/watch?v=kYJv5_W_k6w', type: 'Video', platform: 'YouTube' },
+                        { name: 'LetsDefend.io SOC Foundations', url: 'https://letsdefend.io/', type: 'Course', platform: 'LetsDefend' },
+                        { name: 'Cybrary: Defensive Security Ops', url: 'https://www.cybrary.it/course/defensive-security-operations', type: 'Course', platform: 'Cybrary' },
+                        { name: 'Security Blue Team: FREE Training', url: 'https://www.securityblue.team/', type: 'Course', platform: 'SBT' }
                     ]
                 },
                 {
@@ -26,12 +30,15 @@ const careerData = {
                     title: 'Phase 2: DFIR (Investigation)',
                     duration: 'Months 4-6',
                     resources: [
+                        { name: 'Blue Team Labs Online (BTLO)', url: 'https://blueteamlabs.online/', type: 'Lab', platform: 'BTLO' },
                         { name: 'CyberDefenders Case Blue', url: 'https://cyberdefenders.org/blueteam-ctf-challenges/', type: 'Lab', platform: 'CyberDefenders' },
                         { name: 'DFIR Science: DFS101', url: 'https://dfir.science/courses/dfs101-intro-to-digital-forensics.html', type: 'Course', platform: 'DFIRScience' },
-                        { name: 'Blue Cape Security: DFIR Foundations', url: 'https://bluecapesecurity.com/courses/dfir-foundations/', type: 'Course', platform: 'Blue Cape' },
-                        { name: 'The Sleuth Kit Training', url: 'https://www.sleuthkit.org/informer/training.php', type: 'Tool', platform: 'SleuthKit' },
-                        { name: 'Autopsy Forensic Browser Tutorial', url: 'https://www.basistech.com/digital-forensics/autopsy/training/', type: 'Video', platform: 'Autopsy' },
-                        { name: 'KAPE Tool Guide (AboutDFIR)', url: 'https://aboutdfir.com/tools/kape/', type: 'Doc', platform: 'AboutDFIR' },
+                        { name: 'Blue Cape: DFIR Foundations', url: 'https://bluecapesecurity.com/courses/dfir-foundations/', type: 'Course', platform: 'Blue Cape' },
+                        { name: 'CISA: Incident Response Training', url: 'https://www.cisa.gov/resources-tools/programs/training', type: 'Course', platform: 'CISA' },
+                        { name: 'Cybrary: IR Lifecycle', url: 'https://www.cybrary.it/course/incident-response-lifecycle', type: 'Course', platform: 'Cybrary' },
+                        { name: 'Autopsy Forensic Tutorial', url: 'https://www.basistech.com/digital-forensics/autopsy/training/', type: 'Video', platform: 'Autopsy' },
+                        { name: 'KAPE Tool Guide', url: 'https://aboutdfir.com/tools/kape/', type: 'Doc', platform: 'AboutDFIR' },
+                        { name: 'Digital Forensics Search (GitHub)', url: 'https://github.com/DFIR-Science/Digital-Forensics-Challenges', type: 'Lab', platform: 'GitHub' },
                         { name: 'SANS DFIR Summit Archives', url: 'https://www.sans.org/blog/sans-dfir-summit-archive/', type: 'Video', platform: 'SANS' }
                     ]
                 },
@@ -41,10 +48,14 @@ const careerData = {
                     duration: 'Months 7-10',
                     resources: [
                         { name: 'TryHackMe Jr Pentesting', url: 'https://tryhackme.com/path/outline/jrpenetrationtester', type: 'Lab', platform: 'TryHackMe' },
-                        { name: 'HackTheBox Academy (Starter Modules)', url: 'https://academy.hackthebox.com/preview/modules', type: 'Lab', platform: 'HTB' },
+                        { name: 'HackTheBox Academy (Starter)', url: 'https://academy.hackthebox.com/preview/modules', type: 'Lab', platform: 'HTB' },
                         { name: 'PortSwigger Web Security Academy', url: 'https://portswigger.net/web-security', type: 'Lab', platform: 'PortSwigger' },
-                        { name: 'TCM Security: PEH (Partial Free)', url: 'https://www.youtube.com/watch?v=3Kq1MIfTWCE', type: 'Video', platform: 'YouTube' },
-                        { name: 'OWASP Web Security Testing Guide', url: 'https://owasp.org/www-project-web-security-testing-guide/', type: 'Book', platform: 'OWASP' },
+                        { name: 'VulnHub: Vulnerable VMs', url: 'https://www.vulnhub.com/', type: 'Lab', platform: 'VulnHub' },
+                        { name: 'PentesterLab: Free Exercises', url: 'https://pentesterlab.com/exercises', type: 'Lab', platform: 'PentesterLab' },
+                        { name: 'OWASP Juice Shop', url: 'https://pwning.owasp-juice.shop/', type: 'Lab', platform: 'OWASP' },
+                        { name: 'CTFlearn: Capture The Flag', url: 'https://ctflearn.com/', type: 'Lab', platform: 'CTFlearn' },
+                        { name: 'TCM Security: PEH (27h Series)', url: 'https://www.youtube.com/watch?v=3Kq1MIfTWCE', type: 'Video', platform: 'YouTube' },
+                        { name: 'EC-Council: Android Bug Bounty', url: 'https://www.eccouncil.org/free-cybersecurity-resources/', type: 'Course', platform: 'EC-Council' },
                         { name: 'Metasploit Unleashed', url: 'https://www.offsec.com/metasploit-unleashed/', type: 'Course', platform: 'OffSec' },
                         { name: 'Bugcrowd University', url: 'https://www.bugcrowd.com/university/', type: 'Course', platform: 'Bugcrowd' }
                     ]
@@ -55,10 +66,14 @@ const careerData = {
                     duration: 'Months 11-14',
                     resources: [
                         { name: 'TryHackMe Red Teaming Path', url: 'https://tryhackme.com/path/outline/redteaming', type: 'Lab', platform: 'TryHackMe' },
-                        { name: 'MITRE Caldera (Adv Emulation)', url: 'https://caldera.mitre.org/', type: 'Tool', platform: 'MITRE' },
+                        { name: 'Sliver Agent C2 Framework', url: 'https://github.com/BishopFox/sliver', type: 'Tool', platform: 'GitHub' },
                         { name: 'Atomic Red Team Tests', url: 'https://atomicredteam.io/', type: 'Lab', platform: 'Atomic Red Team' },
-                        { name: 'BloodHound Graph Theory Guide', url: 'https://bloodhound.readthedocs.io/', type: 'Doc', platform: 'GitHub' },
-                        { name: 'ADSecurity.org (Sean Metcalf)', url: 'https://adsecurity.org/', type: 'Blog', platform: 'ADSecurity' },
+                        { name: 'MITRE Caldera (Adv Emulation)', url: 'https://caldera.mitre.org/', type: 'Tool', platform: 'MITRE' },
+                        { name: 'Gophish: Phishing Framework', url: 'https://getgophish.com/', type: 'Tool', platform: 'GitHub' },
+                        { name: 'Root-Me: Offensive Security', url: 'https://www.root-me.org/', type: 'Lab', platform: 'Root-Me' },
+                        { name: 'Pwn College: Systems Security', url: 'https://pwn.college/', type: 'Course', platform: 'Pwn College' },
+                        { name: 'BloodHound Graph Theory', url: 'https://bloodhound.readthedocs.io/', type: 'Doc', platform: 'BloodHound' },
+                        { name: 'Active Directory Security (Sean Metcalf)', url: 'https://adsecurity.org/', type: 'Blog', platform: 'ADSecurity' },
                         { name: 'IppSec HC Video Search', url: 'https://ippsec.rocks/', type: 'Video', platform: 'IppSec' }
                     ]
                 },
@@ -67,13 +82,17 @@ const careerData = {
                     title: 'Phase 5: AI Security (Modern Era)',
                     duration: 'Months 15-18',
                     resources: [
-                        { name: 'Codecademy: AI Ethical Hacking', url: 'https://www.codecademy.com/learn/prompt-engineering-ethical-hacking-and-generative-ai-fusion', type: 'Course', platform: 'Codecademy' },
+                        { name: 'Web Security Academy: LLM Attacks', url: 'https://portswigger.net/web-security/llm-attacks', type: 'Lab', platform: 'PortSwigger' },
+                        { name: 'Giskard: LLM Security Scanner', url: 'https://github.com/Giskard-AI/giskard', type: 'Tool', platform: 'GitHub' },
                         { name: 'NVIDIA: Adversarial ML Course', url: 'https://www.nvidia.com/en-us/training/online/adversarial-machine-learning/', type: 'Lab', platform: 'NVIDIA' },
-                        { name: 'Microsoft: AI for Beginners (Ethics)', url: 'https://microsoft.github.io/AI-For-Beginners/', type: 'Course', platform: 'Microsoft' },
+                        { name: 'TextAttack: LLM Stress Testing', url: 'https://github.com/QData/TextAttack', type: 'Tool', platform: 'GitHub' },
+                        { name: 'Codecademy: AI Ethical Hacking', url: 'https://www.codecademy.com/learn/prompt-engineering-ethical-hacking-and-generative-ai-fusion', type: 'Course', platform: 'Codecademy' },
                         { name: 'APIsec University: AI Security', url: 'https://www.apisecuniversity.com/courses/ai-security-fundamentals', type: 'Course', platform: 'APIsec' },
+                        { name: 'Microsoft: AI for Beginners', url: 'https://microsoft.github.io/AI-For-Beginners/', type: 'Course', platform: 'Microsoft' },
                         { name: 'Securiti.ai: AI Governance Cert', url: 'https://securiti.ai/education/ai-security-governance-certification/', type: 'Course', platform: 'Securiti' },
-                        { name: 'Learn Prompting: Jailbreaking AI', url: 'https://learnprompting.org/docs/adversarial/introduction', type: 'Doc', platform: 'LearnPrompting' },
-                        { name: 'OWASP LLM Top 10', url: 'https://owasp.org/www-project-top-10-for-large-language-model-applications/', type: 'Doc', platform: 'OWASP' }
+                        { name: 'Learn Prompting: Adversarial AI', url: 'https://learnprompting.org/docs/adversarial/introduction', type: 'Doc', platform: 'LearnPrompting' },
+                        { name: 'OWASP LLM Top 10', url: 'https://owasp.org/www-project-top-10-for-large-language-model-applications/', type: 'Doc', platform: 'OWASP' },
+                        { name: 'SANS AI Security Resources', url: 'https://www.sans.org/top25/ai-security/', type: 'Video', platform: 'SANS' }
                     ]
                 }
             ]
