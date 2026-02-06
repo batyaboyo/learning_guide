@@ -114,5 +114,38 @@ const Storage = {
             console.error('Import failed', e);
             return false;
         }
+    },
+
+    // Global Stats for Dashboard
+    getGlobalStats() {
+        const progress = this.load(this.KEYS.PROGRESS, {});
+        const projects = this.load(this.KEYS.PROJECTS, {});
+        const income = this.load(this.KEYS.INCOME, []);
+
+        let totalResources = 0;
+        let completedResources = 0;
+
+        // Sum up from careerData (available globally)
+        if (typeof careerData !== 'undefined') {
+            Object.keys(careerData.plans).forEach(planId => {
+                careerData.plans[planId].phases.forEach(phase => {
+                    totalResources += phase.resources.length;
+                });
+            });
+        }
+
+        Object.keys(progress).forEach(planId => {
+            completedResources += progress[planId].length;
+        });
+
+        const activeProjects = Object.keys(projects).filter(id => projects[id].status !== 'completed' && projects[id].status !== 'deployed').length;
+        const totalIncome = income.reduce((acc, curr) => acc + (parseFloat(curr.amount) || 0), 0);
+
+        return {
+            totalResources,
+            completedResources,
+            activeProjects,
+            totalIncome
+        };
     }
 };

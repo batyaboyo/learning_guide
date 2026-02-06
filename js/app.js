@@ -14,9 +14,6 @@ const app = {
         // Remove loader
         document.getElementById('app-loader').style.display = 'none';
         document.getElementById('app').style.display = 'block';
-
-        // Check for search in URL or state
-        if (this.currentTab === 'search') this.renderSearch();
     },
 
     cacheDOM() {

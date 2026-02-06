@@ -265,6 +265,22 @@ nav {
     filter: brightness(1.1);
 }
 
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-main);
+    padding: 0.8rem 1.5rem;
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
 .btn-icon {
     width: 40px;
     height: 40px;
