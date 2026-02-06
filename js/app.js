@@ -74,6 +74,7 @@ const app = {
 
         const modalHtml = Views.projectModal(project, state);
         document.body.insertAdjacentHTML('beforeend', modalHtml);
+        this.trapFocus(document.getElementById('project-modal'));
     },
 
     saveProjectDetails(id) {
@@ -121,6 +122,7 @@ const app = {
             </div>
         `;
         document.body.insertAdjacentHTML('beforeend', modalHtml);
+        this.trapFocus(document.getElementById('resource-modal'));
         this.tempRating = meta.rating;
     },
 
@@ -139,8 +141,50 @@ const app = {
             rating: this.tempRating,
             note: note
         });
-        document.getElementById('resource-modal').remove();
+        this.closeModal('resource-modal');
         this.refreshProgressUI(planId);
+    },
+
+    closeModal(id) {
+        const modal = document.getElementById(id);
+        if (modal) {
+            modal.remove();
+            // Restore focus to last active element if tracked, or main content
+            if (this.lastActiveElement) {
+                this.lastActiveElement.focus();
+            }
+        }
+    },
+
+    trapFocus(modal) {
+        this.lastActiveElement = document.activeElement;
+        const focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+        const firstFocusableElement = modal.querySelectorAll(focusableElements)[0];
+        const focusableContent = modal.querySelectorAll(focusableElements);
+        const lastFocusableElement = focusableContent[focusableContent.length - 1];
+
+        modal.addEventListener('keydown', (e) => {
+            let isTabPressed = e.key === 'Tab' || e.keyCode === 9;
+
+            if (!isTabPressed) {
+                if (e.key === 'Escape') this.closeModal(modal.id);
+                return;
+            }
+
+            if (e.shiftKey) { // if shift key pressed for shift + tab
+                if (document.activeElement === firstFocusableElement) {
+                    lastFocusableElement.focus(); // add focus for the last focusable element
+                    e.preventDefault();
+                }
+            } else { // if tab key is pressed
+                if (document.activeElement === lastFocusableElement) { // if focused has reached to last focusable element then focus first focusable element after pressing tab
+                    firstFocusableElement.focus(); // add focus for the first focusable element
+                    e.preventDefault();
+                }
+            }
+        });
+
+        if (firstFocusableElement) firstFocusableElement.focus();
     },
 
     switchTab(tabId) {
@@ -164,7 +208,7 @@ const app = {
         // I'll stick to 2026-12-31 as "End of 2026" or "End of Roadmap" if it's a 2025 roadmap...
         // Wait, "From CS Student to Professional in 2025". It's 2026 now. 
         // I will update the countdown to 2026-12-31 for now as per previous code.
-        const endYear = new Date('2026-12-31');
+        const endYear = new Date('2026-12-31T23:59:59');
         const diff = endYear - now;
         const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
         this.dom.daysLeft.textContent = days > 0 ? days : 0;
@@ -287,7 +331,7 @@ const Views = {
                         <div class="progress-bar" style="width: ${pct}%; background: ${plan.color}"></div>
                     </div>
                     <p class="text-center">${pct}% Completed</p>
-                    <button onclick="app.switchTab('plan${id}')" class="mt-2" style="width:100%; padding:0.5rem; cursor:pointer;">View Plan</button>
+                    <button onclick="app.switchTab('plan${id}')" class="btn-plan-view">View Plan</button>
                 </div>
             `;
         }).join('');
@@ -306,13 +350,13 @@ const Views = {
             </div>
 
             <h2>👋 Welcome Back, Future Pro!</h2>
-            <div class="card mb-2" style="background: linear-gradient(45deg, #1e293b, #0f172a); border: 1px solid #334155; color: white;">
-                <h3 style="color: white;">Overall Progress</h3>
-                <h1 style="color: white;">${globalPct}%</h1>
-                <div class="progress-container" style="height: 12px; background: rgba(255,255,255,0.2);">
-                    <div class="progress-bar" style="width: ${globalPct}%; background: #fff;"></div>
+            <div class="card mb-2 overall-progress-card">
+                <h3>Overall Progress</h3>
+                <h1>${globalPct}%</h1>
+                <div class="progress-container overall-progress-bar-container">
+                    <div class="progress-bar overall-progress-bar" style="width: ${globalPct}%;"></div>
                 </div>
-                <div style="display:flex; justify-content:space-between; margin-top:1rem; border-top:1px solid rgba(255,255,255,0.1); padding-top:1rem;">
+                <div class="stats-grid">
                     <div>${totalDone}/${totalTotal} Resources</div>
                     <div>${pCompleted} Projects Done</div>
                     <div>${pInProgress} Active</div>
@@ -573,7 +617,7 @@ const Views = {
         }).join('');
 
         return `
-            <div style="border-bottom: 2px solid ${plan.color}; margin-bottom: 1rem; padding-bottom:1rem;">
+            <div class="plan-header" style="border-bottom: 2px solid ${plan.color};">
                 <h1 style="color: ${plan.color}">${plan.icon} ${plan.title}</h1>
                 <p>${plan.subtitle}</p>
             </div>

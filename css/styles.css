@@ -501,3 +501,105 @@ input.form-input {
     font-size: 0.8rem;
     color: var(--text-secondary);
 }
+
+/* --- Refactored & New Styles --- */
+.overall-progress-card {
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    border: 1px solid var(--bg-tertiary);
+    color: white;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 0.75rem;
+}
+
+.overall-progress-card h1 {
+    font-size: 3rem;
+    margin: 0.5rem 0;
+    color: white !important;
+}
+
+.overall-progress-card h3 {
+    opacity: 0.9;
+    color: white !important;
+    margin: 0;
+}
+
+.overall-progress-bar-container {
+    height: 12px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    margin: 1rem 0;
+}
+
+.overall-progress-bar {
+    background: white !important;
+}
+
+.stats-grid {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.btn-plan-view {
+    margin-top: 1rem;
+    width: 100%;
+    padding: 0.75rem;
+    cursor: pointer;
+    background: var(--bg-tertiary);
+    border: 1px solid transparent;
+    border-radius: 0.5rem;
+    color: var(--text-primary);
+    transition: var(--transition);
+    font-weight: 600;
+}
+
+.btn-plan-view:hover {
+    background: var(--accent-primary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.plan-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+}
+
+.text-right {
+    text-align: right;
+}
+
+/* Micro-interactions */
+.card {
+    cursor: pointer;
+}
+
+.card:hover {
+    border-color: var(--accent-primary);
+}
+
+.card:active {
+    transform: scale(0.98);
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: var(--accent, var(--accent-primary));
+    transition: width 0.3s ease;
+}
+
+.nav-item.active::after {
+    width: 100%;
+}
