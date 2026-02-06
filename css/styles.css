@@ -98,6 +98,10 @@ header {
     letter-spacing: -0.5px;
 }
 
+.mobile-only {
+    display: none;
+}
+
 nav {
     display: flex;
     justify-content: space-between;
@@ -204,6 +208,14 @@ nav {
     border-right: 1px solid var(--glass-border);
     background: var(--void-panel);
     backdrop-filter: blur(20px);
+    z-index: 1100;
+    transition: transform 0.3s ease;
+}
+
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 240px;
+    }
 }
 
 .nav-group {
@@ -559,20 +571,83 @@ input.form-input {
     font-weight: bold;
 }
 
+/* --- Mobile Responsiveness --- */
 @media (max-width: 768px) {
-    .main-header {
+    .mobile-only {
+        display: flex;
+    }
+
+    .container {
         flex-direction: column;
-        text-align: center;
+        padding: 0 1rem;
         gap: 1rem;
     }
 
-    .header-stats {
+    .app-shell {
+        flex-direction: column;
+    }
+
+    header .container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .search-container {
+        order: 3;
         width: 100%;
-        justify-content: space-around;
+        max-width: none !important;
+        margin: 1rem 0 0 0 !important;
     }
 
-    .nav-list {
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        height: 100vh;
+        width: 280px;
+        transform: translateX(-100%);
+        box-shadow: 20px 0 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .main-viewport {
+        padding: 1rem 0;
+    }
+
+    .stats-grid,
+    .grid,
+    .dashboard-grid {
+        grid-template-columns: 1fr !important;
         gap: 1rem;
+    }
+
+    .hero-section {
+        padding: 2rem 1rem !important;
+    }
+
+    .hero-section h1 {
+        font-size: 2rem !important;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 1.5rem !important;
+        margin: 1rem;
+    }
+
+    .modal-grid {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+    }
+
+    /* Income Form Fix */
+    #income-add-form {
+        grid-template-columns: 1fr !important;
     }
 }
 
