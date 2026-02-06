@@ -446,46 +446,44 @@ const Views = {
 
     projectModal(p, state) {
         return `
-            <div class="modal-overlay" id="project-modal">
-                <div class="modal-content modal-large">
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <h2>${p.name}</h2>
-                        <span class="modal-close" onclick="document.getElementById('project-modal').remove()">&times;</span>
+            <div class="modal-overlay glass" id="project-modal" style="backdrop-filter: blur(20px);">
+                <div class="modal-content glass p-3" style="max-width: 900px; border: 1px solid var(--glass-border); background: var(--void-panel);">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 2rem;">
+                        <h2 style="font-size: 2rem; background: linear-gradient(to right, var(--accent-cyan), var(--accent-violet)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">${p.name}</h2>
+                        <span class="modal-close" onclick="document.getElementById('project-modal').remove()" style="font-size: 2rem; cursor: pointer; color: var(--text-muted);">&times;</span>
                     </div>
                     
                     <div class="modal-body">
-                        <p class="subtitle">${p.desc}</p>
+                        <p style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2rem;">${p.desc}</p>
                         
-                        <div class="modal-grid">
+                        <div class="modal-grid" style="display: grid; grid-template-columns: 3fr 2fr; gap: 3rem;">
                             <div>
-                                <!-- Details -->
                                 <div class="mb-2">
-                                    <h4>Steps / Implementation Hints</h4>
-                                    <ul style="padding-left:1.5rem;">
+                                    <h4 style="color: var(--accent-cyan); margin-bottom: 1rem;">Architectural Steps</h4>
+                                    <ul style="padding-left:1.5rem; color: var(--text-main); line-height: 1.8;">
                                         ${p.steps.map(s => `<li>${s}</li>`).join('')}
                                     </ul>
                                 </div>
 
                                 <div class="mb-2">
-                                    <h4>Skills & Tools</h4>
-                                    <div>
-                                        ${p.skills.map(s => `<span class="tag">${s}</span>`).join('')}
-                                        ${p.tools.map(t => `<span class="tag" style="border-color:var(--accent-primary)">${t}</span>`).join('')}
+                                    <h4 style="color: var(--accent-cyan); margin-bottom: 1rem;">Stack & Arsenal</h4>
+                                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                                        ${p.skills.map(s => `<span class="badge glass" style="font-size: 0.8rem; border-color: var(--glass-border)">${s}</span>`).join('')}
+                                        ${p.tools.map(t => `<span class="badge glass" style="font-size: 0.8rem; border-color: var(--accent-violet); color: var(--accent-violet)">${t}</span>`).join('')}
                                     </div>
                                 </div>
 
                                 <div class="mb-2">
-                                    <h4>Notes / Learnings</h4>
-                                    <textarea id="p-notes" class="note-input" rows="5" placeholder="Document your journey here...">${state.notes || ''}</textarea>
+                                    <h4 style="color: var(--accent-cyan); margin-bottom: 1rem;">Developer Chronicles</h4>
+                                    <textarea id="p-notes" class="glass" style="width: 100%; min-height: 120px; padding: 1rem; border-radius: 12px; font-size: 0.9rem;" placeholder="Log your technical hurdles and triumphs...">${state.notes || ''}</textarea>
                                 </div>
                             </div>
 
-                            <div style="background:var(--bg-primary); padding:1rem; border-radius:0.5rem; height:fit-content;">
-                                <!-- Tracking Form -->
-                                <h4 class="mt-2">Tracking</h4>
+                            <div class="glass p-2" style="background: rgba(255,255,255,0.02); height: fit-content;">
+                                <h4 style="margin-bottom: 1.5rem; text-align: center; letter-spacing: 1px;">FORGE PROGRESS</h4>
                                 
-                                <label>Status</label>
-                                <select id="p-status" class="filter-select" style="width:100%; margin-bottom:1rem;">
+                                <label style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 0.5rem;">STATUS</label>
+                                <select id="p-status" class="glass" style="width:100%; margin-bottom:1.5rem; padding: 0.6rem;">
                                     <option value="not-started" ${(state.status || 'not-started') === 'not-started' ? 'selected' : ''}>Not Started</option>
                                     <option value="planning" ${(state.status || '') === 'planning' ? 'selected' : ''}>Planning</option>
                                     <option value="in-progress" ${(state.status || '') === 'in-progress' ? 'selected' : ''}>In Progress</option>
@@ -493,23 +491,20 @@ const Views = {
                                     <option value="deployed" ${(state.status || '') === 'deployed' ? 'selected' : ''}>Deployed</option>
                                 </select>
 
-                                <label>Time Spent</label>
-                                <input type="text" id="p-time" class="form-input" value="${state.timeSpent || ''}" placeholder="e.g. 5 hours">
+                                <label style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 0.5rem;">TIME INVESTED</label>
+                                <input type="text" id="p-time" class="glass" style="width: 100%; margin-bottom: 1.5rem; padding: 0.6rem;" value="${state.timeSpent || ''}" placeholder="e.g. 12 hours">
 
-                                <label>Income Earned (UGX)</label>
-                                <input type="text" id="p-income" class="form-input" value="${state.incomeEarned || ''}" placeholder="e.g. 500000">
+                                <label style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 0.5rem;">VALUATION (UGX)</label>
+                                <input type="text" id="p-income" class="glass" style="width: 100%; margin-bottom: 1.5rem; padding: 0.6rem;" value="${state.incomeEarned || ''}" placeholder="e.g. 250,000">
 
-                                <label>Portfolio / Demo Link</label>
-                                <input type="text" id="p-link" class="form-input" value="${state.demoLink || ''}" placeholder="https://...">
+                                <label style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 0.5rem;">DEPLOYMENT LINK</label>
+                                <input type="text" id="p-link" class="glass" style="width: 100%; margin-bottom: 1.5rem; padding: 0.6rem;" value="${state.demoLink || ''}" placeholder="https://...">
 
-                                <label>GitHub Repo</label>
-                                <input type="text" id="p-github" class="form-input" value="${state.githubLink || ''}" placeholder="https://github.com/...">
-
-                                <button class="btn-primary" style="width:100%; margin-top:1rem;" onclick="app.saveProjectDetails(${p.id})">Save Progress</button>
+                                <button class="btn-primary" style="width:100%; margin-top:1rem; border-radius: 30px;" onclick="app.saveProjectDetails(${p.id})">Synch Progress</button>
                                 
-                                <div style="margin-top:2rem; font-size:0.8rem; color:var(--text-secondary);">
-                                    <p><strong>Income Potential:</strong> ${p.income}</p>
-                                    <p><strong>Portfolio Val:</strong> ${p.portfolio}</p>
+                                <div style="margin-top:2rem; font-size:0.8rem; color:var(--text-muted); border-top: 1px solid var(--glass-border); padding-top: 1.5rem;">
+                                    <p><strong>Yield Potential:</strong> ${p.income}</p>
+                                    <p><strong>Social Capital:</strong> ${p.portfolio}</p>
                                 </div>
                             </div>
                         </div>
@@ -546,35 +541,35 @@ const Views = {
         const list = results.map(r => {
             if (r.category === 'Resource') {
                 return `
-                    <div class="card mb-2">
-                         <div style="display:flex; justify-content:space-between;">
-                            <strong>${r.name}</strong>
-                            <span class="badge" style="background:${careerData.plans[r.planId].color}">${r.category}</span>
+                    <div class="card glass mb-2 p-1" style="display:flex; justify-content:space-between; align-items:center;">
+                         <div>
+                            <strong style="color: var(--accent-cyan);">${r.name}</strong>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">${r.planTitle} • ${r.type}</div>
                          </div>
-                         <p><a href="${r.url}" target="_blank" class="resource-link">Open Resource</a></p>
-                         <button class="btn-icon" onclick="app.switchTab('plan${r.planId}')">Go to Plan</button>
+                         <button class="badge glass" style="cursor: pointer; background: rgba(34, 211, 238, 0.1);" onclick="app.switchTab('plan${r.planId}')">Observe Plan</button>
                     </div>
                 `;
             } else {
                 return `
-                    <div class="card mb-2">
-                         <div style="display:flex; justify-content:space-between;">
-                            <strong>${r.name}</strong>
-                            <span class="badge" style="background:${careerData.plans[r.plan].color}">${r.category}</span>
+                    <div class="card glass mb-2 p-1" style="display:flex; justify-content:space-between; align-items:center;">
+                         <div>
+                            <strong style="color: var(--accent-violet);">${r.name}</strong>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">Career Forge Project</div>
                          </div>
-                         <p>${r.desc}</p>
-                         <button class="btn-icon" onclick="app.switchTab('projects'); setTimeout(() => app.openProjectModal(${r.id}), 100);">View Project</button>
+                         <button class="badge glass" style="cursor: pointer; background: rgba(139, 92, 246, 0.1);" onclick="app.switchTab('projects'); setTimeout(() => app.openProjectModal(${r.id}), 100);">View Blueprint</button>
                     </div>
                 `;
             }
         }).join('');
 
         return `
-            <div class="search-box">
-                <input type="text" id="global-search" class="search-input" placeholder="🔍 Search resources..." value="${query}" autofocus>
+            <div class="hero-section glass mb-2" style="padding: 2rem;">
+                <h2 style="margin-bottom: 0.5rem;">🔍 Search Results: "${query}"</h2>
+                <p style="color: var(--text-muted);">Detected ${results.length} relevant technical nodes.</p>
             </div>
-            <h2>Search Results for "${query}"</h2>
-            ${results.length ? list : '<p>No results found.</p>'}
+            <div style="max-width: 800px; margin: 0 auto;">
+                ${results.length ? list : '<p style="text-align: center; color: var(--text-muted); padding: 3rem;">No technical records found matching that query.</p>'}
+            </div>
         `;
     },
 
@@ -648,26 +643,29 @@ const Views = {
     },
 
     uganda() {
-        const { communities, jobs } = careerData.uganda;
-
-        const comms = communities.map(c => `<li><a href="${c.url}" target="_blank" class="resource-link">${c.name}</a></li>`).join('');
-        const jobList = jobs.map(j => `<li><a href="${j.url}" target="_blank" class="resource-link">${j.name}</a></li>`).join('');
-
         return `
-            <h1>🇺🇬 Uganda Tech Ecosystem</h1>
-            <div class="grid">
-                <div class="card">
-                    <h3>Communities & Hubs</h3>
-                    <ul>${comms}</ul>
-                </div>
-                <div class="card">
-                    <h3>Job Boards</h3>
-                    <ul>${jobList}</ul>
-                </div>
+            <div class="hero-section glass mb-2" style="padding: 2rem;">
+                <h1 style="margin-bottom: 0.5rem;">🇺🇬 Uganda Tech Hub</h1>
+                <p style="color: var(--text-muted);">Empowering local talent with professional roadmaps.</p>
             </div>
-            <div class="card mt-2">
-                <h3>Local Hack</h3>
-                <p>Attend monthly meetups at Innovation Village or Outbox. Networking is 80% of job hunting in Kampala!</p>
+
+            <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
+                <div class="glass p-2">
+                    <h3 style="color: var(--accent-cyan); margin-bottom: 1.5rem;">🚀 Local Job Boards</h3>
+                    <div class="resource-list">
+                        <a href="https://www.brightermonday.co.ug/jobs/it-software" target="_blank" class="resource-link glass" style="display: block; margin-bottom: 0.8rem; padding: 0.8rem;">BrighterMonday IT</a>
+                        <a href="https://www.kazijobs.com/" target="_blank" class="resource-link glass" style="display: block; margin-bottom: 0.8rem; padding: 0.8rem;">Kazi Jobs</a>
+                        <a href="https://ug.linkedin.com/jobs/it-jobs" target="_blank" class="resource-link glass" style="display: block; margin-bottom: 0.8rem; padding: 0.8rem;">LinkedIn Uganda</a>
+                    </div>
+                </div>
+                <div class="glass p-2">
+                    <h3 style="color: var(--accent-violet); margin-bottom: 1.5rem;">🤝 Tech Communities</h3>
+                    <div class="resource-list">
+                        <a href="#" class="resource-link glass" style="display: block; margin-bottom: 0.8rem; padding: 0.8rem; opacity: 0.5;">Innovation Village (Kampala)</a>
+                        <a href="#" class="resource-link glass" style="display: block; margin-bottom: 0.8rem; padding: 0.8rem; opacity: 0.5;">Outbox Hub</a>
+                        <a href="#" class="resource-link glass" style="display: block; margin-bottom: 0.8rem; padding: 0.8rem; opacity: 0.5;">GDG Kampala</a>
+                    </div>
+                </div>
             </div>
         `;
     },
@@ -675,50 +673,45 @@ const Views = {
     income() {
         const entries = Storage.getIncomeEntries();
         const total = entries.reduce((acc, curr) => acc + curr.amount, 0);
-        const goal = 5000;
-        const pct = Math.min((total / goal) * 100, 100);
-
-        const listHtml = entries.map((e, idx) => `
-            <li class="income-item">
-                <div>
-                    <strong>${e.project}</strong> (${e.client})<br>
-                    <small>${e.date}</small>
-                </div>
-                <div style="text-align:right;">
-                    <div style="color: var(--success); font-weight:bold;">+$${e.amount.toFixed(2)}</div>
-                    <button class="btn-icon" onclick="Storage.deleteIncomeEntry(${idx}); app.render();" style="color:var(--danger)">🗑️</button>
-                </div>
-            </li>
-        `).join('');
 
         return `
-            <h1>💰 Income Tracker</h1>
-            <div class="card text-center mb-2">
-                <h3>Goal: $${goal.toLocaleString()}</h3>
-                <h1 style="color: var(--success)">$${total.toLocaleString(undefined, { minimumFractionDigits: 2 })}</h1>
-                <div class="progress-container">
-                    <div class="progress-bar" style="width: ${pct}%; background: var(--success)"></div>
+            <div class="hero-section glass mb-2" style="padding: 2rem;">
+                <h1 style="margin-bottom: 0.5rem;">💰 Wealth Weaver</h1>
+                <p style="color: var(--text-muted);">Tracking your professional valuation in UGX.</p>
+                <div class="mt-1">
+                    <h2 style="color: var(--accent-cyan); font-size: 2.5rem;">${total.toLocaleString()} UGX</h2>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">Total Portfolio Earnings</p>
                 </div>
-                <p class="subtitle">${pct.toFixed(1)}% of Goal Reached</p>
             </div>
-            
-            <div class="grid">
-                <div class="card">
-                    <h3>Add New Income</h3>
-                    <form id="income-add-form">
-                        <input type="text" id="inc-project" class="form-input" placeholder="Project Name (e.g., Website Fix)" required>
-                        <input type="text" id="inc-client" class="form-input" placeholder="Client Name" required>
-                        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                            <input type="number" id="inc-amount" class="form-input" placeholder="Amount ($)" step="0.01" required>
-                            <input type="date" id="inc-date" class="form-input" required>
-                        </div>
-                        <button type="submit" class="btn-primary" style="width:100%">Add Record</button>
+
+            <div class="grid" style="display: grid; grid-template-columns: 1fr 2fr; gap: 2rem;">
+                <div class="glass p-2">
+                    <h3>Log Transaction</h3>
+                    <form id="income-add-form" class="mt-1" style="display: grid; gap: 1rem;">
+                        <input type="text" id="inc-project" placeholder="Source (e.g., Freelance Web)" class="glass" style="width: 100%;" required>
+                        <input type="text" id="inc-client" placeholder="Client Name" class="glass" style="width: 100%;" required>
+                        <input type="number" id="inc-amount" placeholder="Amount (UGX)" class="glass" style="width: 100%;" required>
+                        <input type="date" id="inc-date" class="glass" style="width: 100%;" required>
+                        <button type="submit" class="btn-primary" style="width: 100%;">Add to Vault</button>
                     </form>
                 </div>
                 
-                <div class="card">
+                <div class="glass p-2">
                     <h3>Transaction Log</h3>
-                    ${entries.length ? `<ul class="income-list">${listHtml}</ul>` : '<p style="color: var(--text-secondary); font-style: italic;">No transactions yet.</p>'}
+                    <div class="resource-list mt-1">
+                        ${entries.length ? entries.map((e, idx) => `
+                            <div class="glass p-1 mb-1" style="display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(255,255,255,0.05);">
+                                <div>
+                                    <strong style="color: var(--text-main);">${e.project}</strong>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted);">${e.client} • ${e.date}</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 1rem;">
+                                    <span style="color: var(--accent-emerald); font-weight: bold;">+${parseFloat(e.amount).toLocaleString()}</span>
+                                    <button class="btn-icon" onclick="Storage.deleteIncomeEntry(${idx}); app.render();" style="color:var(--danger); border: none; background: transparent;">🗑️</button>
+                                </div>
+                            </div>
+                        `).join('') : '<p style="text-align: center; color: var(--text-muted); padding: 2rem;">The vault is currently empty.</p>'}
+                    </div>
                 </div>
             </div>
         `;
