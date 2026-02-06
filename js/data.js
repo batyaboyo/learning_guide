@@ -3,63 +3,77 @@ const careerData = {
         A: {
             id: 'planA',
             title: 'Cybersecurity Path',
-            subtitle: 'SOC → Pentesting → Red Teaming',
+            subtitle: 'SOC → DFIR → Pentesting → Red Teaming → AI Security',
             color: '#DC143C',
             icon: '🛡️',
             phases: [
                 {
                     id: 'p1',
-                    title: 'Phase 1: SOC Analyst Foundations',
-                    duration: 'Months 1-4',
+                    title: 'Phase 1: SOC Analyst (Foundations)',
+                    duration: 'Months 1-3',
                     resources: [
-                        { name: 'TryHackMe SOC Level 1 Path', url: 'https://tryhackme.com/path/outline/soclevel1', type: 'Course', platform: 'TryHackMe' },
-                        { name: 'TryHackMe Cyber Defense', url: 'https://tryhackme.com/path/outline/cyberdefense', type: 'Course', platform: 'TryHackMe' },
-                        { name: 'LetsDefend SOC Analyst Learning Path', url: 'https://letsdefend.io/training', type: 'Course', platform: 'LetsDefend' },
-                        { name: 'Cybrary SOC Analyst', url: 'https://www.cybrary.it', type: 'Course', platform: 'Cybrary' },
-                        { name: 'Blue Team Labs Online', url: 'https://blueteamlabs.online', type: 'Lab', platform: 'BTLO' },
-                        { name: 'Immersive Labs (Community)', url: 'https://www.immersivelabs.com', type: 'Lab', platform: 'Immersive Labs' },
-                        { name: 'SANS Cyber Aces', url: 'https://www.cyberaces.org', type: 'Course', platform: 'SANS' },
-                        { name: 'Professor Messer Security+ (YouTube)', url: 'https://www.youtube.com/playlist?list=PLG49S3nxzAnkL2ulTSqvMrbCdISPNK9Pr', type: 'Video', platform: 'YouTube' },
-                        { name: 'Security Blue Team BTL1 Free', url: 'https://www.securityblue.team', type: 'Course', platform: 'SBT' },
-                        { name: 'Splunk Fundamentals', url: 'https://www.splunk.com/en_us/training.html', type: 'Course', platform: 'Splunk' },
-                        { name: 'Microsoft Learn Security', url: 'https://learn.microsoft.com/en-us/training/browse/?terms=security', type: 'Course', platform: 'Microsoft' },
-                        { name: 'John Hammond', url: 'https://www.youtube.com/@_JohnHammond', type: 'Video', platform: 'YouTube' },
-                        { name: 'NetworkChuck', url: 'https://www.youtube.com/@NetworkChuck', type: 'Video', platform: 'YouTube' },
-                        { name: 'David Bombal', url: 'https://www.youtube.com/@davidbombal', type: 'Video', platform: 'YouTube' },
-                        { name: 'Black Hills Information Security', url: 'https://www.youtube.com/@BlackHillsInformationSecurity', type: 'Video', platform: 'YouTube' }
+                        { name: 'TryHackMe SOC Level 1', url: 'https://tryhackme.com/path/outline/soclevel1', type: 'Lab', platform: 'TryHackMe' },
+                        { name: 'Google Cybersecurity Certificate (Audit)', url: 'https://www.coursera.org/professional-certificates/google-cybersecurity', type: 'Course', platform: 'Coursera' },
+                        { name: 'Splunk Fundamentals (Free Tier)', url: 'https://www.splunk.com/en_us/training/free-courses/splunk-fundamentals-1.html', type: 'Course', platform: 'Splunk' },
+                        { name: 'Microsoft SC-900 Training', url: 'https://learn.microsoft.com/en-us/credentials/certifications/security-compliance-and-identity-fundamentals/', type: 'Course', platform: 'Microsoft' },
+                        { name: 'Professor Messer Security+ SY0-701', url: 'https://www.youtube.com/playlist?list=PLG49S3nxzAnkL2ulTSqvMrbCdISPNK9Pr', type: 'Video', platform: 'YouTube' },
+                        { name: 'Cisco Introduction to Cybersecurity', url: 'https://www.skillsforall.com/course/introduction-to-cybersecurity', type: 'Course', platform: 'Cisco' },
+                        { name: 'Wazuh SIEM Documentation & Labs', url: 'https://documentation.wazuh.com/current/getting-started/index.html', type: 'Lab', platform: 'Wazuh' }
                     ]
                 },
                 {
                     id: 'p2',
-                    title: 'Phase 2: Penetration Testing',
-                    duration: 'Months 5-8',
+                    title: 'Phase 2: DFIR (Investigation)',
+                    duration: 'Months 4-6',
                     resources: [
-                        { name: 'TryHackMe Jr Penetration Tester', url: 'https://tryhackme.com/path/outline/jrpenetrationtester', type: 'Course', platform: 'TryHackMe' },
-                        { name: 'TryHackMe Offensive Pentesting', url: 'https://tryhackme.com/path/outline/pentesting', type: 'Course', platform: 'TryHackMe' },
-                        { name: 'HackTheBox Academy (Free)', url: 'https://academy.hackthebox.com', type: 'Course', platform: 'HTB' },
-                        { name: 'PortSwigger Web Security Academy', url: 'https://portswigger.net/web-security', type: 'Lab', platform: 'PortSwigger' },
-                        { name: 'PicoCTF', url: 'https://picoctf.org', type: 'CTF', platform: 'PicoCTF' },
-                        { name: 'OverTheWire Wargames', url: 'https://overthewire.org/wargames', type: 'CTF', platform: 'OverTheWire' },
-                        { name: 'Pwn College', url: 'https://pwn.college', type: 'Course', platform: 'Pwn College' },
-                        { name: 'Hack This Site', url: 'https://www.hackthissite.org', type: 'Lab', platform: 'HTS' },
-                        { name: 'OWASP Testing Guide', url: 'https://owasp.org/www-project-web-security-testing-guide', type: 'Book', platform: 'OWASP' },
-                        { name: 'HackTricks', url: 'https://book.hacktricks.xyz', type: 'Book', platform: 'GitBook' },
-                        { name: 'IppSec', url: 'https://www.youtube.com/@ippsec', type: 'Video', platform: 'YouTube' },
-                        { name: 'LiveOverflow', url: 'https://www.youtube.com/@LiveOverflow', type: 'Video', platform: 'YouTube' },
-                        { name: 'HackerSploit', url: 'https://www.youtube.com/@HackerSploit', type: 'Video', platform: 'YouTube' }
+                        { name: 'CyberDefenders Case Blue', url: 'https://cyberdefenders.org/blueteam-ctf-challenges/', type: 'Lab', platform: 'CyberDefenders' },
+                        { name: 'DFIR Science: DFS101', url: 'https://dfir.science/courses/dfs101-intro-to-digital-forensics.html', type: 'Course', platform: 'DFIRScience' },
+                        { name: 'Blue Cape Security: DFIR Foundations', url: 'https://bluecapesecurity.com/courses/dfir-foundations/', type: 'Course', platform: 'Blue Cape' },
+                        { name: 'The Sleuth Kit Training', url: 'https://www.sleuthkit.org/informer/training.php', type: 'Tool', platform: 'SleuthKit' },
+                        { name: 'Autopsy Forensic Browser Tutorial', url: 'https://www.basistech.com/digital-forensics/autopsy/training/', type: 'Video', platform: 'Autopsy' },
+                        { name: 'KAPE Tool Guide (AboutDFIR)', url: 'https://aboutdfir.com/tools/kape/', type: 'Doc', platform: 'AboutDFIR' },
+                        { name: 'SANS DFIR Summit Archives', url: 'https://www.sans.org/blog/sans-dfir-summit-archive/', type: 'Video', platform: 'SANS' }
                     ]
                 },
                 {
                     id: 'p3',
-                    title: 'Phase 3: Red Teaming',
-                    duration: 'Months 9-12',
+                    title: 'Phase 3: Pentesting (Ethical Hacking)',
+                    duration: 'Months 7-10',
                     resources: [
-                        { name: 'TryHackMe Red Team Path', url: 'https://tryhackme.com/path/outline/redteaming', type: 'Course', platform: 'TryHackMe' },
-                        { name: 'RangeForce Community', url: 'https://www.rangeforce.com', type: 'Lab', platform: 'RangeForce' },
-                        { name: 'Active Directory Security', url: 'https://adsecurity.org', type: 'Blog', platform: 'ADSecurity' },
-                        { name: 'MITRE ATT&CK Navigator', url: 'https://mitre-attack.github.io/attack-navigator', type: 'Tool', platform: 'MITRE' },
-                        { name: 'Red Team Field Manual (RTFM)', url: '#', type: 'Book', platform: 'Amazon' },
-                        { name: 'The Cyber Mentor Red Team Series', url: 'https://www.youtube.com/@TCMSecurityAcademy', type: 'Video', platform: 'YouTube' }
+                        { name: 'TryHackMe Jr Pentesting', url: 'https://tryhackme.com/path/outline/jrpenetrationtester', type: 'Lab', platform: 'TryHackMe' },
+                        { name: 'HackTheBox Academy (Starter Modules)', url: 'https://academy.hackthebox.com/preview/modules', type: 'Lab', platform: 'HTB' },
+                        { name: 'PortSwigger Web Security Academy', url: 'https://portswigger.net/web-security', type: 'Lab', platform: 'PortSwigger' },
+                        { name: 'TCM Security: PEH (Partial Free)', url: 'https://www.youtube.com/watch?v=3Kq1MIfTWCE', type: 'Video', platform: 'YouTube' },
+                        { name: 'OWASP Web Security Testing Guide', url: 'https://owasp.org/www-project-web-security-testing-guide/', type: 'Book', platform: 'OWASP' },
+                        { name: 'Metasploit Unleashed', url: 'https://www.offsec.com/metasploit-unleashed/', type: 'Course', platform: 'OffSec' },
+                        { name: 'Bugcrowd University', url: 'https://www.bugcrowd.com/university/', type: 'Course', platform: 'Bugcrowd' }
+                    ]
+                },
+                {
+                    id: 'p4',
+                    title: 'Phase 4: Red Teaming (Advanced)',
+                    duration: 'Months 11-14',
+                    resources: [
+                        { name: 'TryHackMe Red Teaming Path', url: 'https://tryhackme.com/path/outline/redteaming', type: 'Lab', platform: 'TryHackMe' },
+                        { name: 'MITRE Caldera (Adv Emulation)', url: 'https://caldera.mitre.org/', type: 'Tool', platform: 'MITRE' },
+                        { name: 'Atomic Red Team Tests', url: 'https://atomicredteam.io/', type: 'Lab', platform: 'Atomic Red Team' },
+                        { name: 'BloodHound Graph Theory Guide', url: 'https://bloodhound.readthedocs.io/', type: 'Doc', platform: 'GitHub' },
+                        { name: 'ADSecurity.org (Sean Metcalf)', url: 'https://adsecurity.org/', type: 'Blog', platform: 'ADSecurity' },
+                        { name: 'IppSec HC Video Search', url: 'https://ippsec.rocks/', type: 'Video', platform: 'IppSec' }
+                    ]
+                },
+                {
+                    id: 'p5',
+                    title: 'Phase 5: AI Security (Modern Era)',
+                    duration: 'Months 15-18',
+                    resources: [
+                        { name: 'Codecademy: AI Ethical Hacking', url: 'https://www.codecademy.com/learn/prompt-engineering-ethical-hacking-and-generative-ai-fusion', type: 'Course', platform: 'Codecademy' },
+                        { name: 'NVIDIA: Adversarial ML Course', url: 'https://www.nvidia.com/en-us/training/online/adversarial-machine-learning/', type: 'Lab', platform: 'NVIDIA' },
+                        { name: 'Microsoft: AI for Beginners (Ethics)', url: 'https://microsoft.github.io/AI-For-Beginners/', type: 'Course', platform: 'Microsoft' },
+                        { name: 'APIsec University: AI Security', url: 'https://www.apisecuniversity.com/courses/ai-security-fundamentals', type: 'Course', platform: 'APIsec' },
+                        { name: 'Securiti.ai: AI Governance Cert', url: 'https://securiti.ai/education/ai-security-governance-certification/', type: 'Course', platform: 'Securiti' },
+                        { name: 'Learn Prompting: Jailbreaking AI', url: 'https://learnprompting.org/docs/adversarial/introduction', type: 'Doc', platform: 'LearnPrompting' },
+                        { name: 'OWASP LLM Top 10', url: 'https://owasp.org/www-project-top-10-for-large-language-model-applications/', type: 'Doc', platform: 'OWASP' }
                     ]
                 }
             ]
