@@ -28,7 +28,18 @@ const careerData = {
                         { name: 'Wazuh', desc: 'Open-source SIEM/XDR.', url: 'https://wazuh.com/' },
                         { name: 'Wireshark', desc: 'Network protocol analyzer.', url: 'https://www.wireshark.org/' },
                         { name: 'Splunk (Free)', desc: 'Powerful log analysis tool.', url: 'https://www.splunk.com/' },
-                        { name: 'Elastic Stack', desc: 'Log storage and visualization.', url: 'https://www.elastic.co/elastic-stack' }
+                        { name: 'Elastic Stack', desc: 'Log storage and visualization.', url: 'https://www.elastic.co/elastic-stack' },
+                        { name: 'Security Onion', desc: 'Intrusion detection distribution.', url: 'https://securityonion.net/' },
+                        { name: 'Zeek', desc: 'Network security monitor.', url: 'https://zeek.org/' },
+                        { name: 'Suricata', desc: 'IDS/IPS engine.', url: 'https://suricata.io/' },
+                        { name: 'MISP', desc: 'Threat intelligence platform.', url: 'https://www.misp-project.org/' },
+                        { name: 'TheHive', desc: 'Incident response platform.', url: 'https://thehive-project.org/' },
+                        { name: 'Shuffle', desc: 'Open-source SOAR.', url: 'https://shuffler.io/' },
+                        { name: 'OSSEC', desc: 'Host-based IDS.', url: 'https://www.ossec.net/' },
+                        { name: 'Graylog', desc: 'Log management.', url: 'https://www.graylog.org/' },
+                        { name: 'Snort', desc: 'Network intrusion detection.', url: 'https://www.snort.org/' },
+                        { name: 'CrowdResponse', desc: 'Incident response toolkit.', url: 'https://www.crowdstrike.com/resources/community-tools/crowdresponse/' },
+                        { name: 'OSquery', desc: 'SQL-powered OS analytics.', url: 'https://osquery.io/' }
                     ]
                 },
                 {
@@ -51,7 +62,18 @@ const careerData = {
                         { name: 'Autopsy', desc: 'Premier forensic platform.', url: 'https://www.sleuthkit.org/autopsy/' },
                         { name: 'Volatility', desc: 'Memory forensics framework.', url: 'https://www.volatilityfoundation.org/' },
                         { name: 'FTK Imager', desc: 'Data acquisition and imaging.', url: 'https://www.exterro.com/ftk-imager' },
-                        { name: 'KAPE', desc: 'Fast triage and artifact collection.', url: 'https://www.kroll.com/en/services/cyber-risk/incident-response-retention/kape' }
+                        { name: 'KAPE', desc: 'Fast triage and artifact collection.', url: 'https://www.kroll.com/en/services/cyber-risk/incident-response-retention/kape' },
+                        { name: 'Sleuth Kit', desc: 'Command line forensic tools.', url: 'https://www.sleuthkit.org/' },
+                        { name: 'SIFT', desc: 'Forensic toolkit distribution.', url: 'https://www.sans.org/tools/sift-workstation/' },
+                        { name: 'CAINE', desc: 'Forensic live environment.', url: 'https://www.caine-live.net/' },
+                        { name: 'Remnux', desc: 'Malware analysis distribution.', url: 'https://remnux.org/' },
+                        { name: 'Recuva', desc: 'Simple file recovery.', url: 'https://www.ccleaner.com/recuva' },
+                        { name: 'Velociraptor', desc: 'Endpoint visibility and IR.', url: 'https://docs.velociraptor.app/' },
+                        { name: 'MemProcFS', desc: 'Memory analysis via file system.', url: 'https://github.com/ufrisk/MemProcFS' },
+                        { name: 'RegRipper', desc: 'Registry analysis tool.', url: 'https://github.com/keydet89/RegRipper3.0' },
+                        { name: 'EvtxECmd', desc: 'Event log parser.', url: 'https://github.com/EricZimmerman/EvtxECmd' },
+                        { name: 'Magnet RAM Capture', desc: 'Memory imaging tool.', url: 'https://www.magnetforensics.com/resources/magnet-ram-capture/' },
+                        { name: 'Wireshark', desc: 'Network forensics.', url: 'https://www.wireshark.org/' }
                     ]
                 },
                 {
@@ -76,7 +98,17 @@ const careerData = {
                         { name: 'Metasploit', desc: 'Exploitation framework.', url: 'https://www.metasploit.com/' },
                         { name: 'Nmap', desc: 'Network scanner.', url: 'https://nmap.org/' },
                         { name: 'SQLmap', desc: 'Automatic SQL injection.', url: 'https://sqlmap.org/' },
-                        { name: 'OWASP ZAP', desc: 'Open-source web scanner.', url: 'https://www.zaproxy.org/' }
+                        { name: 'OWASP ZAP', desc: 'Open-source web scanner.', url: 'https://www.zaproxy.org/' },
+                        { name: 'Kali Linux', desc: 'Pentesting OS.', url: 'https://www.kali.org/' },
+                        { name: 'Nikto', desc: 'Web server scanner.', url: 'https://cirt.net/Nikto2' },
+                        { name: 'BeEF', desc: 'Browser exploitation framework.', url: 'https://beefproject.com/' },
+                        { name: 'OpenVAS', desc: 'Vulnerability scanner.', url: 'https://www.openvas.org/' },
+                        { name: 'SET', desc: 'Social Engineering Toolkit.', url: 'https://github.com/trustedsec/social-engineer-toolkit' },
+                        { name: 'Aircrack-ng', desc: 'WiFi security suite.', url: 'https://www.aircrack-ng.org/' },
+                        { name: 'John the Ripper', desc: 'Password cracker.', url: 'https://www.openwall.com/john/' },
+                        { name: 'Hashcat', desc: 'Advanced password recovery.', url: 'https://hashcat.net/hashcat/' },
+                        { name: 'Hydra', desc: 'Login cracker.', url: 'https://github.com/vanhauser-thc/thc-hydra' },
+                        { name: 'Dirsearch', desc: 'Web path brute-forcer.', url: 'https://github.com/maurosoria/dirsearch' }
                     ]
                 },
                 {
@@ -100,7 +132,17 @@ const careerData = {
                         { name: 'Gophish', desc: 'Phishing simulation framework.', url: 'https://getgophish.com/' },
                         { name: 'Sliver', desc: 'Cross-platform C2 framework.', url: 'https://github.com/BishopFox/sliver' },
                         { name: 'Caldera', desc: 'Adversary emulation.', url: 'https://caldera.mitre.org/' },
-                        { name: 'Atomic Red Team', desc: 'Library of ATT&CK tests.', url: 'https://atomicredteam.io/' }
+                        { name: 'Atomic Red Team', desc: 'Library of ATT&CK tests.', url: 'https://atomicredteam.io/' },
+                        { name: 'Empire', desc: 'PowerShell/Python/C# C2.', url: 'https://github.com/BC-SECURITY/Empire' },
+                        { name: 'Havoc', desc: 'Modern C2 framework.', url: 'https://havocframework.com/' },
+                        { name: 'SpiderFoot', desc: 'Open-source OSINT automation.', url: 'https://www.spiderfoot.net/' },
+                        { name: 'Covenant', desc: '.NET C2 framework.', url: 'https://github.com/cobbr/Covenant' },
+                        { name: 'Impacket', desc: 'Networking protocol library.', url: 'https://github.com/fortra/impacket' },
+                        { name: 'Mimikatz', desc: 'Credential harvesting tool.', url: 'https://github.com/gentilkiwi/mimikatz' },
+                        { name: 'Rubeus', desc: 'Kerberos interaction/abuse.', url: 'https://github.com/GhostPack/Rubeus' },
+                        { name: 'PowerView', desc: 'Active Directory discovery.', url: 'https://github.com/PowerShellMafia/PowerSploit' },
+                        { name: 'Responder', desc: 'LLMNR/NBT-NS/mDNS poisoner.', url: 'https://github.com/lgandx/Responder' },
+                        { name: 'Sherlock', desc: 'OSINT username search.', url: 'https://github.com/sherlock-project/sherlock' }
                     ]
                 },
                 {
@@ -124,7 +166,18 @@ const careerData = {
                         { name: 'Garak', desc: 'LLM vulnerability scanner.', url: 'https://github.com/leondz/garak' },
                         { name: 'PyRIT', desc: 'Redteaming AI Toolkit.', url: 'https://github.com/Azure/pyrit' },
                         { name: 'Giskard', desc: 'LLM Security Scanner.', url: 'https://github.com/Giskard-AI/giskard' },
-                        { name: 'TextAttack', desc: 'Adversarial attacks for LLMs.', url: 'https://github.com/QData/TextAttack' }
+                        { name: 'TextAttack', desc: 'Adversarial attacks for LLMs.', url: 'https://github.com/QData/TextAttack' },
+                        { name: 'Foolbox', desc: 'Robustness benchmarking library.', url: 'https://github.com/bethgelab/foolbox' },
+                        { name: 'AI Fairness 360', desc: 'Bias detection & mitigation.', url: 'https://aif360.res.ibm.com/' },
+                        { name: 'Counterfit', desc: 'Azure AI red teaming tool.', url: 'https://github.com/Azure/counterfit' },
+                        { name: 'ART', desc: 'Adversarial Robustness Toolbox.', url: 'https://github.com/Trusted-AI/adversarial-robustness-toolbox' },
+                        { name: 'LangChain', desc: 'Building secure LLM apps.', url: 'https://www.langchain.com/' },
+                        { name: 'Inspect', desc: 'Evaluation framework for AI.', url: 'https://github.com/UKGovernmentBEIS/inspect' },
+                        { name: 'Probe', desc: 'LLM security evaluation.', url: 'https://github.com/vigil-security/vigil-llm' },
+                        { name: 'Advertools', desc: 'SEO & AI analysis toolkit.', url: 'https://github.com/eliasdabbas/advertools' },
+                        { name: 'Shred', desc: 'Dataset vulnerability scanner.', url: 'https://github.com/cleanlab/cleanlab' },
+                        { name: 'Guardrails AI', desc: 'Validation for LLM outputs.', url: 'https://www.guardrailsai.com/' },
+                        { name: 'Nemoguardrails', desc: 'Safety rails for AI.', url: 'https://github.com/NVIDIA/NeMo-Guardrails' }
                     ]
                 }
             ]
@@ -149,6 +202,23 @@ const careerData = {
                         { name: 'Corey Schafer Python', url: 'https://www.youtube.com/@coreyms', type: 'Video', platform: 'YouTube' },
                         { name: 'Tech With Tim', url: 'https://www.youtube.com/@TechWithTim', type: 'Video', platform: 'YouTube' },
                         { name: 'Programming with Mosh', url: 'https://www.youtube.com/@programmingwithmosh', type: 'Video', platform: 'YouTube' }
+                    ],
+                    tools: [
+                        { name: 'Python', desc: 'The core language.', url: 'https://www.python.org/' },
+                        { name: 'VS Code', desc: 'Best-in-class code editor.', url: 'https://code.visualstudio.com/' },
+                        { name: 'PyCharm (Comm)', desc: 'Powerful Python IDE.', url: 'https://www.jetbrains.com/pycharm/download/' },
+                        { name: 'Pip', desc: 'Package installer for Python.', url: 'https://pypi.org/project/pip/' },
+                        { name: 'Poetry', desc: 'Modern dependency management.', url: 'https://python-poetry.org/' },
+                        { name: 'Virtualenv', desc: 'Isolated Python environments.', url: 'https://virtualenv.pypa.io/' },
+                        { name: 'Pytest', desc: 'Testing framework.', url: 'https://docs.pytest.org/' },
+                        { name: 'Black', desc: 'Uncompromising code formatter.', url: 'https://github.com/psf/black' },
+                        { name: 'Flake8', desc: 'Linter for style/errors.', url: 'https://flake8.pycqa.org/' },
+                        { name: 'Requests', desc: 'Elegant HTTP library.', url: 'https://requests.readthedocs.io/' },
+                        { name: 'BeautifulSoup', desc: 'Web scraping library.', url: 'https://www.crummy.com/software/BeautifulSoup/' },
+                        { name: 'Pandas', desc: 'Data analysis and manipulation.', url: 'https://pandas.pydata.org/' },
+                        { name: 'Jupyter', desc: 'Interactive computing.', url: 'https://jupyter.org/' },
+                        { name: 'Bandit', desc: 'Security linter for Python.', url: 'https://bandit.readthedocs.io/' },
+                        { name: 'Conda', desc: 'Package and env manager.', url: 'https://docs.conda.io/' }
                     ]
                 },
                 {
@@ -164,6 +234,23 @@ const careerData = {
                         { name: 'Traversy Media', url: 'https://www.youtube.com/@TraversyMedia', type: 'Video', platform: 'YouTube' },
                         { name: 'Coding Entrepreneurs', url: 'https://www.youtube.com/@CodingEntrepreneurs', type: 'Video', platform: 'YouTube' },
                         { name: 'Pretty Printed', url: 'https://www.youtube.com/@PrettyPrintedTutorials', type: 'Video', platform: 'YouTube' }
+                    ],
+                    tools: [
+                        { name: 'Django', desc: 'The high-level web framework.', url: 'https://www.djangoproject.com/' },
+                        { name: 'Django Debug Toolbar', desc: 'Optimizer/Profiler.', url: 'https://github.com/jazzband/django-debug-toolbar' },
+                        { name: 'Django Extensions', desc: 'Power-user utilities.', url: 'https://django-extensions.readthedocs.io/' },
+                        { name: 'Postman', desc: 'API testing tool.', url: 'https://www.postman.com/' },
+                        { name: 'DBeaver', desc: 'Universal database manager.', url: 'https://dbeaver.io/' },
+                        { name: 'SQLAlchemy', desc: 'Python SQL toolkit (ORM).', url: 'https://www.sqlalchemy.org/' },
+                        { name: 'Redis', desc: 'Caching and message broker.', url: 'https://redis.io/' },
+                        { name: 'Celery', desc: 'Distributed task queue.', url: 'https://docs.celeryq.dev/' },
+                        { name: 'Whitenoise', desc: 'Static file serving for Django.', url: 'https://whitenoise.readthedocs.io/' },
+                        { name: 'CORS Headers', desc: 'Handle Cross-Origin Resource Sharing.', url: 'https://github.com/adamchainz/django-cors-headers' },
+                        { name: 'Django Filter', desc: 'Dynamic filtering for queries.', url: 'https://django-filter.readthedocs.io/' },
+                        { name: 'Django Simple JWT', desc: 'JSON Web Token authentication.', url: 'https://django-rest-framework-simplejwt.readthedocs.io/' },
+                        { name: 'Gunicorn', desc: 'WSGI HTTP Server.', url: 'https://gunicorn.org/' },
+                        { name: 'Nginx', desc: 'Web server / Reverse proxy.', url: 'https://www.nginx.com/' },
+                        { name: 'PgAdmin', desc: 'PostgreSQL management tool.', url: 'https://www.pgadmin.org/' }
                     ]
                 },
                 {
@@ -182,7 +269,19 @@ const careerData = {
                     tools: [
                         { name: 'Docker', desc: 'Containerization.', url: 'https://www.docker.com/' },
                         { name: 'Sentry', desc: 'Error tracking.', url: 'https://sentry.io/' },
-                        { name: 'Gicorn', desc: 'Production WSGI server.', url: 'https://gunicorn.org/' }
+                        { name: 'Gicorn', desc: 'Production WSGI server.', url: 'https://gunicorn.org/' },
+                        { name: 'Git', desc: 'Version control.', url: 'https://git-scm.com/' },
+                        { name: 'GitHub Desktop', desc: 'Simple git interface.', url: 'https://desktop.github.com/' },
+                        { name: 'Axios', desc: 'Promise-based HTTP for JS.', url: 'https://axios-http.com/' },
+                        { name: 'Vite', desc: 'Frontend build tool.', url: 'https://vitejs.dev/' },
+                        { name: 'NPM', desc: 'Node package manager.', url: 'https://www.npmjs.com/' },
+                        { name: 'Prettier', desc: 'Opinionated code formatter.', url: 'https://prettier.io/' },
+                        { name: 'ESLint', desc: 'JavaScript linter.', url: 'https://eslint.org/' },
+                        { name: 'React DevTools', desc: 'Debug React components.', url: 'https://react.dev/learn/react-developer-tools' },
+                        { name: 'Redux DevTools', desc: 'Debug state changes.', url: 'https://github.com/reduxjs/redux-devtools' },
+                        { name: 'PostCSS', desc: 'Tool for transforming CSS.', url: 'https://postcss.org/' },
+                        { name: 'Framer Motion', desc: 'React animation library.', url: 'https://www.framer.com/motion/' },
+                        { name: 'Lucide Icons', desc: 'Beautiful open-source icons.', url: 'https://lucide.dev/' }
                     ]
                 }
             ]
@@ -211,8 +310,21 @@ const careerData = {
                         { name: 'CBT Nuggets', url: 'https://www.youtube.com/@cbtnuggets', type: 'Video', platform: 'YouTube' }
                     ],
                     tools: [
+                        { name: 'Sysinternals Suite', desc: 'Advanced Windows utilities.', url: 'https://learn.microsoft.com/en-us/sysinternals/' },
+                        { name: 'PuTTY', desc: 'SSH/Telnet client.', url: 'https://www.putty.org/' },
                         { name: '7-Zip', desc: 'File archiver.', url: 'https://www.7-zip.org/' },
-                        { name: 'PowerShell', desc: 'Task automation.', url: 'https://learn.microsoft.com/powershell/' }
+                        { name: 'PowerShell', desc: 'Task automation.', url: 'https://learn.microsoft.com/powershell/' },
+                        { name: 'Rufus', desc: 'Create bootable USB drives.', url: 'https://rufus.ie/' },
+                        { name: 'WinDirStat', desc: 'Disk usage stats viewer.', url: 'https://windirstat.net/' },
+                        { name: 'Angry IP Scanner', desc: 'Fast IP & port scanner.', url: 'https://angryip.org/' },
+                        { name: 'ShareX', desc: 'Screen capture & productivity.', url: 'https://getsharex.com/' },
+                        { name: 'Notepad++', desc: 'Advanced text editor.', url: 'https://notepad-plus-plus.org/' },
+                        { name: 'Revo Uninstaller', desc: 'Clean uninstallation.', url: 'https://www.revouninstaller.com/' },
+                        { name: 'Wireshark', desc: 'Network protocol analyzer.', url: 'https://www.wireshark.org/' },
+                        { name: 'Nmap', desc: 'Network discovery and audit.', url: 'https://nmap.org/' },
+                        { name: 'RustDesk', desc: 'Open-source remote desktop.', url: 'https://rustdesk.com/' },
+                        { name: 'OBS Studio', desc: 'Video recording/streaming.', url: 'https://obsproject.com/' },
+                        { name: 'KeePassXC', desc: 'Cross-platform password manager.', url: 'https://keepassxc.org/' }
                     ]
                 }
             ]

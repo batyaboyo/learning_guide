@@ -647,14 +647,17 @@ input.form-input {
 .tools-grid-compact {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
 }
 
 .tool-card-compact {
-    background: var(--bg-tertiary);
-    padding: 0.4rem 0.8rem;
-    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    /* Pill style */
     border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease;
 }
 
 .tool-card-compact a {
