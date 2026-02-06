@@ -22,18 +22,18 @@ const app = {
     cacheDOM() {
         this.dom = {
             main: document.getElementById('main-content'),
-            tabs: document.querySelectorAll('.nav-item'),
+            sidebarLinks: document.querySelectorAll('.sidebar .nav-item'),
             daysLeft: document.getElementById('days-left'),
-            currentDate: document.getElementById('current-date'),
             themeToggle: document.getElementById('theme-toggle')
         };
     },
 
     bindEvents() {
-        // Tab Switching
-        this.dom.tabs.forEach(tab => {
+        // Tab Switching (Sidebar)
+        this.dom.sidebarLinks.forEach(tab => {
             tab.addEventListener('click', (e) => {
-                this.switchTab(e.target.dataset.tab);
+                const target = e.currentTarget;
+                this.switchTab(target.dataset.tab);
             });
         });
 
@@ -189,29 +189,26 @@ const app = {
 
     switchTab(tabId) {
         this.currentTab = tabId;
-        // Update Nav UI
-        this.dom.tabs.forEach(t => t.classList.remove('active'));
-        const activeTab = document.querySelector(`[data-tab="${tabId}"]`);
-        if (activeTab) activeTab.classList.add('active');
+        // Update Sidebar UI
+        const items = document.querySelectorAll('.sidebar .nav-item');
+        items.forEach(t => t.classList.remove('active'));
+        const activeItem = document.querySelector(`.sidebar [data-tab="${tabId}"]`);
+        if (activeItem) activeItem.classList.add('active');
+
         // Render View
         this.render();
+        window.scrollTo(0, 0); // Reset scroll on tab change
     },
 
     updateHeaderStats() {
-        // Date
+        // Date Logic (Hidden in new UI but kept for storage/calc)
         const now = new Date();
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        this.dom.currentDate.textContent = now.toLocaleDateString('en-US', options);
 
-        // Countdown (Dec 31, 2026) -> Assuming 2025 roadmap but user mentioned 2026 date in history, prompt says 2025. 
-        // Current Local Year is 2026. User request says "Career Roadmap 2025". 
-        // I'll stick to 2026-12-31 as "End of 2026" or "End of Roadmap" if it's a 2025 roadmap...
-        // Wait, "From CS Student to Professional in 2025". It's 2026 now. 
-        // I will update the countdown to 2026-12-31 for now as per previous code.
         const endYear = new Date('2026-12-31T23:59:59');
         const diff = endYear - now;
         const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
-        this.dom.daysLeft.textContent = days > 0 ? days : 0;
+        const daysEl = document.getElementById('days-left');
+        if (daysEl) daysEl.textContent = days > 0 ? days : 0;
     },
 
     // Rendering Engine
@@ -311,59 +308,66 @@ const Views = {
     dashboard() {
         const plans = ['A', 'B', 'C'];
         let totalTotal = 0;
-        let totalDone = 0;
-
-        const planCards = plans.map(id => {
-            const plan = careerData.plans[id];
-            const allResources = plan.phases.flatMap(p => p.resources);
-            const total = allResources.length;
-            const completed = allResources.filter(r => Storage.isResourceCompleted(id, r.name)).length;
-            const pct = total === 0 ? 0 : Math.round((completed / total) * 100);
-
-            totalTotal += total;
-            totalDone += completed;
-
-            return `
-                <div class="card">
-                    <h3 style="color: ${plan.color}">${plan.icon} ${plan.title}</h3>
-                    <p>${plan.subtitle}</p>
-                    <div class="progress-container">
-                        <div class="progress-bar" style="width: ${pct}%; background: ${plan.color}"></div>
-                    </div>
-                    <p class="text-center">${pct}% Completed</p>
-                    <button onclick="app.switchTab('plan${id}')" class="btn-plan-view">View Plan</button>
-                </div>
-            `;
-        }).join('');
-
-        const globalPct = totalTotal === 0 ? 0 : Math.round((totalDone / totalTotal) * 100);
-
-        // Project Stats
-        const allProjects = careerData.projects;
-        const pStates = Storage.getAllProjectStates();
-        const pCompleted = allProjects.filter(p => (pStates[p.id]?.status || 'not-started') === 'completed' || (pStates[p.id]?.status || 'not-started') === 'deployed').length;
-        const pInProgress = allProjects.filter(p => (pStates[p.id]?.status || 'not-started') === 'in-progress').length;
-
+        const stats = Storage.getGlobalStats();
         return `
-            <div class="search-box">
-                <input type="text" id="global-search" class="search-input" placeholder="🔍 Search resources (e.g., 'Python', 'Security')..." value="${app.searchQuery || ''}">
+            <div class="hero-section glass mb-2" style="padding: 3rem; text-align: center; background: radial-gradient(circle at center, rgba(34, 211, 238, 0.1), transparent);">
+                <h1 style="font-size: 3rem; margin-bottom: 1rem; font-weight: 900;">Weave Your <span style="color: var(--accent-cyan);">Technical Destiny</span></h1>
+                <p style="font-size: 1.2rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 2rem;">
+                    Pathweaver is your high-performance career architect, designed to guide you from foundational learning to professional mastery in the 2026 tech landscape.
+                </p>
+                <div style="display: flex; justify-content: center; gap: 1rem;">
+                    <button onclick="app.switchTab('planA')" class="btn-primary" style="padding: 1rem 2rem; border-radius: 30px;">Start Your Journey</button>
+                    <button onclick="app.switchTab('projects')" class="btn-secondary glass" style="padding: 1rem 2rem; border-radius: 30px;">Explore Projects</button>
+                </div>
             </div>
 
-            <h2>👋 Welcome Back, Future Pro!</h2>
-            <div class="card mb-2 overall-progress-card">
-                <h3>Overall Progress</h3>
-                <h1>${globalPct}%</h1>
-                <div class="progress-container overall-progress-bar-container">
-                    <div class="progress-bar overall-progress-bar" style="width: ${globalPct}%;"></div>
+            <div class="stats-grid">
+                <div class="stat-card glass p-2" style="text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🎯</div>
+                    <h3>${stats.totalResources}</h3>
+                    <p style="color: var(--text-muted);">Resources Tracked</p>
                 </div>
-                <div class="stats-grid">
-                    <div>${totalDone}/${totalTotal} Resources</div>
-                    <div>${pCompleted} Projects Done</div>
-                    <div>${pInProgress} Active</div>
+                <div class="stat-card glass p-2" style="text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">✅</div>
+                    <h3>${stats.completedResources}</h3>
+                    <p style="color: var(--text-muted);">Modules Completed</p>
+                </div>
+                <div class="stat-card glass p-2" style="text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🚀</div>
+                    <h3>${stats.activeProjects}</h3>
+                    <p style="color: var(--text-muted);">Live Projects</p>
+                </div>
+                <div class="stat-card glass p-2" style="text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">💰</div>
+                    <h3>${stats.totalIncome.toLocaleString()}</h3>
+                    <p style="color: var(--text-muted);">UGX Earned</p>
                 </div>
             </div>
-            <div class="grid">
-                ${planCards}
+
+            <div class="dashboard-grid mt-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <div class="glass p-2">
+                    <h3>Current Focus</h3>
+                    <p class="text-secondary">Pick up where you left off in your career path.</p>
+                    <div class="mt-1" style="display: grid; gap: 1rem;">
+                        <div class="focus-item glass p-1" style="display: flex; align-items: center; gap: 1rem; cursor: pointer; border: 1px solid rgba(255,255,255,0.05);" onclick="app.switchTab('planA')">
+                            <span style="font-size: 2rem;">🛡️</span>
+                            <div style="flex-grow: 1;">
+                                <strong>Cybersecurity Architecture</strong>
+                                <div class="progress-container" style="height: 6px; margin-top: 5px;">
+                                    <div class="progress-bar" style="width: 15%; background: var(--accent-cyan);"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass p-2">
+                    <h3>Quick Navigator</h3>
+                    <div class="mt-1" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                        <button class="badge glass" onclick="app.switchTab('uganda')" style="cursor: pointer; padding: 0.5rem 1rem;">🇺🇬 local_hub</button>
+                        <button class="badge glass" onclick="app.switchTab('projects')" style="cursor: pointer; padding: 0.5rem 1rem;">🚀 active_projects</button>
+                        <button class="badge glass" onclick="app.switchTab('income')" style="cursor: pointer; padding: 0.5rem 1rem;">💰 earnings_tracker</button>
+                    </div>
+                </div>
             </div>
         `;
     },
@@ -381,7 +385,6 @@ const Views = {
             return s === status;
         });
 
-        // Mapping to HTML
         const cards = pList.map(p => {
             const state = pStates[p.id] || {};
             const st = state.status || 'not-started';
@@ -389,50 +392,54 @@ const Views = {
             const stClass = `status-${st}`;
 
             return `
-                <div class="card">
-                    <div class="project-card-header">
-                        <span class="badge" style="background: ${careerData.plans[p.plan].color}">${careerData.plans[p.plan].icon} Plan ${p.plan}</span>
+                <div class="card glass p-2" style="border: 1px solid var(--glass-border);">
+                    <div class="project-card-header mb-1" style="display:flex; justify-content:space-between; align-items:center;">
+                        <span class="badge glass" style="background: ${careerData.plans[p.plan].color}">${careerData.plans[p.plan].icon} Plan ${p.plan}</span>
                         <span class="status-badge ${stClass}">${stDisplay}</span>
                     </div>
-                    <h3>${p.name}</h3>
-                    <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:1rem;">${p.desc}</p>
+                    <h3 style="margin-bottom: 0.5rem;">${p.name}</h3>
+                    <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:1rem;">${p.desc}</p>
                     
                     <div style="display:flex; gap:0.5rem; margin-bottom:1rem;">
-                        <span class="difficulty-badge">${p.difficulty}</span>
-                        <span class="difficulty-badge">⏱️ ${p.time}</span>
+                        <span class="badge glass" style="font-size: 0.7rem;">📊 ${p.difficulty}</span>
+                        <span class="badge glass" style="font-size: 0.7rem;">⏱️ ${p.time}</span>
                     </div>
 
-                    <button class="btn-primary" style="width:100%" onclick="app.openProjectModal(${p.id})">Details & Track</button>
+                    <button class="btn-primary" style="width:100%; border-radius: 8px;" onclick="app.openProjectModal(${p.id})">Details & Track</button>
                 </div>
             `;
         }).join('');
 
         return `
-            <h1>🚀 Project Tracker</h1>
-            <div class="project-filters">
-                <select class="filter-select" onchange="app.updateProjectFilter('plan', this.value)">
-                    <option value="all" ${plan === 'all' ? 'selected' : ''}>All Plans</option>
-                    <option value="A" ${plan === 'A' ? 'selected' : ''}>Plan A: Cybersecurity</option>
-                    <option value="B" ${plan === 'B' ? 'selected' : ''}>Plan B: Django</option>
-                    <option value="C" ${plan === 'C' ? 'selected' : ''}>Plan C: IT Support</option>
-                </select>
-                <select class="filter-select" onchange="app.updateProjectFilter('difficulty', this.value)">
-                    <option value="all" ${difficulty === 'all' ? 'selected' : ''}>All Difficulties</option>
-                    <option value="Beginner" ${difficulty === 'Beginner' ? 'selected' : ''}>Beginner</option>
-                    <option value="Intermediate" ${difficulty === 'Intermediate' ? 'selected' : ''}>Intermediate</option>
-                    <option value="Advanced" ${difficulty === 'Advanced' ? 'selected' : ''}>Advanced</option>
-                </select>
-                <select class="filter-select" onchange="app.updateProjectFilter('status', this.value)">
-                    <option value="all" ${status === 'all' ? 'selected' : ''}>All Statuses</option>
-                    <option value="not-started" ${status === 'not-started' ? 'selected' : ''}>Not Started</option>
-                    <option value="in-progress" ${status === 'in-progress' ? 'selected' : ''}>In Progress</option>
-                    <option value="completed" ${status === 'completed' ? 'selected' : ''}>Completed</option>
-                </select>
+            <div class="hero-section glass mb-2" style="padding: 2rem;">
+                <h1 style="margin-bottom: 0.5rem;">🚀 Project Forge</h1>
+                <p style="color: var(--text-muted);">Building real-world experience, one commit at a time.</p>
+                
+                <div class="project-filters mt-1" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <select class="filter-select glass" onchange="app.updateProjectFilter('plan', this.value)">
+                        <option value="all" ${plan === 'all' ? 'selected' : ''}>All Specializations</option>
+                        <option value="A" ${plan === 'A' ? 'selected' : ''}>Cybersecurity</option>
+                        <option value="B" ${plan === 'B' ? 'selected' : ''}>Django Development</option>
+                        <option value="C" ${plan === 'C' ? 'selected' : ''}>IT Support</option>
+                    </select>
+                    <select class="filter-select glass" onchange="app.updateProjectFilter('difficulty', this.value)">
+                        <option value="all" ${difficulty === 'all' ? 'selected' : ''}>All Levels</option>
+                        <option value="Beginner" ${difficulty === 'Beginner' ? 'selected' : ''}>Beginner</option>
+                        <option value="Intermediate" ${difficulty === 'Intermediate' ? 'selected' : ''}>Intermediate</option>
+                        <option value="Advanced" ${difficulty === 'Advanced' ? 'selected' : ''}>Advanced</option>
+                    </select>
+                    <select class="filter-select glass" onchange="app.updateProjectFilter('status', this.value)">
+                        <option value="all" ${status === 'all' ? 'selected' : ''}>All Statuses</option>
+                        <option value="not-started" ${status === 'not-started' ? 'selected' : ''}>Not Started</option>
+                        <option value="in-progress" ${status === 'in-progress' ? 'selected' : ''}>In Progress</option>
+                        <option value="completed" ${status === 'completed' ? 'selected' : ''}>Completed</option>
+                        <option value="deployed" ${status === 'deployed' ? 'selected' : ''}>Deployed</option>
+                    </select>
+                </div>
             </div>
             
-            <p>Showing ${pList.length} projects</p>
-            <div class="grid">
-                ${cards.length ? cards : '<p>No projects match your filters.</p>'}
+            <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
+                ${cards.length ? cards : '<p>No projects match your current workflow filters.</p>'}
             </div>
         `;
     },
@@ -614,16 +621,16 @@ const Views = {
             const pct = total === 0 ? 0 : Math.round((done / total) * 100);
 
             return `
-                <div class="card mb-2">
+                <div class="card glass mb-2 p-2" style="border: 1px solid var(--glass-border);">
                     <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <h3>${phase.title}</h3>
-                        <span class="badge">${phase.duration}</span>
+                        <h3 style="margin: 0;">${phase.title}</h3>
+                        <span class="badge glass" style="background: rgba(255,255,255,0.05);">${phase.duration}</span>
                     </div>
-                    <div class="progress-container">
+                    <div class="progress-container mt-1">
                         <div class="progress-bar" style="width: ${pct}%; background: ${plan.color}"></div>
                     </div>
-                    <p class="text-right" style="font-size:0.8rem;">${done}/${total} Completed</p>
-                    <div class="resource-list">
+                    <p class="text-right" style="font-size:0.8rem; margin: 0.5rem 0;">${done}/${total} Completed</p>
+                    <div class="resource-list mt-1">
                         ${resourceList}
                     </div>
                     ${phaseToolsHtml}
@@ -632,9 +639,9 @@ const Views = {
         }).join('');
 
         return `
-            <div class="plan-header" style="border-bottom: 2px solid ${plan.color};">
-                <h1 style="color: ${plan.color}">${plan.icon} ${plan.title}</h1>
-                <p>${plan.subtitle}</p>
+            <div class="hero-section glass mb-2" style="padding: 2rem; border-left: 6px solid ${plan.color};">
+                <h1 style="color: var(--text-main); margin-bottom: 0.5rem;">${plan.icon} ${plan.title}</h1>
+                <p style="color: var(--text-muted);">${plan.subtitle}</p>
             </div>
             ${phasesHtml}
         `;
