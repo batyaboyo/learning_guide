@@ -603,3 +603,42 @@ input.form-input {
 .nav-item.active::after {
     width: 100%;
 }
+
+/* Tools Section */
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.tool-card {
+    background: var(--bg-primary);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--bg-tertiary);
+}
+
+.tool-card strong {
+    display: block;
+    color: var(--accent-primary);
+    margin-bottom: 0.25rem;
+}
+
+.tool-card p {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+}
+
+.tool-link {
+    font-size: 0.8rem;
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.tool-link:hover {
+    text-decoration: underline;
+}

@@ -95,12 +95,20 @@ const careerData = {
                         { name: 'SANS AI Security Resources', url: 'https://www.sans.org/top25/ai-security/', type: 'Video', platform: 'SANS' }
                     ]
                 }
+            ],
+            tools: [
+                { name: 'Wireshark', desc: 'Network protocol analyzer for deep traffic inspection.', url: 'https://www.wireshark.org/' },
+                { name: 'Burp Suite Community', desc: 'Web vulnerability scanner and proxy tool.', url: 'https://portswigger.net/burp/communitydownload' },
+                { name: 'Metasploit', desc: 'Explotation framework for validating vulnerabilities.', url: 'https://www.metasploit.com/' },
+                { name: 'Nmap', desc: 'Network discovery and security auditing tool.', url: 'https://nmap.org/' },
+                { name: 'Kali Linux', desc: 'OS preloaded with hundreds of security tools.', url: 'https://www.kali.org/' },
+                { name: 'Autopsy', desc: 'Digital forensics platform and GUI for Sleuth Kit.', url: 'https://www.sleuthkit.org/autopsy/' }
             ]
         },
         B: {
             id: 'planB',
-            title: 'Django Full-Stack Dev',
-            subtitle: 'Python → Django → Full Stack',
+            title: 'Full-Stack Django Dev',
+            subtitle: 'Python → JS → Django → React',
             color: '#10B981',
             icon: '🐍',
             phases: [
@@ -148,12 +156,20 @@ const careerData = {
                         { name: 'Docker for Beginners', url: 'https://docker-curriculum.com', type: 'Course', platform: 'Docker' }
                     ]
                 }
+            ],
+            tools: [
+                { name: 'VS Code', desc: 'Powerful, extensible code editor with Python support.', url: 'https://code.visualstudio.com/' },
+                { name: 'Postman', desc: 'Essential tool for API testing and documentation.', url: 'https://www.postman.com/' },
+                { name: 'Docker', desc: 'Containerization for consistent dev/prod environments.', url: 'https://www.docker.com/' },
+                { name: 'DBeaver', desc: 'Universal database manager (PostgreSQL/SQLite).', url: 'https://dbeaver.io/' },
+                { name: 'Git', desc: 'Industry-standard version control system.', url: 'https://git-scm.com/' },
+                { name: 'Django Debug Toolbar', desc: 'Crucial for profiling and optimizing queries.', url: 'https://github.com/jazzband/django-debug-toolbar' }
             ]
         },
         C: {
             id: 'planC',
-            title: 'IT & Security Support',
-            subtitle: 'A+ → Networking → System Admin',
+            title: 'IT Support & Admin',
+            subtitle: 'Hardware → OS → Networking → Cloud',
             color: '#3B82F6',
             icon: '🔧',
             phases: [
@@ -174,6 +190,14 @@ const careerData = {
                         { name: 'CBT Nuggets', url: 'https://www.youtube.com/@cbtnuggets', type: 'Video', platform: 'YouTube' }
                     ]
                 }
+            ],
+            tools: [
+                { name: 'Sysinternals Suite', desc: 'Advanced Windows troubleshooting utilities.', url: 'https://learn.microsoft.com/en-us/sysinternals/' },
+                { name: 'PuTTY', desc: 'SSH/Telnet client for remote system management.', url: 'https://www.putty.org/' },
+                { name: 'Clonezilla', desc: 'Open source disk imaging and cloning solution.', url: 'https://clonezilla.org/' },
+                { name: '7-Zip', desc: 'High-compression file archiver for backups.', url: 'https://www.7-zip.org/' },
+                { name: 'PowerShell', desc: 'Automation and configuration management shell.', url: 'https://learn.microsoft.com/en-us/powershell/' },
+                { name: 'RustDesk', desc: 'Open-source remote desktop alternative.', url: 'https://rustdesk.com/' }
             ]
         }
     },

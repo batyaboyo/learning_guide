@@ -616,11 +616,27 @@ const Views = {
             `;
         }).join('');
 
+        const toolsHtml = plan.tools ? `
+            <div class="card mb-2 tools-section">
+                <h3>🛠️ Essential Tools</h3>
+                <div class="tools-grid">
+                    ${plan.tools.map(t => `
+                        <div class="tool-card">
+                            <strong>${t.name}</strong>
+                            <p>${t.desc}</p>
+                            <a href="${t.url}" target="_blank" class="tool-link">Download / View</a>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        ` : '';
+
         return `
             <div class="plan-header" style="border-bottom: 2px solid ${plan.color};">
                 <h1 style="color: ${plan.color}">${plan.icon} ${plan.title}</h1>
                 <p>${plan.subtitle}</p>
             </div>
+            ${toolsHtml}
             ${phasesHtml}
         `;
     },
