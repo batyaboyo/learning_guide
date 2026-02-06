@@ -23,6 +23,12 @@ const careerData = {
                         { name: 'LetsDefend.io SOC Foundations', url: 'https://letsdefend.io/', type: 'Course', platform: 'LetsDefend' },
                         { name: 'Cybrary: Defensive Security Ops', url: 'https://www.cybrary.it/course/defensive-security-operations', type: 'Course', platform: 'Cybrary' },
                         { name: 'Security Blue Team: FREE Training', url: 'https://www.securityblue.team/', type: 'Course', platform: 'SBT' }
+                    ],
+                    tools: [
+                        { name: 'Wazuh', desc: 'Open-source SIEM/XDR.', url: 'https://wazuh.com/' },
+                        { name: 'Wireshark', desc: 'Network protocol analyzer.', url: 'https://www.wireshark.org/' },
+                        { name: 'Splunk (Free)', desc: 'Powerful log analysis tool.', url: 'https://www.splunk.com/' },
+                        { name: 'Elastic Stack', desc: 'Log storage and visualization.', url: 'https://www.elastic.co/elastic-stack' }
                     ]
                 },
                 {
@@ -40,6 +46,12 @@ const careerData = {
                         { name: 'KAPE Tool Guide', url: 'https://aboutdfir.com/tools/kape/', type: 'Doc', platform: 'AboutDFIR' },
                         { name: 'Digital Forensics Search (GitHub)', url: 'https://github.com/DFIR-Science/Digital-Forensics-Challenges', type: 'Lab', platform: 'GitHub' },
                         { name: 'SANS DFIR Summit Archives', url: 'https://www.sans.org/blog/sans-dfir-summit-archive/', type: 'Video', platform: 'SANS' }
+                    ],
+                    tools: [
+                        { name: 'Autopsy', desc: 'Premier forensic platform.', url: 'https://www.sleuthkit.org/autopsy/' },
+                        { name: 'Volatility', desc: 'Memory forensics framework.', url: 'https://www.volatilityfoundation.org/' },
+                        { name: 'FTK Imager', desc: 'Data acquisition and imaging.', url: 'https://www.exterro.com/ftk-imager' },
+                        { name: 'KAPE', desc: 'Fast triage and artifact collection.', url: 'https://www.kroll.com/en/services/cyber-risk/incident-response-retention/kape' }
                     ]
                 },
                 {
@@ -58,6 +70,13 @@ const careerData = {
                         { name: 'EC-Council: Android Bug Bounty', url: 'https://www.eccouncil.org/free-cybersecurity-resources/', type: 'Course', platform: 'EC-Council' },
                         { name: 'Metasploit Unleashed', url: 'https://www.offsec.com/metasploit-unleashed/', type: 'Course', platform: 'OffSec' },
                         { name: 'Bugcrowd University', url: 'https://www.bugcrowd.com/university/', type: 'Course', platform: 'Bugcrowd' }
+                    ],
+                    tools: [
+                        { name: 'Burp Suite (Comm)', desc: 'Web proxy and scanner.', url: 'https://portswigger.net/' },
+                        { name: 'Metasploit', desc: 'Exploitation framework.', url: 'https://www.metasploit.com/' },
+                        { name: 'Nmap', desc: 'Network scanner.', url: 'https://nmap.org/' },
+                        { name: 'SQLmap', desc: 'Automatic SQL injection.', url: 'https://sqlmap.org/' },
+                        { name: 'OWASP ZAP', desc: 'Open-source web scanner.', url: 'https://www.zaproxy.org/' }
                     ]
                 },
                 {
@@ -75,6 +94,13 @@ const careerData = {
                         { name: 'BloodHound Graph Theory', url: 'https://bloodhound.readthedocs.io/', type: 'Doc', platform: 'BloodHound' },
                         { name: 'Active Directory Security (Sean Metcalf)', url: 'https://adsecurity.org/', type: 'Blog', platform: 'ADSecurity' },
                         { name: 'IppSec HC Video Search', url: 'https://ippsec.rocks/', type: 'Video', platform: 'IppSec' }
+                    ],
+                    tools: [
+                        { name: 'BloodHound', desc: 'AD attack path analysis.', url: 'https://github.com/BloodHoundAD/BloodHound' },
+                        { name: 'Gophish', desc: 'Phishing simulation framework.', url: 'https://getgophish.com/' },
+                        { name: 'Sliver', desc: 'Cross-platform C2 framework.', url: 'https://github.com/BishopFox/sliver' },
+                        { name: 'Caldera', desc: 'Adversary emulation.', url: 'https://caldera.mitre.org/' },
+                        { name: 'Atomic Red Team', desc: 'Library of ATT&CK tests.', url: 'https://atomicredteam.io/' }
                     ]
                 },
                 {
@@ -93,16 +119,14 @@ const careerData = {
                         { name: 'Learn Prompting: Adversarial AI', url: 'https://learnprompting.org/docs/adversarial/introduction', type: 'Doc', platform: 'LearnPrompting' },
                         { name: 'OWASP LLM Top 10', url: 'https://owasp.org/www-project-top-10-for-large-language-model-applications/', type: 'Doc', platform: 'OWASP' },
                         { name: 'SANS AI Security Resources', url: 'https://www.sans.org/top25/ai-security/', type: 'Video', platform: 'SANS' }
+                    ],
+                    tools: [
+                        { name: 'Garak', desc: 'LLM vulnerability scanner.', url: 'https://github.com/leondz/garak' },
+                        { name: 'PyRIT', desc: 'Redteaming AI Toolkit.', url: 'https://github.com/Azure/pyrit' },
+                        { name: 'Giskard', desc: 'LLM Security Scanner.', url: 'https://github.com/Giskard-AI/giskard' },
+                        { name: 'TextAttack', desc: 'Adversarial attacks for LLMs.', url: 'https://github.com/QData/TextAttack' }
                     ]
                 }
-            ],
-            tools: [
-                { name: 'Wireshark', desc: 'Network protocol analyzer for deep traffic inspection.', url: 'https://www.wireshark.org/' },
-                { name: 'Burp Suite Community', desc: 'Web vulnerability scanner and proxy tool.', url: 'https://portswigger.net/burp/communitydownload' },
-                { name: 'Metasploit', desc: 'Explotation framework for validating vulnerabilities.', url: 'https://www.metasploit.com/' },
-                { name: 'Nmap', desc: 'Network discovery and security auditing tool.', url: 'https://nmap.org/' },
-                { name: 'Kali Linux', desc: 'OS preloaded with hundreds of security tools.', url: 'https://www.kali.org/' },
-                { name: 'Autopsy', desc: 'Digital forensics platform and GUI for Sleuth Kit.', url: 'https://www.sleuthkit.org/autopsy/' }
             ]
         },
         B: {
@@ -154,16 +178,13 @@ const careerData = {
                         { name: 'MDN Web Docs', url: 'https://developer.mozilla.org', type: 'Doc', platform: 'MDN' },
                         { name: 'React Documentation', url: 'https://react.dev', type: 'Doc', platform: 'React' },
                         { name: 'Docker for Beginners', url: 'https://docker-curriculum.com', type: 'Course', platform: 'Docker' }
+                    ],
+                    tools: [
+                        { name: 'Docker', desc: 'Containerization.', url: 'https://www.docker.com/' },
+                        { name: 'Sentry', desc: 'Error tracking.', url: 'https://sentry.io/' },
+                        { name: 'Gicorn', desc: 'Production WSGI server.', url: 'https://gunicorn.org/' }
                     ]
                 }
-            ],
-            tools: [
-                { name: 'VS Code', desc: 'Powerful, extensible code editor with Python support.', url: 'https://code.visualstudio.com/' },
-                { name: 'Postman', desc: 'Essential tool for API testing and documentation.', url: 'https://www.postman.com/' },
-                { name: 'Docker', desc: 'Containerization for consistent dev/prod environments.', url: 'https://www.docker.com/' },
-                { name: 'DBeaver', desc: 'Universal database manager (PostgreSQL/SQLite).', url: 'https://dbeaver.io/' },
-                { name: 'Git', desc: 'Industry-standard version control system.', url: 'https://git-scm.com/' },
-                { name: 'Django Debug Toolbar', desc: 'Crucial for profiling and optimizing queries.', url: 'https://github.com/jazzband/django-debug-toolbar' }
             ]
         },
         C: {
@@ -188,16 +209,12 @@ const careerData = {
                         { name: 'Eli the Computer Guy', url: 'https://www.youtube.com/@Elithecomputerguypage', type: 'Video', platform: 'YouTube' },
                         { name: 'Techquickie', url: 'https://www.youtube.com/@techquickie', type: 'Video', platform: 'YouTube' },
                         { name: 'CBT Nuggets', url: 'https://www.youtube.com/@cbtnuggets', type: 'Video', platform: 'YouTube' }
+                    ],
+                    tools: [
+                        { name: '7-Zip', desc: 'File archiver.', url: 'https://www.7-zip.org/' },
+                        { name: 'PowerShell', desc: 'Task automation.', url: 'https://learn.microsoft.com/powershell/' }
                     ]
                 }
-            ],
-            tools: [
-                { name: 'Sysinternals Suite', desc: 'Advanced Windows troubleshooting utilities.', url: 'https://learn.microsoft.com/en-us/sysinternals/' },
-                { name: 'PuTTY', desc: 'SSH/Telnet client for remote system management.', url: 'https://www.putty.org/' },
-                { name: 'Clonezilla', desc: 'Open source disk imaging and cloning solution.', url: 'https://clonezilla.org/' },
-                { name: '7-Zip', desc: 'High-compression file archiver for backups.', url: 'https://www.7-zip.org/' },
-                { name: 'PowerShell', desc: 'Automation and configuration management shell.', url: 'https://learn.microsoft.com/en-us/powershell/' },
-                { name: 'RustDesk', desc: 'Open-source remote desktop alternative.', url: 'https://rustdesk.com/' }
             ]
         }
     },

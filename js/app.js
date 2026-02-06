@@ -594,6 +594,20 @@ const Views = {
                 `;
             }).join('');
 
+            // NEW: Phase Specific Tools
+            const phaseToolsHtml = phase.tools ? `
+                <div class="phase-tools mt-2">
+                    <h4 style="font-size:0.9rem; margin-bottom:0.5rem;">🛠️ Essential Tools for this Phase:</h4>
+                    <div class="tools-grid-compact">
+                        ${phase.tools.map(t => `
+                            <div class="tool-card-compact">
+                                <a href="${t.url}" target="_blank" title="${t.desc}"><strong>${t.name}</strong></a>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            ` : '';
+
             // Phase Progress
             const total = phase.resources.length;
             const done = phase.resources.filter(r => Storage.isResourceCompleted(planLetter, r.name)).length;
@@ -612,31 +626,16 @@ const Views = {
                     <div class="resource-list">
                         ${resourceList}
                     </div>
+                    ${phaseToolsHtml}
                 </div>
             `;
         }).join('');
-
-        const toolsHtml = plan.tools ? `
-            <div class="card mb-2 tools-section">
-                <h3>🛠️ Essential Tools</h3>
-                <div class="tools-grid">
-                    ${plan.tools.map(t => `
-                        <div class="tool-card">
-                            <strong>${t.name}</strong>
-                            <p>${t.desc}</p>
-                            <a href="${t.url}" target="_blank" class="tool-link">Download / View</a>
-                        </div>
-                    `).join('')}
-                </div>
-            </div>
-        ` : '';
 
         return `
             <div class="plan-header" style="border-bottom: 2px solid ${plan.color};">
                 <h1 style="color: ${plan.color}">${plan.icon} ${plan.title}</h1>
                 <p>${plan.subtitle}</p>
             </div>
-            ${toolsHtml}
             ${phasesHtml}
         `;
     },
