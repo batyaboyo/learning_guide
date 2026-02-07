@@ -295,36 +295,41 @@ const careerData = {
             phases: [
                 {
                     id: 'p1',
-                    title: 'IT Foundations',
-                    duration: 'Ongoing',
+                    title: 'Phase 1: IT Foundations (Hardware & OS)',
+                    duration: 'Months 1-3',
                     resources: [
-                        { name: 'Professor Messer A+', url: 'https://www.professormesser.com/free-a-plus-training/220-1101/220-1101-video/220-1101-training-course', type: 'Course', platform: 'Professor Messer' },
+                        { name: 'Professor Messer A+ Course', url: 'https://www.professormesser.com/free-a-plus-training/220-1101/220-1101-video/220-1101-training-course', type: 'Course', platform: 'Professor Messer' },
                         { name: 'Google IT Support Certificate', url: 'https://www.coursera.org/professional-certificates/google-it-support', type: 'Course', platform: 'Coursera' },
-                        { name: 'Microsoft Learn', url: 'https://learn.microsoft.com/en-us/training', type: 'Course', platform: 'Microsoft' },
-                        { name: 'Cisco Networking Academy', url: 'https://www.netacad.com', type: 'Course', platform: 'Cisco' },
-                        { name: 'Linux Foundation Free Courses', url: 'https://training.linuxfoundation.org/resources', type: 'Course', platform: 'Linux FDN' },
-                        { name: 'PowerCert Animated Videos', url: 'https://www.youtube.com/@PowerCertAnimatedVideos', type: 'Video', platform: 'YouTube' },
-                        { name: 'Linux Journey', url: 'https://linuxjourney.com', type: 'Course', platform: 'Web' },
-                        { name: 'Eli the Computer Guy', url: 'https://www.youtube.com/@Elithecomputerguypage', type: 'Video', platform: 'YouTube' },
-                        { name: 'Techquickie', url: 'https://www.youtube.com/@techquickie', type: 'Video', platform: 'YouTube' },
-                        { name: 'CBT Nuggets', url: 'https://www.youtube.com/@cbtnuggets', type: 'Video', platform: 'YouTube' }
+                        { name: 'Microsoft Windows 11 Support', url: 'https://learn.microsoft.com/en-us/training/paths/support-windows-11-devices/', type: 'Course', platform: 'Microsoft' },
+                        { name: 'Linux Journey (Foundations)', url: 'https://linuxjourney.com', type: 'Course', platform: 'Web' },
+                        { name: 'PowerCert: How a CPU Works', url: 'https://www.youtube.com/watch?v=FZGugFqdr60', type: 'Video', platform: 'YouTube' },
+                        { name: 'Eli the Computer Guy', url: 'https://www.youtube.com/@Elithecomputerguypage', type: 'Video', platform: 'YouTube' }
                     ],
                     tools: [
                         { name: 'Sysinternals Suite', desc: 'Advanced Windows utilities.', url: 'https://learn.microsoft.com/en-us/sysinternals/' },
-                        { name: 'PuTTY', desc: 'SSH/Telnet client.', url: 'https://www.putty.org/' },
-                        { name: '7-Zip', desc: 'File archiver.', url: 'https://www.7-zip.org/' },
-                        { name: 'PowerShell', desc: 'Task automation.', url: 'https://learn.microsoft.com/powershell/' },
                         { name: 'Rufus', desc: 'Create bootable USB drives.', url: 'https://rufus.ie/' },
                         { name: 'WinDirStat', desc: 'Disk usage stats viewer.', url: 'https://windirstat.net/' },
+                        { name: '7-Zip', desc: 'File archiver.', url: 'https://www.7-zip.org/' },
+                        { name: 'KeePassXC', desc: 'Password manager.', url: 'https://keepassxc.org/' }
+                    ]
+                },
+                {
+                    id: 'p2',
+                    title: 'Phase 2: Networking & Cloud Admin',
+                    duration: 'Months 4-6',
+                    resources: [
+                        { name: 'Professor Messer Network+', url: 'https://www.professormesser.com/network-plus/n10-008/n10-008-video/n10-008-training-course/', type: 'Course', platform: 'Professor Messer' },
+                        { name: 'Cisco Introduction to Networks', url: 'https://www.skillsforall.com/course/introduction-to-networks', type: 'Course', platform: 'Cisco' },
+                        { name: 'AWS Cloud Practitioner Essentials', url: 'https://explore.skillbuilder.aws/learn/course/external/view/elearning/134/aws-cloud-practitioner-essentials', type: 'Course', platform: 'AWS' },
+                        { name: 'Azure Fundamentals (AZ-900)', url: 'https://learn.microsoft.com/en-us/training/paths/microsoft-azure-fundamentals-describe-cloud-concepts/', type: 'Course', platform: 'Microsoft' },
+                        { name: 'NetworkChuck: CCNA Series', url: 'https://www.youtube.com/watch?v=H8W9SshmS54', type: 'Video', platform: 'YouTube' }
+                    ],
+                    tools: [
+                        { name: 'PuTTY', desc: 'SSH/Telnet client.', url: 'https://www.putty.org/' },
                         { name: 'Angry IP Scanner', desc: 'Fast IP & port scanner.', url: 'https://angryip.org/' },
-                        { name: 'ShareX', desc: 'Screen capture & productivity.', url: 'https://getsharex.com/' },
-                        { name: 'Notepad++', desc: 'Advanced text editor.', url: 'https://notepad-plus-plus.org/' },
-                        { name: 'Revo Uninstaller', desc: 'Clean uninstallation.', url: 'https://www.revouninstaller.com/' },
                         { name: 'Wireshark', desc: 'Network protocol analyzer.', url: 'https://www.wireshark.org/' },
-                        { name: 'Nmap', desc: 'Network discovery and audit.', url: 'https://nmap.org/' },
-                        { name: 'RustDesk', desc: 'Open-source remote desktop.', url: 'https://rustdesk.com/' },
-                        { name: 'OBS Studio', desc: 'Video recording/streaming.', url: 'https://obsproject.com/' },
-                        { name: 'KeePassXC', desc: 'Cross-platform password manager.', url: 'https://keepassxc.org/' }
+                        { name: 'Nmap', desc: 'Network discovery.', url: 'https://nmap.org/' },
+                        { name: 'RustDesk', desc: 'Remote desktop tool.', url: 'https://rustdesk.com/' }
                     ]
                 }
             ]
@@ -336,14 +341,18 @@ const careerData = {
             { name: 'Outbox Hub', url: 'https://outbox.co.ug' },
             { name: 'Hive Colab', url: 'http://www.hivecolab.org' },
             { name: 'Refactory Academy', url: 'https://refactory.ug' },
-            { name: 'PyLadies Kampala', url: '#' },
-            { name: 'Google Developer Groups Kampala', url: '#' }
+            { name: 'PyLadies Kampala', url: 'https://twitter.com/pyladieskla' },
+            { name: 'GDG Kampala', url: 'https://gdg.community.dev/gdg-kampala/' },
+            { name: 'Women in Tech Uganda', url: 'https://witug.org/' },
+            { name: 'Node.js Uganda', url: 'https://twitter.com/nodejsuganda' }
         ],
         jobs: [
             { name: 'BrighterMonday Uganda', url: 'https://www.brightermonday.co.ug' },
             { name: 'Fuzu Uganda', url: 'https://www.fuzu.com/ug' },
             { name: 'LinkedIn Jobs Uganda', url: 'https://www.linkedin.com/jobs' },
-            { name: 'Remote African Jobs', url: 'https://remoteafrican.com' }
+            { name: 'Remote African Jobs', url: 'https://remoteafrican.com' },
+            { name: 'The Independent Uganda Jobs', url: 'https://www.independent.co.ug/jobs/' },
+            { name: 'Daily Monitor Classifieds', url: 'https://www.monitor.co.ug/monitor/magazines/jobs-and-career' }
         ]
     },
     projects: [

@@ -6,6 +6,7 @@ const app = {
 
     // Init
     init() {
+        Storage.init();
         this.cacheDOM();
         this.bindEvents();
         this.render();
@@ -198,17 +199,33 @@ const app = {
         if (firstFocusableElement) firstFocusableElement.focus();
     },
 
-    switchTab(tabId) {
-        this.currentTab = tabId;
+    switchTab(tab, phaseIdx = null) {
+        console.log(`[Pathweaver] Switching to tab: ${tab}${phaseIdx !== null ? `, phase: ${phaseIdx}` : ''}`);
+        this.currentTab = tab;
+
         // Update Sidebar UI
         const items = document.querySelectorAll('.sidebar .nav-item');
         items.forEach(t => t.classList.remove('active'));
-        const activeItem = document.querySelector(`.sidebar [data-tab="${tabId}"]`);
+        const activeItem = document.querySelector(`.sidebar [data-tab="${tab}"]`);
         if (activeItem) activeItem.classList.add('active');
 
         // Render View
         this.render();
-        window.scrollTo(0, 0); // Reset scroll on tab change
+
+        // Handle scrolling to phase if provided
+        if (phaseIdx !== null) {
+            setTimeout(() => {
+                const planLetter = tab.replace('plan', '');
+                const element = document.getElementById(`plan-${planLetter}-phase-${phaseIdx}`);
+                if (element && this.dom.main) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }, 100);
+        } else {
+            // Reset scroll on tab change if no specific phase
+            if (this.dom.main) this.dom.main.scrollTop = 0;
+            window.scrollTo(0, 0);
+        }
 
         // Close sidebar on mobile after selection
         if (window.innerWidth <= 768 && this.dom.sidebar) {
@@ -227,30 +244,38 @@ const app = {
 
     // Rendering Engine
     render() {
+        console.log(`[Pathweaver] Render starting for tab: ${this.currentTab}`);
         let html = '';
-        switch (this.currentTab) {
-            case 'dashboard': html = Views.dashboard(); break;
-            case 'planA': html = Views.plan('A'); break;
-            case 'planB': html = Views.plan('B'); break;
-            case 'planC': html = Views.plan('C'); break;
-            case 'projects': html = Views.projects(); break;
-            case 'uganda': html = Views.uganda(); break;
-            case 'income': html = Views.income(); break;
-            case 'search': html = Views.search(this.searchQuery); break;
-            default: html = '<h1>404 - Not Found</h1>';
-        }
-        if (this.dom.main) this.dom.main.innerHTML = html;
-        this.postRender();
-
-        // Refocus search if needed
-        if (this.currentTab === 'search') {
-            const input = document.getElementById('global-search');
-            if (input) {
-                input.focus();
-                const len = input.value.length;
-                input.setSelectionRange(len, len);
+        try {
+            switch (this.currentTab) {
+                case 'dashboard': html = Views.dashboard(); break;
+                case 'planA': html = Views.plan('A'); break;
+                case 'planB': html = Views.plan('B'); break;
+                case 'planC': html = Views.plan('C'); break;
+                case 'projects': html = Views.projects(); break;
+                case 'uganda': html = Views.uganda(); break;
+                case 'income': html = Views.income(); break;
+                case 'search': html = Views.search(this.searchQuery); break;
+                default: html = '<h1>404 - Not Found</h1>';
             }
+            console.log(`[Pathweaver] ${this.currentTab} HTML generated successfully (${html.length} chars)`);
+        } catch (err) {
+            console.error('[Pathweaver] Render Crash:', err);
+            html = `
+                <div class="glass p-3 text-center">
+                    <h2 style="color: var(--error)">⚠️ Engine Stall</h2>
+                    <p>We encountered a technical glitch while weaving this path.</p>
+                    <pre style="font-size: 0.8rem; background: rgba(0,0,0,0.3); padding: 1rem; margin-top: 1rem; text-align: left;">${err.stack}</pre>
+                    <button onclick="location.reload()" class="btn-primary mt-1">Restart Engine</button>
+                </div>
+            `;
         }
+
+        if (this.dom.main) {
+            this.dom.main.innerHTML = html;
+            this.dom.main.scrollTop = 0;
+        }
+        this.postRender();
     },
 
     postRender() {
@@ -310,6 +335,14 @@ const app = {
             }
         };
         reader.readAsText(file);
+    },
+
+    clearAllData() {
+        if (confirm('Are you sure you want to clear all progress and data? This cannot be undone.')) {
+            Storage.clearAll();
+            alert('All data cleared.');
+            location.reload();
+        }
     }
 };
 
@@ -317,6 +350,15 @@ const app = {
 const Views = {
     dashboard() {
         const stats = Storage.getGlobalStats();
+
+        // Calculate progress for Plan A (featured)
+        const planA = careerData.plans['A'];
+        const progress = Storage.load(Storage.KEYS.PROGRESS, {});
+        const completedA = progress['A'] ? progress['A'].length : 0;
+        let totalA = 0;
+        planA.phases.forEach(p => totalA += p.resources.length);
+        const percentA = totalA > 0 ? Math.round((completedA / totalA) * 100) : 0;
+
         return `
             <div class="hero-section glass mb-2 dashboard-hero">
                 <h1>Weave Your <span class="accent-text">Technical Destiny</span></h1>
@@ -346,20 +388,24 @@ const Views = {
                 <div class="stat-card glass p-2">
                     <div class="stat-icon">💰</div>
                     <h3>${stats.totalIncome.toLocaleString()}</h3>
-                    <p class="text-muted">UGX Earned</p>
+                    <p class="text-muted">Total UGX Earned</p>
                 </div>
             </div>
 
             <div class="dashboard-grid mt-2">
                 <div class="glass p-2">
-                    <h3>Current Focus</h3>
+                    <h3>Focus: ${planA.title}</h3>
                     <div class="mt-1">
                         <div class="focus-item glass p-1" onclick="app.switchTab('planA')">
-                            <span class="focus-icon">🛡️</span>
+                            <span class="focus-icon">${planA.icon}</span>
                             <div class="focus-details">
-                                <strong>Cybersecurity Architecture</strong>
+                                <strong>${planA.subtitle}</strong>
+                                <div class="progress-info" style="display:flex; justify-content: space-between; font-size: 0.8rem;">
+                                    <span>${percentA}% Completed</span>
+                                    <span>${completedA}/${totalA} Resources</span>
+                                </div>
                                 <div class="progress-container compact">
-                                    <div class="progress-bar" style="width: 15%;"></div>
+                                    <div class="progress-bar" style="width: ${percentA}%;"></div>
                                 </div>
                             </div>
                         </div>
@@ -420,8 +466,14 @@ const Views = {
                     </select>
                 </div>
             </div>
-            <div class="grid">
-                ${cards.length ? cards : '<p class="text-center p-3 text-muted">No projects match your current filters.</p>'}
+            <div class="grid animate-fade-in">
+                ${cards.length ? cards : `
+                    <div class="glass p-3 text-center full-width">
+                        <div style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;">🔍</div>
+                        <h3>No Projects Found</h3>
+                        <p class="text-muted">Adjust your filters to see more technical challenges.</p>
+                    </div>
+                `}
             </div>
         `;
     },
@@ -480,45 +532,82 @@ const Views = {
         let results = [];
 
         ['A', 'B', 'C'].forEach(id => {
-            careerData.plans[id].phases.forEach(phase => {
+            const plan = careerData.plans[id];
+            plan.phases.forEach((phase, pIdx) => {
+                // Search Phase Title
+                if (phase.title.toLowerCase().includes(lowerQ)) {
+                    results.push({ name: phase.title, planId: id, phaseIdx: pIdx, category: 'Phase' });
+                }
+                // Search Resources
                 phase.resources.forEach(r => {
-                    if (r.name.toLowerCase().includes(lowerQ)) {
-                        results.push({ ...r, planId: id, category: 'Resource' });
+                    const searchable = (r.name + ' ' + (r.platform || '') + ' ' + (r.type || '')).toLowerCase();
+                    if (searchable.includes(lowerQ)) {
+                        results.push({ ...r, planId: id, phaseIdx: pIdx, category: 'Resource' });
                     }
                 });
+                // Search Tools
+                if (phase.tools) {
+                    phase.tools.forEach(t => {
+                        const searchable = (t.name + ' ' + (t.desc || '')).toLowerCase();
+                        if (searchable.includes(lowerQ)) {
+                            results.push({ ...t, planId: id, phaseIdx: pIdx, category: 'Tool' });
+                        }
+                    });
+                }
             });
         });
 
         careerData.projects.forEach(p => {
-            if (p.name.toLowerCase().includes(lowerQ)) {
+            const searchable = (p.name + ' ' + (p.desc || '') + ' ' + (p.skills.join(' ')) + ' ' + (p.steps.join(' '))).toLowerCase();
+            if (searchable.includes(lowerQ)) {
                 results.push({ ...p, category: 'Project' });
             }
         });
 
-        const list = results.map(r => `
-            <div class="card glass mb-2 p-1 search-result-card">
-                <div class="result-info">
-                    <strong>${r.name}</strong>
-                    <small class="text-muted">${r.category}</small>
+        const list = results.map(r => {
+            const clickAction = r.category === 'Project'
+                ? `app.switchTab('projects')`
+                : `app.switchTab('plan${r.planId}', ${r.phaseIdx})`;
+
+            return `
+                <div class="card glass mb-2 p-1 search-result-card">
+                    <div class="result-info">
+                        <strong>${r.name}</strong>
+                        <small class="text-muted">${r.category} ${r.planId ? `(${careerData.plans[r.planId].title})` : ''}</small>
+                    </div>
+                    <button class="badge glass" onclick="${clickAction}">View</button>
                 </div>
-                <button class="badge glass" onclick="app.switchTab('${r.category === 'Resource' ? 'plan' + r.planId : 'projects'}')">View</button>
-            </div>
-        `).join('');
+            `;
+        }).join('');
 
         return `
             <div class="hero-section glass mb-2">
                 <h2>🔍 Search: "${query}"</h2>
                 <p class="text-muted">Detected ${results.length} relevant nodes.</p>
             </div>
-            <div class="search-results-list">
-                ${results.length ? list : '<p class="text-center p-3 text-muted">No technical records found.</p>'}
+            <div class="search-results-list animate-fade-in">
+                ${results.length ? list : `
+                    <div class="glass p-3 text-center">
+                        <div style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;">🛰️</div>
+                        <h3>Deep Space Search</h3>
+                        <p class="text-muted">No signals matching "${query}" were found in our technical records.</p>
+                    </div>
+                `}
             </div>
         `;
     },
 
     plan(planLetter) {
+        console.log(`[Pathweaver] Fetching Plan: ${planLetter}`);
         const plan = careerData.plans[planLetter];
-        const phasesHtml = plan.phases.map(phase => {
+        if (!plan) {
+            throw new Error(`Plan data for '${planLetter}' is missing from careerData.`);
+        }
+
+        console.log(`[Pathweaver] Plan ${planLetter} (${plan.title}) - Phases: ${plan.phases.length}`);
+
+        const phasesHtml = plan.phases.map((phase, idx) => {
+            console.log(`[Pathweaver] Phase ${idx + 1}: ${phase.resources.length} resources found.`);
             const resourceList = phase.resources.map(r => {
                 const isChecked = Storage.isResourceCompleted(planLetter, r.name) ? 'checked' : '';
                 return `
@@ -537,7 +626,7 @@ const Views = {
             ` : '';
 
             return `
-                <div class="card glass mb-2 p-2 plan-phase-card">
+                <div id="plan-${planLetter}-phase-${idx}" class="card glass mb-2 p-2 plan-phase-card animate-fade-in" style="animation-delay: ${idx * 0.1}s">
                     <h3>${phase.title}</h3>
                     <div class="resource-list mt-1">${resourceList}</div>
                     ${toolsHtml}
@@ -546,33 +635,43 @@ const Views = {
         }).join('');
 
         return `
-            <div class="hero-section glass mb-2 plan-hero" style="border-left: 6px solid ${plan.color};">
-                <h1>${plan.icon} ${plan.title}</h1>
-                <p class="text-muted">${plan.subtitle || ''}</p>
+            <div id="plan-view-${planLetter}" class="plan-container">
+                <div class="hero-section glass mb-2 plan-hero" style="border-left: 6px solid ${plan.color};">
+                    <h1>${plan.icon} ${plan.title}</h1>
+                    <p class="text-muted">${plan.subtitle || ''}</p>
+                </div>
+                <div class="phases-wrapper">
+                    ${phasesHtml}
+                </div>
             </div>
-            ${phasesHtml}
         `;
     },
 
     uganda() {
+        const jobsHtml = careerData.uganda.jobs.map(j => `
+            <a href="${j.url}" target="_blank" class="hub-link glass">${j.name}</a>
+        `).join('');
+
+        const communitiesHtml = careerData.uganda.communities.map(c => `
+            <a href="${c.url}" target="_blank" class="hub-link glass">${c.name}</a>
+        `).join('');
+
         return `
-            <div class="hero-section glass mb-2">
+            <div class="hero-section glass mb-2 animate-fade-in">
                 <h1>🇺🇬 Uganda Tech Hub</h1>
-                <p class="text-muted">Empowering local talent with professional roadmaps.</p>
+                <p class="text-muted">Empowering local talent with professional roadmaps and local opportunities.</p>
             </div>
-            <div class="responsive-grid">
+            <div class="responsive-grid animate-fade-in" style="animation-delay: 0.2s">
                 <div class="glass p-2">
-                    <h3 class="accent-color">Job Boards</h3>
-                    <div class="hub-list mt-1">
-                        <a href="https://www.brightermonday.co.ug" target="_blank" class="hub-link glass">BrighterMonday IT</a>
-                        <a href="https://www. kazijobs.com" target="_blank" class="hub-link glass">Kazi Jobs</a>
+                    <h3 class="accent-color mb-1">Local Job Boards</h3>
+                    <div class="hub-list">
+                        ${jobsHtml}
                     </div>
                 </div>
                 <div class="glass p-2">
-                    <h3 class="violet-color">Communities</h3>
-                    <div class="hub-list mt-1">
-                        <div class="hub-link glass disabled">Outbox Hub (Kampala)</div>
-                        <div class="hub-link glass disabled">Innovation Village</div>
+                    <h3 class="violet-color mb-1">Tech Communities</h3>
+                    <div class="hub-list">
+                        ${communitiesHtml}
                     </div>
                 </div>
             </div>

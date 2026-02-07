@@ -10,15 +10,15 @@
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://techpathug.com/">
+    <meta property="og:url" content="https://pathweaver.app/">
     <meta property="og:title" content="Pathweaver | Technical Destiny 2026">
     <meta property="og:description" content="High-performance career architecture for the modern tech era.">
     <meta property="og:image" content="assets/og-image.jpg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:title" content="TechPath UG - Career Roadmap 2026">
-    <meta property="twitter:description" content="Professional growth tracker for tech talent in Uganda.">
+    <meta property="twitter:title" content="Pathweaver - Career Roadmap 2026">
+    <meta property="twitter:description" content="Professional growth tracker for modern tech talent.">
     <meta property="twitter:image" content="assets/og-image.jpg">
 
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -50,10 +50,11 @@
     <div id="app" style="display: none;">
         <header>
             <div class="container header-content">
-                <div class="brand" onclick="app.switchTab('dashboard')" style="cursor: pointer;">
-                    <button id="mobile-menu-toggle" class="btn-icon glass mobile-only"
-                        onclick="event.stopPropagation()">☰</button>
-                    <span>✨</span> Pathweaver
+                <div class="logo-wrap">
+                    <button id="mobile-menu-toggle" class="btn-icon glass mobile-only">☰</button>
+                    <div class="brand" onclick="app.switchTab('dashboard')" style="cursor: pointer;">
+                        <span>✨</span> Pathweaver
+                    </div>
                 </div>
                 <div class="search-container">
                     <input type="text" id="global-search" placeholder="Search resources, tools, or projects..."
@@ -97,7 +98,7 @@
 
                 <div class="sidebar-footer">
                     <div id="days-left-container" class="glass">
-                        <div id="days-left">329</div>
+                        <div id="days-left">...</div>
                         <small>Days Remaining in 2026</small>
                     </div>
                 </div>
@@ -115,6 +116,8 @@
                     <button onclick="app.exportData()" class="btn-secondary glass">Export Data</button>
                     <input type="file" id="import-file" hidden onchange="app.importData(this)">
                     <button onclick="document.getElementById('import-file').click()" class="btn-secondary glass">Import
+                        Data</button>
+                    <button onclick="app.clearAllData()" class="btn-secondary glass" style="color: var(--danger);">Clear
                         Data</button>
                 </div>
             </div>
