@@ -56,8 +56,8 @@
 
 html,
 body {
-    height: 100%;
-    overflow: hidden;
+    min-height: 100vh;
+    overflow-x: hidden;
     scroll-behavior: smooth;
 }
 
@@ -86,10 +86,12 @@ header {
     background: var(--void-panel);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--glass-border);
-    z-index: 1000;
+    z-index: 1500;
     padding: 0.8rem 0;
     height: var(--header-height);
     flex-shrink: 0;
+    position: sticky;
+    top: 0;
 }
 
 .header-content {
@@ -247,21 +249,20 @@ nav {
 #app {
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
+    min-height: 100vh;
+    width: 100%;
 }
 
 .app-shell {
     display: flex;
     flex: 1;
-    overflow: hidden;
     width: 100%;
+    position: relative;
 }
 
 .sidebar {
     width: 300px;
-    height: 100%;
+    height: calc(100vh - var(--header-height));
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
@@ -270,6 +271,8 @@ nav {
     backdrop-filter: blur(20px);
     z-index: 1100;
     overflow-y: auto;
+    position: sticky;
+    top: var(--header-height);
     -webkit-overflow-scrolling: touch;
 }
 
@@ -343,12 +346,10 @@ nav {
 
 .main-viewport {
     flex: 1;
-    height: 100%;
-    min-height: 0;
-    /* Critical flex fix */
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+    min-width: 0;
+    /* Prevent flex blowout */
     padding: 2rem;
+    min-height: calc(100vh - var(--header-height));
 }
 
 .sidebar::-webkit-scrollbar,

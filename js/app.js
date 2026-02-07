@@ -217,13 +217,18 @@ const app = {
             setTimeout(() => {
                 const planLetter = tab.replace('plan', '');
                 const element = document.getElementById(`plan-${planLetter}-phase-${phaseIdx}`);
-                if (element && this.dom.main) {
-                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                if (element) {
+                    const headerOffset = 100;
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
                 }
             }, 100);
         } else {
-            // Reset scroll on tab change if no specific phase
-            if (this.dom.main) this.dom.main.scrollTop = 0;
             window.scrollTo(0, 0);
         }
 
@@ -273,7 +278,6 @@ const app = {
 
         if (this.dom.main) {
             this.dom.main.innerHTML = html;
-            this.dom.main.scrollTop = 0;
         }
         this.postRender();
     },
