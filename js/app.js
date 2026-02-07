@@ -243,8 +243,24 @@ const app = {
         const endYear = new Date('2026-12-31T23:59:59');
         const diff = endYear - now;
         const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+
+        // Update current date
+        const dateEl = document.getElementById('current-date');
+        if (dateEl) {
+            dateEl.textContent = now.toLocaleDateString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric'
+            });
+        }
+
+        // Update countdowns (both sidebar and header)
         const daysEl = document.getElementById('days-left');
-        if (daysEl) daysEl.textContent = days > 0 ? days : 0;
+        const headerDaysEl = document.getElementById('header-days-left');
+
+        const daysText = days > 0 ? days : 0;
+        if (daysEl) daysEl.textContent = daysText;
+        if (headerDaysEl) headerDaysEl.textContent = `${daysText} Days`;
     },
 
     // Rendering Engine

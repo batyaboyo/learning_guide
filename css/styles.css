@@ -230,8 +230,34 @@ nav {
 
 .header-stats {
     display: flex;
-    gap: 1.5rem;
+    gap: 2rem;
     align-items: center;
+    margin: 0 2rem;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.stat-item small {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.stat-item div {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accent-cyan);
+}
+
+@media (max-width: 1024px) {
+    .mobile-hide {
+        display: none;
+    }
 }
 
 /* Legacy Nav Stubs - Removed as they conflict with new sidebar */
