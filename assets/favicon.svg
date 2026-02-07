@@ -1,6 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect x="0" y="0" width="64" height="64" rx="10" fill="#1e293b" />
-  <path d="M32 8 L52 18 V34 C52 48 32 60 32 60 C32 60 12 48 12 34 V18 Z" 
-        fill="none" stroke="#D90000" stroke-width="4" />
-  <text x="32" y="42" font-family="sans-serif" font-weight="bold" font-size="28" fill="#FCDC04" text-anchor="middle">TP</text>
+  <defs>
+    <linearGradient id="brandGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#22d3ee;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="64" height="64" rx="16" fill="#0f172a" />
+  <text x="32" y="44" font-family="system-ui, sans-serif" font-weight="900" font-size="32" fill="url(#brandGradient)" text-anchor="middle">PW</text>
+  <path d="M10 54 L54 54" stroke="url(#brandGradient)" stroke-width="4" stroke-linecap="round" opacity="0.5" />
 </svg>
