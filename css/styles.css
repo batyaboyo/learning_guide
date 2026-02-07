@@ -133,9 +133,7 @@ header {
 }
 
 .mobile-only {
-    display: none;
-    z-index: 2100;
-    /* Extremely high to stay above sidebar */
+    display: none !important;
 }
 
 nav {
@@ -906,7 +904,8 @@ input.form-input {
 /* --- Mobile Responsiveness --- */
 @media (max-width: 768px) {
     .mobile-only {
-        display: flex;
+        display: flex !important;
+        z-index: 2100;
     }
 
     .header-content {
