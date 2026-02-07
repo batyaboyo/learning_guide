@@ -20,6 +20,9 @@
     --shadow-premium: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
     --card-hover-shadow: 0 15px 30px -10px rgba(34, 211, 238, 0.2);
     --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --overlay-bg: rgba(0, 0, 0, 0.7);
+    --badge-bg: rgba(255, 255, 255, 0.1);
+    --shadow-sidebar: 20px 0 50px rgba(0, 0, 0, 0.5);
     --glass-panel: rgba(15, 23, 42, 0.6);
     --hover-bg: rgba(255, 255, 255, 0.05);
     --active-bg: rgba(34, 211, 238, 0.1);
@@ -54,6 +57,9 @@
     --shadow-premium: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
     --card-hover-shadow: 0 10px 25px -5px rgba(34, 211, 238, 0.15);
     --glass-shadow: 0 4px 20px 0 rgba(15, 23, 42, 0.05);
+    --overlay-bg: rgba(255, 255, 255, 0.85);
+    --badge-bg: rgba(15, 23, 42, 0.05);
+    --shadow-sidebar: 10px 0 30px rgba(15, 23, 42, 0.05);
     --card-gradient: linear-gradient(135deg, #f1f5f9, #ffffff);
     --glass-panel: rgba(255, 255, 255, 0.8);
     --hover-bg: rgba(15, 23, 42, 0.04);
@@ -669,7 +675,7 @@ input[type="checkbox"] {
     align-items: center;
     gap: 1rem;
     cursor: pointer;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
 }
 
 .focus-icon {
@@ -740,7 +746,7 @@ input[type="checkbox"] {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
 }
 
 .entry-info {
@@ -826,7 +832,7 @@ input[type="checkbox"] {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
+    background: var(--overlay-bg);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -965,7 +971,7 @@ input.form-input {
         width: 280px;
         transform: translateX(-100%);
         visibility: hidden;
-        box-shadow: 20px 0 50px rgba(0, 0, 0, 0.5);
+        box-shadow: var(--shadow-sidebar);
         padding-top: 80px;
         /* Space for header toggle */
         z-index: 2000;
@@ -1088,7 +1094,7 @@ footer {
     padding: 0.2rem 0.5rem;
     border-radius: 1rem;
     border: 1px solid var(--text-secondary);
-    background: rgba(0, 0, 0, 0.2);
+    background: var(--badge-bg);
 }
 
 .status-badge {
@@ -1167,7 +1173,7 @@ footer {
     margin-right: 0.5rem;
     margin-bottom: 0.5rem;
     font-size: 0.8rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--glass-border);
 }
 
 .stat-box {
@@ -1227,7 +1233,7 @@ footer {
     display: flex;
     justify-content: space-between;
     margin-top: 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid var(--glass-border);
     padding-top: 1rem;
     font-size: 0.9rem;
 }
@@ -1340,11 +1346,11 @@ footer {
 }
 
 .tool-card-compact {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--badge-bg);
     padding: 0.2rem 0.6rem;
     border-radius: 12px;
     /* Pill style */
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--glass-border);
     transition: all 0.2s ease;
 }
 
