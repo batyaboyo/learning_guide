@@ -6,7 +6,6 @@ A professional, offline-capable career development tracking website.
 - **3 Career Paths**: Cybersecurity, Django Development, IT Support.
 - **Progress Tracking**: Checkboxes, progress bars, and localized data storage.
 - **Ugandan Context**: Curated list of local hubs and job boards.
-- **Income Goal**: Track earnings towards a $5000 target.
 - **Zero Dependencies**: Pure HTML, CSS, JS. No npm install needed.
 - **Dark/Light Mode**: Automatic theme switching.
 

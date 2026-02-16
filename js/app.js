@@ -123,7 +123,6 @@ const app = {
     saveProjectDetails(id) {
         const status = document.getElementById('p-status').value;
         const time = document.getElementById('p-time').value;
-        const income = document.getElementById('p-income').value;
         const notes = document.getElementById('p-notes').value;
         const link = document.getElementById('p-link').value;
 
@@ -135,7 +134,7 @@ const app = {
         });
 
         Storage.saveProjectState(id, {
-            status, timeSpent: time, incomeEarned: income, notes, demoLink: link,
+            status, timeSpent: time, notes, demoLink: link,
             stepsCompleted,
             lastUpdated: new Date().toISOString()
         });
@@ -320,7 +319,6 @@ const app = {
                 case 'planC': html = Views.plan('C'); break;
                 case 'projects': html = Views.projects(); break;
                 case 'uganda': html = Views.uganda(); break;
-                case 'income': html = Views.income(); break;
                 case 'search': html = Views.search(this.searchQuery); break;
                 default: html = '<h1>404 - Not Found</h1>';
             }
@@ -354,20 +352,7 @@ const app = {
             });
         });
 
-        const incomeForm = document.getElementById('income-add-form');
-        if (incomeForm) {
-            incomeForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const entry = {
-                    project: document.getElementById('inc-project').value,
-                    client: document.getElementById('inc-client').value,
-                    amount: parseFloat(document.getElementById('inc-amount').value),
-                    date: document.getElementById('inc-date').value
-                };
-                Storage.addIncomeEntry(entry);
-                this.render();
-            });
-        }
+
     },
 
     refreshProgressUI(planId) {
@@ -450,11 +435,7 @@ const Views = {
                     <h3>${stats.activeProjects}</h3>
                     <p class="text-muted">Live Projects</p>
                 </div>
-                <div class="stat-card glass p-2">
-                    <div class="stat-icon">💰</div>
-                    <h3>${stats.totalIncome.toLocaleString()}</h3>
-                    <p class="text-muted">Total UGX Earned</p>
-                </div>
+
             </div>
 
             <div class="dashboard-grid mt-2">
@@ -481,7 +462,6 @@ const Views = {
                     <div class="navigator-pills mt-1">
                         <button class="badge glass pill" onclick="app.switchTab('uganda')">🇺🇬 local_hub</button>
                         <button class="badge glass pill" onclick="app.switchTab('projects')">🚀 projects</button>
-                        <button class="badge glass pill" onclick="app.switchTab('income')">💰 earnings</button>
                     </div>
                 </div>
             </div>
@@ -535,7 +515,6 @@ const Views = {
                     <div class="project-meta">
                         <span class="meta-tag"><span class="meta-icon">📊</span> ${p.difficulty}</span>
                         <span class="meta-tag"><span class="meta-icon">⏱️</span> ${p.time}</span>
-                        ${p.income ? `<span class="meta-tag"><span class="meta-icon">💰</span> ${p.income}</span>` : ''}
                     </div>
                     <div class="project-skills">
                         ${p.skills.slice(0, 3).map(s => `<span class="skill-tag">${s}</span>`).join('')}
@@ -620,7 +599,6 @@ const Views = {
                         <div class="modal-project-meta mb-2">
                             <span class="meta-tag"><span class="meta-icon">📊</span> ${p.difficulty}</span>
                             <span class="meta-tag"><span class="meta-icon">⏱️</span> ${p.time}</span>
-                            ${p.income ? `<span class="meta-tag"><span class="meta-icon">💰</span> ${p.income}</span>` : ''}
                             <span class="badge glass plan-badge" style="background: ${careerData.plans[p.plan].color}">${careerData.plans[p.plan].icon} ${careerData.plans[p.plan].title}</span>
                         </div>
                         <div class="project-skills mb-2">
@@ -659,10 +637,6 @@ const Views = {
                                 <div class="input-group mt-1">
                                     <label>TIME INVESTED</label>
                                     <input type="text" id="p-time" class="glass full-width" value="${state.timeSpent || ''}">
-                                </div>
-                                <div class="input-group mt-1">
-                                    <label>INCOME (UGX)</label>
-                                    <input type="text" id="p-income" class="glass full-width" value="${state.incomeEarned || ''}">
                                 </div>
                                 <div class="input-group mt-1">
                                     <label>DEPLOYMENT LINK</label>
@@ -835,49 +809,7 @@ const Views = {
         `;
     },
 
-    income() {
-        const entries = Storage.getIncomeEntries();
-        const total = entries.reduce((acc, curr) => acc + (parseFloat(curr.amount) || 0), 0);
 
-        return `
-            <div class="hero-section glass mb-2">
-                <h1>💰 Wealth Weaver</h1>
-                <div class="income-stats">
-                    <h2 class="accent-color total-income">${total.toLocaleString()} UGX</h2>
-                    <p class="text-muted">Total Portfolio Earnings</p>
-                </div>
-            </div>
-            <div class="responsive-grid">
-                <div class="glass p-2">
-                    <h3>Log Transaction</h3>
-                    <form id="income-add-form" class="mt-1">
-                        <input type="text" id="inc-project" placeholder="Source" class="glass full-width" required>
-                        <input type="text" id="inc-client" placeholder="Client" class="glass full-width" required>
-                        <input type="number" id="inc-amount" placeholder="Amount" class="glass full-width" required>
-                        <input type="date" id="inc-date" class="glass full-width" required>
-                        <button type="submit" class="btn-primary full-width mt-1">Add to Vault</button>
-                    </form>
-                </div>
-                <div class="glass p-2">
-                    <h3>Transaction Log</h3>
-                    <div class="income-log mt-1">
-                        ${entries.length ? entries.map((e, idx) => `
-                            <div class="glass p-1 mb-1 log-entry">
-                                <div class="entry-info">
-                                    <strong>${e.project}</strong>
-                                    <small>${e.client}</small>
-                                </div>
-                                <div class="entry-math">
-                                    <span class="earned-text">+${e.amount.toLocaleString()}</span>
-                                    <button class="btn-icon delete-btn" onclick="Storage.deleteIncomeEntry(${idx}); app.render();">🗑️</button>
-                                </div>
-                            </div>
-                        `).join('') : '<p class="text-center text-muted p-2">The vault is currently empty.</p>'}
-                    </div>
-                </div>
-            </div>
-        `;
-    }
 };
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -2,7 +2,6 @@ const Storage = {
     // Keys
     KEYS: {
         PROGRESS: 'pathweaver_progress',
-        INCOME: 'pathweaver_income',
         SETTINGS: 'pathweaver_settings',
         PROJECTS: 'pathweaver_projects'
     },
@@ -14,7 +13,7 @@ const Storage = {
 
     migrateLegacyKeys() {
         const legacyPrefix = 'techpath_';
-        const keys = ['progress', 'income', 'settings', 'projects'];
+        const keys = ['progress', 'settings', 'projects'];
         keys.forEach(k => {
             const oldKey = legacyPrefix + k;
             const newKey = this.KEYS[k.toUpperCase()];
@@ -76,28 +75,6 @@ const Storage = {
         return allMeta[`${planId}|${resourceName}`] || null;
     },
 
-    // Income Helpers
-    addIncomeEntry(entry) {
-        const income = this.load(this.KEYS.INCOME, []);
-        income.push(entry);
-        this.save(this.KEYS.INCOME, income);
-        return income;
-    },
-
-    getIncomeEntries() {
-        return this.load(this.KEYS.INCOME, []);
-    },
-
-    deleteIncomeEntry(index) {
-        const income = this.load(this.KEYS.INCOME, []);
-        // simple index based deletion
-        if (index >= 0 && index < income.length) {
-            income.splice(index, 1);
-            this.save(this.KEYS.INCOME, income);
-        }
-        return income;
-    },
-
     // Project Tracking
     saveProjectState(projectId, data) {
         const all = this.load(this.KEYS.PROJECTS, {});
@@ -151,7 +128,6 @@ const Storage = {
     getGlobalStats() {
         const progress = this.load(this.KEYS.PROGRESS, {});
         const projects = this.load(this.KEYS.PROJECTS, {});
-        const income = this.load(this.KEYS.INCOME, []);
 
         let totalResources = 0;
         let completedResources = 0;
@@ -171,21 +147,10 @@ const Storage = {
 
         const activeProjects = Object.keys(projects).filter(id => projects[id].status !== 'completed' && projects[id].status !== 'deployed').length;
 
-        // Sum regular income entries
-        let totalIncome = income.reduce((acc, curr) => acc + (parseFloat(curr.amount) || 0), 0);
-
-        // ADD Project income earned
-        Object.values(projects).forEach(pState => {
-            if (pState.incomeEarned) {
-                totalIncome += (parseFloat(pState.incomeEarned) || 0);
-            }
-        });
-
         return {
             totalResources,
             completedResources,
-            activeProjects,
-            totalIncome
+            activeProjects
         };
     }
 };

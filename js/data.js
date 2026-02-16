@@ -364,7 +364,6 @@ const careerData = {
             desc: 'Set up Wireshark to monitor your home network traffic, identify all connected devices, and create a security report.',
             skills: ['Network analysis', 'packet inspection', 'documentation'],
             tools: ['Wireshark', 'network mapping tools'],
-            income: '50k-200k UGX', portfolio: 'Shows basic security awareness',
             steps: ['Install Wireshark and Nmap', 'Map local network devices', 'Capture 15mins of traffic', 'Analyze HTTP/DNS traffic', 'Document findings']
         },
         {
@@ -373,7 +372,6 @@ const careerData = {
             desc: 'Create a comprehensive incident response plan document for a small business.',
             skills: ['Incident response', 'documentation', 'security frameworks'],
             tools: ['Word/Google Docs', 'NIST framework'],
-            income: '200k-500k UGX', portfolio: 'Demonstrates knowledge of IR procedures',
             steps: ['Study NIST IR lifecycle', 'Draft Preparation phase', 'Draft Detection/Analysis protocols', 'Create communication templates', 'Finalize layout']
         },
         {
@@ -382,7 +380,6 @@ const careerData = {
             desc: 'Build a Splunk dashboard analyzing sample security logs (Boss of the SOC dataset).',
             skills: ['SIEM', 'log analysis', 'threat detection'],
             tools: ['Splunk Free', 'BOTS dataset'],
-            income: 'Demo for job interviews', portfolio: 'Shows hands-on SIEM experience',
             steps: ['Install Splunk Free', 'Ingest BOTS dataset', 'Create index patterns', 'Build visualizations for failed logins', 'Create alert thresholds']
         },
         {
@@ -391,7 +388,6 @@ const careerData = {
             desc: 'Create a tool/guide to analyze phishing emails, extract IOCs (Indicators of Compromise).',
             skills: ['Email security', 'threat intelligence'],
             tools: ['Email headers', 'VirusTotal', 'URLScan.io'],
-            income: '300k-1M UGX', portfolio: 'Practical security skill',
             steps: ['Collect sample phishing emails', 'Parse email headers', 'Extract URLs and attachments', 'Check IOCs on VirusTotal', 'Write analysis report']
         },
         {
@@ -400,7 +396,6 @@ const careerData = {
             desc: 'Build a complete home SOC lab with Security Onion, attacking machine, and victim machines.',
             skills: ['Virtualization', 'IDS/IPS', 'network security'],
             tools: ['VirtualBox', 'Security Onion', 'Kali Linux', 'Windows VMs'],
-            income: 'Blog/YouTube tutorial monetization', portfolio: 'Shows initiative and hands-on skills',
             steps: ['Setup VirtualBox/VMware', 'Install Security Onion', 'Deploy Kali and Windows targets', 'Configure network networking', 'Test log ingestion']
         },
         {
@@ -409,7 +404,6 @@ const careerData = {
             desc: 'Research current cyber threats affecting East Africa, create professional threat intel report.',
             skills: ['Research', 'OSINT', 'technical writing'],
             tools: ['MITRE ATT&CK', 'threat intel platforms'],
-            income: '500k-2M UGX', portfolio: 'Demonstrates analytical skills',
             steps: ['Identify regional threats', 'Gather OSINT data', 'Map to MITRE ATT&CK', 'Draft executive summary', 'Publish report']
         },
         {
@@ -418,7 +412,6 @@ const careerData = {
             desc: 'Create a complete security awareness training with slides, quizzes, and phishing simulation guide.',
             skills: ['Teaching', 'social engineering awareness'],
             tools: ['PowerPoint/Google Slides', 'Canva'],
-            income: '500k-3M UGX per session', portfolio: 'Shows communication skills',
             steps: ['Outline key topics', 'Design slide deck', 'Create interactive quizzes', 'Draft phishing examples', 'Package materials']
         },
         {
@@ -427,7 +420,6 @@ const careerData = {
             desc: 'Capture and analyze 24 hours of network traffic, identify anomalies, create detailed report.',
             skills: ['Packet analysis', 'threat detection'],
             tools: ['Wireshark', 'Zeek', 'NetworkMiner'],
-            income: 'Freelance analysis service', portfolio: 'Real-world SOC task',
             steps: ['Configure traffic capture', 'Run for 24 hours', 'Filter for non-standard ports', 'Identify top talkers', 'Report suspicious activity']
         },
         {
@@ -436,7 +428,6 @@ const careerData = {
             desc: 'Analyze pcap files from Malware-Traffic-Analysis.net, identify C2 communications.',
             skills: ['Malware analysis', 'network forensics'],
             tools: ['Wireshark', 'IDS signatures'],
-            income: 'Incident response consulting', portfolio: 'Advanced SOC capability',
             steps: ['Download sample PCAP', 'Identify infection vector', 'Find Command & Control IP', 'Extract malicious payload', 'Write technical writeup']
         },
         {
@@ -445,7 +436,6 @@ const careerData = {
             desc: 'Create hardening guides for Windows/Linux systems based on CIS Benchmarks.',
             skills: ['System hardening', 'compliance'],
             tools: ['CIS Benchmarks', 'PowerShell/Bash'],
-            income: '300k-1M UGX', portfolio: 'Shows security best practices knowledge',
             steps: ['Select OS version', 'Review CIS Benchmarks', 'Draft configuration steps', 'Create checking script', 'Validate on VM']
         },
         // Pentesting
@@ -455,7 +445,6 @@ const careerData = {
             desc: 'Scan your own or friend\'s website, identify vulnerabilities, create professional report.',
             skills: ['Web app testing', 'OWASP Top 10'],
             tools: ['OWASP ZAP', 'Burp Suite Community'],
-            income: '500k-2M UGX per assessment', portfolio: 'Real-world pentest report',
             steps: ['Obtain permission', 'Run automated scan', 'Manual verification', 'Document findings', 'Propose remediations']
         },
         {
@@ -464,7 +453,6 @@ const careerData = {
             desc: 'Exploit all DVWA vulnerabilities at all difficulty levels, document methodology.',
             skills: ['SQL injection', 'XSS', 'CSRF', 'command injection'],
             tools: ['DVWA', 'Burp Suite', 'browser dev tools'],
-            income: 'Create YouTube series (ad revenue)', portfolio: 'Demonstrates fundamental skills',
             steps: ['Setup DVWA', 'Solve Low security', 'Solve Medium security', 'Solve High security', 'Write comprehensive guide']
         },
         {
@@ -473,7 +461,6 @@ const careerData = {
             desc: 'Build a Python script that audits WordPress sites for common vulnerabilities.',
             skills: ['Web scraping', 'security testing', 'Python'],
             tools: ['Python', 'requests library', 'WPScan API'],
-            income: '300k-1M UGX each', portfolio: 'Shows automation skills',
             steps: ['Plan tool features', 'Implement version detection', 'Check common plugins', 'Integrate WPScan API', 'Generate output report']
         },
         {
@@ -482,7 +469,6 @@ const careerData = {
             desc: 'Participate in bug bounty programs, document findings (even if not accepted).',
             skills: ['Real-world testing', 'report writing'],
             tools: ['HackerOne', 'BugCrowd', 'various testing tools'],
-            income: 'Direct bounties ($50-$10,000+)', portfolio: 'Bug bounty profile',
             steps: ['Sign up on HackerOne', 'Select program', 'Reconnaissance', 'Vulnerability scanning', 'Report submission']
         },
         {
@@ -491,7 +477,6 @@ const careerData = {
             desc: 'Analyze a simple Android app, find vulnerabilities, create report.',
             skills: ['Mobile pentesting', 'reverse engineering basics'],
             tools: ['APKTool', 'Jadx', 'MobSF', 'ADB'],
-            income: '1M-5M UGX', portfolio: 'Niche skill for Ugandan market',
             steps: ['Decompile APK', 'Static analysis', 'Dynamic analysis', 'Intercept traffic', 'Report issues']
         },
         {
@@ -500,7 +485,6 @@ const careerData = {
             desc: 'Write Python exploits for known vulnerabilities (CVEs).',
             skills: ['Exploit development', 'Python', 'networking'],
             tools: ['Python', 'Metasploit framework'],
-            income: 'Security consulting credibility', portfolio: 'Advanced technical capability',
             steps: ['Select CVE', 'Understand vulnerability', 'Write PoC in Python', 'Test against lab target', 'Refine payload']
         },
         {
@@ -509,7 +493,6 @@ const careerData = {
             desc: 'Solve CTF challenges, publish detailed writeups on blog/GitHub.',
             skills: ['Problem-solving', 'technical writing'],
             tools: ['Various CTF tools'],
-            income: 'Build reputation, job offers', portfolio: 'Public demonstration of skills',
             steps: ['Select CTF', 'Solve challenge', 'Screenshot steps', 'Explain methodology', 'Publish post']
         },
         {
@@ -518,7 +501,6 @@ const careerData = {
             desc: 'Build multi-machine vulnerable network, perform full pentest, document.',
             skills: ['Network pentesting', 'pivoting', 'privilege escalation'],
             tools: ['VirtualBox', 'Metasploitable', 'Windows VMs', 'Kali'],
-            income: '2M-10M UGX', portfolio: 'Enterprise-level testing experience',
             steps: ['Design network topology', 'Setup VMs', 'Scan network', 'Exploit entry point', 'Pivot and escalate']
         },
         {
@@ -527,7 +509,6 @@ const careerData = {
             desc: 'Test public APIs (or create vulnerable one), find security issues.',
             skills: ['API testing', 'authentication bypass', 'IDOR'],
             tools: ['Postman', 'Burp Suite', 'custom scripts'],
-            income: 'API security consulting', portfolio: 'Modern application security',
             steps: ['Identify API endpoints', 'Test auth mechanisms', 'Check for IDOR', 'Fuzz inputs', 'Document results']
         },
         {
@@ -536,7 +517,6 @@ const careerData = {
             desc: 'Create phishing simulation templates, awareness materials, testing framework.',
             skills: ['Social engineering', 'awareness training'],
             tools: ['GoPhish', 'email templating'],
-            income: '500k-3M UGX', portfolio: 'Red team capability',
             steps: ['Setup GoPhish', 'Design email template', 'Create landing page', 'Run simulation', 'Analyze click rates']
         },
         // Red Teaming
@@ -546,7 +526,6 @@ const careerData = {
             desc: 'Build AD environment, demonstrate common attack paths, create defensive recommendations.',
             skills: ['AD exploitation', 'Kerberos attacks', 'lateral movement'],
             tools: ['BloodHound', 'Mimikatz', 'Impacket', 'PowerView'],
-            income: '5M-20M UGX per engagement', portfolio: 'Enterprise-critical skill',
             steps: ['Setup Domain Controller', 'Create users/groups', 'Run BloodHound', 'Execute Kerberoasting', 'Document defenses']
         },
         {
@@ -555,7 +534,6 @@ const careerData = {
             desc: 'Set up Covenant/Sliver C2, demonstrate red team capabilities.',
             skills: ['Command and control', 'persistence', 'evasion'],
             tools: ['Covenant', 'Sliver', 'cloud hosting'],
-            income: 'Advanced red team engagements', portfolio: 'Red team operations capability',
             steps: ['Provision cloud server', 'Install C2 framework', 'Generate payloads', 'Test connectivity', 'Implement evasion']
         },
         {
@@ -564,7 +542,6 @@ const careerData = {
             desc: 'Research AV/EDR bypass techniques, create PoC payloads (ethical use only).',
             skills: ['Malware development', 'evasion techniques'],
             tools: ['Visual Studio', 'obfuscation tools', 'test environment'],
-            income: 'Security research reputation', portfolio: 'Cutting-edge red team skill',
             steps: ['Study detection methods', 'Develop obfuscation', 'Test against AV', 'Refine code', 'Document technique']
         },
         {
@@ -573,7 +550,6 @@ const careerData = {
             desc: 'Design complete purple team exercise combining attack and defense.',
             skills: ['Red team + blue team collaboration'],
             tools: ['Full SOC + pentest toolkit'],
-            income: '10M-30M UGX', portfolio: 'Strategic security thinking',
             steps: ['Define scenarios', 'Execute attacks', 'Monitor defenses', 'Tune alerts', 'Create after-action report']
         },
         {
@@ -582,7 +558,6 @@ const careerData = {
             desc: 'Study real APT groups, emulate their TTPs in lab environment.',
             skills: ['Threat intelligence', 'adversary emulation'],
             tools: ['MITRE ATT&CK', 'Caldera', 'Atomic Red Team'],
-            income: 'Threat intelligence consulting', portfolio: 'Advanced threat modeling',
             steps: ['Select APT group', 'Analyze TTPs', 'Configure emulation plan', 'Run emulation', 'Analyze footprint']
         },
 
@@ -593,7 +568,6 @@ const careerData = {
             desc: 'Command-line tool to track daily expenses, generate reports.',
             skills: ['Python basics', 'file I/O', 'data structures'],
             tools: ['Python', 'CSV module'],
-            income: '200k-500k UGX', portfolio: 'Shows programming fundamentals',
             steps: ['Design data structure', 'Implement add/view functions', 'Add CSV persistence', 'Create summary report', 'Polish CLI UI']
         },
         {
@@ -602,7 +576,6 @@ const careerData = {
             desc: 'Scrape BrighterMonday/Fuzu for tech jobs, send daily email digest.',
             skills: ['Web scraping', 'APIs', 'automation'],
             tools: ['BeautifulSoup', 'Requests', 'smtplib'],
-            income: 'Job alert service subscription', portfolio: 'Practical automation',
             steps: ['Inspect target HTML', 'Write scrape logic', 'Parse job data', 'Setup email sending', 'Schedule cron job']
         },
         {
@@ -611,7 +584,6 @@ const careerData = {
             desc: 'Build secure password manager with encryption.',
             skills: ['Cryptography', 'security', 'file handling'],
             tools: ['Python', 'cryptography library'],
-            income: 'Learning project', portfolio: 'Security-focused development',
             steps: ['Design encryption scheme', 'Implement master key', 'Create add/retrieve logic', 'Add file storage', 'Build CLI/GUI']
         },
         {
@@ -620,7 +592,6 @@ const careerData = {
             desc: 'Build tool that integrates with Africa\'s Talking API for SMS.',
             skills: ['API integration', 'mobile-first thinking'],
             tools: ['Python', 'Africa\'s Talking API'],
-            income: '500k-2M UGX setup', portfolio: 'Uganda-relevant skill',
             steps: ['Get API keys', 'Setup Python env', 'Implement SMS send', 'Handle callbacks', 'Build usage demo']
         },
         {
@@ -629,7 +600,6 @@ const careerData = {
             desc: 'Analyze sample datasets, create visualizations, generate insights.',
             skills: ['Data analysis', 'pandas', 'matplotlib'],
             tools: ['Pandas', 'Matplotlib', 'Seaborn'],
-            income: '300k-1M UGX', portfolio: 'Data skills showcase',
             steps: ['Load CSV data', 'Clean/preprocess', 'Generate stats', 'Create charts', 'Export report']
         },
         {
@@ -638,7 +608,6 @@ const careerData = {
             desc: 'Full-featured blog with posts, comments, categories, admin panel.',
             skills: ['Django models', 'views', 'templates', 'admin'],
             tools: ['Django', 'SQLite', 'Bootstrap'],
-            income: '500k-1.5M UGX', portfolio: 'Essential Django project',
             steps: ['Setup Django project', 'Create Post model', 'Build detail/list views', 'Add comments', 'Style with Bootstrap']
         },
         {
@@ -647,7 +616,6 @@ const careerData = {
             desc: 'Manage students, courses, grades, attendance for schools.',
             skills: ['Complex models', 'relationships', 'user roles'],
             tools: ['Django', 'PostgreSQL', 'authentication'],
-            income: '2M-10M UGX per school', portfolio: 'Real-world application',
             steps: ['Design DB schema', 'Implement User roles', 'Create Student/Course models', 'Build gradebook views', 'Generate PDF reports']
         },
         {
@@ -656,7 +624,6 @@ const careerData = {
             desc: 'Post jobs, apply online, employer dashboard, search/filter.',
             skills: ['Forms', 'user authentication', 'file uploads'],
             tools: ['Django', 'Bootstrap', 'database design'],
-            income: '100k-500k per listing', portfolio: 'Full-stack capability',
             steps: ['Create Job model', 'Build search/filter', 'Implement apply form', 'Create employer dashboard', 'Add email notifications']
         },
         {
@@ -665,7 +632,6 @@ const careerData = {
             desc: 'Menu management, online orders, kitchen dashboard, delivery tracking.',
             skills: ['Real-time updates', 'payment integration potential'],
             tools: ['Django', 'JavaScript', 'possibly Django Channels'],
-            income: '1M-5M UGX', portfolio: 'Business application',
             steps: ['Design Menu models', 'Build cart system', 'Create order flow', 'Build kitchen view', 'Implement status tracking']
         },
         {
@@ -674,7 +640,6 @@ const careerData = {
             desc: 'Product catalog, shopping cart, checkout, order management.',
             skills: ['Complex business logic', 'sessions', 'payments'],
             tools: ['Django', 'Stripe/Flutterwave', 'PostgreSQL'],
-            income: '3M-15M UGX', portfolio: 'Major portfolio piece',
             steps: ['Setup models', 'Implement Cart logic', 'Integrate Payments', 'Build Order history', 'Secure checkout']
         },
         {
@@ -683,7 +648,6 @@ const careerData = {
             desc: 'Calendar, book appointments, email confirmations, admin dashboard.',
             skills: ['DateTime handling', 'scheduling', 'notifications'],
             tools: ['Django', 'FullCalendar.js', 'email backend'],
-            income: '1M-4M UGX', portfolio: 'Service business application',
             steps: ['Integrate Calendar JS', 'Create Booking model', 'Implement availability logic', 'Send email confirms', 'Admin schedule view']
         },
         {
@@ -692,7 +656,6 @@ const careerData = {
             desc: 'Track products, stock levels, sales, generate reports.',
             skills: ['Complex queries', 'reporting', 'data visualization'],
             tools: ['Django', 'Chart.js', 'Excel export'],
-            income: '2M-8M UGX each', portfolio: 'Business intelligence',
             steps: ['Model Product/Stock', 'Record In/Out transactions', 'Calculate current stock', 'Build alert system', 'Create visual reports']
         },
         {
@@ -701,7 +664,6 @@ const careerData = {
             desc: 'Shorten URLs, track clicks, geographic data, referrers.',
             skills: ['URL routing', 'analytics', 'data aggregation'],
             tools: ['Django', 'GeoIP', 'Chart.js'],
-            income: 'Premium service subscription', portfolio: 'Fun practical project',
             steps: ['Create Link model', 'Implement redirect view', 'Track request metadata', 'Build analytics dashboard', 'Add QR code generation']
         },
         {
@@ -710,7 +672,6 @@ const careerData = {
             desc: 'Questions, answers, voting, reputation system, moderation.',
             skills: ['Complex relationships', 'gamification', 'permissions'],
             tools: ['Django', 'Markdown editor', 'search'],
-            income: '2M-10M UGX', portfolio: 'Social platform experience',
             steps: ['Design Thread/Post models', 'Implement voting logic', 'Add user reputation', 'Build moderation tools', 'Integrate search']
         },
         {
@@ -719,7 +680,6 @@ const careerData = {
             desc: 'Projects, tasks, assignments, deadlines, team collaboration.',
             skills: ['User permissions', 'notifications', 'dashboard design'],
             tools: ['Django', 'JavaScript', 'drag-and-drop'],
-            income: '1M-5M UGX', portfolio: 'SaaS application experience',
             steps: ['Create Project/Task models', 'Implement Kanban view', 'Add user assignments', 'Build deadline alerts', 'Create dashboard']
         },
         {
@@ -728,7 +688,6 @@ const careerData = {
             desc: 'Beautiful portfolio site with Django backend to manage projects.',
             skills: ['Frontend design', 'Django admin customization'],
             tools: ['Django', 'React/Vue', 'modern CSS'],
-            income: '500k-3M UGX', portfolio: 'YOUR portfolio!',
             steps: ['Design frontend', 'Build Project model', 'Create API/Template', 'Populate content', 'Deploy']
         },
         {
@@ -737,7 +696,6 @@ const careerData = {
             desc: 'WhatsApp-style chat with Django Channels and WebSockets.',
             skills: ['Real-time communications', 'WebSockets'],
             tools: ['Django Channels', 'Redis', 'JavaScript'],
-            income: '3M-10M UGX', portfolio: 'Advanced real-time capability',
             steps: ['Setup Channels/Redis', 'Create Room/Message models', 'Implement simple chat', 'Add user presence', 'Polish UI']
         },
         {
@@ -746,7 +704,6 @@ const careerData = {
             desc: 'Accept payments via MTN/Airtel Mobile Money APIs.',
             skills: ['Payment integration', 'Uganda-specific'],
             tools: ['Django', 'MTN MoMo API', 'Flutterwave'],
-            income: '1M-5M UGX per project', portfolio: 'Critical Uganda skill',
             steps: ['Get API Sandbox keys', 'Implement Request to Pay', 'Handle Webhooks', 'Verify transactions', 'Build demo store']
         },
         {
@@ -755,7 +712,6 @@ const careerData = {
             desc: 'Multi-tenant SaaS with subscriptions, billing, user management.',
             skills: ['SaaS architecture', 'Stripe integration'],
             tools: ['Django', 'Stripe', 'subdomain routing'],
-            income: '5M+ UGX', portfolio: 'Enterprise-level architecture',
             steps: ['Design Tenant model', 'Implement middleware', 'Setup Stripe billing', 'Create onboarding flow', 'Document code']
         },
         {
@@ -764,7 +720,6 @@ const careerData = {
             desc: 'RESTful API with authentication, documentation, versioning.',
             skills: ['Django REST Framework', 'API design'],
             tools: ['DRF', 'JWT authentication', 'Swagger/Postman'],
-            income: '2M-8M UGX', portfolio: 'Backend specialization',
             steps: ['Define API requirements', 'Setup DRF', 'Implement Endpoints', 'Add JWT Auth', 'Generate Swagger docs']
         },
         {
@@ -773,7 +728,6 @@ const careerData = {
             desc: 'Restaurants, menus, orders, delivery tracking, payment.',
             skills: ['Complex business logic', 'real-time updates'],
             tools: ['Django', 'React/Vue', 'Google Maps API', 'payments'],
-            income: '10M-50M UGX', portfolio: 'Startup-level project',
             steps: ['Plan architecture', 'Build Restaurant/Menu API', 'Implement Order flow', 'Add Geolocation', 'Build User APPs']
         },
         {
@@ -782,7 +736,6 @@ const careerData = {
             desc: 'Courses, videos, quizzes, progress tracking, certificates.',
             skills: ['Video streaming', 'gamification', 'reporting'],
             tools: ['Django', 'video hosting', 'progress tracking'],
-            income: '5M-20M UGX', portfolio: 'EdTech experience',
             steps: ['Create Course/Lesson models', 'Implement progress tracking', 'Build Quiz engine', 'Generate PDF certificates', 'Admin dashboard']
         },
         {
@@ -791,7 +744,6 @@ const careerData = {
             desc: 'List properties, search, filter, contact agents, admin dashboard.',
             skills: ['Search optimization', 'image handling', 'maps'],
             tools: ['Django', 'Google Maps', 'image optimization'],
-            income: '2M-10M UGX', portfolio: 'Vertical-specific application',
             steps: ['Design Property model', 'Build filter/search', 'Implement image gallery', 'Add map view', 'Contact form']
         },
         {
@@ -800,7 +752,6 @@ const careerData = {
             desc: 'Create events, sell tickets, QR codes, attendee management.',
             skills: ['Payment processing', 'QR generation', 'email'],
             tools: ['Django', 'payment gateway', 'QR library'],
-            income: '1M-5M UGX', portfolio: 'Event industry application',
             steps: ['Create Event model', 'Implement Ticket generation', 'Add QR code logic', 'Integrate payments', 'Check-in interface']
         },
         {
@@ -809,7 +760,6 @@ const careerData = {
             desc: 'Fetch weather data, display forecasts, historical data.',
             skills: ['External API integration', 'data visualization'],
             tools: ['Django', 'OpenWeather API', 'Chart.js'],
-            income: 'Add weather to other projects', portfolio: 'API integration demonstration',
             steps: ['Get API Key', 'Build fetch service', 'Create caching layer', 'Design frontend', 'Display charts']
         },
 
@@ -820,7 +770,6 @@ const careerData = {
             desc: 'Document building a home lab with VirtualBox, networking.',
             skills: ['Virtualization', 'documentation'],
             tools: ['VirtualBox', 'various OS images'],
-            income: '200k-1M UGX', portfolio: 'Shows hands-on experience',
             steps: ['Select hardware', 'Install VirtualBox', 'Setup Network (NAT/Bridge)', 'Install Windows Server', 'Document topology']
         },
         {
@@ -829,7 +778,6 @@ const careerData = {
             desc: 'Build custom PCs, optimize performance, troubleshoot.',
             skills: ['Hardware', 'Windows optimization'],
             tools: ['PC components', 'diagnostic software'],
-            income: '200k-500k per build', portfolio: 'Practical IT skills',
             steps: ['Select components', 'Assemble PC', 'Install OS/Drivers', 'Run stress tests', 'Optimize startup/services']
         },
         {
@@ -838,7 +786,6 @@ const careerData = {
             desc: 'Design and implement network, WiFi, security, documentation.',
             skills: ['Networking', 'router configuration', 'security'],
             tools: ['Routers', 'switches', 'cable management'],
-            income: '500k-3M UGX per setup', portfolio: 'Network administration',
             steps: ['Assess requirements', 'Run cabling', 'Configure Router/WiFi', 'Secure access points', 'Document network map']
         },
         {
@@ -847,7 +794,6 @@ const careerData = {
             desc: 'Set up automated backups, cloud sync, disaster recovery plans.',
             skills: ['Backup software', 'cloud services', 'data management'],
             tools: ['Windows Backup', 'cloud storage', 'cloning tools'],
-            income: '300k-2M UGX setup', portfolio: 'Data protection expertise',
             steps: ['Identify critical data', 'Select backup medium (Cloud/NAS)', 'Configure auto-backup', 'Test recovery', 'Write policy']
         },
         {
@@ -856,7 +802,6 @@ const careerData = {
             desc: 'Migrate email, documents, train users, troubleshoot.',
             skills: ['Cloud administration', 'migration tools', 'training'],
             tools: ['Microsoft 365 admin', 'Google Admin'],
-            income: '1M-5M UGX per migration', portfolio: 'Cloud services expertise',
             steps: ['Setup tenant', 'Verify domain', 'Create users', 'Migrate emails/data', 'Train staff']
         },
         {
@@ -865,7 +810,6 @@ const careerData = {
             desc: 'Offer remote troubleshooting via TeamViewer/AnyDesk.',
             skills: ['Remote support tools', 'troubleshooting'],
             tools: ['TeamViewer', 'AnyDesk', 'remote desktop'],
-            income: '50k-200k per session', portfolio: 'Support experience',
             steps: ['Setup remote tool', 'Receive ticket', 'Remote in', 'Diagnose issue', 'Resolve and log']
         },
         {
@@ -874,7 +818,6 @@ const careerData = {
             desc: 'Train employees on security best practices.',
             skills: ['Teaching', 'security awareness', 'presentation'],
             tools: ['PowerPoint', 'demonstration tools'],
-            income: '500k-3M UGX per session', portfolio: 'Training experience',
             steps: ['Assess client needs', 'Prepare slides', 'Conduct workshop', 'Run quick quiz', 'Provide handouts']
         },
         {
@@ -883,7 +826,6 @@ const careerData = {
             desc: 'Set up web hosting, email, DNS, SSL certificates.',
             skills: ['cPanel/hosting', 'DNS', 'email configuration'],
             tools: ['Hosting platforms', 'domain registrars'],
-            income: '300k-1.5M setup', portfolio: 'Web services management',
             steps: ['Buy domain/hosting', 'Configure DNS records', 'Setup email accounts', 'Install SSL', 'Connect email client']
         },
         {
@@ -892,7 +834,6 @@ const careerData = {
             desc: 'Install cameras, configure recording, remote viewing.',
             skills: ['Physical installation', 'network configuration'],
             tools: ['IP cameras', 'NVR/DVR', 'networking'],
-            income: '1M-10M UGX per installation', portfolio: 'Security systems expertise',
             steps: ['Site survey', 'Install cabling', 'Mount cameras', 'Configure NVR/DVR', 'Setup mobile viewing']
         },
         {
@@ -901,7 +842,6 @@ const careerData = {
             desc: 'Create spreadsheet or simple app to track company IT assets.',
             skills: ['Database management', 'reporting'],
             tools: ['Excel/Google Sheets', 'custom web app'],
-            income: '500k-2M per implementation', portfolio: 'IT management skills',
             steps: ['Inventory all assets', 'Design tracking sheet/db', 'Tag physical assets', 'Input data', 'Setup maintenance schedule']
         }
     ]

@@ -736,40 +736,6 @@ input[type="checkbox"] {
     letter-spacing: 1px;
 }
 
-/* Income Specifics */
-.total-income {
-    font-size: 2.5rem;
-    margin: 0.5rem 0;
-}
-
-.log-entry {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid var(--glass-border);
-}
-
-.entry-info {
-    display: flex;
-    flex-direction: column;
-}
-
-.entry-info small {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-}
-
-.entry-math {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.earned-text {
-    color: var(--accent-emerald);
-    font-weight: bold;
-}
-
 .hub-list {
     display: flex;
     flex-direction: column;
@@ -878,34 +844,7 @@ input.form-input {
     box-sizing: border-box;
 }
 
-/* --- Income Tracker --- */
-.income-form {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: 1fr 1fr;
-    margin-bottom: 2rem;
-}
 
-.income-list {
-    list-style: none;
-    padding: 0;
-}
-
-.income-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem;
-    background: var(--bg-primary);
-    margin-bottom: 0.5rem;
-    border-radius: 0.5rem;
-    align-items: center;
-}
-
-/* Income Form - input spacing */
-#income-add-form input,
-#income-add-form select {
-    margin-bottom: 0.75rem;
-}
 
 .btn-icon {
     background: none;
@@ -1032,9 +971,6 @@ input.form-input {
         gap: 2rem !important;
     }
 
-    #income-add-form {
-        grid-template-columns: 1fr !important;
-    }
 
     /* Forced Visibility for Career Plans */
     .plan-container,
