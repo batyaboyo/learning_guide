@@ -356,493 +356,145 @@ const careerData = {
         ]
     },
     projects: [
-        // --- PLAN A: CYBERSECURITY ---
-        // SOC Analyst
+        // --- PLAN A: CYBERSECURITY (5 projects) ---
         {
-            id: 1, plan: 'A', name: 'Home Network Security Monitor',
-            difficulty: 'Beginner', time: '2-3 days',
-            desc: 'Set up Wireshark to monitor your home network traffic, identify all connected devices, and create a security report.',
-            skills: ['Network analysis', 'packet inspection', 'documentation'],
-            tools: ['Wireshark', 'network mapping tools'],
-            steps: ['Install Wireshark and Nmap', 'Map local network devices', 'Capture 15mins of traffic', 'Analyze HTTP/DNS traffic', 'Document findings']
-        },
-        {
-            id: 2, plan: 'A', name: 'Security Incident Response Playbook',
-            difficulty: 'Beginner', time: '3-5 days',
-            desc: 'Create a comprehensive incident response plan document for a small business.',
-            skills: ['Incident response', 'documentation', 'security frameworks'],
-            tools: ['Word/Google Docs', 'NIST framework'],
-            steps: ['Study NIST IR lifecycle', 'Draft Preparation phase', 'Draft Detection/Analysis protocols', 'Create communication templates', 'Finalize layout']
-        },
-        {
-            id: 3, plan: 'A', name: 'Log Analysis Dashboard',
+            id: 1, plan: 'A', name: 'Log Analysis Dashboard',
             difficulty: 'Intermediate', time: '1 week',
             desc: 'Build a Splunk dashboard analyzing sample security logs (Boss of the SOC dataset).',
             skills: ['SIEM', 'log analysis', 'threat detection'],
             tools: ['Splunk Free', 'BOTS dataset'],
-            steps: ['Install Splunk Free', 'Ingest BOTS dataset', 'Create index patterns', 'Build visualizations for failed logins', 'Create alert thresholds']
+            steps: ['Install Splunk Free', 'Ingest BOTS dataset', 'Create index patterns', 'Build visualizations for failed logins', 'Create alert thresholds'],
+            portfolio: 'Shows hands-on SIEM experience'
         },
         {
-            id: 4, plan: 'A', name: 'Phishing Email Analyzer',
-            difficulty: 'Beginner-Intermediate', time: '3-5 days',
-            desc: 'Create a tool/guide to analyze phishing emails, extract IOCs (Indicators of Compromise).',
-            skills: ['Email security', 'threat intelligence'],
-            tools: ['Email headers', 'VirusTotal', 'URLScan.io'],
-            steps: ['Collect sample phishing emails', 'Parse email headers', 'Extract URLs and attachments', 'Check IOCs on VirusTotal', 'Write analysis report']
-        },
-        {
-            id: 5, plan: 'A', name: 'Virtual SOC Lab Environment',
+            id: 2, plan: 'A', name: 'Virtual SOC Lab Environment',
             difficulty: 'Intermediate', time: '1-2 weeks',
             desc: 'Build a complete home SOC lab with Security Onion, attacking machine, and victim machines.',
             skills: ['Virtualization', 'IDS/IPS', 'network security'],
             tools: ['VirtualBox', 'Security Onion', 'Kali Linux', 'Windows VMs'],
-            steps: ['Setup VirtualBox/VMware', 'Install Security Onion', 'Deploy Kali and Windows targets', 'Configure network networking', 'Test log ingestion']
+            steps: ['Setup VirtualBox/VMware', 'Install Security Onion', 'Deploy Kali and Windows targets', 'Configure network topology', 'Test log ingestion'],
+            portfolio: 'Demonstrates practical security operations capability'
         },
         {
-            id: 6, plan: 'A', name: 'Threat Intelligence Report',
-            difficulty: 'Intermediate', time: '1 week',
-            desc: 'Research current cyber threats affecting East Africa, create professional threat intel report.',
-            skills: ['Research', 'OSINT', 'technical writing'],
-            tools: ['MITRE ATT&CK', 'threat intel platforms'],
-            steps: ['Identify regional threats', 'Gather OSINT data', 'Map to MITRE ATT&CK', 'Draft executive summary', 'Publish report']
-        },
-        {
-            id: 7, plan: 'A', name: 'Security Awareness Training Program',
-            difficulty: 'Beginner-Intermediate', time: '1-2 weeks',
-            desc: 'Create a complete security awareness training with slides, quizzes, and phishing simulation guide.',
-            skills: ['Teaching', 'social engineering awareness'],
-            tools: ['PowerPoint/Google Slides', 'Canva'],
-            steps: ['Outline key topics', 'Design slide deck', 'Create interactive quizzes', 'Draft phishing examples', 'Package materials']
-        },
-        {
-            id: 8, plan: 'A', name: 'Network Traffic Analysis Report',
-            difficulty: 'Intermediate', time: '3-5 days',
-            desc: 'Capture and analyze 24 hours of network traffic, identify anomalies, create detailed report.',
-            skills: ['Packet analysis', 'threat detection'],
-            tools: ['Wireshark', 'Zeek', 'NetworkMiner'],
-            steps: ['Configure traffic capture', 'Run for 24 hours', 'Filter for non-standard ports', 'Identify top talkers', 'Report suspicious activity']
-        },
-        {
-            id: 9, plan: 'A', name: 'Malware Traffic Analysis',
-            difficulty: 'Intermediate-Advanced', time: '1 week',
-            desc: 'Analyze pcap files from Malware-Traffic-Analysis.net, identify C2 communications.',
-            skills: ['Malware analysis', 'network forensics'],
-            tools: ['Wireshark', 'IDS signatures'],
-            steps: ['Download sample PCAP', 'Identify infection vector', 'Find Command & Control IP', 'Extract malicious payload', 'Write technical writeup']
-        },
-        {
-            id: 10, plan: 'A', name: 'Security Baseline Configuration Guide',
-            difficulty: 'Beginner-Intermediate', time: '1 week',
-            desc: 'Create hardening guides for Windows/Linux systems based on CIS Benchmarks.',
-            skills: ['System hardening', 'compliance'],
-            tools: ['CIS Benchmarks', 'PowerShell/Bash'],
-            steps: ['Select OS version', 'Review CIS Benchmarks', 'Draft configuration steps', 'Create checking script', 'Validate on VM']
-        },
-        // Pentesting
-        {
-            id: 11, plan: 'A', name: 'Personal Website Vulnerability Assessment',
-            difficulty: 'Beginner', time: '2-3 days',
-            desc: 'Scan your own or friend\'s website, identify vulnerabilities, create professional report.',
-            skills: ['Web app testing', 'OWASP Top 10'],
+            id: 3, plan: 'A', name: 'Vulnerability Assessment & Report',
+            difficulty: 'Beginner-Intermediate', time: '3-5 days',
+            desc: 'Scan a website for vulnerabilities using OWASP ZAP, create a professional pentest-style report.',
+            skills: ['Web app testing', 'OWASP Top 10', 'report writing'],
             tools: ['OWASP ZAP', 'Burp Suite Community'],
-            steps: ['Obtain permission', 'Run automated scan', 'Manual verification', 'Document findings', 'Propose remediations']
+            steps: ['Obtain permission', 'Run automated scan', 'Manual verification', 'Document findings', 'Propose remediations'],
+            portfolio: 'Real-world pentest report for interviews'
         },
         {
-            id: 12, plan: 'A', name: 'DVWA Complete Walkthrough',
-            difficulty: 'Beginner-Intermediate', time: '1 week',
-            desc: 'Exploit all DVWA vulnerabilities at all difficulty levels, document methodology.',
-            skills: ['SQL injection', 'XSS', 'CSRF', 'command injection'],
-            tools: ['DVWA', 'Burp Suite', 'browser dev tools'],
-            steps: ['Setup DVWA', 'Solve Low security', 'Solve Medium security', 'Solve High security', 'Write comprehensive guide']
-        },
-        {
-            id: 13, plan: 'A', name: 'WordPress Security Audit Tool',
-            difficulty: 'Intermediate', time: '1-2 weeks',
-            desc: 'Build a Python script that audits WordPress sites for common vulnerabilities.',
-            skills: ['Web scraping', 'security testing', 'Python'],
-            tools: ['Python', 'requests library', 'WPScan API'],
-            steps: ['Plan tool features', 'Implement version detection', 'Check common plugins', 'Integrate WPScan API', 'Generate output report']
-        },
-        {
-            id: 14, plan: 'A', name: 'Bug Bounty Practice Lab',
-            difficulty: 'Intermediate', time: 'Ongoing',
-            desc: 'Participate in bug bounty programs, document findings (even if not accepted).',
-            skills: ['Real-world testing', 'report writing'],
-            tools: ['HackerOne', 'BugCrowd', 'various testing tools'],
-            steps: ['Sign up on HackerOne', 'Select program', 'Reconnaissance', 'Vulnerability scanning', 'Report submission']
-        },
-        {
-            id: 15, plan: 'A', name: 'Mobile App Security Assessment',
-            difficulty: 'Intermediate-Advanced', time: '1-2 weeks',
-            desc: 'Analyze a simple Android app, find vulnerabilities, create report.',
-            skills: ['Mobile pentesting', 'reverse engineering basics'],
-            tools: ['APKTool', 'Jadx', 'MobSF', 'ADB'],
-            steps: ['Decompile APK', 'Static analysis', 'Dynamic analysis', 'Intercept traffic', 'Report issues']
-        },
-        {
-            id: 16, plan: 'A', name: 'Custom Exploitation Scripts',
-            difficulty: 'Intermediate-Advanced', time: '1-2 weeks',
-            desc: 'Write Python exploits for known vulnerabilities (CVEs).',
-            skills: ['Exploit development', 'Python', 'networking'],
-            tools: ['Python', 'Metasploit framework'],
-            steps: ['Select CVE', 'Understand vulnerability', 'Write PoC in Python', 'Test against lab target', 'Refine payload']
-        },
-        {
-            id: 17, plan: 'A', name: 'CTF Challenge Writeups',
-            difficulty: 'Varies', time: 'Ongoing',
-            desc: 'Solve CTF challenges, publish detailed writeups on blog/GitHub.',
-            skills: ['Problem-solving', 'technical writing'],
-            tools: ['Various CTF tools'],
-            steps: ['Select CTF', 'Solve challenge', 'Screenshot steps', 'Explain methodology', 'Publish post']
-        },
-        {
-            id: 18, plan: 'A', name: 'Network Penetration Testing Lab',
+            id: 4, plan: 'A', name: 'Network Penetration Testing Lab',
             difficulty: 'Intermediate-Advanced', time: '2-3 weeks',
-            desc: 'Build multi-machine vulnerable network, perform full pentest, document.',
+            desc: 'Build multi-machine vulnerable network, perform full pentest, document methodology.',
             skills: ['Network pentesting', 'pivoting', 'privilege escalation'],
             tools: ['VirtualBox', 'Metasploitable', 'Windows VMs', 'Kali'],
-            steps: ['Design network topology', 'Setup VMs', 'Scan network', 'Exploit entry point', 'Pivot and escalate']
+            steps: ['Design network topology', 'Setup VMs', 'Scan network', 'Exploit entry point', 'Pivot and escalate'],
+            portfolio: 'Shows end-to-end pentesting skills'
         },
         {
-            id: 19, plan: 'A', name: 'API Security Testing Project',
-            difficulty: 'Intermediate', time: '1 week',
-            desc: 'Test public APIs (or create vulnerable one), find security issues.',
-            skills: ['API testing', 'authentication bypass', 'IDOR'],
-            tools: ['Postman', 'Burp Suite', 'custom scripts'],
-            steps: ['Identify API endpoints', 'Test auth mechanisms', 'Check for IDOR', 'Fuzz inputs', 'Document results']
-        },
-        {
-            id: 20, plan: 'A', name: 'Social Engineering Awareness Campaign',
-            difficulty: 'Beginner-Intermediate', time: '1-2 weeks',
-            desc: 'Create phishing simulation templates, awareness materials, testing framework.',
-            skills: ['Social engineering', 'awareness training'],
-            tools: ['GoPhish', 'email templating'],
-            steps: ['Setup GoPhish', 'Design email template', 'Create landing page', 'Run simulation', 'Analyze click rates']
-        },
-        // Red Teaming
-        {
-            id: 21, plan: 'A', name: 'Active Directory Attack Lab',
+            id: 5, plan: 'A', name: 'Active Directory Attack & Defense Lab',
             difficulty: 'Advanced', time: '2-3 weeks',
             desc: 'Build AD environment, demonstrate common attack paths, create defensive recommendations.',
             skills: ['AD exploitation', 'Kerberos attacks', 'lateral movement'],
             tools: ['BloodHound', 'Mimikatz', 'Impacket', 'PowerView'],
-            steps: ['Setup Domain Controller', 'Create users/groups', 'Run BloodHound', 'Execute Kerberoasting', 'Document defenses']
-        },
-        {
-            id: 22, plan: 'A', name: 'Custom C2 Infrastructure',
-            difficulty: 'Advanced', time: '2-4 weeks',
-            desc: 'Set up Covenant/Sliver C2, demonstrate red team capabilities.',
-            skills: ['Command and control', 'persistence', 'evasion'],
-            tools: ['Covenant', 'Sliver', 'cloud hosting'],
-            steps: ['Provision cloud server', 'Install C2 framework', 'Generate payloads', 'Test connectivity', 'Implement evasion']
-        },
-        {
-            id: 23, plan: 'A', name: 'EDR/Antivirus Evasion Research',
-            difficulty: 'Advanced', time: '2-3 weeks',
-            desc: 'Research AV/EDR bypass techniques, create PoC payloads (ethical use only).',
-            skills: ['Malware development', 'evasion techniques'],
-            tools: ['Visual Studio', 'obfuscation tools', 'test environment'],
-            steps: ['Study detection methods', 'Develop obfuscation', 'Test against AV', 'Refine code', 'Document technique']
-        },
-        {
-            id: 24, plan: 'A', name: 'Purple Team Exercise Framework',
-            difficulty: 'Advanced', time: '3-4 weeks',
-            desc: 'Design complete purple team exercise combining attack and defense.',
-            skills: ['Red team + blue team collaboration'],
-            tools: ['Full SOC + pentest toolkit'],
-            steps: ['Define scenarios', 'Execute attacks', 'Monitor defenses', 'Tune alerts', 'Create after-action report']
-        },
-        {
-            id: 25, plan: 'A', name: 'Threat Emulation Based on Real APTs',
-            difficulty: 'Advanced', time: '2-3 weeks',
-            desc: 'Study real APT groups, emulate their TTPs in lab environment.',
-            skills: ['Threat intelligence', 'adversary emulation'],
-            tools: ['MITRE ATT&CK', 'Caldera', 'Atomic Red Team'],
-            steps: ['Select APT group', 'Analyze TTPs', 'Configure emulation plan', 'Run emulation', 'Analyze footprint']
+            steps: ['Setup Domain Controller', 'Create users/groups', 'Run BloodHound', 'Execute Kerberoasting', 'Document defenses'],
+            portfolio: 'Enterprise-critical skill highly valued by employers'
         },
 
-        // --- PLAN B: DJANGO ---
+        // --- PLAN B: DJANGO (5 projects) ---
         {
-            id: 26, plan: 'B', name: 'Personal Expense Tracker CLI',
-            difficulty: 'Beginner', time: '2-3 days',
-            desc: 'Command-line tool to track daily expenses, generate reports.',
-            skills: ['Python basics', 'file I/O', 'data structures'],
-            tools: ['Python', 'CSV module'],
-            steps: ['Design data structure', 'Implement add/view functions', 'Add CSV persistence', 'Create summary report', 'Polish CLI UI']
+            id: 6, plan: 'B', name: 'RESTful API with Authentication',
+            difficulty: 'Intermediate-Advanced', time: '2 weeks',
+            desc: 'Build a production-grade REST API with JWT auth, documentation, versioning, and tests.',
+            skills: ['Django REST Framework', 'API design', 'testing'],
+            tools: ['DRF', 'JWT authentication', 'Swagger/Postman'],
+            steps: ['Define API requirements', 'Setup DRF', 'Implement Endpoints', 'Add JWT Auth', 'Generate Swagger docs'],
+            portfolio: 'Backend API proficiency — most asked about in interviews'
         },
         {
-            id: 27, plan: 'B', name: 'Web Scraper for Ugandan Job Boards',
-            difficulty: 'Beginner-Intermediate', time: '3-5 days',
-            desc: 'Scrape BrighterMonday/Fuzu for tech jobs, send daily email digest.',
-            skills: ['Web scraping', 'APIs', 'automation'],
-            tools: ['BeautifulSoup', 'Requests', 'smtplib'],
-            steps: ['Inspect target HTML', 'Write scrape logic', 'Parse job data', 'Setup email sending', 'Schedule cron job']
-        },
-        {
-            id: 28, plan: 'B', name: 'Password Manager (Local)',
-            difficulty: 'Intermediate', time: '1 week',
-            desc: 'Build secure password manager with encryption.',
-            skills: ['Cryptography', 'security', 'file handling'],
-            tools: ['Python', 'cryptography library'],
-            steps: ['Design encryption scheme', 'Implement master key', 'Create add/retrieve logic', 'Add file storage', 'Build CLI/GUI']
-        },
-        {
-            id: 29, plan: 'B', name: 'SMS/USSD Integration Tool',
-            difficulty: 'Intermediate', time: '1 week',
-            desc: 'Build tool that integrates with Africa\'s Talking API for SMS.',
-            skills: ['API integration', 'mobile-first thinking'],
-            tools: ['Python', 'Africa\'s Talking API'],
-            steps: ['Get API keys', 'Setup Python env', 'Implement SMS send', 'Handle callbacks', 'Build usage demo']
-        },
-        {
-            id: 30, plan: 'B', name: 'Data Analysis Dashboard (CSV)',
-            difficulty: 'Beginner-Intermediate', time: '5-7 days',
-            desc: 'Analyze sample datasets, create visualizations, generate insights.',
-            skills: ['Data analysis', 'pandas', 'matplotlib'],
-            tools: ['Pandas', 'Matplotlib', 'Seaborn'],
-            steps: ['Load CSV data', 'Clean/preprocess', 'Generate stats', 'Create charts', 'Export report']
-        },
-        {
-            id: 31, plan: 'B', name: 'Personal Blog with CMS',
-            difficulty: 'Beginner', time: '1 week',
-            desc: 'Full-featured blog with posts, comments, categories, admin panel.',
-            skills: ['Django models', 'views', 'templates', 'admin'],
-            tools: ['Django', 'SQLite', 'Bootstrap'],
-            steps: ['Setup Django project', 'Create Post model', 'Build detail/list views', 'Add comments', 'Style with Bootstrap']
-        },
-        {
-            id: 32, plan: 'B', name: 'Student Management System',
-            difficulty: 'Intermediate', time: '2 weeks',
-            desc: 'Manage students, courses, grades, attendance for schools.',
-            skills: ['Complex models', 'relationships', 'user roles'],
-            tools: ['Django', 'PostgreSQL', 'authentication'],
-            steps: ['Design DB schema', 'Implement User roles', 'Create Student/Course models', 'Build gradebook views', 'Generate PDF reports']
-        },
-        {
-            id: 33, plan: 'B', name: 'Job Board for Ugandan Tech Jobs',
-            difficulty: 'Intermediate', time: '2 weeks',
-            desc: 'Post jobs, apply online, employer dashboard, search/filter.',
-            skills: ['Forms', 'user authentication', 'file uploads'],
-            tools: ['Django', 'Bootstrap', 'database design'],
-            steps: ['Create Job model', 'Build search/filter', 'Implement apply form', 'Create employer dashboard', 'Add email notifications']
-        },
-        {
-            id: 34, plan: 'B', name: 'Restaurant Order Management',
-            difficulty: 'Intermediate', time: '1-2 weeks',
-            desc: 'Menu management, online orders, kitchen dashboard, delivery tracking.',
-            skills: ['Real-time updates', 'payment integration potential'],
-            tools: ['Django', 'JavaScript', 'possibly Django Channels'],
-            steps: ['Design Menu models', 'Build cart system', 'Create order flow', 'Build kitchen view', 'Implement status tracking']
-        },
-        {
-            id: 35, plan: 'B', name: 'E-commerce Platform (Basic)',
+            id: 7, plan: 'B', name: 'E-commerce Platform',
             difficulty: 'Intermediate-Advanced', time: '3-4 weeks',
-            desc: 'Product catalog, shopping cart, checkout, order management.',
+            desc: 'Product catalog, shopping cart, checkout, order management with payment integration.',
             skills: ['Complex business logic', 'sessions', 'payments'],
             tools: ['Django', 'Stripe/Flutterwave', 'PostgreSQL'],
-            steps: ['Setup models', 'Implement Cart logic', 'Integrate Payments', 'Build Order history', 'Secure checkout']
+            steps: ['Setup models', 'Implement Cart logic', 'Integrate Payments', 'Build Order history', 'Secure checkout'],
+            portfolio: 'Major portfolio piece covering full-stack skills'
         },
         {
-            id: 36, plan: 'B', name: 'Appointment Booking System',
-            difficulty: 'Intermediate', time: '1-2 weeks',
-            desc: 'Calendar, book appointments, email confirmations, admin dashboard.',
-            skills: ['DateTime handling', 'scheduling', 'notifications'],
-            tools: ['Django', 'FullCalendar.js', 'email backend'],
-            steps: ['Integrate Calendar JS', 'Create Booking model', 'Implement availability logic', 'Send email confirms', 'Admin schedule view']
-        },
-        {
-            id: 37, plan: 'B', name: 'Inventory Management System',
+            id: 8, plan: 'B', name: 'Task & Project Management Tool',
             difficulty: 'Intermediate', time: '2 weeks',
-            desc: 'Track products, stock levels, sales, generate reports.',
-            skills: ['Complex queries', 'reporting', 'data visualization'],
-            tools: ['Django', 'Chart.js', 'Excel export'],
-            steps: ['Model Product/Stock', 'Record In/Out transactions', 'Calculate current stock', 'Build alert system', 'Create visual reports']
-        },
-        {
-            id: 38, plan: 'B', name: 'URL Shortener with Analytics',
-            difficulty: 'Beginner-Intermediate', time: '3-5 days',
-            desc: 'Shorten URLs, track clicks, geographic data, referrers.',
-            skills: ['URL routing', 'analytics', 'data aggregation'],
-            tools: ['Django', 'GeoIP', 'Chart.js'],
-            steps: ['Create Link model', 'Implement redirect view', 'Track request metadata', 'Build analytics dashboard', 'Add QR code generation']
-        },
-        {
-            id: 39, plan: 'B', name: 'Community Forum/Q&A Site',
-            difficulty: 'Intermediate-Advanced', time: '2-3 weeks',
-            desc: 'Questions, answers, voting, reputation system, moderation.',
-            skills: ['Complex relationships', 'gamification', 'permissions'],
-            tools: ['Django', 'Markdown editor', 'search'],
-            steps: ['Design Thread/Post models', 'Implement voting logic', 'Add user reputation', 'Build moderation tools', 'Integrate search']
-        },
-        {
-            id: 40, plan: 'B', name: 'Task/Project Management Tool',
-            difficulty: 'Intermediate', time: '2 weeks',
-            desc: 'Projects, tasks, assignments, deadlines, team collaboration.',
+            desc: 'Projects, tasks, assignments, deadlines, team collaboration with Kanban board.',
             skills: ['User permissions', 'notifications', 'dashboard design'],
             tools: ['Django', 'JavaScript', 'drag-and-drop'],
-            steps: ['Create Project/Task models', 'Implement Kanban view', 'Add user assignments', 'Build deadline alerts', 'Create dashboard']
+            steps: ['Create Project/Task models', 'Implement Kanban view', 'Add user assignments', 'Build deadline alerts', 'Create dashboard'],
+            portfolio: 'Demonstrates complex CRUD, roles, and UX thinking'
         },
         {
-            id: 41, plan: 'B', name: 'Portfolio Website with CMS Backend',
-            difficulty: 'Intermediate', time: '1 week',
-            desc: 'Beautiful portfolio site with Django backend to manage projects.',
-            skills: ['Frontend design', 'Django admin customization'],
-            tools: ['Django', 'React/Vue', 'modern CSS'],
-            steps: ['Design frontend', 'Build Project model', 'Create API/Template', 'Populate content', 'Deploy']
-        },
-        {
-            id: 42, plan: 'B', name: 'Real-time Chat Application',
+            id: 9, plan: 'B', name: 'Real-time Chat Application',
             difficulty: 'Advanced', time: '2 weeks',
             desc: 'WhatsApp-style chat with Django Channels and WebSockets.',
-            skills: ['Real-time communications', 'WebSockets'],
+            skills: ['Real-time communications', 'WebSockets', 'async Python'],
             tools: ['Django Channels', 'Redis', 'JavaScript'],
-            steps: ['Setup Channels/Redis', 'Create Room/Message models', 'Implement simple chat', 'Add user presence', 'Polish UI']
+            steps: ['Setup Channels/Redis', 'Create Room/Message models', 'Implement simple chat', 'Add user presence', 'Polish UI'],
+            portfolio: 'Shows WebSocket/real-time expertise — impressive in interviews'
         },
         {
-            id: 43, plan: 'B', name: 'Mobile Money Integration Demo',
-            difficulty: 'Intermediate-Advanced', time: '1-2 weeks',
-            desc: 'Accept payments via MTN/Airtel Mobile Money APIs.',
-            skills: ['Payment integration', 'Uganda-specific'],
-            tools: ['Django', 'MTN MoMo API', 'Flutterwave'],
-            steps: ['Get API Sandbox keys', 'Implement Request to Pay', 'Handle Webhooks', 'Verify transactions', 'Build demo store']
-        },
-        {
-            id: 44, plan: 'B', name: 'SaaS Starter Template',
-            difficulty: 'Advanced', time: '3-4 weeks',
-            desc: 'Multi-tenant SaaS with subscriptions, billing, user management.',
-            skills: ['SaaS architecture', 'Stripe integration'],
-            tools: ['Django', 'Stripe', 'subdomain routing'],
-            steps: ['Design Tenant model', 'Implement middleware', 'Setup Stripe billing', 'Create onboarding flow', 'Document code']
-        },
-        {
-            id: 45, plan: 'B', name: 'API for Mobile App',
-            difficulty: 'Intermediate-Advanced', time: '2 weeks',
-            desc: 'RESTful API with authentication, documentation, versioning.',
-            skills: ['Django REST Framework', 'API design'],
-            tools: ['DRF', 'JWT authentication', 'Swagger/Postman'],
-            steps: ['Define API requirements', 'Setup DRF', 'Implement Endpoints', 'Add JWT Auth', 'Generate Swagger docs']
-        },
-        {
-            id: 46, plan: 'B', name: 'Food Delivery Platform (MVP)',
-            difficulty: 'Advanced', time: '4-6 weeks',
-            desc: 'Restaurants, menus, orders, delivery tracking, payment.',
-            skills: ['Complex business logic', 'real-time updates'],
-            tools: ['Django', 'React/Vue', 'Google Maps API', 'payments'],
-            steps: ['Plan architecture', 'Build Restaurant/Menu API', 'Implement Order flow', 'Add Geolocation', 'Build User APPs']
-        },
-        {
-            id: 47, plan: 'B', name: 'Learning Management System (LMS)',
-            difficulty: 'Advanced', time: '3-4 weeks',
-            desc: 'Courses, videos, quizzes, progress tracking, certificates.',
-            skills: ['Video streaming', 'gamification', 'reporting'],
-            tools: ['Django', 'video hosting', 'progress tracking'],
-            steps: ['Create Course/Lesson models', 'Implement progress tracking', 'Build Quiz engine', 'Generate PDF certificates', 'Admin dashboard']
-        },
-        {
-            id: 48, plan: 'B', name: 'Property/Real Estate Listings',
-            difficulty: 'Intermediate', time: '2 weeks',
-            desc: 'List properties, search, filter, contact agents, admin dashboard.',
-            skills: ['Search optimization', 'image handling', 'maps'],
-            tools: ['Django', 'Google Maps', 'image optimization'],
-            steps: ['Design Property model', 'Build filter/search', 'Implement image gallery', 'Add map view', 'Contact form']
-        },
-        {
-            id: 49, plan: 'B', name: 'Event Management & Ticketing',
-            difficulty: 'Intermediate-Advanced', time: '2-3 weeks',
-            desc: 'Create events, sell tickets, QR codes, attendee management.',
-            skills: ['Payment processing', 'QR generation', 'email'],
-            tools: ['Django', 'payment gateway', 'QR library'],
-            steps: ['Create Event model', 'Implement Ticket generation', 'Add QR code logic', 'Integrate payments', 'Check-in interface']
-        },
-        {
-            id: 50, plan: 'B', name: 'Weather Dashboard with API',
-            difficulty: 'Beginner-Intermediate', time: '3-5 days',
-            desc: 'Fetch weather data, display forecasts, historical data.',
-            skills: ['External API integration', 'data visualization'],
-            tools: ['Django', 'OpenWeather API', 'Chart.js'],
-            steps: ['Get API Key', 'Build fetch service', 'Create caching layer', 'Design frontend', 'Display charts']
+            id: 10, plan: 'B', name: 'Portfolio Website with CMS Backend',
+            difficulty: 'Intermediate', time: '1 week',
+            desc: 'Beautiful portfolio site with Django backend to manage and showcase your projects.',
+            skills: ['Frontend design', 'Django admin customization', 'deployment'],
+            tools: ['Django', 'modern CSS', 'Gunicorn'],
+            steps: ['Design frontend', 'Build Project model', 'Create API/Template', 'Populate content', 'Deploy'],
+            portfolio: 'YOUR portfolio — direct proof of skills for every interview'
         },
 
-        // --- PLAN C: IT SUPPORT ---
+        // --- PLAN C: IT SUPPORT (5 projects) ---
         {
-            id: 51, plan: 'C', name: 'Home Lab Setup Guide',
-            difficulty: 'Beginner', time: '1 week',
-            desc: 'Document building a home lab with VirtualBox, networking.',
-            skills: ['Virtualization', 'documentation'],
-            tools: ['VirtualBox', 'various OS images'],
-            steps: ['Select hardware', 'Install VirtualBox', 'Setup Network (NAT/Bridge)', 'Install Windows Server', 'Document topology']
+            id: 11, plan: 'C', name: 'Home Lab Setup & Documentation',
+            difficulty: 'Beginner-Intermediate', time: '1 week',
+            desc: 'Build a virtualized home lab with Active Directory, networking, and detailed documentation.',
+            skills: ['Virtualization', 'Active Directory', 'documentation'],
+            tools: ['VirtualBox', 'Windows Server', 'Ubuntu'],
+            steps: ['Select hardware', 'Install VirtualBox', 'Setup Network (NAT/Bridge)', 'Install Windows Server + AD', 'Document topology'],
+            portfolio: 'Shows hands-on initiative and self-learning'
         },
         {
-            id: 52, plan: 'C', name: 'PC Build and Optimization Service',
-            difficulty: 'Beginner-Intermediate', time: 'Ongoing',
-            desc: 'Build custom PCs, optimize performance, troubleshoot.',
-            skills: ['Hardware', 'Windows optimization'],
-            tools: ['PC components', 'diagnostic software'],
-            steps: ['Select components', 'Assemble PC', 'Install OS/Drivers', 'Run stress tests', 'Optimize startup/services']
-        },
-        {
-            id: 53, plan: 'C', name: 'Network Setup for Small Business',
+            id: 12, plan: 'C', name: 'Network Setup for Small Business',
             difficulty: 'Intermediate', time: '1-2 days per client',
-            desc: 'Design and implement network, WiFi, security, documentation.',
+            desc: 'Design and implement complete network infrastructure with security and documentation.',
             skills: ['Networking', 'router configuration', 'security'],
             tools: ['Routers', 'switches', 'cable management'],
-            steps: ['Assess requirements', 'Run cabling', 'Configure Router/WiFi', 'Secure access points', 'Document network map']
+            steps: ['Assess requirements', 'Run cabling', 'Configure Router/WiFi', 'Secure access points', 'Document network map'],
+            portfolio: 'Practical networking skills employers want to see'
         },
         {
-            id: 54, plan: 'C', name: 'Data Backup & Recovery Solutions',
-            difficulty: 'Beginner-Intermediate', time: 'Varies',
-            desc: 'Set up automated backups, cloud sync, disaster recovery plans.',
-            skills: ['Backup software', 'cloud services', 'data management'],
-            tools: ['Windows Backup', 'cloud storage', 'cloning tools'],
-            steps: ['Identify critical data', 'Select backup medium (Cloud/NAS)', 'Configure auto-backup', 'Test recovery', 'Write policy']
-        },
-        {
-            id: 55, plan: 'C', name: 'Office 365/Google Workspace Migration',
+            id: 13, plan: 'C', name: 'Office 365/Google Workspace Migration',
             difficulty: 'Intermediate', time: '1-3 days per client',
-            desc: 'Migrate email, documents, train users, troubleshoot.',
+            desc: 'Migrate email, documents, train users, troubleshoot cloud platform issues.',
             skills: ['Cloud administration', 'migration tools', 'training'],
             tools: ['Microsoft 365 admin', 'Google Admin'],
-            steps: ['Setup tenant', 'Verify domain', 'Create users', 'Migrate emails/data', 'Train staff']
+            steps: ['Setup tenant', 'Verify domain', 'Create users', 'Migrate emails/data', 'Train staff'],
+            portfolio: 'Cloud migration expertise — high demand skill'
         },
         {
-            id: 56, plan: 'C', name: 'Remote IT Support Service',
-            difficulty: 'Beginner-Intermediate', time: 'Ongoing',
-            desc: 'Offer remote troubleshooting via TeamViewer/AnyDesk.',
-            skills: ['Remote support tools', 'troubleshooting'],
-            tools: ['TeamViewer', 'AnyDesk', 'remote desktop'],
-            steps: ['Setup remote tool', 'Receive ticket', 'Remote in', 'Diagnose issue', 'Resolve and log']
+            id: 14, plan: 'C', name: 'Data Backup & Disaster Recovery Plan',
+            difficulty: 'Beginner-Intermediate', time: '1 week',
+            desc: 'Design and implement automated backup strategy with documented disaster recovery procedures.',
+            skills: ['Backup software', 'cloud services', 'data management'],
+            tools: ['Windows Backup', 'cloud storage', 'cloning tools'],
+            steps: ['Identify critical data', 'Select backup medium (Cloud/NAS)', 'Configure auto-backup', 'Test recovery', 'Write DR policy'],
+            portfolio: 'Data protection expertise every company needs'
         },
         {
-            id: 57, plan: 'C', name: 'Security Awareness Training for SMEs',
-            difficulty: 'Beginner-Intermediate', time: '1 day per session',
-            desc: 'Train employees on security best practices.',
-            skills: ['Teaching', 'security awareness', 'presentation'],
-            tools: ['PowerPoint', 'demonstration tools'],
-            steps: ['Assess client needs', 'Prepare slides', 'Conduct workshop', 'Run quick quiz', 'Provide handouts']
-        },
-        {
-            id: 58, plan: 'C', name: 'Website Hosting & Email Setup',
-            difficulty: 'Beginner-Intermediate', time: '1-2 days per client',
-            desc: 'Set up web hosting, email, DNS, SSL certificates.',
-            skills: ['cPanel/hosting', 'DNS', 'email configuration'],
-            tools: ['Hosting platforms', 'domain registrars'],
-            steps: ['Buy domain/hosting', 'Configure DNS records', 'Setup email accounts', 'Install SSL', 'Connect email client']
-        },
-        {
-            id: 59, plan: 'C', name: 'CCTV/Security Camera Installation',
-            difficulty: 'Intermediate', time: '1-3 days per installation',
-            desc: 'Install cameras, configure recording, remote viewing.',
-            skills: ['Physical installation', 'network configuration'],
-            tools: ['IP cameras', 'NVR/DVR', 'networking'],
-            steps: ['Site survey', 'Install cabling', 'Mount cameras', 'Configure NVR/DVR', 'Setup mobile viewing']
-        },
-        {
-            id: 60, plan: 'C', name: 'IT Asset Management System',
+            id: 15, plan: 'C', name: 'IT Asset Management System',
             difficulty: 'Intermediate', time: '2 weeks',
-            desc: 'Create spreadsheet or simple app to track company IT assets.',
-            skills: ['Database management', 'reporting'],
+            desc: 'Create a system to track company IT assets, maintenance schedules, and lifecycle management.',
+            skills: ['Database management', 'reporting', 'inventory'],
             tools: ['Excel/Google Sheets', 'custom web app'],
-            steps: ['Inventory all assets', 'Design tracking sheet/db', 'Tag physical assets', 'Input data', 'Setup maintenance schedule']
+            steps: ['Inventory all assets', 'Design tracking sheet/db', 'Tag physical assets', 'Input data', 'Setup maintenance schedule'],
+            portfolio: 'IT management skills valued in enterprise roles'
         }
     ]
 };
