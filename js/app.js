@@ -4,6 +4,29 @@ const app = {
     searchQuery: '',
     projectFilters: { plan: 'all', difficulty: 'all', status: 'all' },
 
+    // Toast Notification System
+    showToast(message, type = 'success', duration = 3000) {
+        const container = document.getElementById('toast-container') || this.createToastContainer();
+        const toast = document.createElement('div');
+        toast.className = `toast toast-${type}`;
+        const icons = { success: '✅', error: '❌', info: 'ℹ️', warning: '⚠️' };
+        toast.innerHTML = `<span class="toast-icon">${icons[type] || 'ℹ️'}</span><span class="toast-msg">${message}</span>`;
+        container.appendChild(toast);
+        requestAnimationFrame(() => toast.classList.add('toast-show'));
+        setTimeout(() => {
+            toast.classList.remove('toast-show');
+            toast.classList.add('toast-hide');
+            setTimeout(() => toast.remove(), 400);
+        }, duration);
+    },
+
+    createToastContainer() {
+        const c = document.createElement('div');
+        c.id = 'toast-container';
+        document.body.appendChild(c);
+        return c;
+    },
+
     // Init
     init() {
         Storage.init();
@@ -11,12 +34,47 @@ const app = {
         this.bindEvents();
         this.render();
         this.updateHeaderStats();
+        this.setupScrollToTop();
+        this.setupKeyboardShortcuts();
 
         // Remove loader
         const loader = document.getElementById('app-loader');
         const appContainer = document.getElementById('app');
         if (loader) loader.style.display = 'none';
         if (appContainer) appContainer.style.display = 'block';
+    },
+
+    setupScrollToTop() {
+        const btn = document.createElement('button');
+        btn.id = 'scroll-top-btn';
+        btn.className = 'glass';
+        btn.innerHTML = '↑';
+        btn.title = 'Scroll to top';
+        btn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.body.appendChild(btn);
+
+        window.addEventListener('scroll', () => {
+            btn.classList.toggle('visible', window.scrollY > 400);
+        });
+    },
+
+    setupKeyboardShortcuts() {
+        document.addEventListener('keydown', (e) => {
+            // Don't fire when typing in inputs
+            if (e.target.matches('input, textarea, select')) return;
+
+            // Ctrl+K / Cmd+K = focus search
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                const search = document.getElementById('global-search');
+                if (search) search.focus();
+            }
+            // 1-6 for tab switching
+            const tabMap = { '1': 'dashboard', '2': 'planA', '3': 'planB', '4': 'planC', '5': 'projects', '6': 'uganda' };
+            if (tabMap[e.key] && !e.ctrlKey && !e.metaKey && !e.altKey) {
+                this.switchTab(tabMap[e.key]);
+            }
+        });
     },
 
     cacheDOM() {
@@ -141,6 +199,7 @@ const app = {
 
         const modal = document.getElementById('project-modal');
         if (modal) modal.remove();
+        this.showToast('Progress saved!', 'success');
         this.render();
     },
 
@@ -378,10 +437,10 @@ const app = {
         const reader = new FileReader();
         reader.onload = (e) => {
             if (Storage.importData(e.target.result)) {
-                alert('Data imported successfully!');
-                location.reload();
+                app.showToast('Data imported successfully!', 'success');
+                setTimeout(() => location.reload(), 1000);
             } else {
-                alert('Failed to import data.');
+                app.showToast('Failed to import data.', 'error');
             }
         };
         reader.readAsText(file);
@@ -390,8 +449,8 @@ const app = {
     clearAllData() {
         if (confirm('Are you sure you want to clear all progress and data? This cannot be undone.')) {
             Storage.clearAll();
-            alert('All data cleared.');
-            location.reload();
+            this.showToast('All data cleared.', 'info');
+            setTimeout(() => location.reload(), 1000);
         }
     }
 };
@@ -400,14 +459,21 @@ const app = {
 const Views = {
     dashboard() {
         const stats = Storage.getGlobalStats();
-
-        // Calculate progress for Plan A (featured)
-        const planA = careerData.plans['A'];
         const progress = Storage.load(Storage.KEYS.PROGRESS, {});
-        const completedA = progress['A'] ? progress['A'].length : 0;
-        let totalA = 0;
-        planA.phases.forEach(p => totalA += p.resources.length);
-        const percentA = totalA > 0 ? Math.round((completedA / totalA) * 100) : 0;
+
+        // Calculate progress for all plans
+        const planProgress = ['A', 'B', 'C'].map(id => {
+            const plan = careerData.plans[id];
+            const completed = progress[id] ? progress[id].length : 0;
+            let total = 0;
+            plan.phases.forEach(p => total += p.resources.length);
+            const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
+            return { id, plan, completed, total, percent };
+        });
+
+        const overallCompleted = planProgress.reduce((s, p) => s + p.completed, 0);
+        const overallTotal = planProgress.reduce((s, p) => s + p.total, 0);
+        const overallPercent = overallTotal > 0 ? Math.round((overallCompleted / overallTotal) * 100) : 0;
 
         return `
             <div class="hero-section glass mb-2 dashboard-hero">
@@ -435,33 +501,41 @@ const Views = {
                     <h3>${stats.activeProjects}</h3>
                     <p class="text-muted">Live Projects</p>
                 </div>
+            </div>
 
+            <div class="glass p-2 mt-2 mb-2">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+                    <h3>Overall Mastery</h3>
+                    <span class="text-muted" style="font-size:0.85rem;">${overallCompleted}/${overallTotal} resources &middot; ${overallPercent}%</span>
+                </div>
+                <div class="progress-container compact mb-2">
+                    <div class="progress-bar" style="width: ${overallPercent}%;"></div>
+                </div>
+                <div class="all-plans-grid">
+                    ${planProgress.map(pp => `
+                        <div class="plan-progress-card glass p-1" onclick="app.switchTab('plan${pp.id}')" style="cursor:pointer; border-left: 4px solid ${pp.plan.color};">
+                            <div class="plan-progress-header">
+                                <span>${pp.plan.icon} ${pp.plan.title}</span>
+                                <span class="accent-color" style="font-weight:700;">${pp.percent}%</span>
+                            </div>
+                            <div class="progress-container compact" style="margin:0.4rem 0 0.2rem;">
+                                <div class="progress-bar" style="width: ${pp.percent}%;"></div>
+                            </div>
+                            <small class="text-muted">${pp.completed}/${pp.total} resources</small>
+                        </div>
+                    `).join('')}
+                </div>
             </div>
 
             <div class="dashboard-grid mt-2">
                 <div class="glass p-2">
-                    <h3>Focus: ${planA.title}</h3>
-                    <div class="mt-1">
-                        <div class="focus-item glass p-1" onclick="app.switchTab('planA')">
-                            <span class="focus-icon">${planA.icon}</span>
-                            <div class="focus-details">
-                                <strong>${planA.subtitle}</strong>
-                                <div class="progress-info" style="display:flex; justify-content: space-between; font-size: 0.8rem;">
-                                    <span>${percentA}% Completed</span>
-                                    <span>${completedA}/${totalA} Resources</span>
-                                </div>
-                                <div class="progress-container compact">
-                                    <div class="progress-bar" style="width: ${percentA}%;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="glass p-2">
                     <h3>Quick Navigator</h3>
                     <div class="navigator-pills mt-1">
-                        <button class="badge glass pill" onclick="app.switchTab('uganda')">🇺🇬 local_hub</button>
-                        <button class="badge glass pill" onclick="app.switchTab('projects')">🚀 projects</button>
+                        <button class="badge glass pill" onclick="app.switchTab('planA')">🛡️ Cybersecurity</button>
+                        <button class="badge glass pill" onclick="app.switchTab('planB')">🐍 Django</button>
+                        <button class="badge glass pill" onclick="app.switchTab('planC')">🔧 IT Support</button>
+                        <button class="badge glass pill" onclick="app.switchTab('projects')">🚀 Projects</button>
+                        <button class="badge glass pill" onclick="app.switchTab('uganda')">🇺🇬 Local Hub</button>
                     </div>
                 </div>
             </div>
@@ -504,6 +578,13 @@ const Views = {
             const stepsCompleted = state.stepsCompleted || [];
             const stepProgress = p.steps ? `${stepsCompleted.length}/${p.steps.length}` : '';
 
+            // Gather tech tags for card preview
+            const techPreview = [];
+            if (p.technologies) {
+                if (p.technologies.languages) techPreview.push(...p.technologies.languages);
+                if (p.technologies.frameworks) techPreview.push(...p.technologies.frameworks);
+            }
+
             return `
                 <div class="card glass p-2 project-card">
                     <div class="project-card-header mb-1">
@@ -511,6 +592,7 @@ const Views = {
                         <span class="status-badge ${stClass}">${stDisplay}</span>
                     </div>
                     <h3>${p.name}</h3>
+                    ${p.portfolio ? '<span class="portfolio-badge">⭐ Portfolio-worthy</span>' : ''}
                     <p class="project-desc">${p.desc}</p>
                     <div class="project-meta">
                         <span class="meta-tag"><span class="meta-icon">📊</span> ${p.difficulty}</span>
@@ -520,6 +602,12 @@ const Views = {
                         ${p.skills.slice(0, 3).map(s => `<span class="skill-tag">${s}</span>`).join('')}
                         ${p.skills.length > 3 ? `<span class="skill-tag">+${p.skills.length - 3}</span>` : ''}
                     </div>
+                    ${techPreview.length ? `
+                        <div class="tech-preview">
+                            ${techPreview.slice(0, 4).map(t => `<span class="tech-tag tech-lang">${t}</span>`).join('')}
+                            ${techPreview.length > 4 ? `<span class="tech-tag tech-other">+${techPreview.length - 4}</span>` : ''}
+                        </div>
+                    ` : ''}
                     ${stepsCompleted.length > 0 ? `
                         <div class="project-step-progress">
                             <div class="progress-container compact">
@@ -604,6 +692,42 @@ const Views = {
                         <div class="project-skills mb-2">
                             ${p.skills.map(s => `<span class="skill-tag">${s}</span>`).join('')}
                         </div>
+                        <div class="problem-solution-section mb-2">
+                            <div class="ps-card glass">
+                                <h4 class="ps-heading"><span class="ps-icon">🔍</span> The Problem</h4>
+                                <p class="ps-text">${p.problem || ''}</p>
+                            </div>
+                            <div class="ps-card glass">
+                                <h4 class="ps-heading"><span class="ps-icon">💡</span> The Solution</h4>
+                                <p class="ps-text">${p.solution || ''}</p>
+                            </div>
+                        </div>
+                        ${p.technologies ? `
+                        <div class="technologies-section mb-2">
+                            <h4 class="accent-color"><span class="ps-icon">🛠️</span> Technologies</h4>
+                            <div class="tech-categories">
+                                ${p.technologies.languages && p.technologies.languages.length ? `
+                                <div class="tech-category">
+                                    <span class="tech-category-label">Languages</span>
+                                    <div class="tech-tags">${p.technologies.languages.map(t => `<span class="tech-tag tech-lang">${t}</span>`).join('')}</div>
+                                </div>` : ''}
+                                ${p.technologies.frameworks && p.technologies.frameworks.length ? `
+                                <div class="tech-category">
+                                    <span class="tech-category-label">Frameworks</span>
+                                    <div class="tech-tags">${p.technologies.frameworks.map(t => `<span class="tech-tag tech-fw">${t}</span>`).join('')}</div>
+                                </div>` : ''}
+                                ${p.technologies.databases && p.technologies.databases.length ? `
+                                <div class="tech-category">
+                                    <span class="tech-category-label">Databases</span>
+                                    <div class="tech-tags">${p.technologies.databases.map(t => `<span class="tech-tag tech-db">${t}</span>`).join('')}</div>
+                                </div>` : ''}
+                                ${p.technologies.other && p.technologies.other.length ? `
+                                <div class="tech-category">
+                                    <span class="tech-category-label">Tools & Other</span>
+                                    <div class="tech-tags">${p.technologies.other.map(t => `<span class="tech-tag tech-other">${t}</span>`).join('')}</div>
+                                </div>` : ''}
+                            </div>
+                        </div>` : ''}
                         <div class="modal-grid">
                             <div class="modal-main">
                                 <h4 class="accent-color">Architectural Steps <small class="text-muted">(${stepsDone}/${stepsTotal} — ${stepsPercent}%)</small></h4>
@@ -689,7 +813,14 @@ const Views = {
         });
 
         careerData.projects.forEach(p => {
-            const searchable = (p.name + ' ' + (p.desc || '') + ' ' + (p.skills.join(' ')) + ' ' + (p.steps.join(' '))).toLowerCase();
+            let searchable = (p.name + ' ' + (p.desc || '') + ' ' + (p.skills.join(' ')) + ' ' + (p.steps.join(' '))).toLowerCase();
+            // Include technologies, problem, and solution in search
+            if (p.problem) searchable += ' ' + p.problem.toLowerCase();
+            if (p.solution) searchable += ' ' + p.solution.toLowerCase();
+            if (p.technologies) {
+                const tech = p.technologies;
+                searchable += ' ' + [...(tech.languages || []), ...(tech.frameworks || []), ...(tech.databases || []), ...(tech.other || [])].join(' ').toLowerCase();
+            }
             if (searchable.includes(lowerQ)) {
                 results.push({ ...p, category: 'Project' });
             }
@@ -739,6 +870,15 @@ const Views = {
 
         const phasesHtml = plan.phases.map((phase, idx) => {
             console.log(`[Pathweaver] Phase ${idx + 1}: ${phase.resources.length} resources found.`);
+
+            // Phase progress
+            const phaseTotal = phase.resources.length;
+            let phaseDone = 0;
+            phase.resources.forEach(r => {
+                if (Storage.isResourceCompleted(planLetter, r.name)) phaseDone++;
+            });
+            const phasePercent = phaseTotal > 0 ? Math.round((phaseDone / phaseTotal) * 100) : 0;
+
             const resourceList = phase.resources.map(r => {
                 const isChecked = Storage.isResourceCompleted(planLetter, r.name) ? 'checked' : '';
                 return `
@@ -758,7 +898,13 @@ const Views = {
 
             return `
                 <div id="plan-${planLetter}-phase-${idx}" class="card glass mb-2 p-2 plan-phase-card animate-fade-in" style="animation-delay: ${idx * 0.1}s">
-                    <h3>${phase.title}</h3>
+                    <div class="phase-header">
+                        <h3>${phase.title}</h3>
+                        <span class="phase-progress-label">${phaseDone}/${phaseTotal} &middot; ${phasePercent}%</span>
+                    </div>
+                    <div class="progress-container compact" style="margin: 0.5rem 0;">
+                        <div class="progress-bar" style="width: ${phasePercent}%;"></div>
+                    </div>
                     <div class="resource-list mt-1">${resourceList}</div>
                     ${toolsHtml}
                 </div>
