@@ -41,12 +41,20 @@ const app = {
 
         // Theme Toggle
         if (this.dom.themeToggle) {
+            // Restore saved theme
+            const savedTheme = localStorage.getItem('pathweaver_theme');
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+                this.dom.themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+            }
+
             this.dom.themeToggle.addEventListener('click', () => {
                 const html = document.documentElement;
                 const current = html.getAttribute('data-theme');
                 const next = current === 'dark' ? 'light' : 'dark';
                 html.setAttribute('data-theme', next);
                 this.dom.themeToggle.textContent = next === 'dark' ? '☀️' : '🌙';
+                localStorage.setItem('pathweaver_theme', next);
             });
         }
 
@@ -67,7 +75,7 @@ const app = {
                     this.currentTab = 'search';
                     this.searchQuery = query;
                     this.render();
-                } else if (this.currentTab === 'search' && query.length === 0) {
+                } else if (this.currentTab === 'search') {
                     this.switchTab('dashboard');
                 }
             }
@@ -87,6 +95,13 @@ const app = {
 
         const modalHtml = Views.projectModal(project, state);
         document.body.insertAdjacentHTML('beforeend', modalHtml);
+        // Close modal on overlay click
+        const modal = document.getElementById('project-modal');
+        if (modal) {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) modal.remove();
+            });
+        }
         this.trapFocus(document.getElementById('project-modal'));
     },
 
@@ -135,6 +150,13 @@ const app = {
             </div>
         `;
         document.body.insertAdjacentHTML('beforeend', modalHtml);
+        // Close modal on overlay click
+        const resourceModal = document.getElementById('resource-modal');
+        if (resourceModal) {
+            resourceModal.addEventListener('click', (e) => {
+                if (e.target === resourceModal) resourceModal.remove();
+            });
+        }
         this.trapFocus(document.getElementById('resource-modal'));
         this.tempRating = meta.rating;
     },
@@ -523,6 +545,7 @@ const Views = {
                                         <option value="not-started" ${(state.status || 'not-started') === 'not-started' ? 'selected' : ''}>Not Started</option>
                                         <option value="in-progress" ${(state.status || '') === 'in-progress' ? 'selected' : ''}>In Progress</option>
                                         <option value="completed" ${(state.status || '') === 'completed' ? 'selected' : ''}>Completed</option>
+                                        <option value="deployed" ${(state.status || '') === 'deployed' ? 'selected' : ''}>Deployed</option>
                                     </select>
                                 </div>
                                 <div class="input-group mt-1">
@@ -700,7 +723,7 @@ const Views = {
 
     income() {
         const entries = Storage.getIncomeEntries();
-        const total = entries.reduce((acc, curr) => acc + curr.amount, 0);
+        const total = entries.reduce((acc, curr) => acc + (parseFloat(curr.amount) || 0), 0);
 
         return `
             <div class="hero-section glass mb-2">

@@ -901,6 +901,12 @@ input.form-input {
     align-items: center;
 }
 
+/* Income Form - input spacing */
+#income-add-form input,
+#income-add-form select {
+    margin-bottom: 0.75rem;
+}
+
 .btn-icon {
     background: none;
     border: none;

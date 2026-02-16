@@ -269,7 +269,7 @@ const careerData = {
                     tools: [
                         { name: 'Docker', desc: 'Containerization.', url: 'https://www.docker.com/' },
                         { name: 'Sentry', desc: 'Error tracking.', url: 'https://sentry.io/' },
-                        { name: 'Gicorn', desc: 'Production WSGI server.', url: 'https://gunicorn.org/' },
+                        { name: 'Gunicorn', desc: 'Production WSGI server.', url: 'https://gunicorn.org/' },
                         { name: 'Git', desc: 'Version control.', url: 'https://git-scm.com/' },
                         { name: 'GitHub Desktop', desc: 'Simple git interface.', url: 'https://desktop.github.com/' },
                         { name: 'Axios', desc: 'Promise-based HTTP for JS.', url: 'https://axios-http.com/' },
@@ -510,7 +510,7 @@ const careerData = {
             skills: ['Problem-solving', 'technical writing'],
             tools: ['Various CTF tools'],
             income: 'Build reputation, job offers', portfolio: 'Public demonstration of skills',
-            steps: ['Select CTF', 'Solve challenge', 'Screenshoot steps', 'Explain methodology', 'Publish post']
+            steps: ['Select CTF', 'Solve challenge', 'Screenshot steps', 'Explain methodology', 'Publish post']
         },
         {
             id: 18, plan: 'A', name: 'Network Penetration Testing Lab',
@@ -747,7 +747,7 @@ const careerData = {
             skills: ['Payment integration', 'Uganda-specific'],
             tools: ['Django', 'MTN MoMo API', 'Flutterwave'],
             income: '1M-5M UGX per project', portfolio: 'Critical Uganda skill',
-            steps: ['Get API Sandox keys', 'Implement Request to Pay', 'Handle Webhooks', 'Verify transactions', 'Build demo store']
+            steps: ['Get API Sandbox keys', 'Implement Request to Pay', 'Handle Webhooks', 'Verify transactions', 'Build demo store']
         },
         {
             id: 44, plan: 'B', name: 'SaaS Starter Template',

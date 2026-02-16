@@ -14,7 +14,7 @@ const Storage = {
 
     migrateLegacyKeys() {
         const legacyPrefix = 'techpath_';
-        const keys = ['progress', 'income', 'settings', 'habits', 'projects'];
+        const keys = ['progress', 'income', 'settings', 'projects'];
         keys.forEach(k => {
             const oldKey = legacyPrefix + k;
             const newKey = this.KEYS[k.toUpperCase()];
@@ -118,16 +118,20 @@ const Storage = {
     exportData() {
         const allData = {};
         for (const key in this.KEYS) {
-            allData[key] = this.load(this.KEYS[key]);
+            allData[this.KEYS[key]] = this.load(this.KEYS[key]);
         }
+        // Include resource metadata
+        const metaKey = `${this.KEYS.PROGRESS}_meta`;
+        allData[metaKey] = this.load(metaKey);
         return JSON.stringify(allData);
     },
 
     importData(jsonString) {
         try {
             const data = JSON.parse(jsonString);
+            const validKeys = [...Object.values(this.KEYS), `${this.KEYS.PROGRESS}_meta`];
             for (const key in data) {
-                if (Object.values(this.KEYS).includes(key)) {
+                if (validKeys.includes(key)) {
                     this.save(key, data[key]);
                 }
             }
