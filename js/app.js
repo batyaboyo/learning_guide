@@ -121,7 +121,18 @@ const app = {
             this.dom.mobileToggle.addEventListener('click', () => {
                 if (this.dom.sidebar) {
                     this.dom.sidebar.classList.toggle('active');
+                    const backdrop = document.getElementById('sidebar-backdrop');
+                    if (backdrop) backdrop.classList.toggle('active');
                 }
+            });
+        }
+
+        // Sidebar backdrop close
+        const backdrop = document.getElementById('sidebar-backdrop');
+        if (backdrop) {
+            backdrop.addEventListener('click', () => {
+                if (this.dom.sidebar) this.dom.sidebar.classList.remove('active');
+                backdrop.classList.remove('active');
             });
         }
 
@@ -338,6 +349,8 @@ const app = {
         // Close sidebar on mobile after selection
         if (window.innerWidth <= 768 && this.dom.sidebar) {
             this.dom.sidebar.classList.remove('active');
+            const backdrop = document.getElementById('sidebar-backdrop');
+            if (backdrop) backdrop.classList.remove('active');
         }
     },
 
