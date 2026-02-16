@@ -1137,6 +1137,137 @@ footer {
     color: white;
 }
 
+/* Project Card Metadata */
+.project-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.project-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.meta-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    background: var(--badge-bg);
+    padding: 0.25rem 0.6rem;
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+}
+
+.meta-icon {
+    font-size: 0.8rem;
+}
+
+.project-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-bottom: 0.75rem;
+}
+
+.skill-tag {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 8px;
+    background: var(--active-bg);
+    color: var(--accent-cyan);
+    border: 1px solid rgba(34, 211, 238, 0.2);
+}
+
+.project-step-progress {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.project-step-progress .progress-container {
+    flex: 1;
+    margin: 0;
+}
+
+/* Project Stats Row */
+.project-stats-row {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.plan-stat-pill {
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-left: 3px solid;
+}
+
+/* Modal Project Meta */
+.modal-project-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.modal-tools-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-top: 0.3rem;
+}
+
+/* Step Checkboxes */
+.steps-checklist {
+    list-style: none;
+    padding-left: 0;
+}
+
+.step-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.6rem 0.5rem;
+    border-bottom: 1px solid var(--glass-border);
+    transition: var(--transition);
+    border-radius: 6px;
+}
+
+.step-item:last-child {
+    border-bottom: none;
+}
+
+.step-item:hover {
+    background: var(--hover-bg);
+}
+
+.step-check {
+    margin-top: 0.15rem;
+    flex-shrink: 0;
+}
+
+.step-text {
+    line-height: 1.5;
+    color: var(--text-main);
+}
+
+.step-done .step-text {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+.step-done {
+    opacity: 0.7;
+}
+
 /* Large Modal for Projects */
 .modal-large {
     width: 95%;

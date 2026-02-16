@@ -101,6 +101,21 @@ const app = {
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) modal.remove();
             });
+            // Live step checkbox updates
+            modal.querySelectorAll('.step-check').forEach(cb => {
+                cb.addEventListener('change', (e) => {
+                    const li = e.target.closest('.step-item');
+                    if (li) li.classList.toggle('step-done', e.target.checked);
+                    // Update step progress display
+                    const total = modal.querySelectorAll('.step-check').length;
+                    const done = modal.querySelectorAll('.step-check:checked').length;
+                    const pct = Math.round((done / total) * 100);
+                    const heading = modal.querySelector('.modal-main h4 small');
+                    if (heading) heading.textContent = `(${done}/${total} — ${pct}%)`;
+                    const bar = modal.querySelector('.modal-main .progress-bar');
+                    if (bar) bar.style.width = `${pct}%`;
+                });
+            });
         }
         this.trapFocus(document.getElementById('project-modal'));
     },
@@ -112,14 +127,22 @@ const app = {
         const notes = document.getElementById('p-notes').value;
         const link = document.getElementById('p-link').value;
 
+        // Collect checked steps
+        const stepChecks = document.querySelectorAll('.step-check');
+        const stepsCompleted = [];
+        stepChecks.forEach(cb => {
+            if (cb.checked) stepsCompleted.push(parseInt(cb.dataset.step));
+        });
+
         Storage.saveProjectState(id, {
             status, timeSpent: time, incomeEarned: income, notes, demoLink: link,
+            stepsCompleted,
             lastUpdated: new Date().toISOString()
         });
 
         const modal = document.getElementById('project-modal');
         if (modal) modal.remove();
-        this.render(); // Refresh to show updated status
+        this.render();
     },
 
     openResourceModal(planId, resourceName) {
@@ -470,6 +493,22 @@ const Views = {
         let pList = careerData.projects;
         const pStates = Storage.getAllProjectStates();
 
+        // --- Completion Stats ---
+        const allProjects = careerData.projects;
+        const totalCount = allProjects.length;
+        let completedCount = 0, inProgressCount = 0, deployedCount = 0, notStartedCount = 0;
+        const planCounts = { A: { total: 0, done: 0 }, B: { total: 0, done: 0 }, C: { total: 0, done: 0 } };
+        allProjects.forEach(p => {
+            const s = pStates[p.id]?.status || 'not-started';
+            planCounts[p.plan].total++;
+            if (s === 'completed' || s === 'deployed') { completedCount++; planCounts[p.plan].done++; }
+            if (s === 'deployed') deployedCount++;
+            if (s === 'in-progress') inProgressCount++;
+            if (s === 'not-started') notStartedCount++;
+        });
+        const donePercent = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
+
+        // --- Filtering ---
         if (plan !== 'all') pList = pList.filter(p => p.plan === plan);
         if (difficulty !== 'all') pList = pList.filter(p => p.difficulty.toLowerCase().includes(difficulty.toLowerCase()));
         if (status !== 'all') pList = pList.filter(p => {
@@ -482,15 +521,34 @@ const Views = {
             const st = state.status || 'not-started';
             const stDisplay = st.replace('-', ' ');
             const stClass = `status-${st}`;
+            const stepsCompleted = state.stepsCompleted || [];
+            const stepProgress = p.steps ? `${stepsCompleted.length}/${p.steps.length}` : '';
 
             return `
-                <div class="card glass p-2">
+                <div class="card glass p-2 project-card">
                     <div class="project-card-header mb-1">
                         <span class="badge glass plan-badge" style="background: ${careerData.plans[p.plan].color}">${careerData.plans[p.plan].icon} Plan ${p.plan}</span>
                         <span class="status-badge ${stClass}">${stDisplay}</span>
                     </div>
                     <h3>${p.name}</h3>
                     <p class="project-desc">${p.desc}</p>
+                    <div class="project-meta">
+                        <span class="meta-tag"><span class="meta-icon">📊</span> ${p.difficulty}</span>
+                        <span class="meta-tag"><span class="meta-icon">⏱️</span> ${p.time}</span>
+                        ${p.income ? `<span class="meta-tag"><span class="meta-icon">💰</span> ${p.income}</span>` : ''}
+                    </div>
+                    <div class="project-skills">
+                        ${p.skills.slice(0, 3).map(s => `<span class="skill-tag">${s}</span>`).join('')}
+                        ${p.skills.length > 3 ? `<span class="skill-tag">+${p.skills.length - 3}</span>` : ''}
+                    </div>
+                    ${stepsCompleted.length > 0 ? `
+                        <div class="project-step-progress">
+                            <div class="progress-container compact">
+                                <div class="progress-bar" style="width: ${Math.round((stepsCompleted.length / p.steps.length) * 100)}%;"></div>
+                            </div>
+                            <small class="text-muted">${stepProgress} steps</small>
+                        </div>
+                    ` : ''}
                     <button class="btn-primary full-width" onclick="app.openProjectModal(${p.id})">Details</button>
                 </div>
             `;
@@ -499,15 +557,40 @@ const Views = {
         return `
             <div class="hero-section glass mb-2">
                 <h1>🚀 Project Forge</h1>
+                <p class="text-muted">${completedCount} of ${totalCount} completed &middot; ${inProgressCount} in-progress &middot; ${deployedCount} deployed</p>
+                <div class="progress-container mt-1" style="max-width: 500px; margin-left: auto; margin-right: auto;">
+                    <div class="progress-bar" style="width: ${donePercent}%;"></div>
+                </div>
+                <div class="project-stats-row mt-1">
+                    ${Object.keys(planCounts).map(k => `
+                        <span class="plan-stat-pill glass" style="border-color: ${careerData.plans[k].color}">
+                            ${careerData.plans[k].icon} ${planCounts[k].done}/${planCounts[k].total}
+                        </span>
+                    `).join('')}
+                </div>
                 <div class="project-filters mt-1">
                     <select class="filter-select glass" onchange="app.updateProjectFilter('plan', this.value)">
                         <option value="all" ${plan === 'all' ? 'selected' : ''}>All Specializations</option>
-                        <option value="A" ${plan === 'A' ? 'selected' : ''}>Cybersecurity</option>
-                        <option value="B" ${plan === 'B' ? 'selected' : ''}>Django Development</option>
-                        <option value="C" ${plan === 'C' ? 'selected' : ''}>IT Support</option>
+                        <option value="A" ${plan === 'A' ? 'selected' : ''}>Cybersecurity (${planCounts.A.total})</option>
+                        <option value="B" ${plan === 'B' ? 'selected' : ''}>Django Development (${planCounts.B.total})</option>
+                        <option value="C" ${plan === 'C' ? 'selected' : ''}>IT Support (${planCounts.C.total})</option>
+                    </select>
+                    <select class="filter-select glass" onchange="app.updateProjectFilter('difficulty', this.value)">
+                        <option value="all" ${difficulty === 'all' ? 'selected' : ''}>All Difficulties</option>
+                        <option value="beginner" ${difficulty === 'beginner' ? 'selected' : ''}>Beginner</option>
+                        <option value="intermediate" ${difficulty === 'intermediate' ? 'selected' : ''}>Intermediate</option>
+                        <option value="advanced" ${difficulty === 'advanced' ? 'selected' : ''}>Advanced</option>
+                    </select>
+                    <select class="filter-select glass" onchange="app.updateProjectFilter('status', this.value)">
+                        <option value="all" ${status === 'all' ? 'selected' : ''}>All Statuses</option>
+                        <option value="not-started" ${status === 'not-started' ? 'selected' : ''}>Not Started (${notStartedCount})</option>
+                        <option value="in-progress" ${status === 'in-progress' ? 'selected' : ''}>In Progress (${inProgressCount})</option>
+                        <option value="completed" ${status === 'completed' ? 'selected' : ''}>Completed (${completedCount - deployedCount})</option>
+                        <option value="deployed" ${status === 'deployed' ? 'selected' : ''}>Deployed (${deployedCount})</option>
                     </select>
                 </div>
             </div>
+            <p class="text-muted mb-2" style="font-size: 0.85rem;">Showing ${pList.length} of ${totalCount} projects</p>
             <div class="grid animate-fade-in">
                 ${cards.length ? cards : `
                     <div class="glass p-3 text-center full-width">
@@ -521,6 +604,11 @@ const Views = {
     },
 
     projectModal(p, state) {
+        const stepsCompleted = state.stepsCompleted || [];
+        const stepsDone = stepsCompleted.length;
+        const stepsTotal = p.steps.length;
+        const stepsPercent = stepsTotal > 0 ? Math.round((stepsDone / stepsTotal) * 100) : 0;
+
         return `
             <div class="modal-overlay glass" id="project-modal">
                 <div class="modal-content glass modal-large">
@@ -529,11 +617,31 @@ const Views = {
                         <span class="modal-close" onclick="document.getElementById('project-modal').remove()">&times;</span>
                     </div>
                     <div class="modal-body">
+                        <div class="modal-project-meta mb-2">
+                            <span class="meta-tag"><span class="meta-icon">📊</span> ${p.difficulty}</span>
+                            <span class="meta-tag"><span class="meta-icon">⏱️</span> ${p.time}</span>
+                            ${p.income ? `<span class="meta-tag"><span class="meta-icon">💰</span> ${p.income}</span>` : ''}
+                            <span class="badge glass plan-badge" style="background: ${careerData.plans[p.plan].color}">${careerData.plans[p.plan].icon} ${careerData.plans[p.plan].title}</span>
+                        </div>
+                        <div class="project-skills mb-2">
+                            ${p.skills.map(s => `<span class="skill-tag">${s}</span>`).join('')}
+                        </div>
                         <div class="modal-grid">
                             <div class="modal-main">
-                                <h4 class="accent-color">Architectural Steps</h4>
-                                <ul class="steps-list">
-                                    ${p.steps.map(s => `<li>${s}</li>`).join('')}
+                                <h4 class="accent-color">Architectural Steps <small class="text-muted">(${stepsDone}/${stepsTotal} — ${stepsPercent}%)</small></h4>
+                                <div class="progress-container compact mb-1">
+                                    <div class="progress-bar" style="width: ${stepsPercent}%;"></div>
+                                </div>
+                                <ul class="steps-list steps-checklist">
+                                    ${p.steps.map((s, idx) => {
+                                        const checked = stepsCompleted.includes(idx) ? 'checked' : '';
+                                        return `
+                                            <li class="step-item ${checked ? 'step-done' : ''}">
+                                                <input type="checkbox" class="step-check" data-project="${p.id}" data-step="${idx}" ${checked}>
+                                                <span class="step-text">${s}</span>
+                                            </li>
+                                        `;
+                                    }).join('')}
                                 </ul>
                                 <h4 class="accent-color mt-2">Developer Chronicles</h4>
                                 <textarea id="p-notes" class="glass note-input" placeholder="Notes...">${state.notes || ''}</textarea>
@@ -559,6 +667,12 @@ const Views = {
                                 <div class="input-group mt-1">
                                     <label>DEPLOYMENT LINK</label>
                                     <input type="text" id="p-link" class="glass full-width" value="${state.demoLink || ''}">
+                                </div>
+                                <div class="input-group mt-1">
+                                    <label>TOOLS</label>
+                                    <div class="modal-tools-list">
+                                        ${p.tools.map(t => `<span class="skill-tag">${t}</span>`).join('')}
+                                    </div>
                                 </div>
                                 <button class="btn-primary full-width mt-1" onclick="app.saveProjectDetails(${p.id})">Save Progress</button>
                             </div>
