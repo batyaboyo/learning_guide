@@ -4,6 +4,9 @@ const app = {
     selectedCountry: 'Uganda',
     selectedContinent: 'All',
     verifiedOnly: false,
+    recentSearches: [],
+    searchLoading: false,
+    searchDebounceTimer: null,
     searchQuery: '',
     projectFilters: { plan: 'all', difficulty: 'all', status: 'all' },
 
@@ -39,6 +42,7 @@ const app = {
     // Init
     init() {
         Storage.init();
+        this.loadUiPrefs();
         this.cacheDOM();
         this.bindEvents();
         this.render();
@@ -152,10 +156,42 @@ const app = {
                 if (query.length > 2) {
                     this.currentTab = 'search';
                     this.searchQuery = query;
+                    this.searchLoading = true;
                     this.render();
+
+                    if (this.searchDebounceTimer) {
+                        clearTimeout(this.searchDebounceTimer);
+                    }
+
+                    this.searchDebounceTimer = setTimeout(() => {
+                        if (this.currentTab === 'search' && this.searchQuery === query) {
+                            this.searchLoading = false;
+                            this.render();
+                        }
+                    }, 180);
                 } else if (this.currentTab === 'search') {
+                    this.searchLoading = false;
                     this.switchTab('dashboard');
                 }
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (!e.target.matches('#global-search')) return;
+            if (e.key === 'ArrowDown') {
+                const firstChip = document.querySelector('.recent-search-chip');
+                if (firstChip) {
+                    e.preventDefault();
+                    firstChip.focus();
+                }
+                return;
+            }
+
+            if (e.key !== 'Enter') return;
+
+            const query = (e.target.value || '').trim();
+            if (query.length > 2) {
+                this.addRecentSearch(query);
             }
         });
     },
@@ -163,11 +199,13 @@ const app = {
     // --- Project Logic ---
     updateProjectFilter(type, value) {
         this.projectFilters[type] = value;
+        this.saveUiPrefs();
         this.render();
     },
 
     setCountry(countryName) {
         this.selectedCountry = countryName;
+        this.saveUiPrefs();
         if (this.currentTab === 'uganda') {
             this.render();
         }
@@ -175,6 +213,7 @@ const app = {
 
     setContinent(continentName) {
         this.selectedContinent = continentName;
+        this.saveUiPrefs();
         if (this.currentTab === 'uganda') {
             this.render();
         }
@@ -182,9 +221,84 @@ const app = {
 
     setVerifiedOnly(enabled) {
         this.verifiedOnly = !!enabled;
+        this.saveUiPrefs();
         if (this.currentTab === 'uganda') {
             this.render();
         }
+    },
+
+    loadUiPrefs() {
+        const settings = Storage.load(Storage.KEYS.SETTINGS, {});
+        if (!settings || typeof settings !== 'object') return;
+
+        if (typeof settings.selectedCountry === 'string' && settings.selectedCountry) {
+            this.selectedCountry = settings.selectedCountry;
+        }
+        if (typeof settings.selectedContinent === 'string' && settings.selectedContinent) {
+            this.selectedContinent = settings.selectedContinent;
+        }
+        if (typeof settings.verifiedOnly === 'boolean') {
+            this.verifiedOnly = settings.verifiedOnly;
+        }
+        if (Array.isArray(settings.recentSearches)) {
+            this.recentSearches = settings.recentSearches.filter(v => typeof v === 'string').slice(0, 8);
+        }
+        if (settings.projectFilters && typeof settings.projectFilters === 'object') {
+            this.projectFilters = {
+                ...this.projectFilters,
+                ...settings.projectFilters
+            };
+        }
+    },
+
+    saveUiPrefs() {
+        const settings = Storage.load(Storage.KEYS.SETTINGS, {});
+        const next = {
+            ...(settings || {}),
+            selectedCountry: this.selectedCountry,
+            selectedContinent: this.selectedContinent,
+            verifiedOnly: this.verifiedOnly,
+            recentSearches: this.recentSearches,
+            projectFilters: this.projectFilters
+        };
+        Storage.save(Storage.KEYS.SETTINGS, next);
+    },
+
+    addRecentSearch(query) {
+        const normalized = String(query || '').trim();
+        if (normalized.length < 3) return;
+
+        this.recentSearches = [
+            normalized,
+            ...this.recentSearches.filter(q => q.toLowerCase() !== normalized.toLowerCase())
+        ].slice(0, 8);
+
+        this.saveUiPrefs();
+    },
+
+    applyRecentSearch(encodedQuery) {
+        let query = '';
+        try {
+            query = decodeURIComponent(encodedQuery || '');
+        } catch {
+            query = String(encodedQuery || '');
+        }
+
+        const searchInput = document.getElementById('global-search');
+        if (searchInput) {
+            searchInput.value = query;
+        }
+
+        this.addRecentSearch(query);
+        this.currentTab = 'search';
+        this.searchQuery = query;
+        this.render();
+    },
+
+    clearRecentSearches() {
+        this.recentSearches = [];
+        this.saveUiPrefs();
+        this.render();
     },
 
     openProjectModal(id) {
@@ -492,7 +606,133 @@ const app = {
             });
         });
 
+        // Security hardening for any dynamically rendered external links.
+        const externalLinks = document.querySelectorAll('a[target="_blank"]');
+        externalLinks.forEach(link => {
+            link.setAttribute('rel', 'noopener noreferrer');
+        });
 
+        const recentSearchChips = document.querySelectorAll('.recent-search-chip');
+        recentSearchChips.forEach((chip, idx) => {
+            chip.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    const next = recentSearchChips[idx + 1] || recentSearchChips[0];
+                    if (next) next.focus();
+                    return;
+                }
+                if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    const prev = recentSearchChips[idx - 1] || recentSearchChips[recentSearchChips.length - 1];
+                    if (prev) prev.focus();
+                    return;
+                }
+                if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    const searchInput = document.getElementById('global-search');
+                    if (searchInput) searchInput.focus();
+                }
+            });
+        });
+
+
+    },
+
+    collectAllLinks() {
+        const urls = new Set();
+        const push = (url) => {
+            if (typeof url === 'string' && /^https?:\/\//i.test(url)) {
+                urls.add(url);
+            }
+        };
+
+        Object.values(careerData.plans || {}).forEach(plan => {
+            (plan.phases || []).forEach(phase => {
+                (phase.resources || []).forEach(r => push(r.url));
+                (phase.tools || []).forEach(t => push(t.url));
+            });
+        });
+
+        (careerData.projects || []).forEach(project => {
+            (project.tools || []).forEach(() => { /* tool names only in project schema */ });
+        });
+
+        const opportunities = careerData.opportunities || {};
+        const global = opportunities.global || {};
+        ['jobBoards', 'communities', 'scholarships', 'freelance'].forEach(key => {
+            (global[key] || []).forEach(item => push(item.url));
+        });
+
+        Object.values(opportunities.countries || {}).forEach(country => {
+            ['jobBoards', 'communities', 'programs'].forEach(key => {
+                (country[key] || []).forEach(item => push(item.url));
+            });
+        });
+
+        return [...urls];
+    },
+
+    async runLinkAudit() {
+        const links = this.collectAllLinks();
+        if (!links.length) {
+            this.showToast('No links found for audit.', 'warning');
+            return;
+        }
+
+        this.showToast(`Running browser link audit for ${links.length} links...`, 'info', 2500);
+
+        const TIMEOUT_MS = 9000;
+        const MAX_CONCURRENCY = 6;
+        const results = [];
+        let index = 0;
+
+        const checkOne = async (url) => {
+            const controller = new AbortController();
+            const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
+            try {
+                await fetch(url, {
+                    method: 'GET',
+                    mode: 'no-cors',
+                    cache: 'no-store',
+                    redirect: 'follow',
+                    signal: controller.signal
+                });
+                clearTimeout(timer);
+                return { url, status: 'reachable-or-cors-restricted', checkedAt: new Date().toISOString() };
+            } catch (error) {
+                clearTimeout(timer);
+                return {
+                    url,
+                    status: error?.name === 'AbortError' ? 'timeout' : 'unreachable',
+                    detail: String(error?.message || 'request failed'),
+                    checkedAt: new Date().toISOString()
+                };
+            }
+        };
+
+        const worker = async () => {
+            while (index < links.length) {
+                const current = index;
+                index += 1;
+                results[current] = await checkOne(links[current]);
+            }
+        };
+
+        const workers = Array.from({ length: Math.min(MAX_CONCURRENCY, links.length) }, () => worker());
+        await Promise.all(workers);
+
+        const broken = results.filter(r => r.status === 'unreachable' || r.status === 'timeout').length;
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+        const filename = `pathweaver_link_audit_${timestamp}.json`;
+        const blob = new Blob([JSON.stringify(results, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        a.click();
+        URL.revokeObjectURL(url);
+
+        this.showToast(`Link audit complete. ${broken} potential issues found. Report downloaded.`, broken ? 'warning' : 'success', 4500);
     },
 
     refreshProgressUI(planId) {
@@ -637,6 +877,7 @@ const Views = {
     dashboard() {
         const stats = Storage.getGlobalStats();
         const progress = Storage.load(Storage.KEYS.PROGRESS, {});
+        const recentSearches = app.recentSearches || [];
 
         // Calculate progress for all plans
         const planProgress = Object.keys(careerData.plans).map(id => {
@@ -714,9 +955,31 @@ const Views = {
                             <button class="badge glass pill" onclick="app.switchTab('plan${id}')">${plan.icon} ${plan.title}</button>
                         `).join('')}
                         <button class="badge glass pill" onclick="app.switchTab('projects')">🚀 Projects</button>
-                        <button class="badge glass pill" onclick="app.switchTab('uganda')">🇺🇬 Local Hub</button>
+                        <button class="badge glass pill" onclick="app.switchTab('uganda')">🌍 Opportunities Hub</button>
                     </div>
                 </div>
+            </div>
+
+            ${recentSearches.length ? `
+                <div class="glass p-2 mt-2">
+                    <div style="display:flex; justify-content:space-between; align-items:center; gap:1rem;">
+                        <h3>Recent Searches</h3>
+                        <button class="badge glass" onclick="app.clearRecentSearches()">Clear</button>
+                    </div>
+                    <div class="navigator-pills mt-1">
+                        ${recentSearches.map((q, idx) => `
+                            <button class="badge glass pill recent-search-chip" data-chip-index="${idx}" onclick="app.applyRecentSearch('${encodeURIComponent(q)}')">${q}</button>
+                        `).join('')}
+                    </div>
+                </div>
+            ` : ''}
+
+            <div class="glass p-2 mt-2">
+                <div style="display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap;">
+                    <h3>Maintenance Tools</h3>
+                    <button class="btn-secondary glass" onclick="app.runLinkAudit()">Run Link Audit</button>
+                </div>
+                <p class="text-muted mt-1">Runs a browser-based reachability check and downloads a JSON report.</p>
             </div>
         `;
     },
@@ -968,21 +1231,50 @@ const Views = {
 
     search(query) {
         if (!query) return this.dashboard();
+        if (app.searchLoading) {
+            return `
+                <div class="hero-section glass mb-2">
+                    <h2>🔍 Search: "${query}"</h2>
+                    <p class="text-muted">Preparing grouped results...</p>
+                </div>
+                <div class="glass p-3 text-center">
+                    <div class="search-loader" aria-hidden="true"></div>
+                    <p class="text-muted mt-1">Filtering plans, projects, and opportunities...</p>
+                </div>
+            `;
+        }
+
+        app.addRecentSearch(query);
         const lowerQ = query.toLowerCase();
-        let results = [];
+        const results = [];
+        const seen = new Set();
+
+        const pushUnique = (item) => {
+            const key = [
+                item.category || '',
+                item.name || '',
+                item.url || '',
+                item.planId || '',
+                String(item.phaseIdx ?? '')
+            ].join('|').toLowerCase();
+
+            if (seen.has(key)) return;
+            seen.add(key);
+            results.push(item);
+        };
 
         Object.keys(careerData.plans).forEach(id => {
             const plan = careerData.plans[id];
             plan.phases.forEach((phase, pIdx) => {
                 // Search Phase Title
                 if (phase.title.toLowerCase().includes(lowerQ)) {
-                    results.push({ name: phase.title, planId: id, phaseIdx: pIdx, category: 'Phase' });
+                    pushUnique({ name: phase.title, planId: id, phaseIdx: pIdx, category: 'Phase' });
                 }
                 // Search Resources
                 phase.resources.forEach(r => {
                     const searchable = (r.name + ' ' + (r.platform || '') + ' ' + (r.type || '')).toLowerCase();
                     if (searchable.includes(lowerQ)) {
-                        results.push({ ...r, planId: id, phaseIdx: pIdx, category: 'Resource' });
+                        pushUnique({ ...r, planId: id, phaseIdx: pIdx, category: 'Resource' });
                     }
                 });
                 // Search Tools
@@ -990,7 +1282,7 @@ const Views = {
                     phase.tools.forEach(t => {
                         const searchable = (t.name + ' ' + (t.desc || '')).toLowerCase();
                         if (searchable.includes(lowerQ)) {
-                            results.push({ ...t, planId: id, phaseIdx: pIdx, category: 'Tool' });
+                            pushUnique({ ...t, planId: id, phaseIdx: pIdx, category: 'Tool' });
                         }
                     });
                 }
@@ -1007,16 +1299,22 @@ const Views = {
                 searchable += ' ' + [...(tech.languages || []), ...(tech.frameworks || []), ...(tech.databases || []), ...(tech.other || [])].join(' ').toLowerCase();
             }
             if (searchable.includes(lowerQ)) {
-                results.push({ ...p, category: 'Project' });
+                pushUnique({ ...p, category: 'Project' });
             }
         });
 
         const opportunities = careerData.opportunities || {};
-        const globalGroups = opportunities.global ? Object.values(opportunities.global) : [];
-        globalGroups.flat().forEach(item => {
+        const global = opportunities.global || {};
+        const globalLists = [
+            ...(global.jobBoards || []),
+            ...(global.communities || []),
+            ...(global.scholarships || []),
+            ...(global.freelance || [])
+        ];
+        globalLists.forEach(item => {
             const searchable = `${item.name} ${item.url}`.toLowerCase();
             if (searchable.includes(lowerQ)) {
-                results.push({ ...item, category: 'Global Opportunity', tab: 'uganda' });
+                pushUnique({ ...item, category: 'Global Opportunity', tab: 'uganda' });
             }
         });
 
@@ -1027,12 +1325,30 @@ const Views = {
             Object.values(groups).flat().forEach(item => {
                 const searchable = `${item.name} ${item.url} ${country} ${continent}`.toLowerCase();
                 if (searchable.includes(lowerQ)) {
-                    results.push({ ...item, category: `${country} Opportunity`, tab: 'uganda' });
+                    pushUnique({ ...item, category: `${country} Opportunity`, tab: 'uganda' });
                 }
             });
         });
 
-        const list = results.map(r => {
+        const grouped = {
+            Learning: [],
+            Projects: [],
+            Opportunities: []
+        };
+
+        results.forEach(r => {
+            if (r.category === 'Project') {
+                grouped.Projects.push(r);
+                return;
+            }
+            if ((r.category || '').includes('Opportunity')) {
+                grouped.Opportunities.push(r);
+                return;
+            }
+            grouped.Learning.push(r);
+        });
+
+        const renderItem = (r) => {
             const clickAction = r.category === 'Project'
                 ? `app.switchTab('projects')`
                 : `app.switchTab('plan${r.planId}', ${r.phaseIdx})`;
@@ -1051,15 +1367,33 @@ const Views = {
                     <button class="badge glass" onclick="${finalClick}">View</button>
                 </div>
             `;
-        }).join('');
+        };
+
+        const sections = Object.entries(grouped)
+            .filter(([, items]) => items.length)
+            .map(([label, items]) => `
+                <section class="glass p-2 mb-2">
+                    <h3>${label} <span class="text-muted">(${items.length})</span></h3>
+                    <div class="search-results-list animate-fade-in mt-1">
+                        ${items.map(renderItem).join('')}
+                    </div>
+                </section>
+            `).join('');
 
         return `
             <div class="hero-section glass mb-2">
                 <h2>🔍 Search: "${query}"</h2>
                 <p class="text-muted">Detected ${results.length} relevant nodes.</p>
+                ${app.recentSearches.length ? `
+                    <div class="navigator-pills mt-1" style="justify-content:center;">
+                        ${app.recentSearches.slice(0, 5).map((q, idx) => `
+                            <button class="badge glass pill recent-search-chip" data-chip-index="${idx}" onclick="app.applyRecentSearch('${encodeURIComponent(q)}')">${q}</button>
+                        `).join('')}
+                    </div>
+                ` : ''}
             </div>
-            <div class="search-results-list animate-fade-in">
-                ${results.length ? list : `
+            <div class="search-results-wrap">
+                ${results.length ? sections : `
                     <div class="glass p-3 text-center">
                         <div style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;">🛰️</div>
                         <h3>Deep Space Search</h3>
@@ -1148,7 +1482,10 @@ const Views = {
             ? app.selectedCountry
             : (filteredCountryNames[0] || allCountryNames[0] || 'Uganda');
 
-        app.selectedCountry = activeCountry;
+        if (app.selectedCountry !== activeCountry) {
+            app.selectedCountry = activeCountry;
+            app.saveUiPrefs();
+        }
 
         const countryData = countries[activeCountry] || { jobBoards: [], communities: [], programs: [] };
         const activeMeta = countryMeta[activeCountry] || { continent: 'Other', verifiedOn: '' };

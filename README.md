@@ -12,29 +12,33 @@ It combines:
 ## What Is Included
 
 - **Two full learning tracks**
-	- Cybersecurity Path (SOC -> DFIR -> Pentesting -> Red Teaming -> AI Security)
-	- Data Analyst Path (Excel -> SQL -> Python -> Dashboards -> Storytelling)
+  - Cybersecurity Path (SOC -> DFIR -> Pentesting -> Red Teaming -> AI Security)
+  - Data Analyst Path (Excel -> SQL -> Python -> Dashboards -> Storytelling)
 - **Progress tracking**
-	- Resource checkboxes and per-phase progress bars
-	- Dashboard-level total progress and completion summaries
+  - Resource checkboxes and per-phase progress bars
+  - Dashboard-level total progress and completion summaries
 - **Roadmap intelligence from uploaded PDFs**
-	- Checkpoint timelines
-	- Skill clusters to master
-	- Beginner and advanced certification suggestions
+  - Checkpoint timelines
+  - Skill clusters to master
+  - Beginner and advanced certification suggestions
 - **Opportunities Hub (global + country)**
-	- Global job boards, communities, scholarships, and freelance platforms
-	- Country-focused resources with continent filtering
-	- "Show only verified recently" toggle
-	- Freshness labels based on verification dates
+  - Global job boards, communities, scholarships, and freelance platforms
+  - Country-focused resources with continent filtering
+  - "Show only verified recently" toggle
+  - Freshness labels based on verification dates
 - **Project Forge**
-	- Track project status (not started, in progress, completed, deployed)
-	- Save notes, time invested, deployment links, and completed project steps
+  - Track project status (not started, in progress, completed, deployed)
+  - Save notes, time invested, deployment links, and completed project steps
 - **Search**
-	- Unified search across plans, resources, tools, projects, and opportunities
+  - Unified search across plans, resources, tools, projects, and opportunities
+  - Grouped and deduplicated result sections
+  - Recent search chips with one-click replay
+  - Lightweight loading state while grouped results prepare
+  - Keyboard-friendly recent-search navigation
 - **Data portability**
-	- Export/import local progress as JSON backup files
+  - Export/import local progress as JSON backup files
 - **No build step**
-	- Pure HTML/CSS/JavaScript (no npm install required)
+  - Pure HTML/CSS/JavaScript (no npm install required)
 
 ## Quick Start
 
@@ -70,6 +74,7 @@ If you clear browser storage or use private/incognito windows, data may be lost.
 - `js/data.js` - plans, projects, roadmap insights, opportunities data
 - `js/storage.js` - LocalStorage logic, migrations, import/export
 - `js/app.js` - app state, rendering, search, interactions
+- `sw.js` - offline caching for app shell and assets
 - `manifest.json` - installable web manifest metadata
 
 ## Deployment
@@ -121,13 +126,27 @@ Suggested naming convention if you add image files:
 ## Notes
 
 - A web manifest is included.
-- A service worker is not included, so full offline behavior is browser-cache dependent.
+- A service worker is included for offline app-shell support.
+- First visit requires network to prime caches; subsequent visits can load core pages and assets offline.
 
 ## Customization
 
 - Update learning content and opportunities in `js/data.js`.
 - Update theme and component styles in `css/styles.css`.
 - Extend behavior and views in `js/app.js`.
+
+## Maintenance
+
+Run a quick link-health audit (resources + README URLs):
+
+```bash
+node scripts/check-links.mjs
+```
+
+The command writes a detailed report to `link-check-report.json`.
+
+You can also run a browser-side audit from the dashboard "Maintenance Tools" panel.
+Note: browser audits can mark some links as "reachable-or-cors-restricted" due cross-origin limits.
 
 ---
 

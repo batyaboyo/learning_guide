@@ -92,8 +92,8 @@ body {
 /* Glassmorphism Utilities */
 .glass {
     background: var(--void-panel);
-    backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
     border-radius: 20px;
     box-shadow: var(--glass-shadow);
@@ -103,6 +103,7 @@ body {
 /* Header Navigation */
 header {
     background: var(--void-panel);
+    -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--glass-border);
     z-index: 1500;
@@ -127,11 +128,12 @@ header {
     font-size: 1.5rem;
     font-weight: 800;
     background: linear-gradient(to right, var(--accent-cyan), var(--accent-violet));
-    background-clip: text;
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: -0.5px;
     flex-shrink: 0;
+    -webkit-user-select: none;
     user-select: none;
     transition: var(--transition);
 }
@@ -324,12 +326,12 @@ nav {
     flex-direction: column;
     border-right: 1px solid var(--glass-border);
     background: var(--void-panel);
+    -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
     z-index: 1100;
     overflow-y: auto;
     position: sticky;
     top: var(--header-height);
-    -webkit-overflow-scrolling: touch;
 }
 
 .sidebar-footer {
@@ -378,6 +380,7 @@ nav {
     font-weight: 500;
     margin-bottom: 0.3rem;
     position: relative;
+    -webkit-user-select: none;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
 }
@@ -535,6 +538,7 @@ input.glass:focus {
 
 .card {
     background: var(--void-panel);
+    -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
     padding: 1.5rem;
     border-radius: 1.25rem;
@@ -726,6 +730,27 @@ input[type="checkbox"] {
 .badge.pill {
     cursor: pointer;
     padding: 0.5rem 1rem;
+}
+
+.recent-search-chip:focus-visible {
+    outline: 2px solid var(--accent-cyan);
+    outline-offset: 2px;
+}
+
+.search-loader {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 3px solid rgba(148, 163, 184, 0.35);
+    border-top-color: var(--accent-cyan);
+    margin: 0 auto;
+    animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* PDF Insight Blocks */
@@ -2006,6 +2031,7 @@ footer {
     padding: 0.8rem 1.2rem;
     border-radius: 12px;
     background: var(--void-panel);
+    -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
