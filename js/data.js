@@ -247,6 +247,77 @@ const careerData = {
             ]
         }
     },
+    pdfInsights: {
+        A: {
+            source: 'Cyber Security Roadmap (roadmap.sh)',
+            checkpoints: [
+                { skill: 'Fundamental IT Skills', estimate: '2-4 weeks', phase: 'Beginner' },
+                { skill: 'Networking and OS Basics', estimate: '4-8 weeks', phase: 'Beginner' },
+                { skill: 'Core Security Concepts', estimate: '6-8 weeks', phase: 'Intermediate' },
+                { skill: 'Incident Response and Detection', estimate: '6-10 weeks', phase: 'Intermediate' },
+                { skill: 'Cloud Security Fundamentals', estimate: '4-6 weeks', phase: 'Intermediate' },
+                { skill: 'Programming for Security Automation', estimate: '6-8 weeks', phase: 'Intermediate' }
+            ],
+            domains: [
+                {
+                    title: 'Core Foundations',
+                    items: ['Hardware and operating systems', 'Subnetting and IP terminology', 'Protocols, ports, and packet analysis']
+                },
+                {
+                    title: 'Security Operations',
+                    items: ['CIA triad and defense-in-depth', 'Threat hunting and vulnerability management', 'IDS/IPS, SIEM, and SOAR workflows']
+                },
+                {
+                    title: 'Response and Governance',
+                    items: ['Incident response lifecycle', 'NIST/CIS/ISO standards', 'Risk, compliance, and reporting discipline']
+                },
+                {
+                    title: 'Modern Skills',
+                    items: ['Cloud shared responsibility model', 'Identity and zero-trust basics', 'Python/Bash/PowerShell automation']
+                }
+            ],
+            certifications: {
+                beginner: ['CompTIA A+', 'CompTIA Network+', 'CompTIA Security+', 'CCNA', 'CompTIA Linux+'],
+                advanced: ['CEH', 'CISA', 'CISM', 'CISSP', 'OSCP', 'GIAC Tracks']
+            }
+        },
+        B: {
+            source: 'Data Analyst Roadmap (roadmap.sh + Code with Mosh)',
+            checkpoints: [
+                { skill: 'Math and Statistics', estimate: '1-2 months', phase: 'Beginner' },
+                { skill: 'Excel for Analysis and Reporting', estimate: '2-3 weeks', phase: 'Beginner' },
+                { skill: 'SQL and Relational Databases', estimate: '1-2 months', phase: 'Beginner' },
+                { skill: 'Python for Data Analysis', estimate: '1-2 months', phase: 'Beginner' },
+                { skill: 'Version Control with Git', estimate: '1-2 weeks', phase: 'Beginner' },
+                { skill: 'Data Collection and Preparation', estimate: '1-2 months', phase: 'Intermediate' },
+                { skill: 'Data Visualization and Storytelling', estimate: '1-2 months', phase: 'Intermediate' },
+                { skill: 'Machine Learning (Optional)', estimate: '1-2 months', phase: 'Advanced' },
+                { skill: 'Big Data (Optional)', estimate: '1-2 months', phase: 'Advanced' }
+            ],
+            domains: [
+                {
+                    title: 'Analysis Foundations',
+                    items: ['Descriptive and diagnostic analytics', 'Central tendency and dispersion', 'Hypothesis testing and regression']
+                },
+                {
+                    title: 'Data Handling',
+                    items: ['Collect from CSV/APIs/web sources', 'Clean missing and duplicate data', 'Transform and model usable datasets']
+                },
+                {
+                    title: 'Visualization and Communication',
+                    items: ['Dashboard chart selection', 'Data storytelling for decisions', 'Executive-ready summary writing']
+                },
+                {
+                    title: 'Growth Layer',
+                    items: ['Kaggle competitions', 'Portfolio case studies', 'Networking and certification tracks']
+                }
+            ],
+            certifications: {
+                beginner: ['Google Data Analytics', 'Microsoft PL-300', 'IBM Data Analyst', 'SQL Portfolio Badge'],
+                advanced: ['Tableau Desktop Specialist', 'AWS Data Analytics Specialty', 'Databricks Data Analyst Associate']
+            }
+        }
+    },
     uganda: {
         communities: [
             { name: 'Innovation Village (Ntinda)', url: 'https://innovationvillage.co.ug' },

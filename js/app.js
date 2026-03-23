@@ -515,6 +515,101 @@ const app = {
 
 // View Templates
 const Views = {
+    roadmapHighlights() {
+        const insights = careerData.pdfInsights || {};
+        const cards = Object.keys(careerData.plans).map(planLetter => {
+            const plan = careerData.plans[planLetter];
+            const insight = insights[planLetter];
+            if (!insight) return '';
+
+            const checkpoints = insight.checkpoints.slice(0, 4).map(c => `
+                <li><strong>${c.skill}</strong> <span class="text-muted">${c.estimate}</span></li>
+            `).join('');
+
+            const certs = (insight.certifications?.beginner || []).slice(0, 3).map(cert => `
+                <span class="skill-tag">${cert}</span>
+            `).join('');
+
+            return `
+                <div class="glass p-2 intel-card" style="border-left: 4px solid ${plan.color};">
+                    <div class="plan-progress-header">
+                        <span>${plan.icon} ${plan.title}</span>
+                        <button class="badge glass" onclick="app.switchTab('plan${planLetter}')">Open Plan</button>
+                    </div>
+                    <p class="text-muted mt-1">PDF-driven checkpoints from ${insight.source}</p>
+                    <ul class="intel-list mt-1">${checkpoints}</ul>
+                    <div class="mt-1 cert-chip-wrap">${certs}</div>
+                </div>
+            `;
+        }).join('');
+
+        return `
+            <div class="dashboard-grid mt-2">
+                ${cards}
+            </div>
+        `;
+    },
+
+    planIntel(planLetter) {
+        const insight = (careerData.pdfInsights || {})[planLetter];
+        if (!insight) return '';
+
+        const checkpointRows = insight.checkpoints.map(c => `
+            <div class="timeline-row">
+                <div>
+                    <strong>${c.skill}</strong>
+                    <p class="text-muted">Suggested focus block from uploaded roadmap</p>
+                </div>
+                <div class="timeline-meta">
+                    <span class="timeline-pill">${c.phase}</span>
+                    <span class="timeline-time">${c.estimate}</span>
+                </div>
+            </div>
+        `).join('');
+
+        const domainCards = insight.domains.map(d => `
+            <div class="domain-card">
+                <h4>${d.title}</h4>
+                <ul class="intel-list">
+                    ${d.items.map(i => `<li>${i}</li>`).join('')}
+                </ul>
+            </div>
+        `).join('');
+
+        const beginnerCerts = (insight.certifications?.beginner || []).map(c => `<span class="skill-tag">${c}</span>`).join('');
+        const advancedCerts = (insight.certifications?.advanced || []).map(c => `<span class="skill-tag">${c}</span>`).join('');
+
+        return `
+            <div class="responsive-grid mb-2">
+                <section class="glass p-2 intel-card">
+                    <h3>Roadmap Checkpoints</h3>
+                    <p class="text-muted">Source: ${insight.source}</p>
+                    <div class="timeline-board mt-1">${checkpointRows}</div>
+                </section>
+                <section class="glass p-2 intel-card">
+                    <h3>Skill Clusters to Master</h3>
+                    <div class="domain-grid mt-1">${domainCards}</div>
+                </section>
+            </div>
+            <div class="responsive-grid mb-2">
+                <section class="glass p-2 intel-card">
+                    <h3>Certification Track</h3>
+                    <p class="text-muted">Beginner foundations first, then role-specific depth.</p>
+                    <div class="cert-stack mt-1">
+                        <div>
+                            <strong>Beginner</strong>
+                            <div class="cert-chip-wrap mt-1">${beginnerCerts}</div>
+                        </div>
+                        <div class="mt-1">
+                            <strong>Advanced</strong>
+                            <div class="cert-chip-wrap mt-1">${advancedCerts}</div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        `;
+    },
+
     dashboard() {
         const stats = Storage.getGlobalStats();
         const progress = Storage.load(Storage.KEYS.PROGRESS, {});
@@ -536,7 +631,7 @@ const Views = {
         return `
             <div class="hero-section glass mb-2 dashboard-hero">
                 <h1>Weave Your <span class="accent-text">Technical Destiny</span></h1>
-                <p>Pathweaver is your high-performance career architect, designed to guide you to mastery.</p>
+                <p>Pathweaver now blends your progress tracking with curated checkpoints extracted from your uploaded cybersecurity and data analyst roadmaps.</p>
                 <div class="hero-actions">
                     <button onclick="app.switchTab('planA')" class="btn-primary">Start Journey</button>
                     <button onclick="app.switchTab('projects')" class="btn-secondary glass">Explore Projects</button>
@@ -560,6 +655,8 @@ const Views = {
                     <p class="text-muted">Live Projects</p>
                 </div>
             </div>
+
+            ${this.roadmapHighlights()}
 
             <div class="glass p-2 mt-2 mb-2">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
@@ -976,6 +1073,7 @@ const Views = {
                     <h1>${plan.icon} ${plan.title}</h1>
                     <p class="text-muted">${plan.subtitle || ''}</p>
                 </div>
+                ${this.planIntel(planLetter)}
                 <div class="phases-wrapper">
                     ${phasesHtml}
                 </div>
