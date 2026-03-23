@@ -10,7 +10,13 @@ const app = {
         const toast = document.createElement('div');
         toast.className = `toast toast-${type}`;
         const icons = { success: '✅', error: '❌', info: 'ℹ️', warning: '⚠️' };
-        toast.innerHTML = `<span class="toast-icon">${icons[type] || 'ℹ️'}</span><span class="toast-msg">${message}</span>`;
+        const icon = document.createElement('span');
+        icon.className = 'toast-icon';
+        icon.textContent = icons[type] || 'ℹ️';
+        const msg = document.createElement('span');
+        msg.className = 'toast-msg';
+        msg.textContent = String(message ?? '');
+        toast.append(icon, msg);
         container.appendChild(toast);
         requestAnimationFrame(() => toast.classList.add('toast-show'));
         setTimeout(() => {
@@ -69,8 +75,8 @@ const app = {
                 const search = document.getElementById('global-search');
                 if (search) search.focus();
             }
-            // 1-6 for tab switching
-            const tabMap = { '1': 'dashboard', '2': 'planA', '3': 'planB', '4': 'planC', '5': 'projects', '6': 'uganda' };
+            // 1-5 for tab switching
+            const tabMap = { '1': 'dashboard', '2': 'planA', '3': 'planB', '4': 'projects', '5': 'uganda' };
             if (tabMap[e.key] && !e.ctrlKey && !e.metaKey && !e.altKey) {
                 this.switchTab(tabMap[e.key]);
             }
@@ -216,28 +222,29 @@ const app = {
 
     openResourceModal(planId, resourceName) {
         const meta = Storage.getResourceMeta(planId, resourceName) || { rating: 0, note: '' };
+        const currentRating = Number.isInteger(meta.rating) ? Math.min(Math.max(meta.rating, 0), 5) : 0;
 
         const modalHtml = `
             <div class="modal-overlay" id="resource-modal">
                 <div class="modal-content glass">
-                    <span class="modal-close" onclick="document.getElementById('resource-modal').remove()">&times;</span>
-                    <h3>${resourceName}</h3>
+                    <button type="button" id="resource-modal-close" class="modal-close" aria-label="Close notes dialog">&times;</button>
+                    <h3 id="resource-modal-title"></h3>
                     
                     <div class="mb-2">
                         <label>Difficulty / Rating:</label>
                         <div class="star-rating">
                             ${[1, 2, 3, 4, 5].map(i => `
-                                <span class="star ${i <= meta.rating ? 'active' : ''}" onclick="app.setRating(${i})">★</span>
+                                <span class="star ${i <= currentRating ? 'active' : ''}" data-rating="${i}" role="button" tabindex="0" aria-label="Set rating ${i}">★</span>
                             `).join('')}
                         </div>
                     </div>
 
                     <div class="mb-2">
                         <label>My Notes:</label>
-                        <textarea id="modal-note" class="note-input glass" rows="4" placeholder="What did you learn?">${meta.note}</textarea>
+                        <textarea id="modal-note" class="note-input glass" rows="4" placeholder="What did you learn?"></textarea>
                     </div>
 
-                    <button class="btn-primary" onclick="app.saveResourceMeta('${planId}', '${resourceName}')">Save Notes</button>
+                    <button type="button" id="resource-modal-save" class="btn-primary">Save Notes</button>
                 </div>
             </div>
         `;
@@ -245,12 +252,37 @@ const app = {
         // Close modal on overlay click
         const resourceModal = document.getElementById('resource-modal');
         if (resourceModal) {
+            const closeBtn = document.getElementById('resource-modal-close');
+            const title = document.getElementById('resource-modal-title');
+            const noteInput = document.getElementById('modal-note');
+            const saveBtn = document.getElementById('resource-modal-save');
+
+            if (title) title.textContent = String(resourceName);
+            if (noteInput) noteInput.value = String(meta.note || '');
+
             resourceModal.addEventListener('click', (e) => {
                 if (e.target === resourceModal) resourceModal.remove();
             });
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => this.closeModal('resource-modal'));
+            }
+            if (saveBtn) {
+                saveBtn.addEventListener('click', () => this.saveResourceMeta(planId, resourceName));
+            }
+            resourceModal.querySelectorAll('.star-rating .star').forEach(star => {
+                const val = Number(star.dataset.rating);
+                if (!Number.isFinite(val)) return;
+                star.addEventListener('click', () => this.setRating(val));
+                star.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        this.setRating(val);
+                    }
+                });
+            });
         }
         this.trapFocus(document.getElementById('resource-modal'));
-        this.tempRating = meta.rating;
+        this.tempRating = currentRating;
     },
 
     setRating(val) {
@@ -283,6 +315,7 @@ const app = {
     },
 
     trapFocus(modal) {
+        if (!modal) return;
         this.lastActiveElement = document.activeElement;
         const focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
         const firstFocusableElement = modal.querySelectorAll(focusableElements)[0];
@@ -314,7 +347,6 @@ const app = {
     },
 
     switchTab(tab, phaseIdx = null) {
-        console.log(`[Pathweaver] Switching to tab: ${tab}${phaseIdx !== null ? `, phase: ${phaseIdx}` : ''}`);
         this.currentTab = tab;
 
         // Update Sidebar UI
@@ -381,20 +413,17 @@ const app = {
 
     // Rendering Engine
     render() {
-        console.log(`[Pathweaver] Render starting for tab: ${this.currentTab}`);
         let html = '';
         try {
             switch (this.currentTab) {
                 case 'dashboard': html = Views.dashboard(); break;
                 case 'planA': html = Views.plan('A'); break;
                 case 'planB': html = Views.plan('B'); break;
-                case 'planC': html = Views.plan('C'); break;
                 case 'projects': html = Views.projects(); break;
                 case 'uganda': html = Views.uganda(); break;
                 case 'search': html = Views.search(this.searchQuery); break;
                 default: html = '<h1>404 - Not Found</h1>';
             }
-            console.log(`[Pathweaver] ${this.currentTab} HTML generated successfully (${html.length} chars)`);
         } catch (err) {
             console.error('[Pathweaver] Render Crash:', err);
             html = `
@@ -424,6 +453,21 @@ const app = {
             });
         });
 
+        const noteButtons = document.querySelectorAll('.resource-note-btn');
+        noteButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const planId = e.currentTarget.dataset.plan;
+                const encodedName = e.currentTarget.dataset.resource || '';
+                let resourceName = '';
+                try {
+                    resourceName = decodeURIComponent(encodedName);
+                } catch {
+                    resourceName = encodedName;
+                }
+                this.openResourceModal(planId, resourceName);
+            });
+        });
+
 
     },
 
@@ -442,6 +486,7 @@ const app = {
         a.href = url;
         a.download = 'pathweaver_backup.json';
         a.click();
+        URL.revokeObjectURL(url);
     },
 
     importData(input) {
@@ -475,7 +520,7 @@ const Views = {
         const progress = Storage.load(Storage.KEYS.PROGRESS, {});
 
         // Calculate progress for all plans
-        const planProgress = ['A', 'B', 'C'].map(id => {
+        const planProgress = Object.keys(careerData.plans).map(id => {
             const plan = careerData.plans[id];
             const completed = progress[id] ? progress[id].length : 0;
             let total = 0;
@@ -544,9 +589,9 @@ const Views = {
                 <div class="glass p-2">
                     <h3>Quick Navigator</h3>
                     <div class="navigator-pills mt-1">
-                        <button class="badge glass pill" onclick="app.switchTab('planA')">🛡️ Cybersecurity</button>
-                        <button class="badge glass pill" onclick="app.switchTab('planB')">🐍 Django</button>
-                        <button class="badge glass pill" onclick="app.switchTab('planC')">🔧 IT Support</button>
+                        ${Object.entries(careerData.plans).map(([id, plan]) => `
+                            <button class="badge glass pill" onclick="app.switchTab('plan${id}')">${plan.icon} ${plan.title}</button>
+                        `).join('')}
                         <button class="badge glass pill" onclick="app.switchTab('projects')">🚀 Projects</button>
                         <button class="badge glass pill" onclick="app.switchTab('uganda')">🇺🇬 Local Hub</button>
                     </div>
@@ -564,9 +609,15 @@ const Views = {
         const allProjects = careerData.projects;
         const totalCount = allProjects.length;
         let completedCount = 0, inProgressCount = 0, deployedCount = 0, notStartedCount = 0;
-        const planCounts = { A: { total: 0, done: 0 }, B: { total: 0, done: 0 }, C: { total: 0, done: 0 } };
+        const planCounts = Object.keys(careerData.plans).reduce((acc, planId) => {
+            acc[planId] = { total: 0, done: 0 };
+            return acc;
+        }, {});
         allProjects.forEach(p => {
             const s = pStates[p.id]?.status || 'not-started';
+            if (!planCounts[p.plan]) {
+                planCounts[p.plan] = { total: 0, done: 0 };
+            }
             planCounts[p.plan].total++;
             if (s === 'completed' || s === 'deployed') { completedCount++; planCounts[p.plan].done++; }
             if (s === 'deployed') deployedCount++;
@@ -651,9 +702,9 @@ const Views = {
                 <div class="project-filters mt-1">
                     <select class="filter-select glass" onchange="app.updateProjectFilter('plan', this.value)">
                         <option value="all" ${plan === 'all' ? 'selected' : ''}>All Specializations</option>
-                        <option value="A" ${plan === 'A' ? 'selected' : ''}>Cybersecurity (${planCounts.A.total})</option>
-                        <option value="B" ${plan === 'B' ? 'selected' : ''}>Django Development (${planCounts.B.total})</option>
-                        <option value="C" ${plan === 'C' ? 'selected' : ''}>IT Support (${planCounts.C.total})</option>
+                        ${Object.entries(careerData.plans).map(([id, p]) => `
+                            <option value="${id}" ${plan === id ? 'selected' : ''}>${p.title} (${planCounts[id]?.total || 0})</option>
+                        `).join('')}
                     </select>
                     <select class="filter-select glass" onchange="app.updateProjectFilter('difficulty', this.value)">
                         <option value="all" ${difficulty === 'all' ? 'selected' : ''}>All Difficulties</option>
@@ -799,7 +850,7 @@ const Views = {
         const lowerQ = query.toLowerCase();
         let results = [];
 
-        ['A', 'B', 'C'].forEach(id => {
+        Object.keys(careerData.plans).forEach(id => {
             const plan = careerData.plans[id];
             plan.phases.forEach((phase, pIdx) => {
                 // Search Phase Title
@@ -873,17 +924,12 @@ const Views = {
     },
 
     plan(planLetter) {
-        console.log(`[Pathweaver] Fetching Plan: ${planLetter}`);
         const plan = careerData.plans[planLetter];
         if (!plan) {
             throw new Error(`Plan data for '${planLetter}' is missing from careerData.`);
         }
 
-        console.log(`[Pathweaver] Plan ${planLetter} (${plan.title}) - Phases: ${plan.phases.length}`);
-
         const phasesHtml = plan.phases.map((phase, idx) => {
-            console.log(`[Pathweaver] Phase ${idx + 1}: ${phase.resources.length} resources found.`);
-
             // Phase progress
             const phaseTotal = phase.resources.length;
             let phaseDone = 0;
@@ -898,7 +944,7 @@ const Views = {
                     <div class="resource-item">
                         <input type="checkbox" class="resource-check" data-plan="${planLetter}" data-resource="${r.name}" ${isChecked}>
                         <a href="${r.url}" target="_blank" class="resource-link">${r.name}</a>
-                        <button class="btn-icon" onclick="app.openResourceModal('${planLetter}', '${r.name.replace(/'/g, "\\'")}')">✏️</button>
+                        <button type="button" class="btn-icon resource-note-btn" data-plan="${planLetter}" data-resource="${encodeURIComponent(r.name)}" aria-label="Open resource notes">✏️</button>
                     </div>
                 `;
             }).join('');

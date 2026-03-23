@@ -9,6 +9,39 @@ const Storage = {
     // Initialize/Load Data
     init() {
         this.migrateLegacyKeys();
+        this.migrateProjectIds();
+    },
+
+    migrateProjectIds() {
+        const idMap = {
+            '16': '6',
+            '17': '7',
+            '18': '8',
+            '19': '9',
+            '20': '10'
+        };
+
+        const projectStates = this.load(this.KEYS.PROJECTS, {});
+        if (!projectStates || typeof projectStates !== 'object') return;
+
+        let changed = false;
+        Object.entries(idMap).forEach(([oldId, newId]) => {
+            if (!projectStates[oldId]) return;
+
+            // Keep any existing newer record and fill in missing values from the old one.
+            if (projectStates[newId]) {
+                projectStates[newId] = { ...projectStates[oldId], ...projectStates[newId] };
+            } else {
+                projectStates[newId] = projectStates[oldId];
+            }
+
+            delete projectStates[oldId];
+            changed = true;
+        });
+
+        if (changed) {
+            this.save(this.KEYS.PROJECTS, projectStates);
+        }
     },
 
     migrateLegacyKeys() {
@@ -32,7 +65,14 @@ const Storage = {
 
     load(key, defaultData = null) {
         const data = localStorage.getItem(key);
-        return data ? JSON.parse(data) : defaultData;
+        if (!data) return defaultData;
+        try {
+            return JSON.parse(data);
+        } catch (error) {
+            console.warn(`[Pathweaver] Corrupted localStorage payload for key: ${key}. Resetting key.`, error);
+            localStorage.removeItem(key);
+            return defaultData;
+        }
     },
 
     save(key, data) {

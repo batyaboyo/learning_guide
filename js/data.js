@@ -184,152 +184,64 @@ const careerData = {
         },
         B: {
             id: 'planB',
-            title: 'Full-Stack Django Dev',
-            subtitle: 'Python → JS → Django → React',
-            color: '#10B981',
-            icon: '🐍',
+            title: 'Data Analyst Path',
+            subtitle: 'Excel -> SQL -> Python -> Dashboards -> Storytelling',
+            color: '#0EA5E9',
+            icon: '📈',
             phases: [
                 {
                     id: 'p1',
-                    title: 'Month 1: Python & Web Foundations',
-                    duration: 'Month 1',
+                    title: 'Phase 1: Spreadsheet Foundations',
+                    duration: 'Months 1-2',
                     resources: [
-                        { name: 'Python for Everybody (Dr. Chuck)', url: 'https://www.py4e.com', type: 'Course', platform: 'Py4E' },
-                        { name: 'freeCodeCamp Python', url: 'https://www.freecodecamp.org/learn/scientific-computing-with-python', type: 'Course', platform: 'freeCodeCamp' },
-                        { name: 'Automate the Boring Stuff', url: 'https://automatetheboringstuff.com', type: 'Book', platform: 'Web' },
-                        { name: 'Google Python Class', url: 'https://developers.google.com/edu/python', type: 'Course', platform: 'Google' },
-                        { name: 'Real Python', url: 'https://realpython.com', type: 'Blog', platform: 'Real Python' },
-                        { name: 'Corey Schafer Python', url: 'https://www.youtube.com/@coreyms', type: 'Video', platform: 'YouTube' },
-                        { name: 'Tech With Tim', url: 'https://www.youtube.com/@TechWithTim', type: 'Video', platform: 'YouTube' },
-                        { name: 'Programming with Mosh', url: 'https://www.youtube.com/@programmingwithmosh', type: 'Video', platform: 'YouTube' }
+                        { name: 'Excel Skills for Business (Audit)', url: 'https://www.coursera.org/specializations/excel', type: 'Course', platform: 'Coursera' },
+                        { name: 'Google Sheets Training', url: 'https://support.google.com/a/users/answer/9282959', type: 'Doc', platform: 'Google' },
+                        { name: 'Khan Academy Statistics', url: 'https://www.khanacademy.org/math/statistics-probability', type: 'Course', platform: 'Khan Academy' },
+                        { name: 'Alex The Analyst - Excel Playlist', url: 'https://www.youtube.com/@AlexTheAnalyst', type: 'Video', platform: 'YouTube' },
+                        { name: 'Data Cleaning in Spreadsheets', url: 'https://www.kaggle.com/learn/data-cleaning', type: 'Course', platform: 'Kaggle' }
                     ],
                     tools: [
-                        { name: 'Python', desc: 'The core language.', url: 'https://www.python.org/' },
-                        { name: 'VS Code', desc: 'Best-in-class code editor.', url: 'https://code.visualstudio.com/' },
-                        { name: 'PyCharm (Comm)', desc: 'Powerful Python IDE.', url: 'https://www.jetbrains.com/pycharm/download/' },
-                        { name: 'Pip', desc: 'Package installer for Python.', url: 'https://pypi.org/project/pip/' },
-                        { name: 'Poetry', desc: 'Modern dependency management.', url: 'https://python-poetry.org/' },
-                        { name: 'Virtualenv', desc: 'Isolated Python environments.', url: 'https://virtualenv.pypa.io/' },
-                        { name: 'Pytest', desc: 'Testing framework.', url: 'https://docs.pytest.org/' },
-                        { name: 'Black', desc: 'Uncompromising code formatter.', url: 'https://github.com/psf/black' },
-                        { name: 'Flake8', desc: 'Linter for style/errors.', url: 'https://flake8.pycqa.org/' },
-                        { name: 'Requests', desc: 'Elegant HTTP library.', url: 'https://requests.readthedocs.io/' },
-                        { name: 'BeautifulSoup', desc: 'Web scraping library.', url: 'https://www.crummy.com/software/BeautifulSoup/' },
-                        { name: 'Pandas', desc: 'Data analysis and manipulation.', url: 'https://pandas.pydata.org/' },
-                        { name: 'Jupyter', desc: 'Interactive computing.', url: 'https://jupyter.org/' },
-                        { name: 'Bandit', desc: 'Security linter for Python.', url: 'https://bandit.readthedocs.io/' },
-                        { name: 'Conda', desc: 'Package and env manager.', url: 'https://docs.conda.io/' }
+                        { name: 'Microsoft Excel', desc: 'Core spreadsheet analysis tool.', url: 'https://www.microsoft.com/microsoft-365/excel' },
+                        { name: 'Google Sheets', desc: 'Cloud spreadsheets and collaboration.', url: 'https://www.google.com/sheets/about/' },
+                        { name: 'OpenRefine', desc: 'Data cleaning and transformation.', url: 'https://openrefine.org/' },
+                        { name: 'Notion', desc: 'Analyst notes and project documentation.', url: 'https://www.notion.so/' }
                     ]
                 },
                 {
                     id: 'p2',
-                    title: 'Month 2: Django Core Development',
-                    duration: 'Month 2',
+                    title: 'Phase 2: SQL & Data Querying',
+                    duration: 'Months 3-4',
                     resources: [
-                        { name: 'Official Django Tutorial', url: 'https://docs.djangoproject.com/en/stable/intro/tutorial01', type: 'Doc', platform: 'Django' },
-                        { name: 'Django for Everybody', url: 'https://www.dj4e.com', type: 'Course', platform: 'DJ4E' },
-                        { name: 'Django Girls Tutorial', url: 'https://tutorial.djangogirls.org', type: 'Course', platform: 'Django Girls' },
-                        { name: 'Mozilla Django Tutorial', url: 'https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django', type: 'Doc', platform: 'MDN' },
-                        { name: 'Dennis Ivy Django', url: 'https://www.youtube.com/@DennisIvy', type: 'Video', platform: 'YouTube' },
-                        { name: 'Traversy Media', url: 'https://www.youtube.com/@TraversyMedia', type: 'Video', platform: 'YouTube' },
-                        { name: 'Coding Entrepreneurs', url: 'https://www.youtube.com/@CodingEntrepreneurs', type: 'Video', platform: 'YouTube' },
-                        { name: 'Pretty Printed', url: 'https://www.youtube.com/@PrettyPrintedTutorials', type: 'Video', platform: 'YouTube' }
+                        { name: 'SQLBolt Interactive Lessons', url: 'https://sqlbolt.com/', type: 'Lab', platform: 'SQLBolt' },
+                        { name: 'Mode SQL Tutorial', url: 'https://mode.com/sql-tutorial/', type: 'Course', platform: 'Mode' },
+                        { name: 'DataLemur SQL Practice', url: 'https://datalemur.com/sql-interview-questions', type: 'Lab', platform: 'DataLemur' },
+                        { name: 'LeetCode Database Problems', url: 'https://leetcode.com/problemset/database/', type: 'Lab', platform: 'LeetCode' },
+                        { name: 'PostgreSQL Tutorial', url: 'https://www.postgresqltutorial.com/', type: 'Doc', platform: 'PostgreSQL' }
                     ],
                     tools: [
-                        { name: 'Django', desc: 'The high-level web framework.', url: 'https://www.djangoproject.com/' },
-                        { name: 'Django Debug Toolbar', desc: 'Optimizer/Profiler.', url: 'https://github.com/jazzband/django-debug-toolbar' },
-                        { name: 'Django Extensions', desc: 'Power-user utilities.', url: 'https://django-extensions.readthedocs.io/' },
-                        { name: 'Postman', desc: 'API testing tool.', url: 'https://www.postman.com/' },
-                        { name: 'DBeaver', desc: 'Universal database manager.', url: 'https://dbeaver.io/' },
-                        { name: 'SQLAlchemy', desc: 'Python SQL toolkit (ORM).', url: 'https://www.sqlalchemy.org/' },
-                        { name: 'Redis', desc: 'Caching and message broker.', url: 'https://redis.io/' },
-                        { name: 'Celery', desc: 'Distributed task queue.', url: 'https://docs.celeryq.dev/' },
-                        { name: 'Whitenoise', desc: 'Static file serving for Django.', url: 'https://whitenoise.readthedocs.io/' },
-                        { name: 'CORS Headers', desc: 'Handle Cross-Origin Resource Sharing.', url: 'https://github.com/adamchainz/django-cors-headers' },
-                        { name: 'Django Filter', desc: 'Dynamic filtering for queries.', url: 'https://django-filter.readthedocs.io/' },
-                        { name: 'Django Simple JWT', desc: 'JSON Web Token authentication.', url: 'https://django-rest-framework-simplejwt.readthedocs.io/' },
-                        { name: 'Gunicorn', desc: 'WSGI HTTP Server.', url: 'https://gunicorn.org/' },
-                        { name: 'Nginx', desc: 'Web server / Reverse proxy.', url: 'https://www.nginx.com/' },
-                        { name: 'PgAdmin', desc: 'PostgreSQL management tool.', url: 'https://www.pgadmin.org/' }
+                        { name: 'PostgreSQL', desc: 'Reliable relational database engine.', url: 'https://www.postgresql.org/' },
+                        { name: 'DBeaver', desc: 'Universal SQL client.', url: 'https://dbeaver.io/' },
+                        { name: 'DB Fiddle', desc: 'Quick SQL sandbox.', url: 'https://www.db-fiddle.com/' },
+                        { name: 'Metabase', desc: 'Lightweight analytics dashboarding.', url: 'https://www.metabase.com/' }
                     ]
                 },
                 {
                     id: 'p3',
-                    title: 'Month 3: Full-Stack & Modern Web',
-                    duration: 'Month 3',
+                    title: 'Phase 3: Python Analytics & BI',
+                    duration: 'Months 5-6',
                     resources: [
-                        { name: 'Django REST Framework', url: 'https://www.django-rest-framework.org/tutorial/quickstart', type: 'Doc', platform: 'DRF' },
-                        { name: 'JavaScript.info', url: 'https://javascript.info', type: 'Course', platform: 'Web' },
-                        { name: 'The Odin Project', url: 'https://www.theodinproject.com', type: 'Course', platform: 'Odin' },
-                        { name: 'Full Stack Open', url: 'https://fullstackopen.com/en', type: 'Course', platform: 'Helsinki U' },
-                        { name: 'MDN Web Docs', url: 'https://developer.mozilla.org', type: 'Doc', platform: 'MDN' },
-                        { name: 'React Documentation', url: 'https://react.dev', type: 'Doc', platform: 'React' },
-                        { name: 'Docker for Beginners', url: 'https://docker-curriculum.com', type: 'Course', platform: 'Docker' }
+                        { name: 'Kaggle Python Course', url: 'https://www.kaggle.com/learn/python', type: 'Course', platform: 'Kaggle' },
+                        { name: 'Kaggle Pandas Course', url: 'https://www.kaggle.com/learn/pandas', type: 'Course', platform: 'Kaggle' },
+                        { name: 'Data Visualization with Seaborn', url: 'https://seaborn.pydata.org/tutorial.html', type: 'Doc', platform: 'Seaborn' },
+                        { name: 'Power BI Learning Path', url: 'https://learn.microsoft.com/en-us/training/powerplatform/power-bi/', type: 'Course', platform: 'Microsoft' },
+                        { name: 'Tableau Free Training Videos', url: 'https://www.tableau.com/learn/training', type: 'Video', platform: 'Tableau' }
                     ],
                     tools: [
-                        { name: 'Docker', desc: 'Containerization.', url: 'https://www.docker.com/' },
-                        { name: 'Sentry', desc: 'Error tracking.', url: 'https://sentry.io/' },
-                        { name: 'Gunicorn', desc: 'Production WSGI server.', url: 'https://gunicorn.org/' },
-                        { name: 'Git', desc: 'Version control.', url: 'https://git-scm.com/' },
-                        { name: 'GitHub Desktop', desc: 'Simple git interface.', url: 'https://desktop.github.com/' },
-                        { name: 'Axios', desc: 'Promise-based HTTP for JS.', url: 'https://axios-http.com/' },
-                        { name: 'Vite', desc: 'Frontend build tool.', url: 'https://vitejs.dev/' },
-                        { name: 'NPM', desc: 'Node package manager.', url: 'https://www.npmjs.com/' },
-                        { name: 'Prettier', desc: 'Opinionated code formatter.', url: 'https://prettier.io/' },
-                        { name: 'ESLint', desc: 'JavaScript linter.', url: 'https://eslint.org/' },
-                        { name: 'React DevTools', desc: 'Debug React components.', url: 'https://react.dev/learn/react-developer-tools' },
-                        { name: 'Redux DevTools', desc: 'Debug state changes.', url: 'https://github.com/reduxjs/redux-devtools' },
-                        { name: 'PostCSS', desc: 'Tool for transforming CSS.', url: 'https://postcss.org/' },
-                        { name: 'Framer Motion', desc: 'React animation library.', url: 'https://www.framer.com/motion/' },
-                        { name: 'Lucide Icons', desc: 'Beautiful open-source icons.', url: 'https://lucide.dev/' }
-                    ]
-                }
-            ]
-        },
-        C: {
-            id: 'planC',
-            title: 'IT Support & Admin',
-            subtitle: 'Hardware → OS → Networking → Cloud',
-            color: '#3B82F6',
-            icon: '🔧',
-            phases: [
-                {
-                    id: 'p1',
-                    title: 'Phase 1: IT Foundations (Hardware & OS)',
-                    duration: 'Months 1-3',
-                    resources: [
-                        { name: 'Professor Messer A+ Course', url: 'https://www.professormesser.com/free-a-plus-training/220-1101/220-1101-video/220-1101-training-course', type: 'Course', platform: 'Professor Messer' },
-                        { name: 'Google IT Support Certificate', url: 'https://www.coursera.org/professional-certificates/google-it-support', type: 'Course', platform: 'Coursera' },
-                        { name: 'Microsoft Windows 11 Support', url: 'https://learn.microsoft.com/en-us/training/paths/support-windows-11-devices/', type: 'Course', platform: 'Microsoft' },
-                        { name: 'Linux Journey (Foundations)', url: 'https://linuxjourney.com', type: 'Course', platform: 'Web' },
-                        { name: 'PowerCert: How a CPU Works', url: 'https://www.youtube.com/watch?v=FZGugFqdr60', type: 'Video', platform: 'YouTube' },
-                        { name: 'Eli the Computer Guy', url: 'https://www.youtube.com/@Elithecomputerguypage', type: 'Video', platform: 'YouTube' }
-                    ],
-                    tools: [
-                        { name: 'Sysinternals Suite', desc: 'Advanced Windows utilities.', url: 'https://learn.microsoft.com/en-us/sysinternals/' },
-                        { name: 'Rufus', desc: 'Create bootable USB drives.', url: 'https://rufus.ie/' },
-                        { name: 'WinDirStat', desc: 'Disk usage stats viewer.', url: 'https://windirstat.net/' },
-                        { name: '7-Zip', desc: 'File archiver.', url: 'https://www.7-zip.org/' },
-                        { name: 'KeePassXC', desc: 'Password manager.', url: 'https://keepassxc.org/' }
-                    ]
-                },
-                {
-                    id: 'p2',
-                    title: 'Phase 2: Networking & Cloud Admin',
-                    duration: 'Months 4-6',
-                    resources: [
-                        { name: 'Professor Messer Network+', url: 'https://www.professormesser.com/network-plus/n10-008/n10-008-video/n10-008-training-course/', type: 'Course', platform: 'Professor Messer' },
-                        { name: 'Cisco Introduction to Networks', url: 'https://www.skillsforall.com/course/introduction-to-networks', type: 'Course', platform: 'Cisco' },
-                        { name: 'AWS Cloud Practitioner Essentials', url: 'https://explore.skillbuilder.aws/learn/course/external/view/elearning/134/aws-cloud-practitioner-essentials', type: 'Course', platform: 'AWS' },
-                        { name: 'Azure Fundamentals (AZ-900)', url: 'https://learn.microsoft.com/en-us/training/paths/microsoft-azure-fundamentals-describe-cloud-concepts/', type: 'Course', platform: 'Microsoft' },
-                        { name: 'NetworkChuck: CCNA Series', url: 'https://www.youtube.com/watch?v=H8W9SshmS54', type: 'Video', platform: 'YouTube' }
-                    ],
-                    tools: [
-                        { name: 'PuTTY', desc: 'SSH/Telnet client.', url: 'https://www.putty.org/' },
-                        { name: 'Angry IP Scanner', desc: 'Fast IP & port scanner.', url: 'https://angryip.org/' },
-                        { name: 'Wireshark', desc: 'Network protocol analyzer.', url: 'https://www.wireshark.org/' },
-                        { name: 'Nmap', desc: 'Network discovery.', url: 'https://nmap.org/' },
-                        { name: 'RustDesk', desc: 'Remote desktop tool.', url: 'https://rustdesk.com/' }
+                        { name: 'Python', desc: 'Data scripting and analysis language.', url: 'https://www.python.org/' },
+                        { name: 'Pandas', desc: 'Data wrangling library.', url: 'https://pandas.pydata.org/' },
+                        { name: 'Jupyter Notebook', desc: 'Interactive analysis environment.', url: 'https://jupyter.org/' },
+                        { name: 'Power BI Desktop', desc: 'Business intelligence dashboards.', url: 'https://powerbi.microsoft.com/desktop/' },
+                        { name: 'Tableau Public', desc: 'Interactive public dashboards.', url: 'https://public.tableau.com/' }
                     ]
                 }
             ]
@@ -418,128 +330,310 @@ const careerData = {
             portfolio: 'Enterprise-critical skill highly valued by employers'
         },
 
-        // --- PLAN B: DJANGO (5 projects) ---
+        // --- PLAN B: DATA ANALYST (5 projects) ---
         {
-            id: 6, plan: 'B', name: 'RESTful API with Authentication',
-            difficulty: 'Intermediate-Advanced', time: '2 weeks',
-            desc: 'Build a production-grade REST API with JWT auth, documentation, versioning, and tests.',
-            problem: 'Modern apps (mobile, SPA, IoT) need secure, well-documented APIs to communicate with backends. Many developers build APIs without proper authentication, versioning, or documentation — leading to security holes and integration nightmares.',
-            solution: 'Build a Django REST Framework API with JWT token authentication, role-based permissions, API versioning, rate limiting, pagination, and auto-generated Swagger/OpenAPI documentation. Write comprehensive tests for every endpoint.',
-            technologies: { languages: ['Python'], frameworks: ['Django', 'Django REST Framework'], databases: ['PostgreSQL', 'SQLite'], other: ['JWT (SimpleJWT)', 'Swagger/drf-spectacular', 'Postman', 'Pytest', 'Docker'] },
-            skills: ['Django REST Framework', 'API design', 'testing'],
-            tools: ['DRF', 'JWT authentication', 'Swagger/Postman'],
-            steps: ['Define API requirements', 'Setup DRF', 'Implement Endpoints', 'Add JWT Auth', 'Generate Swagger docs'],
-            portfolio: 'Backend API proficiency — most asked about in interviews'
-        },
-        {
-            id: 7, plan: 'B', name: 'E-commerce Platform',
-            difficulty: 'Intermediate-Advanced', time: '3-4 weeks',
-            desc: 'Product catalog, shopping cart, checkout, order management with payment integration.',
-            problem: 'Small businesses in Uganda and across Africa need affordable online stores but commercial platforms charge high fees and lack local payment integration (Mobile Money, Flutterwave). They need custom solutions tailored to local markets.',
-            solution: 'Build a full e-commerce platform with product catalog, category filtering, shopping cart with session persistence, secure checkout flow, Stripe/Flutterwave payment integration, order tracking, and an admin dashboard for inventory management.',
-            technologies: { languages: ['Python', 'JavaScript', 'HTML', 'CSS'], frameworks: ['Django', 'Bootstrap'], databases: ['PostgreSQL'], other: ['Stripe API', 'Flutterwave', 'Pillow', 'Celery', 'Redis', 'Docker'] },
-            skills: ['Complex business logic', 'sessions', 'payments'],
-            tools: ['Django', 'Stripe/Flutterwave', 'PostgreSQL'],
-            steps: ['Setup models', 'Implement Cart logic', 'Integrate Payments', 'Build Order history', 'Secure checkout'],
-            portfolio: 'Major portfolio piece covering full-stack skills'
-        },
-        {
-            id: 8, plan: 'B', name: 'Task & Project Management Tool',
-            difficulty: 'Intermediate', time: '2 weeks',
-            desc: 'Projects, tasks, assignments, deadlines, team collaboration with Kanban board.',
-            problem: 'Teams waste hours in disorganized communication and missed deadlines. Existing tools like Jira are overly complex for small teams, while simpler tools lack features like role-based access, deadline alerts, and visual task boards.',
-            solution: 'Build a project management app with Kanban-style boards, drag-and-drop task cards, user roles (admin/member/viewer), deadline notifications via email, activity logs, and a dashboard showing project health metrics.',
-            technologies: { languages: ['Python', 'JavaScript', 'HTML', 'CSS'], frameworks: ['Django', 'SortableJS'], databases: ['PostgreSQL'], other: ['Django Channels', 'HTMX', 'Chart.js', 'Celery', 'SMTP Email'] },
-            skills: ['User permissions', 'notifications', 'dashboard design'],
-            tools: ['Django', 'JavaScript', 'drag-and-drop'],
-            steps: ['Create Project/Task models', 'Implement Kanban view', 'Add user assignments', 'Build deadline alerts', 'Create dashboard'],
-            portfolio: 'Demonstrates complex CRUD, roles, and UX thinking'
-        },
-        {
-            id: 9, plan: 'B', name: 'Real-time Chat Application',
-            difficulty: 'Advanced', time: '2 weeks',
-            desc: 'WhatsApp-style chat with Django Channels and WebSockets.',
-            problem: 'Traditional HTTP request-response is too slow for messaging. Users expect instant delivery, typing indicators, and online status — features that require persistent bidirectional connections.',
-            solution: 'Use Django Channels with WebSockets for real-time communication. Build chat rooms, private messaging, typing indicators, online/offline status, message history with pagination, and file sharing. Use Redis as the channel layer for scalability.',
-            technologies: { languages: ['Python', 'JavaScript', 'HTML', 'CSS'], frameworks: ['Django', 'Django Channels'], databases: ['PostgreSQL', 'Redis'], other: ['WebSockets', 'Daphne ASGI Server', 'Docker', 'Pillow'] },
-            skills: ['Real-time communications', 'WebSockets', 'async Python'],
-            tools: ['Django Channels', 'Redis', 'JavaScript'],
-            steps: ['Setup Channels/Redis', 'Create Room/Message models', 'Implement simple chat', 'Add user presence', 'Polish UI'],
-            portfolio: 'Shows WebSocket/real-time expertise — impressive in interviews'
-        },
-        {
-            id: 10, plan: 'B', name: 'Portfolio Website with CMS Backend',
+            id: 6, plan: 'B', name: 'Uganda Jobs Data Dashboard',
             difficulty: 'Intermediate', time: '1 week',
-            desc: 'Beautiful portfolio site with Django backend to manage and showcase your projects.',
-            problem: 'Developers need a professional online presence but static portfolios become stale. Updating HTML files manually for each new project is tedious. You need a CMS that lets you add projects, blog posts, and skills dynamically.',
-            solution: 'Build a responsive portfolio site with a Django-powered admin panel. Create models for Projects, Skills, Blog Posts, and Testimonials. Use Django\'s admin interface to manage content without touching code. Deploy with Gunicorn + Nginx for production readiness.',
-            technologies: { languages: ['Python', 'JavaScript', 'HTML', 'CSS'], frameworks: ['Django', 'Bootstrap/Tailwind'], databases: ['PostgreSQL'], other: ['Gunicorn', 'Nginx', 'Whitenoise', 'Pillow', 'Docker', 'DigitalOcean/Railway'] },
-            skills: ['Frontend design', 'Django admin customization', 'deployment'],
-            tools: ['Django', 'modern CSS', 'Gunicorn'],
-            steps: ['Design frontend', 'Build Project model', 'Create API/Template', 'Populate content', 'Deploy'],
-            portfolio: 'YOUR portfolio — direct proof of skills for every interview'
+            desc: 'Scrape and analyze Uganda tech job listings, then publish a dashboard of trends.',
+            problem: 'Job seekers struggle to understand which skills and roles are trending because openings are spread across many sites.',
+            solution: 'Collect listings from public job boards, clean and standardize titles and skills, then build a dashboard showing demand by role, skill, and location.',
+            technologies: { languages: ['Python', 'SQL'], frameworks: ['Pandas'], databases: ['PostgreSQL'], other: ['Power BI', 'BeautifulSoup'] },
+            skills: ['data cleaning', 'dashboarding', 'trend analysis'],
+            tools: ['Python', 'PostgreSQL', 'Power BI'],
+            steps: ['Collect job data', 'Clean and normalize fields', 'Write SQL aggregations', 'Build visuals', 'Publish insights'],
+            portfolio: 'Shows end-to-end analyst workflow on local market data'
+        },
+        {
+            id: 7, plan: 'B', name: 'Retail Sales KPI Tracker',
+            difficulty: 'Beginner-Intermediate', time: '4-6 days',
+            desc: 'Build a KPI dashboard for revenue, margin, and product performance.',
+            problem: 'Small shops track sales manually and cannot quickly identify top products or slow movers.',
+            solution: 'Model daily sales data, build KPI definitions, and create dashboards for category performance, seasonality, and outlier detection.',
+            technologies: { languages: ['SQL'], frameworks: [], databases: ['SQLite', 'PostgreSQL'], other: ['Excel', 'Power BI'] },
+            skills: ['KPI design', 'SQL', 'business reporting'],
+            tools: ['SQL', 'Excel', 'Power BI'],
+            steps: ['Define KPI metrics', 'Import and clean sales data', 'Create SQL views', 'Build dashboard pages', 'Document recommendations'],
+            portfolio: 'Demonstrates business-focused analytics delivery'
+        },
+        {
+            id: 8, plan: 'B', name: 'Customer Churn Analysis',
+            difficulty: 'Intermediate', time: '1 week',
+            desc: 'Analyze customer behavior to identify churn signals and retention opportunities.',
+            problem: 'Teams lose customers without understanding the behavioral patterns leading up to churn.',
+            solution: 'Use Python and SQL to segment cohorts, compare retained vs churned users, and produce a retention action report with clear metrics.',
+            technologies: { languages: ['Python', 'SQL'], frameworks: ['Pandas'], databases: ['PostgreSQL'], other: ['Jupyter', 'Seaborn'] },
+            skills: ['cohort analysis', 'EDA', 'data storytelling'],
+            tools: ['Python', 'Jupyter', 'PostgreSQL'],
+            steps: ['Load customer events', 'Create cohorts', 'Measure churn patterns', 'Visualize findings', 'Write retention recommendations'],
+            portfolio: 'Strong analytical thinking and communication evidence'
+        },
+        {
+            id: 9, plan: 'B', name: 'SQL Case Study Portfolio',
+            difficulty: 'Intermediate', time: '5 days',
+            desc: 'Solve practical SQL business questions and publish answers with clear explanation.',
+            problem: 'Employers want SQL fluency, but candidates often only show toy examples with weak business context.',
+            solution: 'Build a case-study repo with realistic datasets, optimized SQL queries, and short narratives explaining decisions and trade-offs.',
+            technologies: { languages: ['SQL'], frameworks: [], databases: ['PostgreSQL'], other: ['DBeaver', 'GitHub'] },
+            skills: ['joins', 'window functions', 'query optimization'],
+            tools: ['PostgreSQL', 'DBeaver', 'GitHub'],
+            steps: ['Pick datasets', 'Write baseline queries', 'Optimize with CTE/window functions', 'Validate outputs', 'Publish write-ups'],
+            portfolio: 'Interview-ready SQL project set with business framing'
+        },
+        {
+            id: 10, plan: 'B', name: 'Executive Insights Report',
+            difficulty: 'Advanced', time: '1 week',
+            desc: 'Create a management-ready analytics report and presentation from raw operational data.',
+            problem: 'Decision-makers receive raw tables but need concise narratives and actionable recommendations.',
+            solution: 'Transform raw data into executive KPIs, highlight risks and opportunities, and present decisions using charts, narrative, and prioritized actions.',
+            technologies: { languages: ['Python', 'SQL'], frameworks: ['Pandas'], databases: ['PostgreSQL'], other: ['Power BI', 'PowerPoint'] },
+            skills: ['executive communication', 'insight prioritization', 'decision support'],
+            tools: ['Python', 'SQL', 'Power BI'],
+            steps: ['Frame business questions', 'Prepare analysis dataset', 'Build executive visuals', 'Write narrative summary', 'Present recommendations'],
+            portfolio: 'Proves analyst impact beyond charts into decisions'
         },
 
-        // --- PLAN C: IT SUPPORT (5 projects) ---
+        // --- PLAN A: CYBERSECURITY (10 additional projects) ---
         {
-            id: 11, plan: 'C', name: 'Home Lab Setup & Documentation',
-            difficulty: 'Beginner-Intermediate', time: '1 week',
-            desc: 'Build a virtualized home lab with Active Directory, networking, and detailed documentation.',
-            problem: 'IT support candidates are often rejected for lacking hands-on experience. Without access to enterprise environments, it\'s difficult to practice real-world scenarios like AD management, Group Policy, DNS troubleshooting, and multi-OS networking.',
-            solution: 'Build a fully virtualized lab with Windows Server (AD DS, DNS, DHCP, Group Policy), Ubuntu Server, and Windows 10 clients. Document the entire setup process with screenshots, network diagrams, and troubleshooting notes — creating a portfolio piece.',
-            technologies: { languages: ['PowerShell', 'Bash'], frameworks: [], databases: [], other: ['VirtualBox/VMware', 'Windows Server 2022', 'Ubuntu Server', 'Active Directory', 'DNS', 'DHCP', 'Group Policy', 'Draw.io'] },
-            skills: ['Virtualization', 'Active Directory', 'documentation'],
-            tools: ['VirtualBox', 'Windows Server', 'Ubuntu'],
-            steps: ['Select hardware', 'Install VirtualBox', 'Setup Network (NAT/Bridge)', 'Install Windows Server + AD', 'Document topology'],
-            portfolio: 'Shows hands-on initiative and self-learning'
+            id: 11, plan: 'A', name: 'SOC Alert Triage Playbook',
+            difficulty: 'Beginner-Intermediate', time: '4-6 days',
+            desc: 'Design a practical triage flow for common SOC alerts with severity mapping and response actions.',
+            problem: 'Analysts burn time without standardized triage steps, causing inconsistent investigations and missed threats.',
+            solution: 'Create a playbook for phishing, brute-force, malware, and suspicious login alerts with clear decision trees, evidence checklist, and escalation criteria.',
+            technologies: { languages: ['Markdown'], frameworks: ['MITRE ATT&CK'], databases: [], other: ['TheHive', 'Wazuh', 'Splunk'] },
+            skills: ['incident triage', 'playbook design', 'threat prioritization'],
+            tools: ['TheHive', 'Wazuh', 'Splunk'],
+            steps: ['Identify top alert types', 'Define severity rubric', 'Document response steps', 'Create evidence checklist', 'Run tabletop review'],
+            portfolio: 'Demonstrates SOC process maturity and practical IR thinking'
         },
         {
-            id: 12, plan: 'C', name: 'Network Setup for Small Business',
-            difficulty: 'Intermediate', time: '1-2 days per client',
-            desc: 'Design and implement complete network infrastructure with security and documentation.',
-            problem: 'Small businesses in Uganda often have poorly configured networks: no VLANs, default router passwords, open WiFi, no documentation. This leads to security breaches, slow performance, and costly downtime when issues arise.',
-            solution: 'Perform a site survey, design a network topology with proper segmentation (VLANs), configure routers/switches with security hardening, set up secured WiFi with WPA3, and deliver complete documentation including network diagrams and credential management.',
-            technologies: { languages: [], frameworks: [], databases: [], other: ['Cisco/MikroTik Routers', 'Managed Switches', 'Ubiquiti UniFi', 'Wireshark', 'Draw.io', 'Cat6 Cabling', 'TP-Link/Netgear'] },
-            skills: ['Networking', 'router configuration', 'security'],
-            tools: ['Routers', 'switches', 'cable management'],
-            steps: ['Assess requirements', 'Run cabling', 'Configure Router/WiFi', 'Secure access points', 'Document network map'],
-            portfolio: 'Practical networking skills employers want to see'
+            id: 12, plan: 'A', name: 'Phishing Detection Pipeline',
+            difficulty: 'Intermediate', time: '1 week',
+            desc: 'Build an automated pipeline to score suspicious emails using header and content indicators.',
+            problem: 'Teams receive high volumes of suspicious emails and need a repeatable way to prioritize likely phishing attempts.',
+            solution: 'Parse email headers, extract IOC features, score risk with weighted rules, and export analyst-ready summaries.',
+            technologies: { languages: ['Python'], frameworks: [], databases: ['SQLite'], other: ['YARA', 'VirusTotal API', 'Pandas'] },
+            skills: ['phishing analysis', 'automation', 'IOC extraction'],
+            tools: ['Python', 'VirusTotal API', 'Pandas'],
+            steps: ['Collect sample emails', 'Extract indicators', 'Define risk scoring', 'Generate analyst report', 'Tune false positives'],
+            portfolio: 'Shows automation applied to a high-impact SOC use case'
         },
         {
-            id: 13, plan: 'C', name: 'Office 365/Google Workspace Migration',
-            difficulty: 'Intermediate', time: '1-3 days per client',
-            desc: 'Migrate email, documents, train users, troubleshoot cloud platform issues.',
-            problem: 'Organizations moving from on-premise email or switching cloud providers risk data loss, downtime, and user frustration. Staff need training on the new platform, and DNS/MX records must be properly configured to prevent email disruption.',
-            solution: 'Plan and execute a structured migration: audit existing data, set up the new tenant, configure DNS/MX records, migrate mailboxes and documents using native tools, verify delivery, train staff with hands-on workshops, and provide post-migration support documentation.',
-            technologies: { languages: ['PowerShell'], frameworks: [], databases: [], other: ['Microsoft 365 Admin Center', 'Google Admin Console', 'Exchange Online', 'SharePoint', 'DNS Management', 'MX Toolbox', 'BitTitan MigrationWiz'] },
-            skills: ['Cloud administration', 'migration tools', 'training'],
-            tools: ['Microsoft 365 admin', 'Google Admin'],
-            steps: ['Setup tenant', 'Verify domain', 'Create users', 'Migrate emails/data', 'Train staff'],
-            portfolio: 'Cloud migration expertise — high demand skill'
+            id: 13, plan: 'A', name: 'Threat Hunting with Sigma Rules',
+            difficulty: 'Intermediate-Advanced', time: '1-2 weeks',
+            desc: 'Create and test Sigma detection rules against sample telemetry.',
+            problem: 'Static alerting misses emerging attacker behaviors that require hypothesis-driven hunts.',
+            solution: 'Write Sigma rules for suspicious process chains, encoded commands, and lateral movement indicators, then validate rule quality on logs.',
+            technologies: { languages: ['YAML'], frameworks: ['Sigma'], databases: ['Elasticsearch'], other: ['Sysmon', 'Kibana'] },
+            skills: ['threat hunting', 'detection engineering', 'log analysis'],
+            tools: ['Sigma', 'Sysmon', 'Kibana'],
+            steps: ['Define hunt hypotheses', 'Write Sigma rules', 'Replay sample attacks', 'Measure precision', 'Document tuning changes'],
+            portfolio: 'Great evidence of blue-team detection engineering ability'
         },
         {
-            id: 14, plan: 'C', name: 'Data Backup & Disaster Recovery Plan',
-            difficulty: 'Beginner-Intermediate', time: '1 week',
-            desc: 'Design and implement automated backup strategy with documented disaster recovery procedures.',
-            problem: 'Most small businesses have no backup strategy — or worse, untested backups that fail during recovery. Ransomware attacks, hardware failures, and accidental deletions cause permanent data loss without proper backup and disaster recovery planning.',
-            solution: 'Implement the 3-2-1 backup strategy (3 copies, 2 media types, 1 offsite). Set up automated daily backups using Windows Server Backup and cloud sync. Create a disaster recovery plan document with RPO/RTO targets, recovery procedures, and conduct a test recovery drill.',
-            technologies: { languages: ['PowerShell', 'Bash'], frameworks: [], databases: [], other: ['Windows Server Backup', 'Veeam Free', 'Acronis', 'Google Drive/OneDrive', 'NAS Storage', 'Clonezilla', 'Rsync'] },
-            skills: ['Backup software', 'cloud services', 'data management'],
-            tools: ['Windows Backup', 'cloud storage', 'cloning tools'],
-            steps: ['Identify critical data', 'Select backup medium (Cloud/NAS)', 'Configure auto-backup', 'Test recovery', 'Write DR policy'],
-            portfolio: 'Data protection expertise every company needs'
+            id: 14, plan: 'A', name: 'Cloud IAM Misconfiguration Audit',
+            difficulty: 'Intermediate', time: '1 week',
+            desc: 'Audit cloud IAM policies and identify privilege escalation risks.',
+            problem: 'Excessive IAM permissions are a common breach path in cloud environments.',
+            solution: 'Inventory identities and policies, detect wildcards and risky role assumptions, and provide least-privilege remediation guidance.',
+            technologies: { languages: ['Python'], frameworks: [], databases: [], other: ['AWS IAM Access Analyzer', 'Azure IAM', 'Prowler'] },
+            skills: ['cloud security', 'IAM review', 'risk reporting'],
+            tools: ['Prowler', 'AWS IAM Access Analyzer', 'Azure Portal'],
+            steps: ['Export IAM config', 'Flag risky permissions', 'Prioritize fixes', 'Apply least privilege updates', 'Retest'],
+            portfolio: 'Highlights practical cloud governance and access control skills'
         },
         {
-            id: 15, plan: 'C', name: 'IT Asset Management System',
-            difficulty: 'Intermediate', time: '2 weeks',
-            desc: 'Create a system to track company IT assets, maintenance schedules, and lifecycle management.',
-            problem: 'Companies lose track of hardware and software assets — leading to wasted licenses, missing equipment, unpatched systems, and audit failures. Without a centralized system, IT teams can\'t plan budgets or maintenance schedules.',
-            solution: 'Build a centralized asset tracking system with fields for asset type, serial number, location, assigned user, purchase date, warranty status, and maintenance schedule. Generate reports for audits, upcoming warranty expirations, and lifecycle replacement planning.',
-            technologies: { languages: ['Python', 'JavaScript', 'HTML', 'CSS'], frameworks: ['Django (optional)', 'Bootstrap'], databases: ['SQLite', 'Google Sheets'], other: ['Excel/Google Sheets', 'QR Code Generator', 'Barcode Scanner', 'Chart.js'] },
-            skills: ['Database management', 'reporting', 'inventory'],
-            tools: ['Excel/Google Sheets', 'custom web app'],
-            steps: ['Inventory all assets', 'Design tracking sheet/db', 'Tag physical assets', 'Input data', 'Setup maintenance schedule'],
-            portfolio: 'IT management skills valued in enterprise roles'
+            id: 15, plan: 'A', name: 'Container Security Baseline',
+            difficulty: 'Intermediate', time: '5-7 days',
+            desc: 'Build and enforce baseline controls for secure containerized workloads.',
+            problem: 'Containers are often deployed with weak defaults, expanding attack surface in CI/CD pipelines.',
+            solution: 'Scan images for CVEs, enforce minimal base images, configure runtime restrictions, and document secure deployment standards.',
+            technologies: { languages: ['YAML', 'Bash'], frameworks: ['CIS Benchmarks'], databases: [], other: ['Trivy', 'Docker', 'Kubernetes'] },
+            skills: ['container security', 'hardening', 'DevSecOps'],
+            tools: ['Trivy', 'Docker', 'kubectl'],
+            steps: ['Select baseline controls', 'Scan existing images', 'Harden Dockerfiles', 'Apply runtime policies', 'Publish checklist'],
+            portfolio: 'Shows cloud-native security readiness'
+        },
+        {
+            id: 16, plan: 'A', name: 'Malware Sandbox Analysis Notes',
+            difficulty: 'Intermediate', time: '1 week',
+            desc: 'Analyze malware samples safely and produce IOC-focused reports.',
+            problem: 'Security teams need practical malware triage capabilities to respond quickly to suspicious binaries.',
+            solution: 'Run samples in isolated sandbox, capture process/network behavior, extract indicators, and summarize findings for SOC consumption.',
+            technologies: { languages: ['Python'], frameworks: [], databases: [], other: ['Any.Run', 'Cuckoo Sandbox', 'Wireshark'] },
+            skills: ['malware analysis', 'IOC generation', 'incident reporting'],
+            tools: ['Any.Run', 'Wireshark', 'YARA'],
+            steps: ['Prepare sandbox', 'Execute sample safely', 'Collect behavior artifacts', 'Extract IOCs', 'Write response brief'],
+            portfolio: 'Useful DFIR artifact demonstrating investigative discipline'
+        },
+        {
+            id: 17, plan: 'A', name: 'SIEM Use Case Engineering',
+            difficulty: 'Advanced', time: '2 weeks',
+            desc: 'Design and implement 10 high-value SIEM detections with tuning notes.',
+            problem: 'Many SIEM deployments have noisy alerts and poor coverage of critical attack techniques.',
+            solution: 'Create mapped detections for ATT&CK techniques, test against benign/malicious data, and tune with suppression and thresholds.',
+            technologies: { languages: ['SPL', 'KQL'], frameworks: ['MITRE ATT&CK'], databases: ['Splunk Index', 'Log Analytics'] , other: ['Splunk', 'Microsoft Sentinel'] },
+            skills: ['SIEM engineering', 'detection tuning', 'ATT&CK mapping'],
+            tools: ['Splunk', 'Microsoft Sentinel'],
+            steps: ['Choose threat scenarios', 'Write detections', 'Validate with sample data', 'Tune noise', 'Document runbooks'],
+            portfolio: 'High-signal project for SOC/detection engineering roles'
+        },
+        {
+            id: 18, plan: 'A', name: 'Web App Bug Bounty Practice Lab',
+            difficulty: 'Intermediate', time: '1-2 weeks',
+            desc: 'Practice bug bounty methodology on legal lab targets and report findings professionally.',
+            problem: 'Bug bounty requires systematic recon and reporting, not just random scanning.',
+            solution: 'Run scoped recon, identify exploitable issues, verify impact, and submit standardized vulnerability reports with repro steps.',
+            technologies: { languages: ['JavaScript', 'Python'], frameworks: ['OWASP Top 10'], databases: [], other: ['Burp Suite', 'Subfinder', 'Nuclei'] },
+            skills: ['recon', 'web exploitation', 'report writing'],
+            tools: ['Burp Suite', 'Nuclei', 'Subfinder'],
+            steps: ['Define legal scope', 'Perform recon', 'Validate vulnerabilities', 'Assess impact', 'Write report'],
+            portfolio: 'Demonstrates offensive workflow and communication quality'
+        },
+        {
+            id: 19, plan: 'A', name: 'Blue Team Metrics Dashboard',
+            difficulty: 'Intermediate', time: '1 week',
+            desc: 'Create a dashboard for MTTD, MTTR, incident volumes, and alert quality metrics.',
+            problem: 'Security operations struggle to improve without measurable performance indicators.',
+            solution: 'Model SOC event data and build KPI dashboards with trend lines and SLA views for leadership reporting.',
+            technologies: { languages: ['SQL', 'Python'], frameworks: [], databases: ['PostgreSQL'], other: ['Power BI', 'Tableau'] },
+            skills: ['security metrics', 'data storytelling', 'operations reporting'],
+            tools: ['PostgreSQL', 'Power BI'],
+            steps: ['Define SOC KPIs', 'Prepare event model', 'Build visuals', 'Add SLA slices', 'Publish monthly report template'],
+            portfolio: 'Bridges technical security work with leadership visibility'
+        },
+        {
+            id: 20, plan: 'A', name: 'Incident Response Tabletop Kit',
+            difficulty: 'Beginner-Intermediate', time: '3-5 days',
+            desc: 'Build a reusable tabletop exercise kit for ransomware and data breach scenarios.',
+            problem: 'Teams often have plans on paper but little rehearsal of real incident decision-making.',
+            solution: 'Create scenario cards, inject timeline events, role prompts, and post-mortem templates to run recurring tabletop sessions.',
+            technologies: { languages: ['Markdown'], frameworks: ['NIST 800-61'], databases: [], other: ['Miro', 'Notion'] },
+            skills: ['incident planning', 'facilitation', 'post-incident review'],
+            tools: ['Notion', 'Miro'],
+            steps: ['Define scenario scope', 'Create inject timeline', 'Assign roles', 'Run tabletop', 'Capture lessons learned'],
+            portfolio: 'Demonstrates preparedness and leadership in response readiness'
+        },
+
+        // --- PLAN B: DATA ANALYST (10 additional projects) ---
+        {
+            id: 21, plan: 'B', name: 'Marketing Funnel Conversion Analysis',
+            difficulty: 'Intermediate', time: '1 week',
+            desc: 'Analyze full-funnel conversion from impressions to paid customers.',
+            problem: 'Marketing teams spend budget without clarity on where conversion drop-offs happen.',
+            solution: 'Build funnel stages, compute stage-to-stage conversion, segment by channel/campaign, and recommend optimization actions.',
+            technologies: { languages: ['SQL', 'Python'], frameworks: ['Pandas'], databases: ['PostgreSQL'], other: ['Power BI'] },
+            skills: ['funnel analytics', 'segmentation', 'business recommendations'],
+            tools: ['SQL', 'Python', 'Power BI'],
+            steps: ['Define funnel stages', 'Prepare event table', 'Calculate conversions', 'Segment by channel', 'Present actions'],
+            portfolio: 'Shows direct revenue-impact analytics'
+        },
+        {
+            id: 22, plan: 'B', name: 'A/B Test Results Analyzer',
+            difficulty: 'Intermediate', time: '4-6 days',
+            desc: 'Evaluate experiment outcomes with significance checks and stakeholder summary.',
+            problem: 'Teams run experiments but misinterpret noise as meaningful improvements.',
+            solution: 'Compute uplift, confidence intervals, and p-values; flag statistical validity; publish clear decision recommendation.',
+            technologies: { languages: ['Python', 'SQL'], frameworks: ['SciPy', 'Pandas'], databases: ['PostgreSQL'], other: ['Jupyter'] },
+            skills: ['experiment analysis', 'statistics', 'decision support'],
+            tools: ['Python', 'Jupyter', 'SciPy'],
+            steps: ['Ingest test data', 'Validate sample quality', 'Run significance tests', 'Summarize outcomes', 'Recommend next step'],
+            portfolio: 'Strong product analytics competency marker'
+        },
+        {
+            id: 23, plan: 'B', name: 'Supply Chain Delay Insights',
+            difficulty: 'Intermediate', time: '1 week',
+            desc: 'Identify causes of delivery delays and model risk patterns by route and vendor.',
+            problem: 'Operations teams face recurring delays but lack root-cause visibility.',
+            solution: 'Build delay KPIs, correlate delays with route/vendor/weather dimensions, and propose process improvements.',
+            technologies: { languages: ['SQL', 'Python'], frameworks: ['Pandas'], databases: ['PostgreSQL'], other: ['Tableau'] },
+            skills: ['root cause analysis', 'ops analytics', 'dashboarding'],
+            tools: ['SQL', 'Python', 'Tableau'],
+            steps: ['Define delay metrics', 'Join operational dimensions', 'Find top delay drivers', 'Visualize trends', 'Propose mitigations'],
+            portfolio: 'Demonstrates operational analytics impact'
+        },
+        {
+            id: 24, plan: 'B', name: 'HR Attrition Insights Dashboard',
+            difficulty: 'Beginner-Intermediate', time: '5 days',
+            desc: 'Analyze employee attrition trends by department, tenure, and role.',
+            problem: 'HR teams need evidence-driven retention strategies but often rely on anecdotal signals.',
+            solution: 'Create attrition cohorts, highlight high-risk segments, and present retention-focused recommendations with supporting visuals.',
+            technologies: { languages: ['SQL'], frameworks: [], databases: ['PostgreSQL'], other: ['Power BI', 'Excel'] },
+            skills: ['HR analytics', 'cohorting', 'executive communication'],
+            tools: ['SQL', 'Power BI'],
+            steps: ['Prepare HR dataset', 'Build attrition cohorts', 'Analyze segment risk', 'Create dashboard', 'Summarize retention ideas'],
+            portfolio: 'Business-friendly analysis with clear actionability'
+        },
+        {
+            id: 25, plan: 'B', name: 'Customer Segmentation Model',
+            difficulty: 'Advanced', time: '1-2 weeks',
+            desc: 'Segment customers using behavioral and monetary signals for targeted strategy.',
+            problem: 'One-size-fits-all campaigns reduce engagement and waste budget.',
+            solution: 'Engineer RFM features, run clustering, profile segments, and generate strategy playbook per segment.',
+            technologies: { languages: ['Python', 'SQL'], frameworks: ['scikit-learn', 'Pandas'], databases: ['PostgreSQL'], other: ['Jupyter'] },
+            skills: ['feature engineering', 'clustering', 'segment strategy'],
+            tools: ['Python', 'scikit-learn', 'Jupyter'],
+            steps: ['Build RFM metrics', 'Scale features', 'Run clustering', 'Interpret clusters', 'Create strategy brief'],
+            portfolio: 'Shows applied analytics + modeling capability'
+        },
+        {
+            id: 26, plan: 'B', name: 'Financial Performance Variance Report',
+            difficulty: 'Intermediate', time: '1 week',
+            desc: 'Build variance analysis between budget and actual performance.',
+            problem: 'Leadership needs fast visibility into where budget assumptions diverge from reality.',
+            solution: 'Create variance views by business unit, identify main drivers, and provide corrective action recommendations.',
+            technologies: { languages: ['SQL', 'Python'], frameworks: ['Pandas'], databases: ['PostgreSQL'], other: ['Power BI'] },
+            skills: ['financial analytics', 'variance analysis', 'executive reporting'],
+            tools: ['SQL', 'Python', 'Power BI'],
+            steps: ['Import budget and actuals', 'Model variance calculations', 'Slice by dimension', 'Highlight outliers', 'Deliver executive memo'],
+            portfolio: 'Strong finance-facing analytics project'
+        },
+        {
+            id: 27, plan: 'B', name: 'Product Usage Cohort Dashboard',
+            difficulty: 'Intermediate', time: '1 week',
+            desc: 'Track retention and engagement by signup cohort over time.',
+            problem: 'Product teams need to know whether changes improve long-term user retention.',
+            solution: 'Build cohort tables and heatmaps, compare retention curves, and annotate product release impacts.',
+            technologies: { languages: ['SQL', 'Python'], frameworks: ['Pandas'], databases: ['PostgreSQL'], other: ['Tableau'] },
+            skills: ['cohort analysis', 'retention analytics', 'product insights'],
+            tools: ['SQL', 'Python', 'Tableau'],
+            steps: ['Define cohort keys', 'Build retention matrix', 'Create heatmap visuals', 'Compare pre/post release', 'Recommend experiments'],
+            portfolio: 'Excellent product analytics case study'
+        },
+        {
+            id: 28, plan: 'B', name: 'Customer Support Ticket Intelligence',
+            difficulty: 'Intermediate', time: '5-7 days',
+            desc: 'Analyze support ticket trends, resolution times, and recurring issue categories.',
+            problem: 'Support teams need data-backed prioritization to reduce backlog and improve response quality.',
+            solution: 'Classify ticket categories, measure SLA breaches, and surface high-impact recurring issues for process fixes.',
+            technologies: { languages: ['Python', 'SQL'], frameworks: ['Pandas'], databases: ['PostgreSQL'], other: ['Power BI'] },
+            skills: ['service analytics', 'SLA reporting', 'process improvement'],
+            tools: ['Python', 'SQL', 'Power BI'],
+            steps: ['Load ticket history', 'Classify issue categories', 'Compute SLA metrics', 'Visualize bottlenecks', 'Propose improvements'],
+            portfolio: 'Shows operations + customer experience analytics'
+        },
+        {
+            id: 29, plan: 'B', name: 'Geo Sales Performance Map',
+            difficulty: 'Beginner-Intermediate', time: '4-6 days',
+            desc: 'Build location-aware sales visuals to compare region performance.',
+            problem: 'Regional teams need visibility into underperforming territories and growth opportunities.',
+            solution: 'Map sales and margin metrics by geography, compare trend deltas, and identify expansion priorities.',
+            technologies: { languages: ['SQL'], frameworks: [], databases: ['PostgreSQL'], other: ['Tableau', 'Power BI Maps'] },
+            skills: ['geospatial analytics', 'sales reporting', 'regional planning'],
+            tools: ['SQL', 'Tableau'],
+            steps: ['Prepare geo dimensions', 'Join sales metrics', 'Build map visuals', 'Compare regional trends', 'Draft territory recommendations'],
+            portfolio: 'Clear business-facing visualization project'
+        },
+        {
+            id: 30, plan: 'B', name: 'End-to-End Analytics Portfolio Site',
+            difficulty: 'Advanced', time: '1-2 weeks',
+            desc: 'Publish your analytics projects with methodology, dashboards, and outcome summaries.',
+            problem: 'Analysts often have great work but weak presentation, reducing interview impact.',
+            solution: 'Build a portfolio site featuring problem context, data prep steps, dashboards, and measurable outcomes for each project.',
+            technologies: { languages: ['HTML', 'CSS', 'JavaScript'], frameworks: [], databases: [], other: ['GitHub Pages', 'Power BI Embed'] },
+            skills: ['portfolio storytelling', 'analytics communication', 'personal branding'],
+            tools: ['GitHub Pages', 'Power BI', 'Tableau Public'],
+            steps: ['Choose 4-6 projects', 'Write structured case studies', 'Embed dashboards', 'Add outcomes section', 'Publish and test mobile layout'],
+            portfolio: 'High-value capstone for job applications'
         }
     ]
 };

@@ -22,6 +22,8 @@
     <meta property="twitter:image" content="assets/og-image.jpg">
 
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="apple-touch-icon" href="assets/logo.svg">
+    <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="css/styles.css">
     <!-- Inline critical CSS for loading state -->
     <style>
@@ -52,18 +54,18 @@
         <p>Weaving your path...</p>
     </div>
 
-    <div id="app" style="display: none;">
+    <div id="app" class="app-hidden">
         <header>
             <div class="container header-content">
                 <div class="logo-wrap">
-                    <button id="mobile-menu-toggle" class="btn-icon glass mobile-only">☰</button>
-                    <div class="brand" onclick="app.switchTab('dashboard')" style="cursor: pointer;">
+                    <button type="button" id="mobile-menu-toggle" class="btn-icon glass mobile-only" aria-label="Toggle navigation menu">☰</button>
+                    <button type="button" class="brand brand-button" onclick="app.switchTab('dashboard')" aria-label="Go to dashboard">
                         <span>✨</span> Pathweaver
-                    </div>
+                    </button>
                 </div>
                 <div class="search-container">
                     <input type="text" id="global-search" placeholder="Search resources, tools, or projects..."
-                        class="glass">
+                        class="glass" aria-label="Search resources, tools, or projects">
                 </div>
                 <div class="header-stats mobile-hide">
                     <div class="stat-item">
@@ -76,11 +78,10 @@
                     </div>
                 </div>
                 <div class="header-actions">
-                    <button id="theme-toggle" class="btn-icon glass">☀️</button>
-                    <button onclick="app.exportData()" class="btn-icon glass" title="Export Data">💾</button>
-                    <label class="btn-icon glass" title="Import Data">
-                        📥 <input type="file" onchange="app.importData(this)" style="display:none;">
-                    </label>
+                    <button type="button" id="theme-toggle" class="btn-icon glass" aria-label="Toggle dark and light theme">☀️</button>
+                    <button type="button" onclick="app.exportData()" class="btn-icon glass" title="Export Data" aria-label="Export progress data">💾</button>
+                    <input type="file" id="import-file-header" hidden onchange="app.importData(this)">
+                    <button type="button" class="btn-icon glass" title="Import Data" aria-label="Import progress data" onclick="document.getElementById('import-file-header').click()">📥</button>
                 </div>
             </div>
         </header>
@@ -96,10 +97,7 @@
                     <span class="nav-icon">🛡️</span> Cybersecurity
                 </div>
                 <div class="nav-item" data-tab="planB">
-                    <span class="nav-icon">🐍</span> Django Developer
-                </div>
-                <div class="nav-item" data-tab="planC">
-                    <span class="nav-icon">🔧</span> IT Support
+                    <span class="nav-icon">📈</span> Data Analyst
                 </div>
                 <div class="nav-group">UTILITIES</div>
                 <div class="nav-item" data-tab="projects">
@@ -127,11 +125,11 @@
             <div class="footer-content container">
                 <p>&copy; 2026 Pathweaver. Weaving Success.</p>
                 <div class="data-controls">
-                    <button onclick="app.exportData()" class="btn-secondary glass">Export Data</button>
+                    <button type="button" onclick="app.exportData()" class="btn-secondary glass">Export Data</button>
                     <input type="file" id="import-file" hidden onchange="app.importData(this)">
-                    <button onclick="document.getElementById('import-file').click()" class="btn-secondary glass">Import
+                    <button type="button" onclick="document.getElementById('import-file').click()" class="btn-secondary glass">Import
                         Data</button>
-                    <button onclick="app.clearAllData()" class="btn-secondary glass" style="color: var(--danger);">Clear
+                    <button type="button" onclick="app.clearAllData()" class="btn-secondary glass btn-danger-text">Clear
                         Data</button>
                 </div>
             </div>

@@ -136,6 +136,15 @@ header {
     transition: var(--transition);
 }
 
+.brand-button {
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    font: inherit;
+    text-align: left;
+}
+
 .brand:hover {
     filter: brightness(1.2);
     transform: scale(1.02);
@@ -296,6 +305,10 @@ nav {
     width: 100%;
 }
 
+#app.app-hidden {
+    display: none;
+}
+
 .app-shell {
     display: flex;
     flex: 1;
@@ -454,6 +467,10 @@ nav {
     border-color: var(--accent-cyan);
 }
 
+.btn-danger-text {
+    color: var(--danger);
+}
+
 .btn-icon {
     width: 40px;
     height: 40px;
@@ -477,13 +494,17 @@ input.glass {
     color: var(--text-main);
     padding: 0.8rem 1.2rem;
     border-radius: 12px;
-    outline: none;
     transition: var(--transition);
 }
 
 input.glass:focus {
     border-color: var(--accent-cyan);
     background: rgba(255, 255, 255, 0.06);
+}
+
+:focus-visible {
+    outline: 2px solid var(--accent-cyan);
+    outline-offset: 2px;
 }
 
 .badge.glass {
@@ -792,7 +813,6 @@ input[type="checkbox"] {
 }
 
 .search-input:focus {
-    outline: none;
     border-color: var(--accent-primary);
 }
 
