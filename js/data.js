@@ -320,6 +320,12 @@ const careerData = {
     },
     opportunities: {
         global: {
+            verification: {
+                jobBoards: '2026-03-20',
+                communities: '2026-03-19',
+                scholarships: '2026-03-18',
+                freelance: '2026-03-17'
+            },
             jobBoards: [
                 { name: 'LinkedIn Jobs', url: 'https://www.linkedin.com/jobs' },
                 { name: 'Indeed Worldwide', url: 'https://www.indeed.com/worldwide' },
@@ -348,6 +354,13 @@ const careerData = {
                 { name: 'Fiverr', url: 'https://www.fiverr.com' },
                 { name: 'Freelancer', url: 'https://www.freelancer.com' }
             ]
+        },
+        countryMeta: {
+            Uganda: { continent: 'Africa', verifiedOn: '2026-03-20' },
+            Kenya: { continent: 'Africa', verifiedOn: '2026-03-19' },
+            Nigeria: { continent: 'Africa', verifiedOn: '2026-03-18' },
+            India: { continent: 'Asia', verifiedOn: '2026-03-20' },
+            'South Africa': { continent: 'Africa', verifiedOn: '2026-03-18' }
         },
         countries: {
             Uganda: {

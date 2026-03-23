@@ -2,6 +2,7 @@ const app = {
     // State
     currentTab: 'dashboard',
     selectedCountry: 'Uganda',
+    selectedContinent: 'All',
     searchQuery: '',
     projectFilters: { plan: 'all', difficulty: 'all', status: 'all' },
 
@@ -166,6 +167,13 @@ const app = {
 
     setCountry(countryName) {
         this.selectedCountry = countryName;
+        if (this.currentTab === 'uganda') {
+            this.render();
+        }
+    },
+
+    setContinent(continentName) {
+        this.selectedContinent = continentName;
         if (this.currentTab === 'uganda') {
             this.render();
         }
@@ -1005,9 +1013,11 @@ const Views = {
         });
 
         const countryGroups = opportunities.countries || {};
+        const countryMeta = opportunities.countryMeta || {};
         Object.entries(countryGroups).forEach(([country, groups]) => {
+            const continent = countryMeta[country]?.continent || '';
             Object.values(groups).flat().forEach(item => {
-                const searchable = `${item.name} ${item.url} ${country}`.toLowerCase();
+                const searchable = `${item.name} ${item.url} ${country} ${continent}`.toLowerCase();
                 if (searchable.includes(lowerQ)) {
                     results.push({ ...item, category: `${country} Opportunity`, tab: 'uganda' });
                 }
@@ -1116,14 +1126,46 @@ const Views = {
     uganda() {
         const opportunities = careerData.opportunities || {};
         const global = opportunities.global || {};
+        const globalVerification = global.verification || {};
+        const countryMeta = opportunities.countryMeta || {};
         const countries = opportunities.countries || {};
-        const countryNames = Object.keys(countries);
-        const activeCountry = countryNames.includes(app.selectedCountry) ? app.selectedCountry : (countryNames[0] || 'Uganda');
-        const countryData = countries[activeCountry] || { jobBoards: [], communities: [], programs: [] };
+        const allCountryNames = Object.keys(countries);
 
-        const renderLinks = (items = []) => items.map(item => `
-            <a href="${item.url}" target="_blank" class="hub-link glass">${item.name}</a>
-        `).join('');
+        const continents = ['All', ...new Set(allCountryNames.map(c => countryMeta[c]?.continent || 'Other'))];
+        const filteredCountryNames = app.selectedContinent === 'All'
+            ? allCountryNames
+            : allCountryNames.filter(c => (countryMeta[c]?.continent || 'Other') === app.selectedContinent);
+
+        const activeCountry = filteredCountryNames.includes(app.selectedCountry)
+            ? app.selectedCountry
+            : (filteredCountryNames[0] || allCountryNames[0] || 'Uganda');
+
+        app.selectedCountry = activeCountry;
+
+        const countryData = countries[activeCountry] || { jobBoards: [], communities: [], programs: [] };
+        const activeMeta = countryMeta[activeCountry] || { continent: 'Other', verifiedOn: '' };
+
+        const getFreshness = (verifiedOn) => {
+            if (!verifiedOn) return { label: 'Review source', cls: 'stale' };
+            const now = new Date();
+            const date = new Date(verifiedOn);
+            const ageDays = Math.floor((now - date) / (1000 * 60 * 60 * 24));
+            if (ageDays <= 45) return { label: 'Verified recently', cls: 'recent' };
+            if (ageDays <= 120) return { label: 'Needs quick recheck', cls: 'warning' };
+            return { label: 'Review source', cls: 'stale' };
+        };
+
+        const renderLinkCard = (item, fallbackVerifiedOn = '') => {
+            const freshness = getFreshness(item.verifiedOn || fallbackVerifiedOn);
+            return `
+                <a href="${item.url}" target="_blank" class="hub-link glass">
+                    <span>${item.name}</span>
+                    <small class="verify-pill ${freshness.cls}">${freshness.label}</small>
+                </a>
+            `;
+        };
+
+        const renderLinks = (items = [], fallbackVerifiedOn = '') => items.map(item => renderLinkCard(item, fallbackVerifiedOn)).join('');
 
         return `
             <div class="hero-section glass mb-2 animate-fade-in">
@@ -1133,9 +1175,13 @@ const Views = {
 
             <div class="glass p-2 mb-2 animate-fade-in">
                 <div class="project-filters" style="margin-bottom:0;">
+                    <label for="continent-select" class="text-muted" style="font-weight:600;">Continent</label>
+                    <select id="continent-select" class="filter-select glass" onchange="app.setContinent(this.value)">
+                        ${continents.map(cont => `<option value="${cont}" ${cont === app.selectedContinent ? 'selected' : ''}>${cont}</option>`).join('')}
+                    </select>
                     <label for="country-select" class="text-muted" style="font-weight:600;">Choose Country Focus</label>
                     <select id="country-select" class="filter-select glass" onchange="app.setCountry(this.value)">
-                        ${countryNames.map(c => `<option value="${c}" ${c === activeCountry ? 'selected' : ''}>${c}</option>`).join('')}
+                        ${filteredCountryNames.map(c => `<option value="${c}" ${c === activeCountry ? 'selected' : ''}>${c}</option>`).join('')}
                     </select>
                 </div>
             </div>
@@ -1144,45 +1190,45 @@ const Views = {
                 <div class="glass p-2">
                     <h3 class="accent-color mb-1">Global Job Boards</h3>
                     <div class="hub-list">
-                        ${renderLinks(global.jobBoards)}
+                        ${renderLinks(global.jobBoards, globalVerification.jobBoards)}
                     </div>
                 </div>
                 <div class="glass p-2">
                     <h3 class="violet-color mb-1">Global Communities</h3>
                     <div class="hub-list">
-                        ${renderLinks(global.communities)}
+                        ${renderLinks(global.communities, globalVerification.communities)}
                     </div>
                 </div>
                 <div class="glass p-2">
                     <h3 class="accent-color mb-1">Global Scholarships & Learning Aid</h3>
                     <div class="hub-list">
-                        ${renderLinks(global.scholarships)}
+                        ${renderLinks(global.scholarships, globalVerification.scholarships)}
                     </div>
                 </div>
             </div>
 
             <div class="hero-section glass mt-2 mb-2 animate-fade-in" style="padding: 1.5rem; text-align:left;">
                 <h2 style="margin-bottom:0.4rem;">${activeCountry} Opportunities</h2>
-                <p class="text-muted">Country-focused pathways to jobs, communities, and accelerators.</p>
+                <p class="text-muted">${activeMeta.continent} pathways to jobs, communities, and accelerators.</p>
             </div>
 
             <div class="responsive-grid animate-fade-in" style="animation-delay: 0.25s">
                 <div class="glass p-2">
                     <h3 class="accent-color mb-1">${activeCountry} Job Boards</h3>
                     <div class="hub-list">
-                        ${renderLinks(countryData.jobBoards)}
+                        ${renderLinks(countryData.jobBoards, activeMeta.verifiedOn)}
                     </div>
                 </div>
                 <div class="glass p-2">
                     <h3 class="violet-color mb-1">${activeCountry} Communities</h3>
                     <div class="hub-list">
-                        ${renderLinks(countryData.communities)}
+                        ${renderLinks(countryData.communities, activeMeta.verifiedOn)}
                     </div>
                 </div>
                 <div class="glass p-2">
                     <h3 class="accent-color mb-1">${activeCountry} Programs</h3>
                     <div class="hub-list">
-                        ${renderLinks(countryData.programs)}
+                        ${renderLinks(countryData.programs, activeMeta.verifiedOn)}
                     </div>
                 </div>
             </div>
