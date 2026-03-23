@@ -3,6 +3,7 @@ const app = {
     currentTab: 'dashboard',
     selectedCountry: 'Uganda',
     selectedContinent: 'All',
+    verifiedOnly: false,
     searchQuery: '',
     projectFilters: { plan: 'all', difficulty: 'all', status: 'all' },
 
@@ -174,6 +175,13 @@ const app = {
 
     setContinent(continentName) {
         this.selectedContinent = continentName;
+        if (this.currentTab === 'uganda') {
+            this.render();
+        }
+    },
+
+    setVerifiedOnly(enabled) {
+        this.verifiedOnly = !!enabled;
         if (this.currentTab === 'uganda') {
             this.render();
         }
@@ -1157,6 +1165,9 @@ const Views = {
 
         const renderLinkCard = (item, fallbackVerifiedOn = '') => {
             const freshness = getFreshness(item.verifiedOn || fallbackVerifiedOn);
+            if (app.verifiedOnly && freshness.cls !== 'recent') {
+                return '';
+            }
             return `
                 <a href="${item.url}" target="_blank" class="hub-link glass">
                     <span>${item.name}</span>
@@ -1165,7 +1176,13 @@ const Views = {
             `;
         };
 
-        const renderLinks = (items = [], fallbackVerifiedOn = '') => items.map(item => renderLinkCard(item, fallbackVerifiedOn)).join('');
+        const renderLinks = (items = [], fallbackVerifiedOn = '') => {
+            const html = items.map(item => renderLinkCard(item, fallbackVerifiedOn)).join('');
+            if (html.trim()) return html;
+            return `
+                <div class="hub-empty text-muted">No resources match the current freshness filter.</div>
+            `;
+        };
 
         return `
             <div class="hero-section glass mb-2 animate-fade-in">
@@ -1183,6 +1200,10 @@ const Views = {
                     <select id="country-select" class="filter-select glass" onchange="app.setCountry(this.value)">
                         ${filteredCountryNames.map(c => `<option value="${c}" ${c === activeCountry ? 'selected' : ''}>${c}</option>`).join('')}
                     </select>
+                    <label class="verified-toggle glass" for="verified-only-toggle">
+                        <input id="verified-only-toggle" type="checkbox" ${app.verifiedOnly ? 'checked' : ''} onchange="app.setVerifiedOnly(this.checked)">
+                        <span>Show only verified recently</span>
+                    </label>
                 </div>
             </div>
 
