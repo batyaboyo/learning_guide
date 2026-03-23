@@ -1,6 +1,7 @@
 const app = {
     // State
     currentTab: 'dashboard',
+    selectedCountry: 'Uganda',
     searchQuery: '',
     projectFilters: { plan: 'all', difficulty: 'all', status: 'all' },
 
@@ -161,6 +162,13 @@ const app = {
     updateProjectFilter(type, value) {
         this.projectFilters[type] = value;
         this.render();
+    },
+
+    setCountry(countryName) {
+        this.selectedCountry = countryName;
+        if (this.currentTab === 'uganda') {
+            this.render();
+        }
     },
 
     openProjectModal(id) {
@@ -987,10 +995,34 @@ const Views = {
             }
         });
 
+        const opportunities = careerData.opportunities || {};
+        const globalGroups = opportunities.global ? Object.values(opportunities.global) : [];
+        globalGroups.flat().forEach(item => {
+            const searchable = `${item.name} ${item.url}`.toLowerCase();
+            if (searchable.includes(lowerQ)) {
+                results.push({ ...item, category: 'Global Opportunity', tab: 'uganda' });
+            }
+        });
+
+        const countryGroups = opportunities.countries || {};
+        Object.entries(countryGroups).forEach(([country, groups]) => {
+            Object.values(groups).flat().forEach(item => {
+                const searchable = `${item.name} ${item.url} ${country}`.toLowerCase();
+                if (searchable.includes(lowerQ)) {
+                    results.push({ ...item, category: `${country} Opportunity`, tab: 'uganda' });
+                }
+            });
+        });
+
         const list = results.map(r => {
             const clickAction = r.category === 'Project'
                 ? `app.switchTab('projects')`
                 : `app.switchTab('plan${r.planId}', ${r.phaseIdx})`;
+
+            const isOpportunity = r.tab === 'uganda';
+            const finalClick = isOpportunity
+                ? `app.switchTab('uganda')`
+                : clickAction;
 
             return `
                 <div class="card glass mb-2 p-1 search-result-card">
@@ -998,7 +1030,7 @@ const Views = {
                         <strong>${r.name}</strong>
                         <small class="text-muted">${r.category} ${r.planId ? `(${careerData.plans[r.planId].title})` : ''}</small>
                     </div>
-                    <button class="badge glass" onclick="${clickAction}">View</button>
+                    <button class="badge glass" onclick="${finalClick}">View</button>
                 </div>
             `;
         }).join('');
@@ -1082,30 +1114,75 @@ const Views = {
     },
 
     uganda() {
-        const jobsHtml = careerData.uganda.jobs.map(j => `
-            <a href="${j.url}" target="_blank" class="hub-link glass">${j.name}</a>
-        `).join('');
+        const opportunities = careerData.opportunities || {};
+        const global = opportunities.global || {};
+        const countries = opportunities.countries || {};
+        const countryNames = Object.keys(countries);
+        const activeCountry = countryNames.includes(app.selectedCountry) ? app.selectedCountry : (countryNames[0] || 'Uganda');
+        const countryData = countries[activeCountry] || { jobBoards: [], communities: [], programs: [] };
 
-        const communitiesHtml = careerData.uganda.communities.map(c => `
-            <a href="${c.url}" target="_blank" class="hub-link glass">${c.name}</a>
+        const renderLinks = (items = []) => items.map(item => `
+            <a href="${item.url}" target="_blank" class="hub-link glass">${item.name}</a>
         `).join('');
 
         return `
             <div class="hero-section glass mb-2 animate-fade-in">
-                <h1>🇺🇬 Uganda Tech Hub</h1>
-                <p class="text-muted">Empowering local talent with professional roadmaps and local opportunities.</p>
+                <h1>🌍 Global & Country Opportunities Hub</h1>
+                <p class="text-muted">Discover global pathways and country-focused jobs, communities, and growth programs.</p>
             </div>
+
+            <div class="glass p-2 mb-2 animate-fade-in">
+                <div class="project-filters" style="margin-bottom:0;">
+                    <label for="country-select" class="text-muted" style="font-weight:600;">Choose Country Focus</label>
+                    <select id="country-select" class="filter-select glass" onchange="app.setCountry(this.value)">
+                        ${countryNames.map(c => `<option value="${c}" ${c === activeCountry ? 'selected' : ''}>${c}</option>`).join('')}
+                    </select>
+                </div>
+            </div>
+
             <div class="responsive-grid animate-fade-in" style="animation-delay: 0.2s">
                 <div class="glass p-2">
-                    <h3 class="accent-color mb-1">Local Job Boards</h3>
+                    <h3 class="accent-color mb-1">Global Job Boards</h3>
                     <div class="hub-list">
-                        ${jobsHtml}
+                        ${renderLinks(global.jobBoards)}
                     </div>
                 </div>
                 <div class="glass p-2">
-                    <h3 class="violet-color mb-1">Tech Communities</h3>
+                    <h3 class="violet-color mb-1">Global Communities</h3>
                     <div class="hub-list">
-                        ${communitiesHtml}
+                        ${renderLinks(global.communities)}
+                    </div>
+                </div>
+                <div class="glass p-2">
+                    <h3 class="accent-color mb-1">Global Scholarships & Learning Aid</h3>
+                    <div class="hub-list">
+                        ${renderLinks(global.scholarships)}
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-section glass mt-2 mb-2 animate-fade-in" style="padding: 1.5rem; text-align:left;">
+                <h2 style="margin-bottom:0.4rem;">${activeCountry} Opportunities</h2>
+                <p class="text-muted">Country-focused pathways to jobs, communities, and accelerators.</p>
+            </div>
+
+            <div class="responsive-grid animate-fade-in" style="animation-delay: 0.25s">
+                <div class="glass p-2">
+                    <h3 class="accent-color mb-1">${activeCountry} Job Boards</h3>
+                    <div class="hub-list">
+                        ${renderLinks(countryData.jobBoards)}
+                    </div>
+                </div>
+                <div class="glass p-2">
+                    <h3 class="violet-color mb-1">${activeCountry} Communities</h3>
+                    <div class="hub-list">
+                        ${renderLinks(countryData.communities)}
+                    </div>
+                </div>
+                <div class="glass p-2">
+                    <h3 class="accent-color mb-1">${activeCountry} Programs</h3>
+                    <div class="hub-list">
+                        ${renderLinks(countryData.programs)}
                     </div>
                 </div>
             </div>

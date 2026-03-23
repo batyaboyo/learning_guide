@@ -318,6 +318,125 @@ const careerData = {
             }
         }
     },
+    opportunities: {
+        global: {
+            jobBoards: [
+                { name: 'LinkedIn Jobs', url: 'https://www.linkedin.com/jobs' },
+                { name: 'Indeed Worldwide', url: 'https://www.indeed.com/worldwide' },
+                { name: 'Wellfound (Startups)', url: 'https://wellfound.com/jobs' },
+                { name: 'Remote OK', url: 'https://remoteok.com' },
+                { name: 'We Work Remotely', url: 'https://weworkremotely.com' }
+            ],
+            communities: [
+                { name: 'Roadmap.sh Community', url: 'https://roadmap.sh/community' },
+                { name: 'Kaggle Community', url: 'https://www.kaggle.com/discussions' },
+                { name: 'OWASP Chapters', url: 'https://owasp.org/chapters/' },
+                { name: 'GitHub Explore', url: 'https://github.com/explore' },
+                { name: 'Hashnode', url: 'https://hashnode.com' }
+            ],
+            scholarships: [
+                { name: 'Google Career Certificates Scholarships', url: 'https://grow.google/certificates/' },
+                { name: 'Coursera Financial Aid', url: 'https://www.coursera.org/about/financial-aid' },
+                { name: 'Microsoft Learn Student Hub', url: 'https://learn.microsoft.com/en-us/training/student-hub/' },
+                { name: 'IBM SkillsBuild', url: 'https://skillsbuild.org' },
+                { name: 'AWS Educate', url: 'https://aws.amazon.com/education/awseducate/' }
+            ],
+            freelance: [
+                { name: 'Upwork', url: 'https://www.upwork.com' },
+                { name: 'Toptal', url: 'https://www.toptal.com' },
+                { name: 'Contra', url: 'https://contra.com' },
+                { name: 'Fiverr', url: 'https://www.fiverr.com' },
+                { name: 'Freelancer', url: 'https://www.freelancer.com' }
+            ]
+        },
+        countries: {
+            Uganda: {
+                jobBoards: [
+                    { name: 'BrighterMonday Uganda', url: 'https://www.brightermonday.co.ug' },
+                    { name: 'Fuzu Uganda', url: 'https://www.fuzu.com/ug' },
+                    { name: 'LinkedIn Jobs Uganda', url: 'https://www.linkedin.com/jobs' },
+                    { name: 'Remote African Jobs', url: 'https://remoteafrican.com' },
+                    { name: 'Daily Monitor Jobs & Careers', url: 'https://www.monitor.co.ug/uganda/jobs-and-career' }
+                ],
+                communities: [
+                    { name: 'Innovation Village (Ntinda)', url: 'https://innovationvillage.co.ug' },
+                    { name: 'Outbox Hub', url: 'https://outbox.co.ug' },
+                    { name: 'Hive Colab', url: 'http://www.hivecolab.org' },
+                    { name: 'Refactory Academy', url: 'https://refactory.ug' },
+                    { name: 'GDG Kampala', url: 'https://gdg.community.dev/gdg-kampala/' }
+                ],
+                programs: [
+                    { name: 'Andela Learning Community (Africa)', url: 'https://andela.com' },
+                    { name: 'UNICEF Venture Fund (Global, incl. Uganda)', url: 'https://www.unicefinnovationfund.org' },
+                    { name: 'Mastercard Foundation Programs', url: 'https://mastercardfdn.org' }
+                ]
+            },
+            Kenya: {
+                jobBoards: [
+                    { name: 'BrighterMonday Kenya', url: 'https://www.brightermonday.co.ke' },
+                    { name: 'MyJobMag Kenya', url: 'https://www.myjobmag.co.ke' },
+                    { name: 'Fuzu Kenya', url: 'https://www.fuzu.com/ke' }
+                ],
+                communities: [
+                    { name: 'Nailab', url: 'https://nailab.co.ke' },
+                    { name: 'iHub Nairobi', url: 'https://ihub.co.ke' },
+                    { name: 'GDG Nairobi', url: 'https://gdg.community.dev/gdg-nairobi/' }
+                ],
+                programs: [
+                    { name: 'Ajira Digital Program', url: 'https://ajiradigital.go.ke' },
+                    { name: 'Moringa School', url: 'https://moringaschool.com' }
+                ]
+            },
+            Nigeria: {
+                jobBoards: [
+                    { name: 'Jobberman', url: 'https://www.jobberman.com' },
+                    { name: 'MyJobMag Nigeria', url: 'https://www.myjobmag.com' },
+                    { name: 'Hot Nigerian Jobs', url: 'https://www.hotnigerianjobs.com' }
+                ],
+                communities: [
+                    { name: 'CcHub', url: 'https://cchub.africa' },
+                    { name: 'GDG Lagos', url: 'https://gdg.community.dev/gdg-lagos/' },
+                    { name: 'forLoop Africa', url: 'https://forloop.africa' }
+                ],
+                programs: [
+                    { name: 'ALX Africa', url: 'https://www.alxafrica.com' },
+                    { name: 'Ingressive for Good', url: 'https://ingressive.org' }
+                ]
+            },
+            India: {
+                jobBoards: [
+                    { name: 'Naukri', url: 'https://www.naukri.com' },
+                    { name: 'LinkedIn India Jobs', url: 'https://www.linkedin.com/jobs' },
+                    { name: 'Cutshort', url: 'https://cutshort.io/jobs' }
+                ],
+                communities: [
+                    { name: 'GDG India Chapters', url: 'https://gdg.community.dev' },
+                    { name: 'Analytics Vidhya', url: 'https://www.analyticsvidhya.com' },
+                    { name: 'Null Community', url: 'https://null.community' }
+                ],
+                programs: [
+                    { name: 'NASSCOM FutureSkills Prime', url: 'https://futureskillsprime.in' },
+                    { name: 'Smart India Hackathon', url: 'https://www.sih.gov.in' }
+                ]
+            },
+            'South Africa': {
+                jobBoards: [
+                    { name: 'PNet', url: 'https://www.pnet.co.za' },
+                    { name: 'Careers24', url: 'https://www.careers24.com' },
+                    { name: 'OfferZen', url: 'https://www.offerzen.com' }
+                ],
+                communities: [
+                    { name: 'Geekulcha', url: 'https://www.geekulcha.com' },
+                    { name: 'GirlCode', url: 'https://girlcode.co.za' },
+                    { name: 'GDG Cape Town', url: 'https://gdg.community.dev/gdg-cape-town/' }
+                ],
+                programs: [
+                    { name: 'Explore Data Science Academy', url: 'https://www.explore.ai' },
+                    { name: 'Mlab Southern Africa', url: 'https://www.mlab.co.za' }
+                ]
+            }
+        }
+    },
     uganda: {
         communities: [
             { name: 'Innovation Village (Ntinda)', url: 'https://innovationvillage.co.ug' },
