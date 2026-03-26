@@ -22,7 +22,17 @@ const careerData = {
                         { name: 'Wazuh SIEM Lab Tutorial', url: 'https://www.youtube.com/watch?v=kYJv5_W_k6w', type: 'Video', platform: 'YouTube' },
                         { name: 'LetsDefend.io SOC Foundations', url: 'https://letsdefend.io/', type: 'Course', platform: 'LetsDefend' },
                         { name: 'Cybrary: Defensive Security Ops', url: 'https://www.cybrary.it/course/defensive-security-operations', type: 'Course', platform: 'Cybrary' },
-                        { name: 'Security Blue Team: FREE Training', url: 'https://www.securityblue.team/', type: 'Course', platform: 'SBT' }
+                        { name: 'Security Blue Team: FREE Training', url: 'https://www.securityblue.team/', type: 'Course', platform: 'SBT' },
+                        { name: 'John Hammond - SOC Analyst Role Overview', url: 'https://www.youtube.com/watch?v=H-Hqweb7i7M', type: 'Video', platform: 'YouTube' },
+                        { name: 'NetworkChuck - Network fundamentals for SOC', url: 'https://www.youtube.com/playlist?list=PLIhvC56v63IKrRHh3gvZZBAGvsvOhwrRF', type: 'Video', platform: 'YouTube' },
+                        { name: 'David Bombal - Security Fundamentals', url: 'https://www.youtube.com/playlist?list=PLhfrWIlLOoKPn7T4FnrNYVjCFDown7ZZN', type: 'Video', platform: 'YouTube' },
+                        { name: 'AntiSyphon Info Sec - Blue Team Ops', url: 'https://www.youtube.com/watch?v=VT7xVkFwSFI', type: 'Video', platform: 'YouTube' },
+                        { name: 'SANS Cyber Aces - Log Analysis Basics', url: 'https://www.youtube.com/watch?v=c_0_L_c9hXs', type: 'Video', platform: 'YouTube' },
+                        { name: 'Security Week - Incident Detection Deep Dive', url: 'https://www.youtube.com/watch?v=3gWnXdh1Iq8', type: 'Video', platform: 'YouTube' },
+                        { name: 'Ippsec - Log Analysis Tutorial', url: 'https://www.youtube.com/watch?v=Ox5w_SeFvq8', type: 'Video', platform: 'YouTube' },
+                        { name: 'StrongDM - SIEM Fundamentals', url: 'https://www.youtube.com/watch?v=vn-Aw4TqgZc', type: 'Video', platform: 'YouTube' },
+                        { name: 'Black Hills Info Sec - Alert Tuning 101', url: 'https://www.youtube.com/watch?v=I-mDmG0w8eg', type: 'Video', platform: 'YouTube' },
+                        { name: 'Splunk Virtual Classroom - SOC Playlist', url: 'https://www.youtube.com/playlist?list=PLxkuDJWnkjstGvLpwJ1E7AEzZ8Z4SXhqI', type: 'Video', platform: 'YouTube' }
                     ],
                     tools: [
                         { name: 'Wazuh', desc: 'Open-source SIEM/XDR.', url: 'https://wazuh.com/' },
@@ -56,7 +66,17 @@ const careerData = {
                         { name: 'Autopsy Forensic Tutorial', url: 'https://www.basistech.com/digital-forensics/autopsy/training/', type: 'Video', platform: 'Autopsy' },
                         { name: 'KAPE Tool Guide', url: 'https://aboutdfir.com/tools/kape/', type: 'Doc', platform: 'AboutDFIR' },
                         { name: 'Digital Forensics Search (GitHub)', url: 'https://github.com/DFIR-Science/Digital-Forensics-Challenges', type: 'Lab', platform: 'GitHub' },
-                        { name: 'SANS DFIR Summit Archives', url: 'https://www.sans.org/blog/sans-dfir-summit-archive/', type: 'Video', platform: 'SANS' }
+                        { name: 'SANS DFIR Summit Archives', url: 'https://www.sans.org/blog/sans-dfir-summit-archive/', type: 'Video', platform: 'SANS' },
+                        { name: 'John Hammond - Incident Response Handbook', url: 'https://www.youtube.com/watch?v=WA5Y7sFjEWk', type: 'Video', platform: 'YouTube' },
+                        { name: 'Tekleit Academy - Forensics Deep Dive', url: 'https://www.youtube.com/watch?v=6M1h4rL29QY', type: 'Video', platform: 'YouTube' },
+                        { name: 'Eric Zimmerman - Registry Analysis', url: 'https://www.youtube.com/watch?v=-FU9hNhqVJ0', type: 'Video', platform: 'YouTube' },
+                        { name: 'IppSec - Forensics Investigation Cases', url: 'https://www.youtube.com/watch?v=hqPPpZz0pYY', type: 'Video', platform: 'YouTube' },
+                        { name: 'DFIR Review - Incident Response Scenarios', url: 'https://www.youtube.com/watch?v=5yjXHEkXQcM', type: 'Video', platform: 'YouTube' },
+                        { name: 'Volatility Framework - Memory Forensics', url: 'https://www.youtube.com/watch?v=nJSYpLS0x5c', type: 'Video', platform: 'YouTube' },
+                        { name: 'AntiSyphon - Ransomware IR Response', url: 'https://www.youtube.com/watch?v=s5hELEMwAb4', type: 'Video', platform: 'YouTube' },
+                        { name: 'Black Hills Info Sec - Timeline Creation', url: 'https://www.youtube.com/watch?v=Eo1RcaNJGAE', type: 'Video', platform: 'YouTube' },
+                        { name: 'SANS OnDemand - Incident Handling', url: 'https://www.youtube.com/watch?v=Gt0l3mK6Qc0', type: 'Video', platform: 'YouTube' },
+                        { name: 'DFIR Monte - Case Studies & Lessons', url: 'https://www.youtube.com/watch?v=nJSYpLS0x5c', type: 'Video', platform: 'YouTube' }
                     ],
                     tools: [
                         { name: 'Autopsy', desc: 'Premier forensic platform.', url: 'https://www.sleuthkit.org/autopsy/' },
@@ -91,7 +111,17 @@ const careerData = {
                         { name: 'TCM Security: PEH (27h Series)', url: 'https://www.youtube.com/watch?v=3Kq1MIfTWCE', type: 'Video', platform: 'YouTube' },
                         { name: 'EC-Council: Android Bug Bounty', url: 'https://www.eccouncil.org/free-cybersecurity-resources/', type: 'Course', platform: 'EC-Council' },
                         { name: 'Metasploit Unleashed', url: 'https://www.offsec.com/metasploit-unleashed/', type: 'Course', platform: 'OffSec' },
-                        { name: 'Bugcrowd University', url: 'https://www.bugcrowd.com/university/', type: 'Course', platform: 'Bugcrowd' }
+                        { name: 'Bugcrowd University', url: 'https://www.bugcrowd.com/university/', type: 'Course', platform: 'Bugcrowd' },
+                        { name: 'NetworkChuck - Ethical Hacking Fundamentals', url: 'https://www.youtube.com/watch?v=fHrFWJ1ExIE', type: 'Video', platform: 'YouTube' },
+                        { name: 'IppSec - HTB Machine Walkthroughs', url: 'https://www.youtube.com/playlist?list=PLidcsTyj9JXXlwvZrqmp9BuSMRYQ3-XoQ', type: 'Video', platform: 'YouTube' },
+                        { name: 'John Hammond - WebApp Penetration Testing', url: 'https://www.youtube.com/watch?v=RoJbvfwvJkU', type: 'Video', platform: 'YouTube' },
+                        { name: 'Tekleit Academy - Burp Suite Mastery', url: 'https://www.youtube.com/watch?v=FZXNZhxW6UM', type: 'Video', platform: 'YouTube' },
+                        { name: 'OWASP Top 10 Deep Dive', url: 'https://www.youtube.com/watch?v=5X32jlASASI', type: 'Video', platform: 'YouTube' },
+                        { name: 'Nahamsec - Bug Bounty Hunting', url: 'https://www.youtube.com/watch?v=5LCXhd0g_70', type: 'Video', platform: 'YouTube' },
+                        { name: 'FY Cyber Lab - Nmap & Port Scanning', url: 'https://www.youtube.com/watch?v=CX3_B3vDPd8', type: 'Video', platform: 'YouTube' },
+                        { name: 'Stok - Web Vulnerability Exploitation', url: 'https://www.youtube.com/watch?v=Xy12L0-L6n0', type: 'Video', platform: 'YouTube' },
+                        { name: 'LiveOverflow - Web Hacking Secrets', url: 'https://www.youtube.com/playlist?list=PLhixgUqwRTjx2BmNF5-GddyqZcizwx46b', type: 'Video', platform: 'YouTube' },
+                        { name: 'Cybermentor - Finding Subdomains', url: 'https://www.youtube.com/watch?v=z9i6_Hh1kAU', type: 'Video', platform: 'YouTube' }
                     ],
                     tools: [
                         { name: 'Burp Suite (Comm)', desc: 'Web proxy and scanner.', url: 'https://portswigger.net/' },
@@ -125,7 +155,17 @@ const careerData = {
                         { name: 'Pwn College: Systems Security', url: 'https://pwn.college/', type: 'Course', platform: 'Pwn College' },
                         { name: 'BloodHound Graph Theory', url: 'https://bloodhound.readthedocs.io/', type: 'Doc', platform: 'BloodHound' },
                         { name: 'Active Directory Security (Sean Metcalf)', url: 'https://adsecurity.org/', type: 'Blog', platform: 'ADSecurity' },
-                        { name: 'IppSec HC Video Search', url: 'https://ippsec.rocks/', type: 'Video', platform: 'IppSec' }
+                        { name: 'IppSec HC Video Search', url: 'https://ippsec.rocks/', type: 'Video', platform: 'IppSec' },
+                        { name: 'Lasts - Domain Takeover Techniques', url: 'https://www.youtube.com/watch?v=wkw9CQ-7I9c', type: 'Video', platform: 'YouTube' },
+                        { name: 'John Hammond - C2 Framework Setup', url: 'https://www.youtube.com/watch?v=k1bvVPgEo9A', type: 'Video', platform: 'YouTube' },
+                        { name: 'Red Team Ops - Adversary Tactics', url: 'https://www.youtube.com/watch?v=8nUmWN8yBqM', type: 'Video', platform: 'YouTube' },
+                        { name: 'NetworkChuck - Active Directory Attacks', url: 'https://www.youtube.com/watch?v=F7-rsJAHkjI', type: 'Video', platform: 'YouTube' },
+                        { name: 'S1ren - Red Team Secrets', url: 'https://www.youtube.com/watch?v=QF_6F1Nri_c', type: 'Video', platform: 'YouTube' },
+                        { name: 'DCDS Intro - Lateral Movement Techniques', url: 'https://www.youtube.com/watch?v=pNLBjJQn0vQ', type: 'Video', platform: 'YouTube' },
+                        { name: 'Specter Ops - Adversary Simulation', url: 'https://www.youtube.com/watch?v=QoUTrHKiAHo', type: 'Video', platform: 'YouTube' },
+                        { name: 'IppSec - C2 Frameworks Comparison', url: 'https://www.youtube.com/watch?v=K9Z3Fkef2j0', type: 'Video', platform: 'YouTube' },
+                        { name: 'Tekleit Academy - Phishing Simulation', url: 'https://www.youtube.com/watch?v=gvF0mDCXEAg', type: 'Video', platform: 'YouTube' },
+                        { name: 'Black Hills Info Sec - ATT&CK Framework', url: 'https://www.youtube.com/watch?v=KYlR8dTXtWQ', type: 'Video', platform: 'YouTube' }
                     ],
                     tools: [
                         { name: 'BloodHound', desc: 'AD attack path analysis.', url: 'https://github.com/BloodHoundAD/BloodHound' },
@@ -160,7 +200,17 @@ const careerData = {
                         { name: 'Securiti.ai: AI Governance Cert', url: 'https://securiti.ai/education/ai-security-governance-certification/', type: 'Course', platform: 'Securiti' },
                         { name: 'Learn Prompting: Adversarial AI', url: 'https://learnprompting.org/docs/adversarial/introduction', type: 'Doc', platform: 'LearnPrompting' },
                         { name: 'OWASP LLM Top 10', url: 'https://owasp.org/www-project-top-10-for-large-language-model-applications/', type: 'Doc', platform: 'OWASP' },
-                        { name: 'SANS AI Security Resources', url: 'https://www.sans.org/top25/ai-security/', type: 'Video', platform: 'SANS' }
+                        { name: 'SANS AI Security Resources', url: 'https://www.sans.org/top25/ai-security/', type: 'Video', platform: 'SANS' },
+                        { name: 'Simon Willison - LLM Security Concerns', url: 'https://www.youtube.com/watch?v=zjkBMFhNj_g', type: 'Video', platform: 'YouTube' },
+                        { name: 'Pranav Rajpurkar - AI Safety Fundamentals', url: 'https://www.youtube.com/watch?v=lLp0cvnTDI4', type: 'Video', platform: 'YouTube' },
+                        { name: 'Jeremy Howard - AI Ethics & Bias', url: 'https://www.youtube.com/watch?v=eFvl6rFjzPI', type: 'Video', platform: 'YouTube' },
+                        { name: 'Yannic Kilcher - LLM Adversarial Examples', url: 'https://www.youtube.com/watch?v=Nx0vXsKN0CI', type: 'Video', platform: 'YouTube' },
+                        { name: 'Fireship - Machine Learning Security', url: 'https://www.youtube.com/watch?v=X8v1GWzuqSA', type: 'Video', platform: 'YouTube' },
+                        { name: 'Paul Vienhage - LLM Prompt Injection', url: 'https://www.youtube.com/watch?v=Sv5OLpjGMVo', type: 'Video', platform: 'YouTube' },
+                        { name: 'MIT AI Policy - AI Governance', url: 'https://www.youtube.com/watch?v=8_POuGXwVXQ', type: 'Video', platform: 'YouTube' },
+                        { name: 'Deeplearning.AI - AI Security Workshop', url: 'https://www.youtube.com/watch?v=RjxQgfJr1ds', type: 'Video', platform: 'YouTube' },
+                        { name: 'AI Alignment Podcast Series', url: 'https://www.youtube.com/watch?v=cdv2_MqSDKc', type: 'Video', platform: 'YouTube' },
+                        { name: 'OWASP AI Security Roundtable', url: 'https://www.youtube.com/watch?v=M19zl4tqpAI', type: 'Video', platform: 'YouTube' }
                     ],
                     tools: [
                         { name: 'Garak', desc: 'LLM vulnerability scanner.', url: 'https://github.com/leondz/garak' },
@@ -198,7 +248,17 @@ const careerData = {
                         { name: 'Google Sheets Training', url: 'https://support.google.com/a/users/answer/9282959', type: 'Doc', platform: 'Google' },
                         { name: 'Khan Academy Statistics', url: 'https://www.khanacademy.org/math/statistics-probability', type: 'Course', platform: 'Khan Academy' },
                         { name: 'Alex The Analyst - Excel Playlist', url: 'https://www.youtube.com/@AlexTheAnalyst', type: 'Video', platform: 'YouTube' },
-                        { name: 'Data Cleaning in Spreadsheets', url: 'https://www.kaggle.com/learn/data-cleaning', type: 'Course', platform: 'Kaggle' }
+                        { name: 'Data Cleaning in Spreadsheets', url: 'https://www.kaggle.com/learn/data-cleaning', type: 'Course', platform: 'Kaggle' },
+                        { name: 'Keith Mackey - Excel Master Class', url: 'https://www.youtube.com/watch?v=MqMfSMEWGSs', type: 'Video', platform: 'YouTube' },
+                        { name: 'Chandoo - Excel Dashboards', url: 'https://www.youtube.com/watch?v=s7EM5hQJBW8', type: 'Video', platform: 'YouTube' },
+                        { name: 'Excel with Brian - Advanced Formulas', url: 'https://www.youtube.com/watch?v=u1jdqXNz6Qw', type: 'Video', platform: 'YouTube' },
+                        { name: 'Maven Analytics - Excel for Analysts', url: 'https://www.youtube.com/watch?v=O8RSVS-M9Zc', type: 'Video', platform: 'YouTube' },
+                        { name: 'Data School - Pivot Tables 101', url: 'https://www.youtube.com/watch?v=TKlI1tqmXPo', type: 'Video', platform: 'YouTube' },
+                        { name: 'Computer Skill Training - Excel Tricks', url: 'https://www.youtube.com/watch?v=H3dCj9e8dXo', type: 'Video', platform: 'YouTube' },
+                        { name: 'Eddie Zabab - Google Sheets Tutorial', url: 'https://www.youtube.com/watch?v=ixuPJePQWCw', type: 'Video', platform: 'YouTube' },
+                        { name: 'Simon Calder - Data Analysis Basics', url: 'https://www.youtube.com/watch?v=JiIKqH-eBkU', type: 'Video', platform: 'YouTube' },
+                        { name: 'Kevin Strategy - VLookup Mastery', url: 'https://www.youtube.com/watch?v=xgPhjFKXNIc', type: 'Video', platform: 'YouTube' },
+                        { name: 'Ablebits Excel - Data Validation', url: 'https://www.youtube.com/watch?v=xJYi9pF_XpY', type: 'Video', platform: 'YouTube' }
                     ],
                     tools: [
                         { name: 'Microsoft Excel', desc: 'Core spreadsheet analysis tool.', url: 'https://www.microsoft.com/microsoft-365/excel' },
@@ -216,7 +276,17 @@ const careerData = {
                         { name: 'Mode SQL Tutorial', url: 'https://mode.com/sql-tutorial/', type: 'Course', platform: 'Mode' },
                         { name: 'DataLemur SQL Practice', url: 'https://datalemur.com/sql-interview-questions', type: 'Lab', platform: 'DataLemur' },
                         { name: 'LeetCode Database Problems', url: 'https://leetcode.com/problemset/database/', type: 'Lab', platform: 'LeetCode' },
-                        { name: 'PostgreSQL Tutorial', url: 'https://www.postgresqltutorial.com/', type: 'Doc', platform: 'PostgreSQL' }
+                        { name: 'PostgreSQL Tutorial', url: 'https://www.postgresqltutorial.com/', type: 'Doc', platform: 'PostgreSQL' },
+                        { name: 'Maven Analytics - SQL for Data Analysis', url: 'https://www.youtube.com/watch?v=yMLO-FYbIBw', type: 'Video', platform: 'YouTube' },
+                        { name: 'Alex The Analyst - SQL Full Course', url: 'https://www.youtube.com/watch?v=HXV3zeQKqGY', type: 'Video', platform: 'YouTube' },
+                        { name: 'Techtorial - SQL Joins Explained', url: 'https://www.youtube.com/watch?v=6Qs3wNCBWKE', type: 'Video', platform: 'YouTube' },
+                        { name: 'Code with Mosh - SQL Mastery', url: 'https://www.youtube.com/watch?v=X6OvN0Y0X20', type: 'Video', platform: 'YouTube' },
+                        { name: 'W3Schools SQL Basics', url: 'https://www.youtube.com/watch?v=PJvQvpHBJ7s', type: 'Video', platform: 'YouTube' },
+                        { name: 'ForDataScience - Advanced SQL', url: 'https://www.youtube.com/watch?v=Y7F3xn4Cf7s', type: 'Video', platform: 'YouTube' },
+                        { name: 'Luke Barousse - Query Optimization', url: 'https://www.youtube.com/watch?v=g3YA8cFoKBg', type: 'Video', platform: 'YouTube' },
+                        { name: 'Analytics Vidhya - SQL for Analysts', url: 'https://www.youtube.com/watch?v=yyJSgDuGW8U', type: 'Video', platform: 'YouTube' },
+                        { name: 'Krish Naik - SQL Window Functions', url: 'https://www.youtube.com/watch?v=ySc6NDdWZCc', type: 'Video', platform: 'YouTube' },
+                        { name: 'Derek Banas - SQL in 60 Minutes', url: 'https://www.youtube.com/watch?v=qJS3PmHvD0c', type: 'Video', platform: 'YouTube' }
                     ],
                     tools: [
                         { name: 'PostgreSQL', desc: 'Reliable relational database engine.', url: 'https://www.postgresql.org/' },
@@ -234,7 +304,18 @@ const careerData = {
                         { name: 'Kaggle Pandas Course', url: 'https://www.kaggle.com/learn/pandas', type: 'Course', platform: 'Kaggle' },
                         { name: 'Data Visualization with Seaborn', url: 'https://seaborn.pydata.org/tutorial.html', type: 'Doc', platform: 'Seaborn' },
                         { name: 'Power BI Learning Path', url: 'https://learn.microsoft.com/en-us/training/powerplatform/power-bi/', type: 'Course', platform: 'Microsoft' },
-                        { name: 'Tableau Free Training Videos', url: 'https://www.tableau.com/learn/training', type: 'Video', platform: 'Tableau' }
+                        { name: 'Tableau Free Training Videos', url: 'https://www.tableau.com/learn/training', type: 'Video', platform: 'Tableau' },
+                        { name: 'Alex The Analyst - Python for Data Analysis', url: 'https://www.youtube.com/watch?v=eMOA1pPVUc8', type: 'Video', platform: 'YouTube' },
+                        { name: 'Code with Mosh - Python Fundamentals', url: 'https://www.youtube.com/watch?v=_uQrJ0TkSuc', type: 'Video', platform: 'YouTube' },
+                        { name: 'Data School - Pandas and NumPy', url: 'https://www.youtube.com/watch?v=hl-TGI4550M', type: 'Video', platform: 'YouTube' },
+                        { name: 'Maven Analytics - Python for Analysts', url: 'https://www.youtube.com/watch?v=R-8KDd3YCPI', type: 'Video', platform: 'YouTube' },
+                        { name: 'freeCodeCamp - Data Visualization with Matplotlib', url: 'https://www.youtube.com/watch?v=OC8jVVtDANE', type: 'Video', platform: 'YouTube' },
+                        { name: 'Ken Jee - Power BI Dashboard Creation', url: 'https://www.youtube.com/watch?v=7cK_8vVUUhE', type: 'Video', platform: 'YouTube' },
+                        { name: 'Tableau Public - Dashboard Tutorials', url: 'https://www.youtube.com/watch?v=iJtYKsrcxME', type: 'Video', platform: 'YouTube' },
+                        { name: 'StatQuest - Data Visualization Beauty', url: 'https://www.youtube.com/watch?v=g-n8EMNZ9Qo', type: 'Video', platform: 'YouTube' },
+                        { name: 'Krish Naik - Python Data Analysis Libraries', url: 'https://www.youtube.com/watch?v=dfKBWfNUg1s', type: 'Video', platform: 'YouTube' },
+                        { name: 'Luke Barousse - Dashboard Design Principles', url: 'https://www.youtube.com/watch?v=_u_Agg8vPNk', type: 'Video', platform: 'YouTube' },
+                        { name: 'Real Python - Pandas Advanced', url: 'https://www.youtube.com/watch?v=T5vcnvH28BA', type: 'Video', platform: 'YouTube' }
                     ],
                     tools: [
                         { name: 'Python', desc: 'Data scripting and analysis language.', url: 'https://www.python.org/' },
