@@ -12,27 +12,14 @@ const careerData = {
                     title: 'Phase 1: SOC Analyst (Foundations)',
                     duration: 'Months 1-3',
                     resources: [
-                        { name: 'TryHackMe SOC Level 1', url: 'https://tryhackme.com/path/outline/soclevel1', type: 'Lab', platform: 'TryHackMe' },
-                        { name: 'Google Cybersecurity Certificate (Audit)', url: 'https://www.coursera.org/professional-certificates/google-cybersecurity', type: 'Course', platform: 'Coursera' },
-                        { name: 'Rangeforce: Immersive Solo Labs', url: 'https://www.rangeforce.com/solo-labs', type: 'Lab', platform: 'Rangeforce' },
-                        { name: 'Splunk Fundamentals (Free)', url: 'https://www.splunk.com/en_us/training/free-courses/splunk-fundamentals-1.html', type: 'Course', platform: 'Splunk' },
-                        { name: 'Microsoft SC-900 Training', url: 'https://learn.microsoft.com/en-us/credentials/certifications/security-compliance-and-identity-fundamentals/', type: 'Course', platform: 'Microsoft' },
-                        { name: 'Professor Messer - Security+ Playlist', url: 'https://www.youtube.com/c/ProfessorMesser/playlists', type: 'Video', platform: 'YouTube' },
-                        { name: 'Cisco Introduction to Cybersecurity', url: 'https://www.skillsforall.com/course/introduction-to-cybersecurity', type: 'Course', platform: 'Cisco' },
-                        { name: 'Wazuh Security Monitoring', url: 'https://wazuh.com/training/', type: 'Course', platform: 'Wazuh' },
-                        { name: 'LetsDefend.io SOC Foundations', url: 'https://letsdefend.io/', type: 'Course', platform: 'LetsDefend' },
-                        { name: 'Cybrary: Defensive Security Ops', url: 'https://www.cybrary.it/course/defensive-security-operations', type: 'Course', platform: 'Cybrary' },
-                        { name: 'Security Blue Team: FREE Training', url: 'https://www.securityblue.team/', type: 'Course', platform: 'SBT' },
-                        { name: 'John Hammond - Cybersecurity Basics', url: 'https://www.youtube.com/@JohnHammond010/playlists', type: 'Video', platform: 'YouTube' },
-                        { name: 'NetworkChuck - Security+ Playlist', url: 'https://www.youtube.com/@NetworkChuck/search?query=security', type: 'Video', platform: 'YouTube' },
-                        { name: 'David Bombal - Network Security Fundamentals', url: 'https://www.youtube.com/@davidbombal/playlists', type: 'Video', platform: 'YouTube' },
-                        { name: 'AntiSyphon Info Sec - Free Security Training', url: 'https://www.youtube.com/@AntiSyphonInfoSec/videos', type: 'Video', platform: 'YouTube' },
-                        { name: 'SANS Cyber Aces - Log Analysis Tutorials', url: 'https://tutorials.cyberaces.org/tutorials/view/logs.html', type: 'Video', platform: 'SANS' },
-                        { name: 'IppSec - Active Directory Series', url: 'https://www.youtube.com/@Ippsec/playlists', type: 'Video', platform: 'YouTube' },
-                        { name: 'TryHackMe - SOC Analyst Path', url: 'https://tryhackme.com/path/outline/soclevel1', type: 'Lab', platform: 'TryHackMe' },
-                        { name: 'Splunk - Official Training', url: 'https://www.youtube.com/@splunk/playlists', type: 'Video', platform: 'YouTube' },
-                        { name: 'Black Hills Info Sec - Weekly Security Lessons', url: 'https://www.youtube.com/@BlackHillsInformationSecurity/videos', type: 'Video', platform: 'YouTube' },
-                        { name: 'Splunk - Official YouTube Channel', url: 'https://www.youtube.com/@splunk/videos', type: 'Video', platform: 'YouTube' }
+                        { name: 'TryHackMe SOC Level 1 Path', url: 'https://tryhackme.com/path/outline/soclevel1', type: 'Lab', platform: 'TryHackMe' },
+                        { name: 'Google Cybersecurity Certificate', url: 'https://www.coursera.org/professional-certificates/google-cybersecurity', type: 'Course', platform: 'Coursera' },
+                        { name: 'Professor Messer - CompTIA Security+ Playlist', url: 'https://www.youtube.com/@professormesser/playlists', type: 'Video', platform: 'YouTube' },
+                        { name: 'John Hammond - Cybersecurity Basics & SOC', url: 'https://www.youtube.com/@JohnHammond010/videos', type: 'Video', platform: 'YouTube' },
+                        { name: 'NetworkChuck - Security+ Training', url: 'https://www.youtube.com/@NetworkChuck/search?query=security+plus', type: 'Video', platform: 'YouTube' },
+                        { name: 'Splunk Fundamentals Free Course', url: 'https://www.splunk.com/en_us/training/free-courses/splunk-fundamentals-1.html', type: 'Course', platform: 'Splunk' },
+                        { name: 'Blue Team Labs Online', url: 'https://blueteamlabs.online/', type: 'Lab', platform: 'BTLO' },
+                        { name: 'Wazuh Security Monitoring Training', url: 'https://wazuh.com/training/', type: 'Course', platform: 'Wazuh' }
                     ],
                     tools: [
                         { name: 'Wazuh', desc: 'Open-source SIEM/XDR.', url: 'https://wazuh.com/' },
@@ -57,14 +44,12 @@ const careerData = {
                     title: 'Phase 2: DFIR (Investigation)',
                     duration: 'Months 4-6',
                     resources: [
-                        { name: 'John Hammond - Forensics & IR', url: 'https://www.youtube.com/@JohnHammond010/search?query=forensics', type: 'Video', platform: 'YouTube' },
-                        { name: 'AntiSyphon - Free DFIR Training', url: 'https://www.youtube.com/@AntiSyphonInfoSec/videos', type: 'Video', platform: 'YouTube' },
-                        { name: 'Eric Zimmerman - DFIR Tools', url: 'https://www.youtube.com/@ericrzimmerman/videos', type: 'Video', platform: 'YouTube' },
-                        { name: 'Black Hills Info Sec - Forensics', url: 'https://www.youtube.com/@BlackHillsInformationSecurity/search?query=forensics', type: 'Video', platform: 'YouTube' },
+                        { name: 'John Hammond - Digital Forensics & IR', url: 'https://www.youtube.com/@JohnHammond010/search?query=forensics', type: 'Video', platform: 'YouTube' },
+                        { name: 'Eric Zimmerman - DFIR Tools & Techniques', url: 'https://www.youtube.com/@ericrzimmerman/videos', type: 'Video', platform: 'YouTube' },
+                        { name: 'AntiSyphon Info Sec - DFIR Training', url: 'https://www.youtube.com/@AntiSyphonInfoSec/videos', type: 'Video', platform: 'YouTube' },
                         { name: 'Blue Team Labs Online (BTLO)', url: 'https://blueteamlabs.online/', type: 'Lab', platform: 'BTLO' },
-                        { name: 'CyberDefenders - IR Cases', url: 'https://cyberdefenders.org/blueteam-ctf-challenges/', type: 'Lab', platform: 'CyberDefenders' },
-                        { name: 'AboutDFIR - Tools & Guides', url: 'https://aboutdfir.com/', type: 'Doc', platform: 'AboutDFIR' },
-                        { name: 'Volatility - Memory Analysis', url: 'https://github.com/volatilityfoundation/volatility', type: 'Tool', platform: 'GitHub' }
+                        { name: 'CyberDefenders - IR Case Studies', url: 'https://cyberdefenders.org/blueteam-ctf-challenges/', type: 'Lab', platform: 'CyberDefenders' },
+                        { name: 'AboutDFIR Documentation', url: 'https://aboutdfir.com/', type: 'Doc', platform: 'AboutDFIR' }
                     ],
                     tools: [
                         { name: 'Autopsy', desc: 'Premier forensic platform.', url: 'https://www.sleuthkit.org/autopsy/' },
@@ -90,13 +75,13 @@ const careerData = {
                     duration: 'Months 7-10',
                     resources: [
                         { name: 'IppSec - HackTheBox Walkthroughs', url: 'https://www.youtube.com/@Ippsec/videos', type: 'Video', platform: 'YouTube' },
-                        { name: 'NetworkChuck - Ethical Hacking', url: 'https://www.youtube.com/@NetworkChuck/search?query=ethical+hacking', type: 'Video', platform: 'YouTube' },
-                        { name: 'John Hammond - Web Security', url: 'https://www.youtube.com/@JohnHammond010/search?query=web+security', type: 'Video', platform: 'YouTube' },
-                        { name: 'Nahamsec - Bug Bounty Basics', url: 'https://www.youtube.com/@nahamsec/videos', type: 'Video', platform: 'YouTube' },
                         { name: 'PortSwigger Web Security Academy', url: 'https://portswigger.net/web-security', type: 'Lab', platform: 'PortSwigger' },
-                        { name: 'TryHackMe Jr Pentesting', url: 'https://tryhackme.com/path/outline/jrpenetrationtester', type: 'Lab', platform: 'TryHackMe' },
-                        { name: 'OWASP Juice Shop Lab', url: 'https://pwning.owasp-juice.shop/', type: 'Lab', platform: 'OWASP' },
-                        { name: 'HackTheBox Academy', url: 'https://academy.hackthebox.com/preview/modules', type: 'Lab', platform: 'HTB' }
+                        { name: 'John Hammond - Web Security & Exploitation', url: 'https://www.youtube.com/@JohnHammond010/search?query=web+security', type: 'Video', platform: 'YouTube' },
+                        { name: 'NetworkChuck - Ethical Hacking 101', url: 'https://www.youtube.com/@NetworkChuck/search?query=ethical+hacking', type: 'Video', platform: 'YouTube' },
+                        { name: 'TryHackMe Jr Pentesting Path', url: 'https://tryhackme.com/path/outline/jrpenetrationtester', type: 'Lab', platform: 'TryHackMe' },
+                        { name: 'HackTheBox Academy', url: 'https://academy.hackthebox.com/preview/modules', type: 'Lab', platform: 'HTB' },
+                        { name: 'Nahamsec - Bug Bounty Recon', url: 'https://www.youtube.com/@nahamsec/videos', type: 'Video', platform: 'YouTube' },
+                        { name: 'OWASP Juice Shop Lab', url: 'https://pwning.owasp-juice.shop/', type: 'Lab', platform: 'OWASP' }
                     ],
                     tools: [
                         { name: 'Burp Suite (Comm)', desc: 'Web proxy and scanner.', url: 'https://portswigger.net/' },
@@ -121,14 +106,13 @@ const careerData = {
                     title: 'Phase 4: Red Teaming (Advanced)',
                     duration: 'Months 11-14',
                     resources: [
-                        { name: 'John Hammond - Red Team & AD Security', url: 'https://www.youtube.com/@JohnHammond010/search?query=red+team', type: 'Video', platform: 'YouTube' },
-                        { name: 'NetworkChuck - Active Directory', url: 'https://www.youtube.com/@NetworkChuck/search?query=active+directory', type: 'Video', platform: 'YouTube' },
-                        { name: 'IppSec - Red Team Techniques', url: 'https://www.youtube.com/@Ippsec/search?query=red+team', type: 'Video', platform: 'YouTube' },
-                        { name: 'Black Hills Info Sec - C2 & Phishing', url: 'https://www.youtube.com/@BlackHillsInformationSecurity/search?query=command+control', type: 'Video', platform: 'YouTube' },
+                        { name: 'IppSec - Red Teaming & AD Attacks', url: 'https://www.youtube.com/@Ippsec/search?query=red+team', type: 'Video', platform: 'YouTube' },
+                        { name: 'John Hammond - Red Team Operations', url: 'https://www.youtube.com/@JohnHammond010/search?query=red+team', type: 'Video', platform: 'YouTube' },
+                        { name: 'NetworkChuck - Active Directory Security', url: 'https://www.youtube.com/@NetworkChuck/search?query=active+directory', type: 'Video', platform: 'YouTube' },
                         { name: 'TryHackMe Red Teaming Path', url: 'https://tryhackme.com/path/outline/redteaming', type: 'Lab', platform: 'TryHackMe' },
-                        { name: 'Atomic Red Team Lab', url: 'https://atomicredteam.io/', type: 'Lab', platform: 'Atomic Red Team' },
                         { name: 'MITRE ATT&CK Framework', url: 'https://attack.mitre.org/resources/getting-started/', type: 'Doc', platform: 'MITRE' },
-                        { name: 'HackTricks Reference', url: 'https://book.hacktricks.xyz/welcome/readme', type: 'Doc', platform: 'HackTricks' }
+                        { name: 'HackTheBox Red Team Challenges', url: 'https://www.hackthebox.com/', type: 'Lab', platform: 'HTB' },
+                        { name: 'HackTricks Penetration Testing Reference', url: 'https://book.hacktricks.xyz/welcome/readme', type: 'Doc', platform: 'HackTricks' }
                     ],
                     tools: [
                         { name: 'BloodHound', desc: 'AD attack path analysis.', url: 'https://github.com/BloodHoundAD/BloodHound' },
@@ -153,14 +137,12 @@ const careerData = {
                     title: 'Phase 5: AI Security (Modern Era)',
                     duration: 'Months 15-18',
                     resources: [
-                        { name: 'Yannic Kilcher - LLM & AI Research', url: 'https://www.youtube.com/@YannicKilcher/videos', type: 'Video', platform: 'YouTube' },
-                        { name: 'Fireship - AI Concepts', url: 'https://www.youtube.com/@Fireship/search?query=ai', type: 'Video', platform: 'YouTube' },
-                        { name: 'Jeremy Howard - Fast.AI', url: 'https://www.youtube.com/@fastdotai/videos', type: 'Video', platform: 'YouTube' },
-                        { name: 'Deeplearning.AI - LLMs Explained', url: 'https://www.youtube.com/@DeepLearningAI/videos', type: 'Video', platform: 'YouTube' },
+                        { name: 'Fireship - AI Security & LLMs Explained', url: 'https://www.youtube.com/@Fireship/search?query=ai', type: 'Video', platform: 'YouTube' },
+                        { name: 'Yannic Kilcher - LLM & AI Research Videos', url: 'https://www.youtube.com/@YannicKilcher/videos', type: 'Video', platform: 'YouTube' },
+                        { name: 'Deeplearning.AI - LLMs & Security', url: 'https://www.youtube.com/@DeepLearningAI/videos', type: 'Video', platform: 'YouTube' },
                         { name: 'PortSwigger - LLM Attack Labs', url: 'https://portswigger.net/web-security/llm-attacks', type: 'Lab', platform: 'PortSwigger' },
-                        { name: 'OWASP LLM Top 10 Guide', url: 'https://owasp.org/www-project-top-10-for-large-language-model-applications/', type: 'Doc', platform: 'OWASP' },
-                        { name: 'Microsoft AI for Beginners', url: 'https://microsoft.github.io/AI-For-Beginners/', type: 'Course', platform: 'Microsoft' },
-                        { name: 'Learn Prompting - Adversarial AI', url: 'https://learnprompting.org/docs/adversarial/introduction', type: 'Doc', platform: 'LearnPrompting' }
+                        { name: 'OWASP LLM Top 10 Project', url: 'https://owasp.org/www-project-top-10-for-large-language-model-applications/', type: 'Doc', platform: 'OWASP' },
+                        { name: 'Microsoft AI for Security', url: 'https://microsoft.github.io/AI-For-Beginners/', type: 'Course', platform: 'Microsoft' }
                     ],
                     tools: [
                         { name: 'Garak', desc: 'LLM vulnerability scanner.', url: 'https://github.com/leondz/garak' },
@@ -222,21 +204,14 @@ const careerData = {
                     title: 'Phase 2: SQL & Data Querying',
                     duration: 'Months 3-4',
                     resources: [
-                        { name: 'SQLBolt Interactive Lessons', url: 'https://sqlbolt.com/', type: 'Lab', platform: 'SQLBolt' },
-                        { name: 'Mode SQL Tutorial', url: 'https://mode.com/sql-tutorial/', type: 'Course', platform: 'Mode' },
-                        { name: 'DataLemur SQL Practice', url: 'https://datalemur.com/sql-interview-questions', type: 'Lab', platform: 'DataLemur' },
-                        { name: 'LeetCode Database Problems', url: 'https://leetcode.com/problemset/database/', type: 'Lab', platform: 'LeetCode' },
-                        { name: 'PostgreSQL Tutorial', url: 'https://www.postgresqltutorial.com/', type: 'Doc', platform: 'PostgreSQL' },
-                        { name: 'Maven Analytics - SQL for Data Analysis', url: 'https://www.youtube.com/@MavenAnalytics/search?query=sql', type: 'Video', platform: 'YouTube' },
                         { name: 'Alex The Analyst - SQL Complete Course', url: 'https://www.youtube.com/@AlexTheAnalyst/search?query=sql', type: 'Video', platform: 'YouTube' },
-                        { name: 'DataCamp - SQL for Beginners', url: 'https://www.datacamp.com/courses/introduction-to-sql', type: 'Course', platform: 'DataCamp' },
-                        { name: 'Code with Mosh - SQL Fundamentals', url: 'https://www.youtube.com/@programmingwithmosh/search?query=sql', type: 'Video', platform: 'YouTube' },
-                        { name: 'W3Schools - SQL Tutorial & Reference', url: 'https://www.w3schools.com/sql/', type: 'Doc', platform: 'W3Schools' },
-                        { name: 'SQLZoo - Interactive SQL Lessons', url: 'https://sqlzoo.net/', type: 'Lab', platform: 'SQLZoo' },
-                        { name: 'Mode Analytics - SQL Tutorial', url: 'https://mode.com/sql-tutorial/', type: 'Course', platform: 'Mode' },
-                        { name: 'Krish Naik - SQL Advanced Topics', url: 'https://www.youtube.com/@krishnaik06/search?query=sql', type: 'Video', platform: 'YouTube' },
-                        { name: 'Derek Banas - SQL Comprehensive', url: 'https://www.youtube.com/@derekbanas/search?query=sql', type: 'Video', platform: 'YouTube' },
-                        { name: 'LeetCode - SQL Practice Problems', url: 'https://leetcode.com/problemset/database/', type: 'Lab', platform: 'LeetCode' }
+                        { name: 'Code with Mosh - SQL Tutorial', url: 'https://www.youtube.com/@programmingwithmosh/search?query=sql', type: 'Video', platform: 'YouTube' },
+                        { name: 'Mode SQL Tutorial', url: 'https://mode.com/sql-tutorial/', type: 'Course', platform: 'Mode' },
+                        { name: 'LeetCode Database Problems', url: 'https://leetcode.com/problemset/database/', type: 'Lab', platform: 'LeetCode' },
+                        { name: 'SQLBolt Interactive Lessons', url: 'https://sqlbolt.com/', type: 'Lab', platform: 'SQLBolt' },
+                        { name: 'DataLemur SQL Practice', url: 'https://datalemur.com/sql-interview-questions', type: 'Lab', platform: 'DataLemur' },
+                        { name: 'Maven Analytics - SQL for Analysts', url: 'https://www.youtube.com/@MavenAnalytics/search?query=sql', type: 'Video', platform: 'YouTube' },
+                        { name: 'DataCamp - SQL for Beginners', url: 'https://www.datacamp.com/courses/introduction-to-sql', type: 'Course', platform: 'DataCamp' }
                     ],
                     tools: [
                         { name: 'PostgreSQL', desc: 'Reliable relational database engine.', url: 'https://www.postgresql.org/' },
@@ -250,22 +225,14 @@ const careerData = {
                     title: 'Phase 3: Python Analytics & BI',
                     duration: 'Months 5-6',
                     resources: [
-                        { name: 'Kaggle Python Course', url: 'https://www.kaggle.com/learn/python', type: 'Course', platform: 'Kaggle' },
-                        { name: 'Kaggle Pandas Course', url: 'https://www.kaggle.com/learn/pandas', type: 'Course', platform: 'Kaggle' },
-                        { name: 'Data Visualization with Seaborn', url: 'https://seaborn.pydata.org/tutorial.html', type: 'Doc', platform: 'Seaborn' },
-                        { name: 'Power BI Learning Path', url: 'https://learn.microsoft.com/en-us/training/powerplatform/power-bi/', type: 'Course', platform: 'Microsoft' },
-                        { name: 'Tableau Free Training Videos', url: 'https://www.tableau.com/learn/training', type: 'Video', platform: 'Tableau' },
-                        { name: 'Alex The Analyst - Python Data Science', url: 'https://www.youtube.com/@AlexTheAnalyst/search?query=python', type: 'Video', platform: 'YouTube' },
-                        { name: 'Code with Mosh - Python Essentials', url: 'https://www.youtube.com/@programmingwithmosh/search?query=python', type: 'Video', platform: 'YouTube' },
-                        { name: 'Real Python - Pandas Tutorials', url: 'https://realpython.com/learning-paths/pandas-data-science/', type: 'Doc', platform: 'Real Python' },
-                        { name: 'Maven Analytics - Python for BI Analysts', url: 'https://www.youtube.com/@MavenAnalytics/search?query=python', type: 'Video', platform: 'YouTube' },
-                        { name: 'freeCodeCamp - Python Data Science Course', url: 'https://www.youtube.com/@freecodecamp/search?query=python+data', type: 'Video', platform: 'YouTube' },
+                        { name: 'Alex The Analyst - Python for Data Science', url: 'https://www.youtube.com/@AlexTheAnalyst/search?query=python', type: 'Video', platform: 'YouTube' },
+                        { name: 'Code with Mosh - Python Complete Course', url: 'https://www.youtube.com/@programmingwithmosh/search?query=python', type: 'Video', platform: 'YouTube' },
+                        { name: 'Kaggle - Python & Pandas Courses', url: 'https://www.kaggle.com/learn/python', type: 'Course', platform: 'Kaggle' },
                         { name: 'Ken Jee - Python Data Science Portfolio', url: 'https://www.youtube.com/@KenJee1/videos', type: 'Video', platform: 'YouTube' },
-                        { name: 'Tableau - Official Training & Tutorials', url: 'https://www.tableau.com/learn/training', type: 'Course', platform: 'Tableau' },
-                        { name: 'StatQuest with Josh Starmer', url: 'https://www.youtube.com/@statquest/videos', type: 'Video', platform: 'YouTube' },
-                        { name: 'Krish Naik - Python & Data Science', url: 'https://www.youtube.com/@krishnaik06/playlists', type: 'Video', platform: 'YouTube' },
-                        { name: 'Microsoft Learn - Power BI Training', url: 'https://learn.microsoft.com/en-us/training/powerplatform/power-bi/', type: 'Course', platform: 'Microsoft' },
-                        { name: 'DataCamp - Python Data Analysis & BI', url: 'https://www.datacamp.com/courses/python-for-data-professionals', type: 'Course', platform: 'DataCamp' }
+                        { name: 'Power BI Learning Path', url: 'https://learn.microsoft.com/en-us/training/powerplatform/power-bi/', type: 'Course', platform: 'Microsoft' },
+                        { name: 'Tableau Public Training Videos', url: 'https://www.tableau.com/learn/training', type: 'Video', platform: 'Tableau' },
+                        { name: 'freeCodeCamp - Python Data Science', url: 'https://www.youtube.com/@freecodecamp/search?query=python+data', type: 'Video', platform: 'YouTube' },
+                        { name: 'DataCamp - Python Data Analysis', url: 'https://www.datacamp.com/courses/python-for-data-professionals', type: 'Course', platform: 'DataCamp' }
                     ],
                     tools: [
                         { name: 'Python', desc: 'Data scripting and analysis language.', url: 'https://www.python.org/' },
@@ -280,14 +247,12 @@ const careerData = {
                     title: 'Phase 4: Statistics & Advanced Analysis',
                     duration: 'Months 7-8',
                     resources: [
-                        { name: 'StatQuest - Statistics Fundamentals', url: 'https://www.youtube.com/@statquest/videos', type: 'Video', platform: 'YouTube' },
-                        { name: '3Blue1Brown - Linear Algebra Essentials', url: 'https://www.youtube.com/@3blue1brown/search?query=linear+algebra', type: 'Video', platform: 'YouTube' },
+                        { name: 'StatQuest with Josh Starmer - Statistics', url: 'https://www.youtube.com/@statquest/videos', type: 'Video', platform: 'YouTube' },
+                        { name: '3Blue1Brown - Linear Algebra Fundamentals', url: 'https://www.youtube.com/@3blue1brown/search?query=linear+algebra', type: 'Video', platform: 'YouTube' },
                         { name: 'Khan Academy - Statistics & Probability', url: 'https://www.khanacademy.org/math/statistics-probability', type: 'Course', platform: 'Khan Academy' },
-                        { name: 'DataCamp - Statistics for Data Analysis', url: 'https://www.datacamp.com/courses/statistical-thinking-in-python-part-1', type: 'Course', platform: 'DataCamp' },
-                        { name: 'Real Python - Statistics in Python', url: 'https://realpython.com/python-statistics/', type: 'Doc', platform: 'Real Python' },
-                        { name: 'Coursera - Statistics with R', url: 'https://www.coursera.org/learn/bayesian-statistics', type: 'Course', platform: 'Coursera' },
-                        { name: 'Kaggle - Statistics for Data Scientists', url: 'https://www.kaggle.com/learn/statistics', type: 'Course', platform: 'Kaggle' },
-                        { name: 'Inferential Statistics Guide', url: 'https://www.khanacademy.org/math/statistics-probability/significance-tests-one-sample', type: 'Doc', platform: 'Khan Academy' }
+                        { name: 'DataCamp - Statistical Thinking in Python', url: 'https://www.datacamp.com/courses/statistical-thinking-in-python-part-1', type: 'Course', platform: 'DataCamp' },
+                        { name: 'Kaggle - Statistics for Data Science', url: 'https://www.kaggle.com/learn/statistics', type: 'Course', platform: 'Kaggle' },
+                        { name: 'Coursera - Statistics with R', url: 'https://www.coursera.org/learn/bayesian-statistics', type: 'Course', platform: 'Coursera' }
                     ],
                     tools: [
                         { name: 'SciPy', desc: 'Scientific computing and statistics.', url: 'https://scipy.org/' },
@@ -302,15 +267,13 @@ const careerData = {
                     title: 'Phase 5: Big Data & Advanced BI',
                     duration: 'Months 9-10',
                     resources: [
-                        { name: 'Apache Spark Fundamentals', url: 'https://spark.apache.org/docs/latest/', type: 'Doc', platform: 'Apache' },
-                        { name: 'freeCodeCamp - PySpark Tutorial', url: 'https://www.youtube.com/@freecodecamp/search?query=pyspark', type: 'Video', platform: 'YouTube' },
-                        { name: 'Databricks - Lakehouse Academy', url: 'https://academy.databricks.com/', type: 'Course', platform: 'Databricks' },
+                        { name: 'freeCodeCamp - PySpark Complete Tutorial', url: 'https://www.youtube.com/@freecodecamp/search?query=pyspark', type: 'Video', platform: 'YouTube' },
+                        { name: 'Databricks Academy - Apache Spark', url: 'https://academy.databricks.com/', type: 'Course', platform: 'Databricks' },
                         { name: 'DataCamp - Big Data with Spark', url: 'https://www.datacamp.com/courses/big-data-fundamentals-with-pyspark', type: 'Course', platform: 'DataCamp' },
-                        { name: 'Power BI Advanced Analyticsing', url: 'https://learn.microsoft.com/en-us/training/paths/advanced-analytics-power-bi/', type: 'Course', platform: 'Microsoft' },
-                        { name: 'Tableau Advanced Dashboarding', url: 'https://www.tableau.com/learn/training', type: 'Course', platform: 'Tableau' },
-                        { name: 'Udemy - Hadoop & Big Data Fundamentals', url: 'https://www.udemy.com/courses/search/?q=hadoop+big+data', type: 'Course', platform: 'Udemy' },
-                        { name: 'AWS Analytics Certification Path', url: 'https://aws.amazon.com/certification/certified-data-analytics-specialty/', type: 'Course', platform: 'AWS' }
-                    ],
+                        { name: 'Power BI Advanced Analytics', url: 'https://learn.microsoft.com/en-us/training/paths/advanced-analytics-power-bi/', type: 'Course', platform: 'Microsoft' },
+                        { name: 'Tableau Advanced Dashboard Design', url: 'https://www.tableau.com/learn/training', type: 'Course', platform: 'Tableau' },
+                        { name: 'AWS Certified Data Analytics Specialty', url: 'https://aws.amazon.com/certification/certified-data-analytics-specialty/', type: 'Course', platform: 'AWS' }
+                    ]
                     tools: [
                         { name: 'Apache Spark', desc: 'Distributed computing framework.', url: 'https://spark.apache.org/' },
                         { name: 'PySpark', desc: 'Python API for Spark.', url: 'https://spark.apache.org/docs/latest/api/python/' },
