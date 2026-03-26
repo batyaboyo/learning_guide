@@ -50,6 +50,9 @@ const app = {
         this.setupScrollToTop();
         this.setupKeyboardShortcuts();
 
+        // Update header stats every minute to refresh day of year and countdown
+        setInterval(() => this.updateHeaderStats(), 60000);
+
         // Remove loader
         const loader = document.getElementById('app-loader');
         const appContainer = document.getElementById('app');
@@ -526,6 +529,17 @@ const app = {
 
     updateHeaderStats() {
         const now = new Date();
+        
+        // Calculate day of year
+        const year = now.getFullYear();
+        const startOfYear = new Date(year, 0, 1);
+        const diffYear = now - startOfYear;
+        const dayOfYear = Math.floor(diffYear / (1000 * 60 * 60 * 24)) + 1;
+        
+        // Check if leap year
+        const isLeapYear = (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+        const totalDaysInYear = isLeapYear ? 366 : 365;
+        
         const endYear = new Date('2026-12-31T23:59:59');
         const diff = endYear - now;
         const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
@@ -538,6 +552,12 @@ const app = {
                 day: 'numeric',
                 year: 'numeric'
             });
+        }
+
+        // Update day of year
+        const dayOfYearEl = document.getElementById('day-of-year');
+        if (dayOfYearEl) {
+            dayOfYearEl.textContent = `${dayOfYear}/${totalDaysInYear}`;
         }
 
         // Update countdowns (both sidebar and header)
